@@ -7,7 +7,7 @@
         </label>
         <div class="login-group">
             <input [(ngModel)]="usuario.email" class="username" type="text" id="login_username" placeholder="E-mail" name="login">
-            <input [(ngModel)]="usuario.senhaView" class="password" type="password" id="login_password" placeholder="Password" name="senha">            
+            <input [(ngModel)]="usuario.senha" class="password" type="password" id="login_password" placeholder="Password" name="senha">            
             <div class="error active" *ngIf="erroLogar">
                 {{erroMensagem}}
             </div>

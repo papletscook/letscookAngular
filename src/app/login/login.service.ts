@@ -4,7 +4,7 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Usuario } from '../viewmodel/usuario';
-import {Md5} from 'ts-md5/dist/md5';
+import { LoginUsuario } from '../viewmodel/login';
 
 @Injectable()
 export class LoginService {
@@ -16,11 +16,10 @@ export class LoginService {
 
     getUsuario(usuario: Usuario): Promise<Boolean> {
         const url = `${this.endpoint}` + "verificarCredencial";
-        usuario.senha = Md5.hashAsciiStr(usuario.senhaView).toString();
 
-        usuario.senhaView = null;
+        let user = new LoginUsuario(usuario.email, usuario.senha);
 
-        return this.http.post(url, JSON.stringify(usuario), this.options)
+        return this.http.post(url, JSON.stringify(user), this.options)
             .toPromise()
             .then(response => {
                 return response.json() as Boolean
@@ -28,7 +27,6 @@ export class LoginService {
     }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
 }

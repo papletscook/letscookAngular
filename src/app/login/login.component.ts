@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
                 }
             }, error => {
                 this.erroLogar = true;
-                this.erroMensagem = "Falha na autenticação, desculpe o transtorno."
-                //console.log("erro[1]");
+                this.erroMensagem = error.json().message;
             });
     }
 

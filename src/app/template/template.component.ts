@@ -14,7 +14,7 @@ export class TemplateComponent implements OnInit {
     // Instância: ** 3125211148
 
     componentData = null;
-    instancia: string = "3125211148";
+    instancia: string = "";
     btnBuscaCadastro: boolean = false;
 
     constructor(private router: Router, private util: Util) { }
