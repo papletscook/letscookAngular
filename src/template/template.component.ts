@@ -1,5 +1,4 @@
-import { CadastroComponent } from './../cadastro/cadastro.component';
-import { Util } from './../util/util';
+import { ValidLoginService } from './../util/login/valid-login.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,16 +10,14 @@ import { Component, OnInit } from '@angular/core';
 
 export class TemplateComponent implements OnInit {
 
-    // Instância: ** 3125211148
+    private componentData = null;
+    public receita: string;
 
-    componentData = null;
-    instancia: string = "";
-    btnBuscaCadastro: boolean = false;
-
-    constructor(private router: Router, private util: Util) { }
+    constructor(private router: Router,
+        private validLoginService: ValidLoginService) { }
 
     ngOnInit(): void {
-        this.util.isLogado().then((result: boolean) => {
+        this.validLoginService.isLogado().then((result: boolean) => {
             if (!result) {
                 this.router.navigate(['./letscook/entrar']);
             }
@@ -31,13 +28,12 @@ export class TemplateComponent implements OnInit {
         sessionStorage.clear();
         this.router.navigate(['./letscook/entrar']);
     }
-
-    createCadastroComponent() {
-        this.btnBuscaCadastro = true;
+    //Criar component.....
+    createNuleComponent() {
         this.componentData = {
-            component: CadastroComponent,
+            component: null,
             inputs: {
-                instancia: this.instancia
+                nothing: null
             }
         }
     }

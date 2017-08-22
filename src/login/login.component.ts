@@ -1,37 +1,39 @@
+import { ValidLoginService } from './../util/login/valid-login.service';
+import { Usuario } from './../viewmodel/login/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
-import { CadastroComponent } from '../cadastro/cadastro.component';
-import { Util } from '../util/util';
 
-import { Usuario } from '../viewmodel/usuario';
 
 @Component({
     templateUrl: 'login.component.html',
-    styleUrls: ['login.component.css']
+    styleUrls: ['login.component.css'],
+    providers: [LoginService]
 })
 
 export class LoginComponent implements OnInit {
-    usuario = new Usuario();
+    public usuario = new Usuario();
 
-    erroLogar: boolean = false;
-    erroMensagem: string;
+    public erroLogar: boolean = false;
+    public erroMensagem: string;
 
-    constructor(private router: Router, private util: Util, private loginService: LoginService) { }
+    constructor(private router: Router,
+        private loginService: LoginService,
+        private validLoginService: ValidLoginService) { }
 
     ngOnInit(): void {
         this.usuario.email;
         this.usuario.senha;
 
-        this.util.isLogado().then((result: boolean) => {
+        this.validLoginService.isLogado().then((result: boolean) => {
             if (result) {
                 this.router.navigate(['./letscook/']);
             }
         })
     }
 
-    entrar(): void {
+    public entrar(): void {
         this.loginService
             .getUsuario(this.usuario)
             .then(data => {
@@ -41,12 +43,21 @@ export class LoginComponent implements OnInit {
                 } else {
                     this.erroLogar = true;
                     this.erroMensagem = "Usuário ou senha incorretos, por favor verifique."
-                    //console.log("erro[2]");
                 }
             }, error => {
                 this.erroLogar = true;
                 this.erroMensagem = error.json().message;
             });
+    }
+
+    public entrarInMock() {
+        if (this.loginService.validInMock(this.usuario)) {
+            sessionStorage.setItem("user", JSON.stringify({email: this.usuario.email}));
+            this.router.navigate(['./letscook/']);
+        } else {
+            this.erroLogar = true;
+            this.erroMensagem = "Usuário ou senha incorretos, por favor verifique."
+        }
     }
 
 }

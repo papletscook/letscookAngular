@@ -1,10 +1,10 @@
+import { User } from './../viewmodel/login/mock';
+import { LoginUsuario } from './../viewmodel/login/login';
+import { Usuario } from './../viewmodel/login/usuario';
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-
-import { Usuario } from '../viewmodel/usuario';
-import { LoginUsuario } from '../viewmodel/login';
 
 @Injectable()
 export class LoginService {
@@ -25,6 +25,16 @@ export class LoginService {
                 return response.json() as Boolean
             }).catch(this.handleError);
     }
+
+    public validInMock(usuario: Usuario): Boolean {
+        let valided: boolean = false;
+        if (usuario.email === User.email && usuario.senha === User.senha) {
+            valided = true;
+        }
+        return valided;
+
+    }
+
 
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);
