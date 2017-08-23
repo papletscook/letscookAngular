@@ -1,3 +1,4 @@
+import { HolderService } from './../util/holder/holder.service';
 import { ValidLoginService } from './../util/login/valid-login.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -14,22 +15,32 @@ export class TemplateComponent implements OnInit {
     public receita: string;
 
     constructor(private router: Router,
-        private validLoginService: ValidLoginService) { }
+        public validLoginService: ValidLoginService,
+        public holderService: HolderService) { }
 
     ngOnInit(): void {
-        this.validLoginService.isLogado().then((result: boolean) => {
-            if (!result) {
-                this.router.navigate(['./letscook/entrar']);
-            }
-        });
+        //Colocar esta função para bloquear as paginas...
+        // this.validLoginService.isLogado().then((result: boolean) => {
+        //     if (!result) {
+        //         this.holderService.modalOpen = true;
+        //     } else {
+        //         this.holderService.userLogado = true;
+        //     }
+        // });
     }
 
-    sair(): void {
-        sessionStorage.clear();
-        this.router.navigate(['./letscook/entrar']);
+    public entrar() {
+        this.holderService.modalOpen = true;
     }
+
+    public sair() {
+        sessionStorage.clear();
+        this.holderService.userLogado = false;
+        //this.router.navigate(['./letscook/']);
+    }
+
     //Criar component.....
-    createNuleComponent() {
+    public createNuleComponent() {
         this.componentData = {
             component: null,
             inputs: {
@@ -37,4 +48,5 @@ export class TemplateComponent implements OnInit {
             }
         }
     }
+
 }

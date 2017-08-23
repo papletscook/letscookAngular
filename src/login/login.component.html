@@ -1,17 +1,26 @@
-<div class="login-wrapper" (keyup.enter)="entrarInMock()">
-    <form class="login" (ngSubmit)="entrarInMock()">
-        <label class="title">
-            <h3 class="welcome">Bem Vindo ao</h3>
-            Let's Cook
-            <h5 class="hint">Utilize seu e-mail e senha para entrar</h5>
-        </label>
-        <div class="login-group">
-            <input [(ngModel)]="usuario.email" class="username" type="text" id="login_username" placeholder="E-mail" name="login">
-            <input [(ngModel)]="usuario.senha" class="password" type="password" id="login_password" placeholder="Password" name="senha">            
-            <div class="error active" *ngIf="erroLogar">
-                {{erroMensagem}}
-            </div>
-            <button type="submit" class="btn btn-primary">Entrar</button>
+<clr-modal [(clrModalOpen)]="holderService.modalOpen">
+    <h3 class="modal-title">Entrar Let's Cook</h3>
+    <div class="modal-body">
+        <h6>Utilize seu e-mail e senha para entrar</h6>
+        <div class="form-group">
+            <input [(ngModel)]="usuario.email" class="username input-width-full input-margin" type="text" placeholder="E-mail" name="login">
         </div>
-    </form>
-</div>
+        <div class="form-group">
+            <input [(ngModel)]="usuario.senha" class="password input-width-full input-margin" type="password" placeholder="Senha" name="senha">
+        </div>
+        <div class="alert alert-danger" *ngIf="erroLogar">
+            <div class="alert-items">
+                <div class="alert-item">
+                    <div class="alert-icon-wrapper">
+                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                    </div>
+                    <span class="alert-text"> {{erroMensagem}} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-block">Registre-se</button>
+        <button type="button" class="btn btn-primary btn-block" (click)="entrarInMock()">Entrar</button>
+    </div>
+</clr-modal>

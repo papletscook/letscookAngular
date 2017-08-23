@@ -1,3 +1,4 @@
+import { Usuario } from './../../viewmodel/login/usuario';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -15,5 +16,5 @@ export class ValidLoginService {
         }
         return Promise.resolve(false);
     }
-    
+
 }

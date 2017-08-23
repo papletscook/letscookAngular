@@ -1,15 +1,18 @@
 <div class="main-container">
-    <header class="header header-6">
+    <header class="header header-4">
         <div class="branding">
             <a class="nav-link">
                 <clr-icon shape="home"></clr-icon>
                 <span class="title">Let's Cook</span>
             </a>
         </div>
-        <div class="search">
-            <label for="search_input">
-                <input id="search_input" name="receita" type="text" placeholder="Buscar Receita..." [(ngModel)]="receita" >
-            </label>
+        <div class="header-nav">
+            <a class="nav-link nav-icon">
+                <clr-icon shape="cloud"></clr-icon>
+            </a>
+            <a class="active nav-link nav-icon">
+                <clr-icon shape="folder"></clr-icon>
+            </a>
         </div>
         <div class="header-actions">
             <clr-dropdown clrMenuPosition="bottom-right">
@@ -18,7 +21,10 @@
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu>
-                    <a clrDropdownItem (click)="sair()">Sair</a>
+                    <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
+                    <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
+                    <a clrDropdownItem>Outra Opção</a>
+                    <a clrDropdownItem>Outra Opção</a>
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
@@ -26,6 +32,7 @@
     <div class="content-container">
         <div class="content-area">
             <dynamic-component [componentData]="componentData"></dynamic-component>
+            <login-component></login-component>
         </div>
     </div>
 </div>
