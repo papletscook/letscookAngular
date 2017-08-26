@@ -1,0 +1,7 @@
+<nav class="subnav" *ngIf="subnavAtivo">
+    <ul class="nav">
+        <li class="nav-item" *ngFor="let menu of menus">
+            <a class="nav-link" (click)="abreComponent(menu)" [class.disabled]="false" [class.active]="qualEstaAtivo(menu)">{{menu.nome}}</a>
+        </li>
+    </ul>
+</nav>

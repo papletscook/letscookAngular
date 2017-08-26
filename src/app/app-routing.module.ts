@@ -4,12 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { TemplateComponent } from './../template/template.component';
 
 const routes: Routes = [
-    {
-        path: '', redirectTo: 'letscook', pathMatch: 'full'
-    },
-    {
-        path: 'letscook', component: TemplateComponent
-    }
+    { path: '', redirectTo: 'letscook', pathMatch: 'full' },
+    { path: 'letscook', component: TemplateComponent }
 ]
 
 @NgModule({
@@ -17,6 +13,6 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 
-export class AppRoutingModule { 
-    
+export class AppRoutingModule {
+
 }

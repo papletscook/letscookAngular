@@ -1,13 +1,12 @@
-import { Component, Input, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
+import { Component, OnInit, ViewChild, ViewContainerRef, Input, ReflectiveInjector, ComponentFactoryResolver } from '@angular/core';
 
 @Component({
     selector: 'dynamic-component',
-    templateUrl: 'dynamic.component.html',
-    entryComponents: [LoginComponent],
+    templateUrl: 'dynamic.component.html'
 })
 
-export class DynamicComponent {
+export class DynamicComponent implements OnInit {
+
     currentComponent = null;
 
     @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) dynamicComponentContainer: ViewContainerRef;
@@ -29,4 +28,7 @@ export class DynamicComponent {
         this.currentComponent = component;
     }
     constructor(private resolver: ComponentFactoryResolver) { }
+
+    ngOnInit() { }
+
 }

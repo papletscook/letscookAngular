@@ -23,12 +23,13 @@
                 <clr-dropdown-menu>
                     <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
                     <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
-                    <a clrDropdownItem>Outra Opção</a>
+                    <a clrDropdownItem (click)="createMenuReceitaComponent()">Menu Receitas</a>
                     <a clrDropdownItem>Outra Opção</a>
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
     </header>
+    <subnav-component [subnavAtivo]="subnavAtivo" [menus]="infoMenuSubNav"></subnav-component>
     <div class="content-container">
         <div class="content-area">
             <dynamic-component [componentData]="componentData"></dynamic-component>

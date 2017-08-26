@@ -1,3 +1,8 @@
+import { MinhasReceitasComponent } from './../menu-receita/minhas-receitas/minhas-receitas.component';
+import { SubnavComponent } from './../util/subnav/subnav.component';
+import { MenuReceitaComponent } from './../menu-receita/menu-receita.component';
+import { PublicarReceitaComponent } from './../menu-receita/publicar-receita/publicar-receita.component';
+import { DynamicComponent } from './../dynamiccomponent/dynamic.component';
 import { HolderService } from './../util/holder/holder.service';
 import { LoginComponent } from './../login/login.component';
 import { ValidLoginService } from './../util/login/valid-login.service';
@@ -10,12 +15,18 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormWizardModule } from 'angular2-wizard';
 
 @NgModule({
     declarations: [
         AppComponent,
+        DynamicComponent,
+        SubnavComponent,
         LoginComponent,
-        TemplateComponent
+        TemplateComponent,
+        PublicarReceitaComponent,
+        MenuReceitaComponent,
+        MinhasReceitasComponent
     ],
     imports: [
         BrowserModule,
@@ -23,14 +34,20 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
         HttpModule,
         ClarityModule.forRoot(),
         BrowserAnimationsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FormWizardModule
     ],
     providers: [
         ValidLoginService,
         HolderService
     ],
     bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    entryComponents: [
+        PublicarReceitaComponent,
+        MenuReceitaComponent,
+        MinhasReceitasComponent
+    ]
 })
 
 export class AppModule {

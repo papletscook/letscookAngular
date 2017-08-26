@@ -5,6 +5,7 @@ export class HolderService {
 
     public modalOpen: boolean = false;
     public userLogado: boolean = false;
+    public qualSubnavEstaAtivo: string;
 
     constructor() { }
 
