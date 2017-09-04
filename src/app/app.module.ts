@@ -1,3 +1,4 @@
+import { SidenavComponent } from './../util/sidenav/sidenav.component';
 import { MinhasReceitasComponent } from './../menu-receita/minhas-receitas/minhas-receitas.component';
 import { SubnavComponent } from './../util/subnav/subnav.component';
 import { MenuReceitaComponent } from './../menu-receita/menu-receita.component';
@@ -22,6 +23,7 @@ import { FormWizardModule } from 'angular2-wizard';
         AppComponent,
         DynamicComponent,
         SubnavComponent,
+        SidenavComponent,
         LoginComponent,
         TemplateComponent,
         PublicarReceitaComponent,

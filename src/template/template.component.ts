@@ -21,6 +21,8 @@ export class TemplateComponent implements OnInit {
     private infoMenuSubNav: MenuSubnav[];
     private subnavAtivo: boolean = false;
 
+    private sidenavActive: boolean = false;
+
     constructor(private router: Router,
         public validLoginService: ValidLoginService,
         public holderService: HolderService) { }
