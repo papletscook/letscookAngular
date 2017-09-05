@@ -1,7 +1,7 @@
 import { HolderService } from './../util/holder/holder.service';
 import { ValidLoginService } from './../util/login/valid-login.service';
 import { Usuario } from './../viewmodel/login/usuario';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
@@ -26,15 +26,14 @@ export class LoginComponent implements OnInit {
         public holderService: HolderService) { }
 
     ngOnInit(): void {
-
         this.usuario.email = "nome@mail.com";
         this.usuario.senha = "123";
-
-        // this.validLoginService.isLogado().then((result: boolean) => {
-        //     if (result) {
-        //         this.router.navigate(['./letscook/']);
-        //     }
-        // })
+        this.validLoginService.isLogado().then((result: boolean) => {
+            if (result) {
+                this.holderService.userLogado = true;
+                // this.router.navigate(['./letscook/']);
+            }
+        })
     }
 
     public entrar() {
@@ -43,7 +42,7 @@ export class LoginComponent implements OnInit {
             .then(data => {
                 if (data) {
                     this.holderService.userLogado = true;
-                    sessionStorage.setItem('user', this.usuario.email);                    
+                    sessionStorage.setItem('user', this.usuario.email);
                     //this.router.navigate(['./letscook/']);
                 } else {
                     this.erroLogar = true;

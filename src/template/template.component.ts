@@ -1,3 +1,6 @@
+import { MenuPainelDeControle } from './../painel-de-controle/mock-painel-de-controle/subnav-manu-painel';
+import { TemplateService } from './util-service/template.service';
+import { TemplateMenuReceitaService } from './util-service/template-menu-receita.service';
 import { MinhasReceitasComponent } from './../menu-receita/minhas-receitas/minhas-receitas.component';
 import { MenuReceitas } from './../menu-receita/mock-subnav-menu/subnav-menu-receitas';
 import { MenuSubnav } from './../viewmodel/menu-subnav/menu-subnav';
@@ -10,7 +13,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     templateUrl: 'template.component.html',
-    styleUrls: ['template.component.css']
+    styleUrls: ['template.component.css'],
+    providers: [TemplateMenuReceitaService, TemplateService]
 })
 
 export class TemplateComponent implements OnInit {
@@ -25,12 +29,16 @@ export class TemplateComponent implements OnInit {
 
     constructor(private router: Router,
         public validLoginService: ValidLoginService,
-        public holderService: HolderService) { }
+        public holderService: HolderService,
+        private templateService: TemplateService,
+        private templateMenuReceitaService: TemplateMenuReceitaService) { }
 
     ngOnInit(): void {
+        this.createIndexComponent();
     }
 
     public entrar() {
+        this.holderService.modalIsCloseable = true;
         this.holderService.modalOpen = true;
     }
 
@@ -40,40 +48,26 @@ export class TemplateComponent implements OnInit {
         //this.router.navigate(['./letscook/']);
     }
 
-    public createMenuReceitaComponent() {
+    public createIndexComponent() {
+        this.componentData = this.templateService.createIndexComponent();
+    }
+
+    public createPainelDeControle() {
         this.subnavAtivo = true;
-        this.infoMenuSubNav = MenuReceitas;
-        this.holderService.qualSubnavEstaAtivo = "minhas-receitas-component";
-        this.componentData = {
-            component: MenuReceitaComponent,
-            inputs: {
-                nothing: null
-            }
-        }
+        this.infoMenuSubNav = MenuPainelDeControle;
+        this.componentData = this.templateService.createPainelDeControle();
     }
 
     public createMinhasReceitasComponent() {
         this.subnavAtivo = true;
-        this.infoMenuSubNav = MenuReceitas;
         this.holderService.qualSubnavEstaAtivo = "minhas-receitas-component";
-        this.componentData = {
-            component: MinhasReceitasComponent,
-            inputs: {
-                nothing: null
-            }
-        }
+        this.componentData = this.templateMenuReceitaService.createMinhasReceitasComponent();
     }
 
     public createPublicarReceitaComponent() {
         this.subnavAtivo = true;
-        this.infoMenuSubNav = MenuReceitas;
         this.holderService.qualSubnavEstaAtivo = "publicar-receita-component";
-        this.componentData = {
-            component: PublicarReceitaComponent,
-            inputs: {
-                nothing: null
-            }
-        }
+        this.componentData = this.templateMenuReceitaService.createPublicarReceitaComponent();
     }
 
 }

@@ -1,3 +1,5 @@
+import { PainelDeControleComponent } from './../painel-de-controle/painel-de-controle.component';
+import { IndexPageComponent } from './../index-page/index-page.component';
 import { SidenavComponent } from './../util/sidenav/sidenav.component';
 import { MinhasReceitasComponent } from './../menu-receita/minhas-receitas/minhas-receitas.component';
 import { SubnavComponent } from './../util/subnav/subnav.component';
@@ -28,7 +30,9 @@ import { FormWizardModule } from 'angular2-wizard';
         TemplateComponent,
         PublicarReceitaComponent,
         MenuReceitaComponent,
-        MinhasReceitasComponent
+        MinhasReceitasComponent,
+        IndexPageComponent,
+        PainelDeControleComponent
     ],
     imports: [
         BrowserModule,
@@ -48,7 +52,9 @@ import { FormWizardModule } from 'angular2-wizard';
     entryComponents: [
         PublicarReceitaComponent,
         MenuReceitaComponent,
-        MinhasReceitasComponent
+        MinhasReceitasComponent,
+        IndexPageComponent,
+        PainelDeControleComponent
     ]
 })
 

@@ -15,15 +15,15 @@
             </a>
         </div>
         <div class="header-actions">
-            <clr-dropdown clrMenuPosition="bottom-right">
-                <button class="nav-icon" clrDropdownToggle>
-                    <clr-icon shape="cog"></clr-icon>
+            <clr-dropdown>
+                <button class="nav-icon" clrDropdownTrigger>
+                    <clr-icon shape="view-list"></clr-icon>
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
-                <clr-dropdown-menu>
+                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                     <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
                     <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
-                    <a clrDropdownItem (click)="createMenuReceitaComponent()">Menu Receitas</a>
+                    <a clrDropdownItem (click)="createPainelDeControle()" *ngIf="holderService.userLogado">Painel de controle</a>
                     <a clrDropdownItem>Outra Opção</a>
                 </clr-dropdown-menu>
             </clr-dropdown>
@@ -35,31 +35,8 @@
             <dynamic-component [componentData]="componentData"></dynamic-component>
             <login-component></login-component>
         </div>
-        <clr-vertical-nav [clrVerticalNavCollapsible]="sidenavActive" [(clrVerticalNavCollapsed)]="collapsed">
-            <a clrVerticalNavLink routerLink="./normal" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="user"></clr-icon>
-                Normal
-            </a>
-            <a clrVerticalNavLink routerLink="./electric" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="bolt"></clr-icon>
-                Electric
-            </a>
-            <a clrVerticalNavLink routerLink="./poison" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="sad-face"></clr-icon>
-                Poison
-            </a>
-            <a clrVerticalNavLink routerLink="./grass" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="bug"></clr-icon>
-                Grass
-            </a>
-            <a clrVerticalNavLink routerLink="./fighting" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="shield"></clr-icon>
-                Fighting
-            </a>
-            <a clrVerticalNavLink routerLink="./credit" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="certificate"></clr-icon>
-                Credit
-            </a>
+        <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed">
+            <sidenav-component></sidenav-component>
         </clr-vertical-nav>
     </div>
 </div>

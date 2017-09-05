@@ -6,7 +6,7 @@ export class ValidLoginService {
 
     constructor() { }
 
-    isLogado(): Promise<boolean> {
+    public isLogado(): Promise<boolean> {
         // Realizar correção verificação de login
         // Guardar Login e Senha do usuário e fazer comparação com a autenticação
         // Usuário pode bugar adicionando informações fake na sessionStorage

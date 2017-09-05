@@ -24,6 +24,7 @@ export class SubnavComponent implements OnInit {
         this.switchMenuReceitas(menu);
     }
 
+    //Menu Receitas....
     public switchMenuReceitas(menu) {
         switch (menu.component) {
             case "minhas-receitas-component":
