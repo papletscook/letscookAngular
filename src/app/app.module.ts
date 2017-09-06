@@ -1,3 +1,4 @@
+import { BuscaComponentComponent } from './../busca/busca.component';
 import { PainelDeControleComponent } from './../painel-de-controle/painel-de-controle.component';
 import { IndexPageComponent } from './../index-page/index-page.component';
 import { SidenavComponent } from './../util/sidenav/sidenav.component';
@@ -18,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormWizardModule } from 'angular2-wizard';
 
 @NgModule({
     declarations: [
@@ -32,7 +32,8 @@ import { FormWizardModule } from 'angular2-wizard';
         MenuReceitaComponent,
         MinhasReceitasComponent,
         IndexPageComponent,
-        PainelDeControleComponent
+        PainelDeControleComponent,
+        BuscaComponentComponent
     ],
     imports: [
         BrowserModule,
@@ -41,7 +42,6 @@ import { FormWizardModule } from 'angular2-wizard';
         ClarityModule.forRoot(),
         BrowserAnimationsModule,
         AppRoutingModule,
-        FormWizardModule
     ],
     providers: [
         ValidLoginService,

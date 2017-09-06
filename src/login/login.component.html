@@ -1,20 +1,22 @@
-<clr-modal [(clrModalOpen)]="holderService.modalOpen" [clrModalClosable]="holderService.modalIsCloseable">
+<clr-modal [(clrModalOpen)]="holderService.modalOpen" [clrModalClosable]="holderService.modalIsCloseable" (keyup.enter)="entrarInMock()">
     <h3 class="modal-title">Entrar Let's Cook</h3>
     <div class="modal-body">
-        <h6>Utilize seu e-mail e senha para entrar</h6>
-        <div class="form-group">
-            <input [(ngModel)]="usuario.email" class="username input-width-full input-margin" type="text" placeholder="E-mail" name="login">
-        </div>
-        <div class="form-group">
-            <input [(ngModel)]="usuario.senha" class="password input-width-full input-margin" type="password" placeholder="Senha" name="senha">
-        </div>
-        <div class="alert alert-danger" *ngIf="erroLogar">
-            <div class="alert-items">
-                <div class="alert-item">
-                    <div class="alert-icon-wrapper">
-                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+        <div>
+            <h6>Utilize seu e-mail e senha para entrar</h6>
+            <div class="form-group">
+                <input [(ngModel)]="usuario.email" class="username input-width-full input-margin" type="text" placeholder="E-mail" name="login">
+            </div>
+            <div class="form-group">
+                <input [(ngModel)]="usuario.senha" class="password input-width-full input-margin" type="password" placeholder="Senha" name="senha">
+            </div>
+            <div class="alert alert-danger" *ngIf="erroLogar">
+                <div class="alert-items">
+                    <div class="alert-item">
+                        <div class="alert-icon-wrapper">
+                            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                        </div>
+                        <span class="alert-text"> {{erroMensagem}} </span>
                     </div>
-                    <span class="alert-text"> {{erroMensagem}} </span>
                 </div>
             </div>
         </div>

@@ -19,13 +19,13 @@ import { Component, OnInit } from '@angular/core';
 
 export class TemplateComponent implements OnInit {
 
-    private componentData = null;
+    public componentData = null;
     public receita: string;
 
-    private infoMenuSubNav: MenuSubnav[];
-    private subnavAtivo: boolean = false;
+    public infoMenuSubNav: MenuSubnav[];
+    public subnavAtivo: boolean = false;
 
-    private sidenavActive: boolean = false;
+    public sidenavActive: boolean = false;
 
     constructor(private router: Router,
         public validLoginService: ValidLoginService,
