@@ -36,10 +36,23 @@
     </wizard-step>
     <wizard-step title="Incluir Ingredientes" optionalStep>
         <div class="container">
-
-
-            <button class="btn btn-primary">Adicionar ingrediente</button>
-
+            <form>
+                <section class="form-block">
+                    <div class="form-group">
+                        <label>Ingrediente: </label>
+                        <input type="text" placeholder="Digite o nome da ingrediente">
+                    </div>
+                    <div class="form-group">
+                        <label>Unidade: </label>
+                        <input type="number" placeholder="Digite a unidade">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantidade: </label>
+                        <input type="number" placeholder="Digite a quantidade">
+                    </div>
+                </section>
+            </form>
+            <button class="btn btn-primary btn-block">Adicionar ingrediente</button>
 
             <table class="table">
                 <thead>
@@ -68,21 +81,42 @@
         <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
         <button type="button" class="btn btn-primary" nextStep>Proximo</button>
     </wizard-step>
-    <wizard-step title="Title of step 2" optionalStep>
+    <wizard-step title="Etapas" optionalStep>
         <div class="container">
 
+            <button class="btn btn-primary btn-block" (click)="modalEtapa = true;">Inserir um Passo*</button>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome da Etapa</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MASSA</td>
+                        <td>
+                            <button class="btn btn-icon btn-primary btn-sm">
+                                    <clr-icon shape="note"></clr-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>COBERTURA</td>
+                        <td>
+                            <button class="btn btn-icon btn-primary btn-sm">
+                                    <clr-icon shape="note"></clr-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
         <button type="button" class="btn btn-primary" nextStep>Proximo</button>
     </wizard-step>
-    <wizard-step title="Title of step 2" optionalStep>
-        <div class="container">
-
-        </div>
-        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
-        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
-    </wizard-step>
-    <wizard-step title="Title of step 3">
+    <wizard-step title="Finalizar">
         <div class="container">
 
         </div>
@@ -90,3 +124,33 @@
         <button type="button" class="btn btn-primary" (click)="finishFunction()">Publicar</button>
     </wizard-step>
 </wizard>
+
+<clr-modal [(clrModalOpen)]="modalEtapa">
+    <h3 class="modal-title">I have a nice title</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <div class="form-group">
+                    <label>Descrição: </label>
+                    <textarea rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tipo: </label>
+                    <div class="select">
+                        <select>
+                            <option value="cat1">cat1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Quantidade em Minutos: </label>
+                    <input type="number" placeholder="Digite a Quantidade em Minutos">
+                </div>
+            </section>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
+    </div>
+</clr-modal>

@@ -9,13 +9,11 @@ import { Wizard } from "clarity-angular";
 
 export class PublicarReceitaComponent implements OnInit {
 
-    @ViewChild("wizardmd") wizardMedium: Wizard;
+    private modalEtapa: boolean = false;
 
     constructor() { }
 
     ngOnInit() {
     }
-
-    mdOpen: boolean = true;
 
 }
