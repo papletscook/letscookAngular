@@ -1,3 +1,4 @@
+import { WizardModule } from 'ng2-archwizard';
 import { BuscaComponentComponent } from './../busca/busca.component';
 import { PainelDeControleComponent } from './../painel-de-controle/painel-de-controle.component';
 import { IndexPageComponent } from './../index-page/index-page.component';
@@ -42,6 +43,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
         ClarityModule.forRoot(),
         BrowserAnimationsModule,
         AppRoutingModule,
+        WizardModule
     ],
     providers: [
         ValidLoginService,

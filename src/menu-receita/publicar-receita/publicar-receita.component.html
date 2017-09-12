@@ -1,109 +1,92 @@
-<div>
-    <h3>Publicar Receita</h3>
-    Receita salva no cache da internet....
-    <button class="btn btn-primary btn-block" (click)="mdOpen = true">Publicar receita</button>
-    <!-- <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block">Cadastrar Ingredientes</button>
-            <button class="btn btn-primary btn-block">Cadastrar etapas</button>
-        </div>
-    </div> -->
-</div>
-
-<div>
-    <clr-wizard #wizardmd [(clrWizardOpen)]="mdOpen">
-        <clr-wizard-title>Publicar receita</clr-wizard-title>
-
-        <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
-        <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
-        <clr-wizard-button [type]="'next'">Proximo</clr-wizard-button>
-        <clr-wizard-button [type]="'finish'">Finalizar</clr-wizard-button>
-
-        <clr-wizard-page>
-            <ng-template clrPageTitle>Descrição</ng-template>
+<wizard>
+    <wizard-step title="Informações da Receita" optionalStep>
+        <div class="container">
             <form>
                 <section class="form-block">
                     <div class="form-group">
-                        <label for="aForm_4">Descrição da receita</label>
-                        <textarea id="aForm_4" rows="5"></textarea>
-                    </div>
-                </section>
-            </form>
-        </clr-wizard-page>
-
-        <clr-wizard-page>
-            <ng-template clrPageTitle>Ingredientes</ng-template>
-            <form>
-                <section class="form-block">
-                    <label>A Form</label>
-                    <div class="form-group">
-                        <label for="aForm_1">This is a form field</label>
-                        <input type="text" id="aForm_1" placeholder="Enter value here" size="45">
+                        <label>Nome da Receita: </label>
+                        <input type="text" placeholder="Digite o nome da receita">
                     </div>
                     <div class="form-group">
-                        <label for="aForm_2">Another form field</label>
-                        <input type="password" id="aForm_2" placeholder="Enter another value here" size="35">
+                        <label>Descrição da Receita: </label>
+                        <textarea rows="5"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="aForm_3">A select box</label>
+                        <label>Tempo de Preparo(Minutos): </label>
+                        <input type="number" placeholder="Digite o tempo que irá demorar até finalizar a receita">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria da Receita: </label>
                         <div class="select">
-                            <select id="aForm_3">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
-                                </select>
+                            <select>
+                                <option value="cat1">cat1</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="aForm_4">Textarea</label>
-                        <textarea id="aForm_4" rows="5"></textarea>
+                        <label>Imagem: </label>
+                        <input type="file">
                     </div>
                 </section>
             </form>
-        </clr-wizard-page>
+        </div>
 
-        <clr-wizard-page>
-            <ng-template clrPageTitle>Imagens????</ng-template>
-            Inputs das imagens
-        </clr-wizard-page>
+        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+    </wizard-step>
+    <wizard-step title="Incluir Ingredientes" optionalStep>
+        <div class="container">
 
-        <clr-wizard-page>
-            <ng-template clrPageTitle>Etapas</ng-template>
-            <button class="btn btn-primary btn-block">Cadastrar etapa</button>
+
+            <button class="btn btn-primary">Adicionar ingrediente</button>
+
 
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Etapas cadastradas</th>
-                        <th>Ações</th>
+                        <th>Nome do Ingrediente</th>
+                        <th>Unidade de Medida</th>
+                        <th>Quantidade</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="left">
-                            <span>Titulo da etapa 1</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm">
-                                <clr-icon shape="note"></clr-icon>
-                            </button>
-                        </td>
+                        <td>Cenoura</td>
+                        <td>UNIDADE</td>
+                        <td>3</td>
                     </tr>
                     <tr>
-                        <td class="left">
-                            <span>Titulo da etapa 2</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm">
-                                <clr-icon shape="note"></clr-icon>
-                            </button>
-                        </td>
+                        <td>Oleo</td>
+                        <td>XICARA</td>
+                        <td>0.5</td>
                     </tr>
                 </tbody>
             </table>
 
+        </div>
 
-        </clr-wizard-page>
-    </clr-wizard>
-</div>
+        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+    </wizard-step>
+    <wizard-step title="Title of step 2" optionalStep>
+        <div class="container">
+
+        </div>
+        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+    </wizard-step>
+    <wizard-step title="Title of step 2" optionalStep>
+        <div class="container">
+
+        </div>
+        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+    </wizard-step>
+    <wizard-step title="Title of step 3">
+        <div class="container">
+
+        </div>
+        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+        <button type="button" class="btn btn-primary" (click)="finishFunction()">Publicar</button>
+    </wizard-step>
+</wizard>
