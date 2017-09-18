@@ -84,7 +84,7 @@
     <wizard-step title="Etapas" optionalStep>
         <div class="container">
 
-            <button class="btn btn-primary btn-block" (click)="modalEtapa = true;">Inserir um Passo*</button>
+            <button class="btn btn-primary btn-block" (click)="modalEtapa = true;">Inserir uma Etapa*</button>
 
             <table class="table">
                 <thead>
@@ -97,7 +97,7 @@
                     <tr>
                         <td>MASSA</td>
                         <td>
-                            <button class="btn btn-icon btn-primary btn-sm">
+                            <button class="btn btn-icon btn-primary btn-sm" (click)="modalPasso = true;">
                                     <clr-icon shape="note"></clr-icon>
                             </button>
                         </td>
@@ -105,7 +105,7 @@
                     <tr>
                         <td>COBERTURA</td>
                         <td>
-                            <button class="btn btn-icon btn-primary btn-sm">
+                            <button class="btn btn-icon btn-primary btn-sm" (click)="modalPasso = true;">
                                     <clr-icon shape="note"></clr-icon>
                             </button>
                         </td>
@@ -118,7 +118,7 @@
     </wizard-step>
     <wizard-step title="Finalizar">
         <div class="container">
-
+            Resumo da receita....
         </div>
         <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
         <button type="button" class="btn btn-primary" (click)="finishFunction()">Publicar</button>
@@ -126,6 +126,32 @@
 </wizard>
 
 <clr-modal [(clrModalOpen)]="modalEtapa">
+    <h3 class="modal-title">Cadastrar Etapa</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <div class="form-group">
+                    <label>Descrição: </label>
+                    <textarea rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tipo: </label>
+                    <div class="select">
+                        <select>
+                            <option value="cat1">cat1</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="modalEtapa = false; modalPasso = true;">Ok</button>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalPasso">
     <h3 class="modal-title">Cadastrar Passo*</h3>
     <div class="modal-body">
         <form>

@@ -10,7 +10,7 @@ import { Wizard } from "clarity-angular";
 export class PublicarReceitaComponent implements OnInit {
 
     private modalEtapa: boolean = false;
-
+    private modalPasso: boolean = false;
     constructor() { }
 
     ngOnInit() {
