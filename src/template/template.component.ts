@@ -45,7 +45,8 @@ export class TemplateComponent implements OnInit {
     public sair() {
         sessionStorage.clear();
         this.holderService.userLogado = false;
-        //this.router.navigate(['./letscook/']);
+        window.location.reload();
+        
     }
 
     public createIndexComponent() {

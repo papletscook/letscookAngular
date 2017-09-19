@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
         private validLoginService: ValidLoginService,
         public holderService: HolderService) { }
 
-    ngOnInit(): void {
-        this.usuario.email = "nome@mail.com";
-        this.usuario.senha = "123";
+    public ngOnInit(): void {
+        this.usuario.email = "admin@letscook.com";
+        this.usuario.senha = "dev";
         this.validLoginService.isLogado().then((result: boolean) => {
             if (result) {
                 this.holderService.userLogado = true;
@@ -37,23 +37,25 @@ export class LoginComponent implements OnInit {
     }
 
     public entrar() {
-        this.loginService
-            .getUsuario(this.usuario)
+        this.loginService.loga(this.usuario)
             .then(data => {
                 if (data) {
                     this.holderService.userLogado = true;
-                    sessionStorage.setItem('user', this.usuario.email);
-                    //this.router.navigate(['./letscook/']);
+                    // Falta Montar cadastro do usuario
+                    sessionStorage.setItem("user", JSON.stringify({ email: this.usuario.email }));
+                    this.holderService.modalOpen = false;
                 } else {
                     this.erroLogar = true;
+                    this.usuario.senha = "";
                     this.erroMensagem = "Usuário ou senha incorretos, por favor verifique."
                 }
             }, error => {
                 this.erroLogar = true;
-                this.erroMensagem = error.json().message;
-            });
+                this.erroMensagem = "Falha em nossos servidores! Tente novamente mais tarde.";
+            })
     }
 
+    //Mock so use se nao estiver binbando beckend...
     public entrarInMock() {
         if (this.loginService.validInMock(this.usuario)) {
             this.holderService.userLogado = true;

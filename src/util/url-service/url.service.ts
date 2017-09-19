@@ -1,18 +1,17 @@
 import { InfoRequest } from './../../viewmodel/url-service/info-request';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions, Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/Rx';
 
 @Injectable()
 export class UrlServiceService {
 
     // IPs 
-    private urlIp = "";
+    private urlIp = "10.40.194.73:8080/"; // PC-Rato
 
     //Path names
-    public pathLetsCook = "";
+    public pathLetsCook = "letscookAPI/";
 
     //Request Options *Não Mecher*
     private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
@@ -22,8 +21,14 @@ export class UrlServiceService {
     constructor(private http: Http) { }
 
     public request(infoRequest: InfoRequest) {
+        //Verifica se url é outra
         this.hOtherUrl(infoRequest.otherUrl);
-
+        switch (infoRequest.rqst) {
+            case "get":
+                return this.httpGetRequest(infoRequest);
+            case "post":
+                return this.httpPostRequest(infoRequest);
+        }
     }
 
     private httpPostRequest(infoResquest: InfoRequest) {
@@ -46,7 +51,7 @@ export class UrlServiceService {
         }
         const url = `${this.url}` + rstlink;
         return this.http.get(url, this.options)
-            .timeout(120000)
+            .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
                 return response.json()

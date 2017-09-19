@@ -1,3 +1,4 @@
+import { UrlServiceService } from './../util/url-service/url.service';
 import { WizardModule } from 'ng2-archwizard';
 import { BuscaComponentComponent } from './../busca/busca.component';
 import { PainelDeControleComponent } from './../painel-de-controle/painel-de-controle.component';
@@ -20,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AlertIconAndTypesService } from "clarity-angular/emphasis/alert/providers/icon-and-types-service";
+import { Ng2CompleterModule } from "ng2-completer";
 
 @NgModule({
     declarations: [
@@ -43,11 +46,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
         ClarityModule.forRoot(),
         BrowserAnimationsModule,
         AppRoutingModule,
-        WizardModule
+        WizardModule,
+        Ng2CompleterModule
     ],
     providers: [
         ValidLoginService,
-        HolderService
+        HolderService,
+        UrlServiceService,
+        AlertIconAndTypesService
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
