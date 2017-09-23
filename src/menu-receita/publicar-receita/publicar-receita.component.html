@@ -1,40 +1,39 @@
-<wizard>
+<wizard navBarLocation="left">
     <wizard-step title="Informações da Receita" optionalStep>
-        <div class="container">
-            <form name="desc">
-                <section class="form-block">
-                    <div class="form-group">
-                        <label>Nome da Receita: </label>
-                        <input type="text" placeholder="Digite o nome da receita">
-                    </div>
-                    <div class="form-group">
-                        <label>Descrição da Receita: </label>
-                        <textarea rows="5"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Tempo de Preparo(Minutos): </label>
-                        <input type="number" placeholder="Digite o tempo que irá demorar até finalizar a receita">
-                    </div>
-                    <div class="form-group">
-                        <label>Categoria da Receita: </label>
-                        <div class="select">
-                            <select name="receita.categoria" [(ngModel)]="receita.categoria">
+        <form class="compact">
+            <section class="form-block">
+                <label>Informações da Receita</label>
+                <div class="form-group">
+                    <label for="nome" class="required">Nome da Receita: </label>
+                    <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome da receita">
+                </div>
+                <div class="form-group">
+                    <label class="required">Tempo de Preparo (Minutos): </label>
+                    <input type="number" placeholder="Tempo de Preparo (Minutos)">
+                </div>
+                <div class="form-group">
+                    <label class="required">Categoria da Receita: </label>
+                    <div class="select">
+                        <select name="receita.categoria" [(ngModel)]="receita.categoria">
                                 <option selected disabled>Selecione</option>
                                 <option value="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>                            </select>
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Imagem: </label>
-                        <input type="file">
-                    </div>
-                </section>
-            </form>
-        </div>
+                </div>
+                <div class="form-group">
+                    <label>Imagem: </label>
+                    <input type="file">
+                </div>
+                <div class="form-group">
+                    <label class="required">Descrição da Receita: </label>
+                    <textarea rows="3"></textarea>
+                </div>
+            </section>
 
-        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
-        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+            <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+            <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+        </form>
     </wizard-step>
-    <wizard-step title="Incluir Ingredientes" optionalStep>
+    <wizard-step title="Ingredientes" optionalStep>
         <div class="container">
             <form>
                 <section class="form-block">
@@ -116,7 +115,7 @@
         <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
         <button type="button" class="btn btn-primary" nextStep>Proximo</button>
     </wizard-step>
-    <wizard-step title="Finalizar">
+    <wizard-step title="Publicar">
         <div class="container">
             Resumo da receita....
         </div>

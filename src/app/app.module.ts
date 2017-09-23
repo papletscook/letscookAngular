@@ -21,8 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AlertIconAndTypesService } from "clarity-angular/emphasis/alert/providers/icon-and-types-service";
-import { Ng2CompleterModule } from "ng2-completer";
+import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 @NgModule({
     declarations: [

@@ -50,11 +50,14 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     public getCategorias() {
-        this.categoriaService.list()
-            .then(data => {
-                this.categorias = data;
-            }, error => {
-            })
+        if (!this.categorias) {
+            this.categoriaService.list()
+                .then(data => {
+                    this.categorias = data;
+                }, error => {
+                })
+        }
+
     }
 
 }
