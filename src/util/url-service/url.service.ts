@@ -7,26 +7,26 @@ import 'rxjs/Rx';
 @Injectable()
 export class UrlServiceService {
 
-    // IPs 
-    private urlIp = "10.40.194.73:8080/"; // PC-Rato
+    // IPs
+    private urlIp = 'http://localhost:8080/'; // PC-Rato
 
-    //Path names
-    public pathLetsCook = "letscookAPI/";
+    // Path names
+    public pathLetsCook = 'letscookAPI/';
 
-    //Request Options *Não Mecher*
+    // Request Options *Não Mecher*
     private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
     public options = new RequestOptions({ headers: this.headersAppJson });
-    public url = "http://" + this.urlIp;
+    public url = this.urlIp;
 
     constructor(private http: Http) { }
 
     public request(infoRequest: InfoRequest) {
-        //Verifica se url é outra
+        // Verifica se url é outra
         this.hOtherUrl(infoRequest.otherUrl);
         switch (infoRequest.rqst) {
-            case "get":
+            case 'get':
                 return this.httpGetRequest(infoRequest);
-            case "post":
+            case 'post':
                 return this.httpPostRequest(infoRequest);
         }
     }
@@ -61,27 +61,26 @@ export class UrlServiceService {
 
     private hOtherUrl(l) {
         if (l) {
-            this.url = "http://" + l;
+            this.url = l;
         }
     }
 
     public handleError(error: any): Promise<any> {
         let er: any;
-        if (error.message === "Timeout has occurred") {
+        if (error.message === 'Timeout has occurred') {
             er = {
-                tError: "Timeout",
-                mError: "Tempo de busca excedido, por favor realize a busca novamente, caso o problema persista informe ao administrador do sistema."
+                tError: 'Timeout',
+                mError: 'Tempo de busca excedido, por favor realize a busca novamente...'
             }
         } else {
             let erJson: any;
             erJson = error.json();
             er = {
-                tError: "",
+                tError: '',
                 mError: erJson.message
             }
         }
         return Promise.reject(er);
     }
-
 
 }

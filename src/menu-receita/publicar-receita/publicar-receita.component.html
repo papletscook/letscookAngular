@@ -1,7 +1,7 @@
 <wizard>
     <wizard-step title="Informações da Receita" optionalStep>
         <div class="container">
-            <form>
+            <form name="desc">
                 <section class="form-block">
                     <div class="form-group">
                         <label>Nome da Receita: </label>
@@ -18,9 +18,9 @@
                     <div class="form-group">
                         <label>Categoria da Receita: </label>
                         <div class="select">
-                            <select>
-                                <option value="cat1">cat1</option>
-                            </select>
+                            <select name="receita.categoria" [(ngModel)]="receita.categoria">
+                                <option selected disabled>Selecione</option>
+                                <option value="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>                            </select>
                         </div>
                     </div>
                     <div class="form-group">
