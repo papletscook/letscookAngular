@@ -1,3 +1,4 @@
+import { IngredienteReceita } from './../../viewmodel/receita/ingredienteReceita';
 import { Receita } from './../../viewmodel/receita/receita';
 import { Categoria } from './../../viewmodel/receita/categoria';
 import { IngredienteService } from './../services/ingrediente.service';
@@ -33,6 +34,8 @@ export class PublicarReceitaComponent implements OnInit {
 
     private receita: Receita;
 
+    private ingredienteCad: IngredienteReceita;
+
 
     constructor(
         private completerService: CompleterService,
@@ -42,12 +45,19 @@ export class PublicarReceitaComponent implements OnInit {
 
     ngOnInit() {
         this.receita = new Receita();
+        this.ingredienteCad = new IngredienteReceita();
         this.carregarCampos()
+    }
+
+    private adicionarIngrediente() {
+        this.receita.ingts.push(this.ingredienteCad)
+        this.ingredienteCad = new IngredienteReceita();
     }
 
     protected carregarCampos() {
         this.getIngredientes();
         this.getCategorias();
+        this.getMedidas();
     }
 
     public getIngredientes() {

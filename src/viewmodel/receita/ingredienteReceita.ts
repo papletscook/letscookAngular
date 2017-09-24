@@ -4,5 +4,5 @@ export class IngredienteReceita {
     id: number;
     ingrediente: Ingrediente;
     uMedida: Medida;
-    qunt: number;
+    quant: number;
 }

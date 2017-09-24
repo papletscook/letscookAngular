@@ -8,8 +8,11 @@ export class Receita {
     descricao: string;
     categoria: Categoria;
     status: string;
-    ingts: IngredienteReceita[];
-    etapas: Etapa[];
+    ingts: IngredienteReceita[] = [];
+    etapas: Etapa[] = [];
     foto: string;
     criador: Usuario;
+
+
+
 }

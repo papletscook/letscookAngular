@@ -1,6 +1,6 @@
-<wizard navBarLocation="left">
-    <wizard-step title="Informações da Receita" optionalStep>
-        <form class="compact">
+<form class="compact">
+    <wizard navBarLocation="left">
+        <wizard-step title="Informações da Receita" optionalStep>
             <section class="form-block">
                 <label>Informações da Receita</label>
                 <div class="form-group">
@@ -16,7 +16,8 @@
                     <div class="select">
                         <select name="receita.categoria" [(ngModel)]="receita.categoria">
                                 <option selected disabled>Selecione</option>
-                                <option value="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>                            </select>
+                                <option value="{{cat}}" *ngFor="let cat of categorias">{{cat.nome}}</option>  
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -31,59 +32,68 @@
 
             <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
             <button type="button" class="btn btn-primary" nextStep>Proximo</button>
-        </form>
-    </wizard-step>
-    <wizard-step title="Ingredientes" optionalStep>
-        <form>
-            <label>Adicionar Ingrediente</label>
-            <section class="form-block">
-                <div class="form-group">
-                    <label>Ingrediente: </label>
-                    <ng2-completer type="text" textNoResults="Ingrediente não encontrado" class="input" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
-                </div>
-                <div class="form-group">
-                    <label>Unidade de Medida: </label>
-                    <input type="number" placeholder="Digite a unidade">
-                </div>
-                <div class="form-group">
-                    <label>Quantidade: </label>
-                    <input type="number" placeholder="Digite a quantidade">
-                </div>
-            </section>
-            <button class="btn btn-primary btn-sm">Adicionar</button>
-            <button class="btn btn-outline btn-sm">Limpar</button>
-        </form>
-        <label>Ingredientes da Receita</label>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nome do Ingrediente</th>
-                    <th>Unidade de Medida</th>
-                    <th>Quantidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Cenoura</td>
-                    <td>UNIDADE</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>Oleo</td>
-                    <td>XICARA</td>
-                    <td>0.5</td>
-                </tr>
-            </tbody>
-        </table>
 
-        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
-        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
-    </wizard-step>
-    <wizard-step title="Etapas" optionalStep>
-        <div class="container">
+        </wizard-step>
+        <wizard-step title="Ingredientes" optionalStep>
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <section class="form-block">
+                        <label>Adicionar Ingrediente</label>
+                        <div class="form-group">
+                            <label>Ingrediente: </label>
+                            <ng2-completer name="ingredienteCad.ingrediente" [(ngModel)]="ingredienteCad.ingrediente" type="text" textNoResults="Ingrediente não encontrado"
+                                class="input" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Unidade de Medida: </label>
+                            <div class="select">
+                                <select name="ingredienteCad.uMedida" [(ngModel)]="ingredienteCad.uMedida">
+                                            <option selected disabled>Selecione</option>
+                                            <option value="{{med}}" *ngFor="let med of medidas">{{med.desc}}</option>
+                                        </select>
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label>Quantidade: </label>
+                            <input name="ingredienteCad.quant" [(ngModel)]="ingredienteCad.quant" type="number" placeholder="Digite a quantidade">
+                        </div>
+                        <button class="btn btn-primary btn-sm" (click)="adicionarIngrediente()">Adicionar</button>
+                        <button class="btn btn-outline btn-sm">Limpar</button>
+                    </section>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <section class="form-block">
+
+                        <label>Ingredientes Cadastrados</label>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Unidade de Medida</th>
+                                    <th>Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ingt of receita.ingts">
+                                    <td>{{ingt.ingrediente.nome}}</td>
+                                    <td>{{ingt.uMedida}}</td>
+                                    <td>{{ingt.quant}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+                <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+            </div>
+
+        </wizard-step>
+        <wizard-step title="Etapas" optionalStep>
             <button class="btn btn-primary btn-block" (click)="modalEtapa = true;">Inserir uma Etapa*</button>
-
             <table class="table">
                 <thead>
                     <tr>
@@ -110,23 +120,21 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
-        <button type="button" class="btn btn-primary" nextStep>Proximo</button>
-    </wizard-step>
-    <wizard-step title="Publicar">
-        <div class="container">
-            Resumo da receita....
-        </div>
-        <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
-        <button type="button" class="btn btn-primary" (click)="finishFunction()">Publicar</button>
-    </wizard-step>
-</wizard>
+            <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+            <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+        </wizard-step>
+        <wizard-step title="Publicar">
+            <div class="container">
+                Resumo da receita....
+            </div>
+            <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+            <button type="button" class="btn btn-primary" (click)="finishFunction()">Publicar</button>
+        </wizard-step>
+    </wizard>
 
-<clr-modal [(clrModalOpen)]="modalEtapa">
-    <h3 class="modal-title">Cadastrar Etapa</h3>
-    <div class="modal-body">
-        <form>
+    <clr-modal [(clrModalOpen)]="modalEtapa">
+        <h3 class="modal-title">Cadastrar Etapa</h3>
+        <div class="modal-body">
             <section class="form-block">
                 <div class="form-group">
                     <label>Descrição: </label>
@@ -141,18 +149,16 @@
                     </div>
                 </div>
             </section>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="modalEtapa = false; modalPasso = true;">Ok</button>
-    </div>
-</clr-modal>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="modalEtapa = false; modalPasso = true;">Ok</button>
+        </div>
+    </clr-modal>
 
-<clr-modal [(clrModalOpen)]="modalPasso">
-    <h3 class="modal-title">Cadastrar Passo*</h3>
-    <div class="modal-body">
-        <form>
+    <clr-modal [(clrModalOpen)]="modalPasso">
+        <h3 class="modal-title">Cadastrar Passo*</h3>
+        <div class="modal-body">
             <section class="form-block">
                 <div class="form-group">
                     <label>Descrição: </label>
@@ -171,10 +177,11 @@
                     <input type="number" placeholder="Digite a Quantidade em Minutos">
                 </div>
             </section>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
-    </div>
-</clr-modal>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
+        </div>
+    </clr-modal>
+</form>
+{{receita | json}}
