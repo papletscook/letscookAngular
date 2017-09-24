@@ -34,48 +34,47 @@
         </form>
     </wizard-step>
     <wizard-step title="Ingredientes" optionalStep>
-        <div class="container">
-            <form>
-                <section class="form-block">
-                    <div class="form-group">
-                        <label>Ingrediente: </label>
-                        <ng2-completer [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
-                    </div>
-                    <div class="form-group">
-                        <label>Unidade: </label>
-                        <input type="number" placeholder="Digite a unidade">
-                    </div>
-                    <div class="form-group">
-                        <label>Quantidade: </label>
-                        <input type="number" placeholder="Digite a quantidade">
-                    </div>
-                </section>
-            </form>
-            <button class="btn btn-primary btn-block">Adicionar ingrediente</button>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nome do Ingrediente</th>
-                        <th>Unidade de Medida</th>
-                        <th>Quantidade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cenoura</td>
-                        <td>UNIDADE</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Oleo</td>
-                        <td>XICARA</td>
-                        <td>0.5</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
+        <form>
+            <label>Adicionar Ingrediente</label>
+            <section class="form-block">
+                <div class="form-group">
+                    <label>Ingrediente: </label>
+                    <ng2-completer type="text" textNoResults="Ingrediente não encontrado" class="input" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
+                </div>
+                <div class="form-group">
+                    <label>Unidade de Medida: </label>
+                    <input type="number" placeholder="Digite a unidade">
+                </div>
+                <div class="form-group">
+                    <label>Quantidade: </label>
+                    <input type="number" placeholder="Digite a quantidade">
+                </div>
+            </section>
+            <button class="btn btn-primary btn-sm">Adicionar</button>
+            <button class="btn btn-outline btn-sm">Limpar</button>
+        </form>
+        <label>Ingredientes da Receita</label>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome do Ingrediente</th>
+                    <th>Unidade de Medida</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cenoura</td>
+                    <td>UNIDADE</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Oleo</td>
+                    <td>XICARA</td>
+                    <td>0.5</td>
+                </tr>
+            </tbody>
+        </table>
 
         <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
         <button type="button" class="btn btn-primary" nextStep>Proximo</button>

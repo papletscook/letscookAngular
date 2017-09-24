@@ -5,6 +5,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Wizard } from 'clarity-angular';
 import { CompleterService, CompleterData } from 'ng2-completer';
 import { CategoriaService } from 'menu-receita/services/categoria.service';
+import { MedidaService } from 'menu-receita/services/medida.service';
+import { Medida } from 'viewmodel/receita/medida';
 
 
 @Component({
@@ -14,7 +16,8 @@ import { CategoriaService } from 'menu-receita/services/categoria.service';
     styleUrls: ['publicar-receita.component.css'],
     providers: [IngredienteService,
         CategoriaService,
-        IngredienteService]
+        IngredienteService,
+        MedidaService]
 })
 
 export class PublicarReceitaComponent implements OnInit {
@@ -26,6 +29,7 @@ export class PublicarReceitaComponent implements OnInit {
     private modalPasso = false;
 
     private categorias: Categoria[];
+    private medidas: Medida[];
 
     private receita: Receita;
 
@@ -33,7 +37,8 @@ export class PublicarReceitaComponent implements OnInit {
     constructor(
         private completerService: CompleterService,
         private ingredientesService: IngredienteService,
-        private categoriaService: CategoriaService) { }
+        private categoriaService: CategoriaService,
+        private medidaService: MedidaService) { }
 
     ngOnInit() {
         this.receita = new Receita();
@@ -41,12 +46,18 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     protected carregarCampos() {
-        this.getAllIngredientes();
+        this.getIngredientes();
         this.getCategorias();
     }
 
-    public getAllIngredientes() {
+    public getIngredientes() {
         this.ingredientesService.list()
+            .then(data => {
+                console.log('list')
+                this.dataService = this.completerService.local(data, 'nome', 'nome');
+            }, error => {
+
+            });
     }
 
     public getCategorias() {
@@ -57,7 +68,16 @@ export class PublicarReceitaComponent implements OnInit {
                 }, error => {
                 })
         }
+    }
 
+    public getMedidas() {
+        if (!this.categorias) {
+            this.medidaService.list()
+                .then(data => {
+                    this.medidas = data;
+                }, error => {
+                })
+        }
     }
 
 }

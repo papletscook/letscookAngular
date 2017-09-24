@@ -1,7 +1,15 @@
+import { Etapa } from './passo';
+import { Usuario } from './../login/usuario';
+import { IngredienteReceita } from './ingredienteReceita';
 import { Categoria } from './categoria';
 export class Receita {
-    id: number;
+    id?: number;
     nome: string;
+    descricao: string;
     categoria: Categoria;
+    status: string;
+    ingts: IngredienteReceita[];
+    etapas: Etapa[];
     foto: string;
+    criador: Usuario;
 }
