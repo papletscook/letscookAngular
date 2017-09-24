@@ -21,6 +21,7 @@ import { Medida } from 'viewmodel/receita/medida';
         MedidaService]
 })
 
+
 export class PublicarReceitaComponent implements OnInit {
 
     protected searchStr: string;
@@ -54,6 +55,10 @@ export class PublicarReceitaComponent implements OnInit {
         this.ingredienteCad = new IngredienteReceita();
     }
 
+    private limparIngrediente() {
+        this.ingredienteCad = new IngredienteReceita();
+    }
+
     protected carregarCampos() {
         this.getIngredientes();
         this.getCategorias();
@@ -64,7 +69,7 @@ export class PublicarReceitaComponent implements OnInit {
         this.ingredientesService.list()
             .then(data => {
                 console.log('list')
-                this.dataService = this.completerService.local(data, 'nome', 'nome');
+                this.dataService = this.completerService.local(data, 'nome', 'nome')
             }, error => {
 
             });

@@ -10,9 +10,9 @@ export class Receita {
     status: string;
     ingts: IngredienteReceita[] = [];
     etapas: Etapa[] = [];
+    minsPreparo: number;
     foto: string;
     criador: Usuario;
-
 
 
 }

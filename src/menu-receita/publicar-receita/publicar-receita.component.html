@@ -1,22 +1,22 @@
-<form class="compact">
-    <wizard navBarLocation="left">
-        <wizard-step title="Informações da Receita" optionalStep>
+<form class="compact" name="publicar">
+    <wizard>
+        <wizard-step title="Informações" optionalStep>
             <section class="form-block">
-                <label>Informações da Receita</label>
+                <label>Informações</label>
                 <div class="form-group">
                     <label for="nome" class="required">Nome da Receita: </label>
                     <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome da receita">
                 </div>
                 <div class="form-group">
                     <label class="required">Tempo de Preparo (Minutos): </label>
-                    <input type="number" placeholder="Tempo de Preparo (Minutos)">
+                    <input type="number" name="minsPreparo" [(ngModel)]="receita.minsPreparo" placeholder="Tempo de Preparo (Minutos)">
                 </div>
                 <div class="form-group">
                     <label class="required">Categoria da Receita: </label>
                     <div class="select">
                         <select name="receita.categoria" [(ngModel)]="receita.categoria">
                                 <option selected disabled>Selecione</option>
-                                <option value="{{cat}}" *ngFor="let cat of categorias">{{cat.nome}}</option>  
+                                <option [ngValue]="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>  
                         </select>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label class="required">Descrição da Receita: </label>
-                    <textarea rows="3"></textarea>
+                    <textarea name="receita.descricao" [(ngModel)]="receita.descricao" rows="3"></textarea>
                 </div>
             </section>
 
@@ -36,7 +36,7 @@
         </wizard-step>
         <wizard-step title="Ingredientes" optionalStep>
             <div class="row">
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-5">
                     <section class="form-block">
                         <label>Adicionar Ingrediente</label>
                         <div class="form-group">
@@ -49,8 +49,8 @@
                             <div class="select">
                                 <select name="ingredienteCad.uMedida" [(ngModel)]="ingredienteCad.uMedida">
                                             <option selected disabled>Selecione</option>
-                                            <option value="{{med}}" *ngFor="let med of medidas">{{med.desc}}</option>
-                                        </select>
+                                            <option [ngValue]="med" *ngFor="let med of medidas">{{med.desc}}</option>
+                                </select>
                             </div>
                         </div>
 
@@ -59,10 +59,28 @@
                             <input name="ingredienteCad.quant" [(ngModel)]="ingredienteCad.quant" type="number" placeholder="Digite a quantidade">
                         </div>
                         <button class="btn btn-primary btn-sm" (click)="adicionarIngrediente()">Adicionar</button>
-                        <button class="btn btn-outline btn-sm">Limpar</button>
+                        <button class="btn btn-outline btn-sm" (click)="limparIngrediente()">Limpar</button>
+
+                        <div class="alert alert-danger">
+                            <div class="alert-items">
+                                <div class="alert-item static">
+                                    <div class="alert-icon-wrapper">
+                                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                                    </div>
+                                    <span class="alert-text">
+                                            Ingrediente já cadastrado!
+                                        </span>
+                                </div>
+                            </div>
+                            <button type="button" class="close" aria-label="Close">
+                                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                                </button>
+                        </div>
+
                     </section>
                 </div>
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-1"></div>
+                <div class="col-sm-12 col-md-5">
                     <section class="form-block">
 
                         <label>Ingredientes Cadastrados</label>
@@ -72,13 +90,17 @@
                                     <th>Nome</th>
                                     <th>Unidade de Medida</th>
                                     <th>Quantidade</th>
+                                    <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let ingt of receita.ingts">
-                                    <td>{{ingt.ingrediente.nome}}</td>
-                                    <td>{{ingt.uMedida}}</td>
+                                    <td>{{ingt.ingrediente}}</td>
+                                    <td>{{ingt.uMedida.desc}}</td>
                                     <td>{{ingt.quant}}</td>
+                                    <td>
+                                        <clr-icon shape="trash"></clr-icon>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

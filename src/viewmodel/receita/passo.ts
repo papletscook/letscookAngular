@@ -1,5 +1,5 @@
 export class Etapa {
-    id: number;
+    id?: number;
     nome: string;
     ordem: number;
 }
