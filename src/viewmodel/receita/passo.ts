@@ -1,5 +1,5 @@
-export class Etapa {
+export class Passo {
     id?: number;
     nome: string;
-    ordem: number;
+    ordem?: number;
 }

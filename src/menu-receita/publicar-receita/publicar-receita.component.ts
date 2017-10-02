@@ -1,3 +1,4 @@
+import { MockReceita } from './mock/mockReceita';
 import { IngredienteReceita } from './../../viewmodel/receita/ingredienteReceita';
 import { Receita } from './../../viewmodel/receita/receita';
 import { Categoria } from './../../viewmodel/receita/categoria';
@@ -48,6 +49,7 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita = new Receita();
         this.ingredienteCad = new IngredienteReceita();
         this.carregarCampos()
+        this.receita = MockReceita;
     }
 
     private adicionarIngrediente() {
@@ -63,6 +65,20 @@ export class PublicarReceitaComponent implements OnInit {
         this.getIngredientes();
         this.getCategorias();
         this.getMedidas();
+    }
+
+    changeListener($event): void {
+        this.readThis($event.target);
+    }
+
+    readThis(inputValue: any): void {
+        var file: File = inputValue.files[0];
+        var myReader: FileReader = new FileReader();
+
+        myReader.onloadend = (e) => {
+            this.receita.foto = myReader.result;
+        }
+        myReader.readAsDataURL(file);
     }
 
     public getIngredientes() {

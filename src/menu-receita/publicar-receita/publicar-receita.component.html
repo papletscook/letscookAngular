@@ -1,15 +1,15 @@
 <form class="compact" name="publicar">
     <wizard>
         <wizard-step title="Informações" optionalStep>
+            <h2>Informações</h2>
             <section class="form-block">
-                <label>Informações</label>
                 <div class="form-group">
                     <label for="nome" class="required">Nome da Receita: </label>
-                    <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome da receita">
+                    <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome da Receita">
                 </div>
                 <div class="form-group">
-                    <label class="required">Tempo de Preparo (Minutos): </label>
-                    <input type="number" name="minsPreparo" [(ngModel)]="receita.minsPreparo" placeholder="Tempo de Preparo (Minutos)">
+                    <label class="required">Tempo de Preparo (minutos): </label>
+                    <input type="number" name="minsPreparo" [(ngModel)]="receita.minsPreparo" placeholder="Tempo de Preparo (minutos)">
                 </div>
                 <div class="form-group">
                     <label class="required">Categoria da Receita: </label>
@@ -22,7 +22,15 @@
                 </div>
                 <div class="form-group">
                     <label>Imagem: </label>
-                    <input type="file">
+                    <input type="file" accept="image" (change)="changeListener($event)">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="card-img">
+                                <img *ngIf="receita.foto" [src]="receita.foto">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="form-group">
                     <label class="required">Descrição da Receita: </label>
@@ -35,6 +43,7 @@
 
         </wizard-step>
         <wizard-step title="Ingredientes" optionalStep>
+            <h2>Ingredientes</h2>
             <div class="row">
                 <div class="col-sm-12 col-md-5">
                     <section class="form-block">
@@ -42,7 +51,7 @@
                         <div class="form-group">
                             <label>Ingrediente: </label>
                             <ng2-completer name="ingredienteCad.ingrediente" [(ngModel)]="ingredienteCad.ingrediente" type="text" textNoResults="Ingrediente não encontrado"
-                                class="input" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
+                                [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
                         </div>
                         <div class="form-group">
                             <label class="required">Unidade de Medida: </label>
@@ -60,8 +69,7 @@
                         </div>
                         <button class="btn btn-primary btn-sm" (click)="adicionarIngrediente()">Adicionar</button>
                         <button class="btn btn-outline btn-sm" (click)="limparIngrediente()">Limpar</button>
-
-                        <div class="alert alert-danger">
+                        <!-- <div class="alert alert-danger">
                             <div class="alert-items">
                                 <div class="alert-item static">
                                     <div class="alert-icon-wrapper">
@@ -75,7 +83,7 @@
                             <button type="button" class="close" aria-label="Close">
                                     <clr-icon aria-hidden="true" shape="close"></clr-icon>
                                 </button>
-                        </div>
+                        </div> -->
 
                     </section>
                 </div>
@@ -115,33 +123,42 @@
 
         </wizard-step>
         <wizard-step title="Etapas" optionalStep>
-            <button class="btn btn-primary btn-block" (click)="modalEtapa = true;">Inserir uma Etapa*</button>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nome da Etapa</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>MASSA</td>
-                        <td>
-                            <button class="btn btn-icon btn-primary btn-sm" (click)="modalPasso = true;">
-                                    <clr-icon shape="note"></clr-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>COBERTURA</td>
-                        <td>
-                            <button class="btn btn-icon btn-primary btn-sm" (click)="modalPasso = true;">
-                                    <clr-icon shape="note"></clr-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h4 class="stack-header">
+                <span class="stack-title">Etapas</span>
+                <span class="stack-actions">
+                    <button class="stack-action btn btn-sm btn-link" type="button">Adicionar Etapa</button>
+                </span>
+            </h4>
+            <dl class="stack-view">
+                <div class="stack-block stack-block-expandable stack-block-expanded" *ngFor="let etapa of receita.etapas">
+                    <dd class="stack-block-content">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10">{{etapa.nome}}</div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="text-center">
+                                    Ações
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                    <div class="stack-children">
+                        <div class="stack-block" *ngFor="let passo of etapa.passos">
+                            <dd class="stack-block-content">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-10 col-xs-10">{{passo.nome}}</div>
+                                    <div class="col-lg-2 col-lg-2">
+                                        <div class="text-center">
+                                            <clr-icon shape="trash"></clr-icon>
+                                            <clr-icon shape="pencil"></clr-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+            </dl>
+
             <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
             <button type="button" class="btn btn-primary" nextStep>Proximo</button>
         </wizard-step>
