@@ -1,6 +1,6 @@
 export class Ingrediente {
-    id: number;
+    id?: number;
     nome: string;
-    tipo: string;
-    foto: string;
+    tipo?: string;
+    foto?: string;
 }

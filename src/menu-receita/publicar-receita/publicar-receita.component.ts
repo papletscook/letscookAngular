@@ -1,3 +1,4 @@
+import { Etapa } from './../../viewmodel/receita/etapa';
 import { MockReceita } from './mock/mockReceita';
 import { IngredienteReceita } from './../../viewmodel/receita/ingredienteReceita';
 import { Receita } from './../../viewmodel/receita/receita';
@@ -49,7 +50,8 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita = new Receita();
         this.ingredienteCad = new IngredienteReceita();
         this.carregarCampos()
-        this.receita = MockReceita;
+        const r = MockReceita;
+        this.receita = r;
     }
 
     private adicionarIngrediente() {
@@ -89,6 +91,18 @@ export class PublicarReceitaComponent implements OnInit {
             }, error => {
 
             });
+    }
+
+    public redefinirEtapas(){
+        this.receita.etapas = [];
+        this.addNewEtapa();
+    }
+
+    public addNewEtapa(){
+        let et = new Etapa();
+        et.nome = 'Nova Etapa'
+        et.passos.push({nome: 'Novo Passo'})
+        this.receita.etapas.push(et);
     }
 
     public getCategorias() {
