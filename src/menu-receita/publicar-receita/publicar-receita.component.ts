@@ -1,5 +1,7 @@
+import { element } from 'protractor';
 import { Passo } from './../../viewmodel/receita/passo';
 import { Etapa } from './../../viewmodel/receita/etapa';
+import { Ingrediente } from './../../viewmodel/receita/ingrediente';
 import { MockReceita } from './mock/mockReceita';
 import { IngredienteReceita } from './../../viewmodel/receita/ingredienteReceita';
 import { Receita } from './../../viewmodel/receita/receita';
@@ -26,7 +28,7 @@ import { Medida } from 'viewmodel/receita/medida';
 
 
 export class PublicarReceitaComponent implements OnInit {
-
+    private allIngredientes: Ingrediente[];
 
     private etapaEdited: Etapa;
     private passoEdited: Passo;
@@ -74,12 +76,28 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita = r;
     }
 
+    excluirEtapa(etapa: Etapa): void {
+        if (confirm('Deseja excluir etapa?')) {
+            this.receita.etapas.splice(this.receita.etapas.indexOf(etapa), 1)
+        }
+    }
+
+    excluirPasso(passo: Passo, etapa: Etapa){
+        etapa.passos.splice(etapa.passos.indexOf(passo), 1)
+    }
+
     editarEtapa(etapa: Etapa): void {
         this.etapaEdited = etapa;
+        this.passoEdited = null;
     }
 
     editarPasso(passo: Passo): void {
         this.passoEdited = passo;
+        this.etapaEdited = null;
+    }
+
+    adicionarNovoPasso(etapa: Etapa): void {
+        etapa.passos.push({ nome: 'Novo Passo' });
     }
 
     salvarPasso(): void {
@@ -123,8 +141,7 @@ export class PublicarReceitaComponent implements OnInit {
     public getIngredientes() {
         this.ingredientesService.list()
             .then(data => {
-                console.log('list')
-                this.dataService = this.completerService.local(data, 'nome', 'nome')
+                this.allIngredientes = data;
             }, error => {
 
             });
