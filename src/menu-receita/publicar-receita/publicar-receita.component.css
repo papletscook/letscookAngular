@@ -1,0 +1,12 @@
+clr-icon {
+    cursor: pointer;
+}
+
+signpost-flex-wrap {
+    position: absolute;
+    z-index: 200;
+}
+
+.steps-indicator{
+    font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif;
+}

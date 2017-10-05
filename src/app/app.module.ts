@@ -1,3 +1,4 @@
+import { AutofocusDirective } from './../menu-receita/publicar-receita/autofocus.directive';
 import { UrlServiceService } from './../util/url-service/url.service';
 import { WizardModule } from 'ng2-archwizard';
 import { BuscaComponentComponent } from './../busca/busca.component';
@@ -37,7 +38,8 @@ import { Ng2CompleterModule } from 'ng2-completer';
         MinhasReceitasComponent,
         IndexPageComponent,
         PainelDeControleComponent,
-        BuscaComponentComponent
+        BuscaComponentComponent,
+        AutofocusDirective
     ],
     imports: [
         BrowserModule,

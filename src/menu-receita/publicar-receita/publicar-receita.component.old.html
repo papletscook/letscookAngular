@@ -1,0 +1,267 @@
+<form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
+    <wizard navigationMode="free" navBarLocation="left" navBarLayout="large-empty-symbols">
+        <wizard-step title="Informações" navigationSymbol="1" optionalStep>
+            <h2>Informações</h2>
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="nome" class="required">Nome da Receita: </label>
+                    <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome da Receita">
+                </div>
+                <div class="form-group">
+                    <label class="required">Tempo de Preparo (minutos): </label>
+                    <input type="number" name="minsPreparo" [(ngModel)]="receita.minsPreparo" placeholder="Tempo de Preparo (minutos)">
+                </div>
+                <div class="form-group">
+                    <label class="required">Categoria da Receita: </label>
+                    <div class="select">
+                        <select name="receita.categoria" [(ngModel)]="receita.categoria">
+                                <option [ngValue]="null" disabled>Selecione</option>
+                                <option [ngValue]="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>  
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Imagem: </label>
+                    <input type="file" accept="image" (change)="changeListener($event)">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="card-img">
+                                <img *ngIf="receita.foto" [src]="receita.foto">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="required">Descrição da Receita: </label>
+                    <textarea name="receita.descricao" [(ngModel)]="receita.descricao" rows="3"></textarea>
+                </div>
+            </section>
+
+            <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+            <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+
+        </wizard-step>
+        <wizard-step title="Ingredientes" optionalStep>
+            <h2>Ingredientes</h2>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <section class="form-block">
+                        <label>Adicionar Ingrediente</label>
+                        <div class="form-group">
+                            <label>Ingrediente: </label>
+                            <ng2-completer name="ingredienteCad.ingrediente" [(ngModel)]="ingredienteCad.ingrediente" type="text" textNoResults="Ingrediente não encontrado"
+                                [datasource]="dataService" [minSearchLength]="3"></ng2-completer>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Unidade de Medida: </label>
+                            <div class="select">
+                                <select name="ingredienteCad.uMedida" [(ngModel)]="ingredienteCad.uMedida">
+                                    <option [ngValue]="null" disabled>Selecione</option>
+                                    <option [ngValue]="med" *ngFor="let med of medidas">{{med.desc}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quantidade: </label>
+                            <input name="ingredienteCad.quant" [(ngModel)]="ingredienteCad.quant" type="number" placeholder="Digite a quantidade">
+                        </div>
+                        <button class="btn btn-primary btn-sm" (click)="adicionarIngrediente()">Adicionar</button>
+                        <button class="btn btn-outline btn-sm" (click)="limparIngrediente()">Limpar</button>
+                        <!-- <div class="alert alert-danger">
+                            <div class="alert-items">
+                                <div class="alert-item static">
+                                    <div class="alert-icon-wrapper">
+                                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                                    </div>
+                                    <span class="alert-text">
+                                            Ingrediente já cadastrado!
+                                        </span>
+                                </div>
+                            </div>
+                            <button type="button" class="close" aria-label="Close">
+                                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                                </button>
+                        </div> -->
+
+                    </section>
+                </div>
+                <div class="col-sm-12 col-md-1"></div>
+                <div class="col-sm-12 col-md-5">
+                    <section class="form-block">
+
+                        <label>Ingredientes Cadastrados</label>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Unidade de Medida</th>
+                                    <th>Quantidade</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ingt of receita.ingts">
+                                    <td>{{ingt.ingrediente}}</td>
+                                    <td>{{ingt.uMedida.desc}}</td>
+                                    <td>{{ingt.quant}}</td>
+                                    <td>
+                                        <clr-icon shape="trash"></clr-icon>
+                                        <clr-icon shape="pencil"></clr-icon>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+                <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+            </div>
+
+        </wizard-step>
+        <wizard-step title="Etapas" optionalStep>
+            <h2>Modo de Preparo</h2>
+            <h4 class="stack-header">
+                <span class="stack-title"></span>
+                <span class="stack-actions">
+                        <button class="stack-action btn btn-sm btn-link" type="button" (click)="redefinirEtapas()">Redefinir</button>
+                    <button class="stack-action btn btn-sm btn-link" type="button" (click)="addNewEtapa()">Adicionar Etapa</button>
+                </span>
+            </h4>
+            <dl class="stack-view">
+                <div class="stack-block stack-block-expandable stack-block-expanded" *ngFor="let etapa of receita.etapas">
+                    <dd class="stack-block-content">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10">
+                                <div *ngIf="etapa != this.etapaEdited">
+                                    {{etapa.nome}}
+                                </div>
+                                <div *ngIf="etapa == this.etapaEdited">
+                                    <input type="text" appAutofocus id="etapa.nome" required name="etapa.nome" [(ngModel)]="etapa.nome" (keyup.enter)="salvarEtapa()"
+                                        placeholder="Nome da Etapa">
+                                    <clr-icon shape="success-standard" size="24" class="is-solid" (click)="salvarEtapa()"></clr-icon>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="text-center">
+                                    <clr-icon shape="trash"></clr-icon>
+                                    <clr-icon shape="pencil" (click)="editarEtapa(etapa)"></clr-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                    <div class="stack-children">
+                        <div class="stack-block" *ngFor="let passo of etapa.passos">
+                            <dd class="stack-block-content">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-10 col-xs-10">
+                                        <div *ngIf="passo != this.passoEdited">
+                                            {{passo.nome}}
+                                        </div>
+                                        <div *ngIf="passo == this.passoEdited">
+                                            <input (keyup.enter)="salvarPasso()" size="{{passo.nome.length}}" type="text" appAutofocus id="passo.nome" required name="passo.nome"
+                                                [(ngModel)]="passo.nome" placeholder="Descrição do Passo">
+                                            <clr-icon shape="success-standard" size="24" class="is-solid" (click)="salvarPasso()"></clr-icon>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-lg-2">
+                                        <div class="text-center">
+                                            <clr-signpost>
+                                                <clr-icon shape="star" clrSignpostTrigger></clr-icon>
+                                                <clr-signpost-content clrPosition="left-middle" *clrIfOpen>
+                                                    <div class="form-group">
+                                                        <label>Duração (minutos): </label>
+                                                        <input type="number" step="5">
+                                                    </div>
+                                                </clr-signpost-content>
+                                            </clr-signpost>
+
+                                            <clr-signpost>
+                                                <clr-icon shape="alarm-clock" clrSignpostTrigger></clr-icon>
+                                                <clr-signpost-content clrPosition="left-middle" *clrIfOpen>
+                                                    <div class="form-group">
+                                                        <label>Duração (minutos): </label>
+                                                        <input type="number" step="5">
+                                                    </div>
+                                                </clr-signpost-content>
+                                            </clr-signpost>
+                                            <clr-icon shape="trash"></clr-icon>
+                                            <clr-icon shape="pencil" (click)="editarPasso(passo)"></clr-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+            </dl>
+
+            <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+            <button type="button" class="btn btn-primary" nextStep>Proximo</button>
+        </wizard-step>
+        <wizard-step title="Publicar">
+            <div class="container">
+                Resumo da receita....
+            </div>
+            <button type="button" class="btn btn-secondary" previousStep>Voltar</button>
+            <button type="button" class="btn btn-primary" (click)="finishFunction()">Publicar</button>
+        </wizard-step>
+    </wizard>
+
+    <clr-modal [(clrModalOpen)]="modalEtapa">
+        <h3 class="modal-title">Cadastrar Etapa</h3>
+        <div class="modal-body">
+            <section class="form-block">
+                <div class="form-group">
+                    <label>Descrição: </label>
+                    <textarea rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tipo: </label>
+                    <div class="select">
+                        <select>
+                            <option value="cat1">cat1</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="modalEtapa = false; modalPasso = true;">Ok</button>
+        </div>
+    </clr-modal>
+
+    <clr-modal [(clrModalOpen)]="modalPasso">
+        <h3 class="modal-title">Cadastrar Passo*</h3>
+        <div class="modal-body">
+            <section class="form-block">
+                <div class="form-group">
+                    <label>Descrição: </label>
+                    <textarea rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tipo: </label>
+                    <div class="select">
+                        <select>
+                            <option value="cat1">cat1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Quantidade em Minutos: </label>
+                    <input type="number" placeholder="Digite a Quantidade em Minutos">
+                </div>
+            </section>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
+        </div>
+    </clr-modal>
+</form>
+{{receita | json}}

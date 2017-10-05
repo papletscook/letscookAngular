@@ -1,3 +1,4 @@
+import { Categoria } from './../../../viewmodel/receita/categoria';
 import { Receita } from 'viewmodel/receita/receita';
 
 export const MockReceita: Receita = {

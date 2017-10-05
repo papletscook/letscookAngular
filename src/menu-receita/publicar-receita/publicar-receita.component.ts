@@ -1,10 +1,11 @@
+import { Passo } from './../../viewmodel/receita/passo';
 import { Etapa } from './../../viewmodel/receita/etapa';
 import { MockReceita } from './mock/mockReceita';
 import { IngredienteReceita } from './../../viewmodel/receita/ingredienteReceita';
 import { Receita } from './../../viewmodel/receita/receita';
 import { Categoria } from './../../viewmodel/receita/categoria';
 import { IngredienteService } from './../services/ingrediente.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Wizard } from 'clarity-angular';
 import { CompleterService, CompleterData } from 'ng2-completer';
 import { CategoriaService } from 'menu-receita/services/categoria.service';
@@ -26,6 +27,10 @@ import { Medida } from 'viewmodel/receita/medida';
 
 export class PublicarReceitaComponent implements OnInit {
 
+
+    private etapaEdited: Etapa;
+    private passoEdited: Passo;
+
     protected searchStr: string;
     protected dataService: CompleterData;
 
@@ -38,13 +43,28 @@ export class PublicarReceitaComponent implements OnInit {
     private receita: Receita;
 
     private ingredienteCad: IngredienteReceita;
+    private ingredientes: IngredienteReceita[] = [];
 
+
+    @ViewChild('wizard') wizard: Wizard;
+    skipStepTwo = true;
+    _open = true;
 
     constructor(
         private completerService: CompleterService,
         private ingredientesService: IngredienteService,
         private categoriaService: CategoriaService,
         private medidaService: MedidaService) { }
+
+
+    toggleStepTwo() {
+        this.skipStepTwo = !this.skipStepTwo;
+    }
+
+    open() {
+        this._open = !this.open;
+    }
+
 
     ngOnInit() {
         this.receita = new Receita();
@@ -54,8 +74,25 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita = r;
     }
 
+    editarEtapa(etapa: Etapa): void {
+        this.etapaEdited = etapa;
+    }
+
+    editarPasso(passo: Passo): void {
+        this.passoEdited = passo;
+    }
+
+    salvarPasso(): void {
+        this.passoEdited = null;
+    }
+
+    salvarEtapa(): void {
+        this.etapaEdited = null;
+    }
+
     private adicionarIngrediente() {
-        this.receita.ingts.push(this.ingredienteCad)
+        this.ingredientes.push(this.ingredienteCad);
+        this.receita.ingts = this.ingredientes;
         this.ingredienteCad = new IngredienteReceita();
     }
 
@@ -74,8 +111,8 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     readThis(inputValue: any): void {
-        var file: File = inputValue.files[0];
-        var myReader: FileReader = new FileReader();
+        const file: File = inputValue.files[0];
+        const myReader: FileReader = new FileReader();
 
         myReader.onloadend = (e) => {
             this.receita.foto = myReader.result;
@@ -93,15 +130,17 @@ export class PublicarReceitaComponent implements OnInit {
             });
     }
 
-    public redefinirEtapas(){
+    public redefinirEtapas() {
         this.receita.etapas = [];
         this.addNewEtapa();
     }
 
-    public addNewEtapa(){
-        let et = new Etapa();
+    public addNewEtapa() {
+        const et: Etapa = new Etapa();
         et.nome = 'Nova Etapa'
-        et.passos.push({nome: 'Novo Passo'})
+        const passos = [];
+        passos.push({ nome: 'Novo Passo' })
+        et.passos = passos;
         this.receita.etapas.push(et);
     }
 
