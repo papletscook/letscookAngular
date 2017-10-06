@@ -1,3 +1,4 @@
+import { InputTrimDirective } from './../menu-receita/publicar-receita/input-trim.directive';
 import { AutofocusDirective } from './../menu-receita/publicar-receita/autofocus.directive';
 import { UrlServiceService } from './../util/url-service/url.service';
 import { WizardModule } from 'ng2-archwizard';
@@ -24,6 +25,7 @@ import { AppComponent } from './app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 import { Ng2CompleterModule } from 'ng2-completer';
+import { ResumoReceitaComponent } from 'menu-receita/resumo-receita/resumo-receita.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +41,9 @@ import { Ng2CompleterModule } from 'ng2-completer';
         IndexPageComponent,
         PainelDeControleComponent,
         BuscaComponentComponent,
-        AutofocusDirective
+        ResumoReceitaComponent,
+        AutofocusDirective,
+        InputTrimDirective
     ],
     imports: [
         BrowserModule,

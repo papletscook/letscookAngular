@@ -18,7 +18,7 @@ export class CategoriaService extends GenericService implements Service<Categori
 
     public list(): Promise<Categoria[]> {
         this.infoRequest = {
-            rqst: 'get', command: this.urlServiceService.pathLetsCook + 'categoriaReceita/list', timeout: 6000
+            rqst: 'get', command: this.urlServiceService.pathLetsCook + 'categoriaReceita', timeout: 6000
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

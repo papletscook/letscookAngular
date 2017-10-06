@@ -10,7 +10,7 @@
 
         <clr-wizard-page>
             <ng-template clrPageNavTitle>
-                Informações da Receita</ng-template>
+                Informações</ng-template>
             <ng-template clrPageTitle>
                 <clr-icon shape="library" size="48"></clr-icon>
                 <label>Informações</label>
@@ -18,15 +18,15 @@
 
             <section class="form-block">
                 <div class="form-group">
-                    <label for="nome" class="required">Nome da Receita: </label>
-                    <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome da Receita">
+                    <label for="nome" class="required">Nome: </label>
+                    <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome ">
                 </div>
                 <div class="form-group">
                     <label class="required">Tempo de Preparo (minutos): </label>
                     <input type="number" name="minsPreparo" [(ngModel)]="receita.minsPreparo" placeholder="Tempo de Preparo (minutos)">
                 </div>
                 <div class="form-group">
-                    <label class="required">Categoria da Receita: </label>
+                    <label class="required">Categoria: </label>
                     <div class="select">
                         <select name="receita.categoria" [(ngModel)]="receita.categoria">
                                     <option [ngValue]="null" disabled>Selecione</option>
@@ -47,7 +47,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label class="required">Descrição da Receita: </label>
+                    <label class="required">Descrição: </label>
                     <textarea name="receita.descricao" [(ngModel)]="receita.descricao" rows="3"></textarea>
                 </div>
             </section>
@@ -130,7 +130,6 @@
                             <td>{{ingt.quant}}</td>
                             <td>
                                 <clr-icon shape="trash"></clr-icon>
-                                <clr-icon shape="pencil"></clr-icon>
                             </td>
                         </tr>
                     </tbody>
@@ -144,6 +143,14 @@
                 <clr-icon shape="tasks" size="48"></clr-icon>
                 <label>Modo de Preparo</label>
             </ng-template>
+
+            <clr-alert>
+                <div class="alert-item">
+                    <span class="alert-text">
+                        Represente o modo de preparo  através da definição de etapas e passos, utilize o cronometro para tarefas tempo definido e a estrela para a identificação de dicas.    
+                    </span>
+                </div>
+            </clr-alert>
 
 
             <h4 class="stack-header">
@@ -162,15 +169,14 @@
                                     {{etapa.nome}}
                                 </div>
                                 <div *ngIf="etapa == this.etapaEdited">
-                                    <input type="text" appAutofocus id="etapa.nome" required name="etapa.nome" [(ngModel)]="etapa.nome" (keyup.enter)="salvarEtapa()"
-                                        placeholder="Nome da Etapa">
+                                    <input type="text" appAutofocus id="etapa.nome" required name="etapa.nome" [(ngModel)]="etapa.nome" (focusout)="salvarEtapa()"
+                                        trim="blur" placeholder="Nome da Etapa">
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2">
                                 <div class="text-center">
                                     <clr-icon shape="plus" (click)="adicionarNovoPasso(etapa)"></clr-icon>
                                     <clr-icon shape="trash" (click)="excluirEtapa(etapa)"></clr-icon>
-                                    <clr-icon shape="pencil" (click)="editarEtapa(etapa)"></clr-icon>
                                 </div>
                             </div>
                         </div>
@@ -184,8 +190,8 @@
                                             {{passo.nome}}
                                         </div>
                                         <div *ngIf="passo == this.passoEdited">
-                                            <input (keyup.enter)="salvarPasso()" size="{{passo.nome.length}}" type="text" appAutofocus id="passo.nome" required name="passo.nome"
-                                                [(ngModel)]="passo.nome" placeholder="Descrição do Passo">
+                                            <input (focusout)="salvarPasso()" size="{{passo.nome.length}}" type="text" appAutofocus id="passo.nome" required name="passo.nome"
+                                                [(ngModel)]="passo.nome" trim="blur" placeholder="Descrição do Passo">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-lg-2">
@@ -209,8 +215,8 @@
                                                     </div>
                                                 </clr-signpost-content>
                                             </clr-signpost>
-                                            <clr-icon shape="trash" (click)="excluirPasso(passo, etapa)"></clr-icon>
                                             <clr-icon shape="pencil" (click)="editarPasso(passo)"></clr-icon>
+                                            <clr-icon shape="trash" (click)="excluirPasso(passo, etapa)"></clr-icon>
                                         </div>
                                     </div>
                                 </div>
@@ -219,9 +225,15 @@
                     </div>
                 </div>
             </dl>
+        </clr-wizard-page>
 
-
-
+        <clr-wizard-page>
+            <ng-template clrPageNavTitle>Resumo</ng-template>
+            <ng-template clrPageTitle>
+                <clr-icon shape="tasks" size="48"></clr-icon>
+                <label>Resumo</label>
+                <resumo-receita-component [(receita)]="receita"></resumo-receita-component>
+            </ng-template>
         </clr-wizard-page>
 
 

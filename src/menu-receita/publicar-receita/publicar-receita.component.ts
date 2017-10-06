@@ -82,7 +82,7 @@ export class PublicarReceitaComponent implements OnInit {
         }
     }
 
-    excluirPasso(passo: Passo, etapa: Etapa){
+    excluirPasso(passo: Passo, etapa: Etapa) {
         etapa.passos.splice(etapa.passos.indexOf(passo), 1)
     }
 

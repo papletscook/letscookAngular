@@ -1,5 +1,7 @@
 export class Passo {
     id?: number;
-    nome: string;
     ordem?: number;
+
+    constructor(public nome: string) { }
+
 }
