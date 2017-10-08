@@ -1,25 +1,27 @@
-<form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
+<clr-wizard #wizard [(clrWizardOpen)]="_open" clrWizardSize="xl">
+    <clr-wizard-title>Publicar Receita</clr-wizard-title>
 
-    <clr-wizard #wizard [(clrWizardOpen)]="_open" clrWizardSize="xl">
-        <clr-wizard-title>Publicar Receita</clr-wizard-title>
+    <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
+    <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Avançar</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'" (click)="publicarReceita()">Publicar</clr-wizard-button>
 
-        <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
-        <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
-        <clr-wizard-button [type]="'next'">Avançar</clr-wizard-button>
-        <clr-wizard-button [type]="'finish'">Publicar</clr-wizard-button>
+    <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepOne()">
+        <ng-template clrPageNavTitle>
+            Informações</ng-template>
+        <ng-template clrPageTitle>
+            <clr-icon shape="library" size="48"></clr-icon>
+            <label>Informações</label>
+        </ng-template>
 
-        <clr-wizard-page>
-            <ng-template clrPageNavTitle>
-                Informações</ng-template>
-            <ng-template clrPageTitle>
-                <clr-icon shape="library" size="48"></clr-icon>
-                <label>Informações</label>
-            </ng-template>
-
+        <form (keydown.enter)="$event.preventDefault()" class="compact" #formPageOne="ngForm">
             <section class="form-block">
                 <div class="form-group">
-                    <label for="nome" class="required">Nome: </label>
-                    <input type="text" id="nome" required name="nome" [(ngModel)]="receita.nome" placeholder="Nome ">
+                    <label class="required">Nome</label>
+                    <label for="nomeInput" aria-haspopup="true" role="tooltip" [class.invalid]="!receita.nome" class="tooltip tooltip-validation tooltip-md tooltip-bottom-right">
+                        <input type="text" id="nomeInput" required [(ngModel)]="receita.nome" name="nome" #name="ngModel">
+                        <span class="tooltip-content">Campo obrigatório!</span>
+                    </label>
                 </div>
                 <div class="form-group">
                     <label class="required">Tempo de Preparo (minutos): </label>
@@ -51,25 +53,26 @@
                     <textarea name="receita.descricao" [(ngModel)]="receita.descricao" rows="3"></textarea>
                 </div>
             </section>
+        </form>
+    </clr-wizard-page>
 
-        </clr-wizard-page>
-
-        <clr-wizard-page>
-            <ng-template clrPageTitle>
-                <clr-icon shape="list" size="48"></clr-icon>
-                <label>Ingredientes</label>
-            </ng-template>
-            <ng-template clrPageNavTitle>Ingredientes</ng-template>
-            <div class="alert alert-info">
-                <div class="alert-items">
-                    <div class="alert-item static">
-                        <div class="alert-icon-wrapper">
-                            <clr-icon class="alert-icon" shape="info-standard"></clr-icon>
-                        </div>
-                        <span class="alert-text">Adicione todos os ingredientes necessários para o preparo da receita!</span>
+    <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepTwo()">
+        <ng-template clrPageTitle>
+            <clr-icon shape="list" size="48"></clr-icon>
+            <label>Ingredientes</label>
+        </ng-template>
+        <ng-template clrPageNavTitle>Ingredientes</ng-template>
+        <div class="alert alert-info">
+            <div class="alert-items">
+                <div class="alert-item static">
+                    <div class="alert-icon-wrapper">
+                        <clr-icon class="alert-icon" shape="info-standard"></clr-icon>
                     </div>
+                    <span class="alert-text">Adicione todos os ingredientes necessários para o preparo da receita!</span>
                 </div>
             </div>
+        </div>
+        <form (keydown.enter)="$event.preventDefault()" class="compact" #formPageTwo="ngForm">
             <section class="form-block">
                 <label>Adicionar Ingrediente</label>
                 <div class="form-group row">
@@ -112,6 +115,7 @@
                 <button class="btn btn-outline btn-sm" (click)="limparIngrediente()">Limpar</button>
 
             </section>
+
             <section class="form-block">
                 <label>Ingredientes Cadastrados</label>
                 <table class="table">
@@ -135,23 +139,25 @@
                     </tbody>
                 </table>
             </section>
-        </clr-wizard-page>
+        </form>
+    </clr-wizard-page>
 
-        <clr-wizard-page>
-            <ng-template clrPageNavTitle>Modo de Preparo</ng-template>
-            <ng-template clrPageTitle>
-                <clr-icon shape="tasks" size="48"></clr-icon>
-                <label>Modo de Preparo</label>
-            </ng-template>
+    <clr-wizard-page>
+        <ng-template clrPageNavTitle>Modo de Preparo</ng-template>
+        <ng-template clrPageTitle>
+            <clr-icon shape="tasks" size="48"></clr-icon>
+            <label>Modo de Preparo</label>
+        </ng-template>
 
-            <clr-alert>
-                <div class="alert-item">
-                    <span class="alert-text">
+        <clr-alert>
+            <div class="alert-item">
+                <span class="alert-text">
                         Represente o modo de preparo  através da definição de etapas e passos, utilize o cronometro para tarefas tempo definido e a estrela para a identificação de dicas.    
                     </span>
-                </div>
-            </clr-alert>
+            </div>
+        </clr-alert>
 
+        <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
 
             <h4 class="stack-header">
                 <span class="stack-title"></span>
@@ -174,7 +180,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2">
-                                <div class="text-center">
+                                <div class="text-right">
                                     <clr-icon shape="plus" (click)="adicionarNovoPasso(etapa)"></clr-icon>
                                     <clr-icon shape="trash" (click)="excluirEtapa(etapa)"></clr-icon>
                                 </div>
@@ -195,7 +201,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-lg-2">
-                                        <div class="text-center">
+                                        <div class="text-right">
                                             <clr-signpost>
                                                 <clr-icon shape="star" clrSignpostTrigger></clr-icon>
                                                 <clr-signpost-content clrPosition="left-middle" *clrIfOpen>
@@ -215,7 +221,7 @@
                                                     </div>
                                                 </clr-signpost-content>
                                             </clr-signpost>
-                                            <clr-icon shape="pencil" (click)="editarPasso(passo)"></clr-icon>
+                                            <!-- <clr-icon shape="pencil" (click)="editarPasso(passo)"></clr-icon> -->
                                             <clr-icon shape="trash" (click)="excluirPasso(passo, etapa)"></clr-icon>
                                         </div>
                                     </div>
@@ -225,21 +231,24 @@
                     </div>
                 </div>
             </dl>
-        </clr-wizard-page>
+        </form>
 
-        <clr-wizard-page>
-            <ng-template clrPageNavTitle>Resumo</ng-template>
-            <ng-template clrPageTitle>
-                <clr-icon shape="tasks" size="48"></clr-icon>
-                <label>Resumo</label>
-                <resumo-receita-component [(receita)]="receita"></resumo-receita-component>
-            </ng-template>
-        </clr-wizard-page>
+    </clr-wizard-page>
+
+    <clr-wizard-page>
+        <ng-template clrPageNavTitle>Resumo</ng-template>
+        <ng-template clrPageTitle>
+            <clr-icon shape="tasks" size="48"></clr-icon>
+            <label>Resumo</label>
+            <resumo-receita-component [(receita)]="receita"></resumo-receita-component>
+        </ng-template>
+
+        <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
+        </form>
+    </clr-wizard-page>
 
 
 
-    </clr-wizard>
+</clr-wizard>
 
-
-</form>
 {{receita | json}}

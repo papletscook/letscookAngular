@@ -27,6 +27,8 @@ export class TemplateComponent implements OnInit {
 
     public sidenavActive: boolean = false;
 
+    private showAlert : boolean = false;
+
     constructor(private router: Router,
         public validLoginService: ValidLoginService,
         public holderService: HolderService,

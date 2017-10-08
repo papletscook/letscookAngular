@@ -12,7 +12,6 @@ import { CompleterService, CompleterData } from 'ng2-completer';
 import { CategoriaService } from 'menu-receita/services/categoria.service';
 import { MedidaService } from 'menu-receita/services/medida.service';
 import { Medida } from 'viewmodel/receita/medida';
-import { MockReceita } from 'menu-receita/publicar-receita/mock/mockReceita';
 
 
 @Component({

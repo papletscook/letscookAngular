@@ -1,3 +1,4 @@
+import { Alert } from './../alert';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -12,6 +13,9 @@ export class HolderService {
 
     //Mostra qual subnav está ativo    
     public qualSubnavEstaAtivo: string;
+
+    // Comportamento do Alert App Level
+    public alert: Alert;
 
     constructor() { }
 

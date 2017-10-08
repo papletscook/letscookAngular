@@ -13,4 +13,11 @@ export class Receita {
     minsPreparo: number;
     foto: string;
     criador: Usuario;
+
+    constructor() {
+        this.nome = ''
+        this.descricao = ''
+        this.categoria = new Categoria()
+        this.ingts = Array<IngredienteReceita>();
+    }
 }

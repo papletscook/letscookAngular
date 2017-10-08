@@ -1,3 +1,5 @@
+import { PrepararReceitaComponent } from './../menu-receita/preparar-receita/preparar-receita.component';
+import { Ng2ImgMaxModule } from './../../NODE_M~1/NG2-IM~1/src/ng2-img-max.module';
 import { InputTrimDirective } from './../menu-receita/publicar-receita/input-trim.directive';
 import { AutofocusDirective } from './../menu-receita/publicar-receita/autofocus.directive';
 import { UrlServiceService } from './../util/url-service/url.service';
@@ -42,6 +44,7 @@ import { ResumoReceitaComponent } from 'menu-receita/resumo-receita/resumo-recei
         PainelDeControleComponent,
         BuscaComponentComponent,
         ResumoReceitaComponent,
+        PrepararReceitaComponent,
         AutofocusDirective,
         InputTrimDirective
     ],
@@ -53,7 +56,8 @@ import { ResumoReceitaComponent } from 'menu-receita/resumo-receita/resumo-recei
         BrowserAnimationsModule,
         AppRoutingModule,
         WizardModule,
-        Ng2CompleterModule
+        Ng2CompleterModule,
+        Ng2ImgMaxModule
     ],
     providers: [
         ValidLoginService,
@@ -68,7 +72,8 @@ import { ResumoReceitaComponent } from 'menu-receita/resumo-receita/resumo-recei
         MenuReceitaComponent,
         MinhasReceitasComponent,
         IndexPageComponent,
-        PainelDeControleComponent
+        PainelDeControleComponent,
+        PrepararReceitaComponent
     ]
 })
 

@@ -1,4 +1,3 @@
-import { Categoria } from './../../../viewmodel/receita/categoria';
 import { Receita } from 'viewmodel/receita/receita';
 
 export const MockReceita: Receita = {
@@ -6,7 +5,7 @@ export const MockReceita: Receita = {
     descricao: 'Descrição',
     categoria: null,
     status: null,
-    ingts: null,
+    ingts: [],
     etapas: [{
         nome: 'MASSA',
         passos: [

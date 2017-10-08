@@ -1,12 +1,9 @@
 <div class="main-container">
-    <clr-alert [clrAlertType]="'alert-info'" [clrAlertAppLevel]="true">
+    <clr-alert [clrAlertType]="'alert-info'" *ngIf="holderService.alert" [clrAlertAppLevel]="true">
         <clr-alert-item>
             <span class="alert-text">
-                        Este aplicativo está em fase de desenvolvimento.
+                    {{ holderService.alert.detail }}
                     </span>
-            <div class="alert-actions">
-                <button class="btn alert-action">Action</button>
-            </div>
         </clr-alert-item>
     </clr-alert>
     <header class="header header-4">

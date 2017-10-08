@@ -1,8 +1,11 @@
+import { MockReceita } from './../mock/mockReceita';
+import { HolderService } from './../../util/holder/holder.service';
+import { Alert } from './../../util/alert';
+import { ReceitaService } from './../services/receita.service';
 import { element } from 'protractor';
 import { Passo } from './../../viewmodel/receita/passo';
 import { Etapa } from './../../viewmodel/receita/etapa';
 import { Ingrediente } from './../../viewmodel/receita/ingrediente';
-import { MockReceita } from './mock/mockReceita';
 import { IngredienteReceita } from './../../viewmodel/receita/ingredienteReceita';
 import { Receita } from './../../viewmodel/receita/receita';
 import { Categoria } from './../../viewmodel/receita/categoria';
@@ -23,7 +26,9 @@ import { Medida } from 'viewmodel/receita/medida';
     providers: [IngredienteService,
         CategoriaService,
         IngredienteService,
-        MedidaService]
+        MedidaService,
+        ReceitaService,
+        HolderService]
 })
 
 
@@ -53,20 +58,12 @@ export class PublicarReceitaComponent implements OnInit {
     _open = true;
 
     constructor(
+        private holderService: HolderService,
+        private receitaService: ReceitaService,
         private completerService: CompleterService,
         private ingredientesService: IngredienteService,
         private categoriaService: CategoriaService,
         private medidaService: MedidaService) { }
-
-
-    toggleStepTwo() {
-        this.skipStepTwo = !this.skipStepTwo;
-    }
-
-    open() {
-        this._open = !this.open;
-    }
-
 
     ngOnInit() {
         this.receita = new Receita();
@@ -74,6 +71,35 @@ export class PublicarReceitaComponent implements OnInit {
         this.carregarCampos()
         const r = MockReceita;
         this.receita = r;
+    }
+
+    toggleStepTwo() {
+        this.skipStepTwo = !this.skipStepTwo;
+    }
+
+    validationStepOne(): boolean {
+        let r = this.receita;
+        return (r.categoria != null && r.descricao != '' && r.nome != '');
+    }
+
+    validationStepTwo(): boolean {
+        return this.receita.ingts.length > 0;
+    }
+
+    publicarReceita(): void {
+        if (!this.receita) {
+            this.receitaService.cadastrar(this.receita)
+                .then(data => {
+                    this.receita = data;
+                }, error => {
+                    this.holderService.alert = new Alert('Falha ao publicar Receita!');
+                })
+        }
+    }
+
+
+    open() {
+        this._open = !this.open;
     }
 
     excluirEtapa(etapa: Etapa): void {
