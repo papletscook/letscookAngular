@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TemplateComponent } from 'app/template/template.component';
 
-import { TemplateComponent } from './../template/template.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'letscook', pathMatch: 'full' },

@@ -1,33 +1,34 @@
-import { PrepararReceitaComponent } from './../menu-receita/preparar-receita/preparar-receita.component';
-import { Ng2ImgMaxModule } from './../../NODE_M~1/NG2-IM~1/src/ng2-img-max.module';
-import { InputTrimDirective } from './../menu-receita/publicar-receita/input-trim.directive';
-import { AutofocusDirective } from './../menu-receita/publicar-receita/autofocus.directive';
-import { UrlServiceService } from './../util/url-service/url.service';
+
+import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
+import { UrlServiceService } from 'app/service/url.service';
+import { HolderService } from 'app/service/holder.service';
+import { ValidLoginService } from './service/valid-login.service';
+import { Ng2CompleterModule } from 'ng2-completer';
 import { WizardModule } from 'ng2-archwizard';
-import { BuscaComponentComponent } from './../busca/busca.component';
-import { PainelDeControleComponent } from './../painel-de-controle/painel-de-controle.component';
-import { IndexPageComponent } from './../index-page/index-page.component';
-import { SidenavComponent } from './../util/sidenav/sidenav.component';
-import { MinhasReceitasComponent } from './../menu-receita/minhas-receitas/minhas-receitas.component';
-import { SubnavComponent } from './../util/subnav/subnav.component';
-import { MenuReceitaComponent } from './../menu-receita/menu-receita.component';
-import { PublicarReceitaComponent } from './../menu-receita/publicar-receita/publicar-receita.component';
-import { DynamicComponent } from './../dynamiccomponent/dynamic.component';
-import { HolderService } from './../util/holder/holder.service';
-import { LoginComponent } from './../login/login.component';
-import { ValidLoginService } from './../util/login/valid-login.service';
-import { TemplateComponent } from './../template/template.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from 'clarity-angular';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { InputTrimDirective } from './directive/input-trim.directive';
+import { AutofocusDirective } from './directive/autofocus.directive';
+import { PrepararReceitaComponent } from './template/menu-receita/preparar-receita/preparar-receita.component';
+import { BuscaComponentComponent } from './template/busca/busca.component';
+import { PainelDeControleComponent } from './template/painel-de-controle/painel-de-controle.component';
+import { IndexPageComponent } from './template/index-page/index-page.component';
+import { MinhasReceitasComponent } from './template/menu-receita/minhas-receitas/minhas-receitas.component';
+import { MenuReceitaComponent } from './template/menu-receita/menu-receita.component';
+import { PublicarReceitaComponent } from './template/menu-receita/publicar-receita/publicar-receita.component';
+import { TemplateComponent } from './template/template.component';
+import { LoginComponent } from './template/login/login.component';
+import { SidenavComponent } from './template/sidenav/sidenav.component';
+import { SubnavComponent } from './template/subnav/subnav.component';
 import { AppComponent } from './app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
-import { Ng2CompleterModule } from 'ng2-completer';
-import { ResumoReceitaComponent } from 'menu-receita/resumo-receita/resumo-receita.component';
+import { DynamicComponent } from 'app/template/dynamic-component/dynamic.component';
+import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita/resumo-receita.component';
+
 
 @NgModule({
     declarations: [
@@ -56,9 +57,7 @@ import { ResumoReceitaComponent } from 'menu-receita/resumo-receita/resumo-recei
         BrowserAnimationsModule,
         AppRoutingModule,
         WizardModule,
-        Ng2CompleterModule,
-        Ng2ImgMaxModule
-    ],
+        Ng2CompleterModule],
     providers: [
         ValidLoginService,
         HolderService,

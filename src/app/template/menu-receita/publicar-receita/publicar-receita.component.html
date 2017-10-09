@@ -1,0 +1,254 @@
+<clr-wizard #wizard [(clrWizardOpen)]="_open" clrWizardSize="xl">
+    <clr-wizard-title>Publicar Receita</clr-wizard-title>
+
+    <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
+    <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Avançar</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'" (click)="publicarReceita()">Publicar</clr-wizard-button>
+
+    <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepOne()">
+        <ng-template clrPageNavTitle>
+            Informações</ng-template>
+        <ng-template clrPageTitle>
+            <clr-icon shape="library" size="48"></clr-icon>
+            <label>Informações</label>
+        </ng-template>
+
+        <form (keydown.enter)="$event.preventDefault()" class="compact" #formPageOne="ngForm">
+            <section class="form-block">
+                <div class="form-group">
+                    <label class="required">Nome</label>
+                    <label for="nomeInput" aria-haspopup="true" role="tooltip" [class.invalid]="!receita.nome" class="tooltip tooltip-validation tooltip-md tooltip-bottom-right">
+                        <input type="text" id="nomeInput" required [(ngModel)]="receita.nome" name="nome" #name="ngModel">
+                        <span class="tooltip-content">Campo obrigatório!</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="required">Tempo de Preparo (minutos): </label>
+                    <input type="number" name="minsPreparo" [(ngModel)]="receita.minsPreparo" placeholder="Tempo de Preparo (minutos)">
+                </div>
+                <div class="form-group">
+                    <label class="required">Categoria: </label>
+                    <div class="select">
+                        <select name="receita.categoria" [(ngModel)]="receita.categoria">
+                                    <option [ngValue]="null" disabled>Selecione</option>
+                                    <option [ngValue]="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>  
+                            </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Imagem: </label>
+                    <input type="file" accept="image" (change)="changeListener($event)">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="card-img">
+                                <img *ngIf="receita.foto" [src]="receita.foto">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="required">Descrição: </label>
+                    <textarea name="receita.descricao" [(ngModel)]="receita.descricao" rows="3"></textarea>
+                </div>
+            </section>
+        </form>
+    </clr-wizard-page>
+
+    <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepTwo()">
+        <ng-template clrPageTitle>
+            <clr-icon shape="list" size="48"></clr-icon>
+            <label>Ingredientes</label>
+        </ng-template>
+        <ng-template clrPageNavTitle>Ingredientes</ng-template>
+        <div class="alert alert-info">
+            <div class="alert-items">
+                <div class="alert-item static">
+                    <div class="alert-icon-wrapper">
+                        <clr-icon class="alert-icon" shape="info-standard"></clr-icon>
+                    </div>
+                    <span class="alert-text">Adicione todos os ingredientes necessários para o preparo da receita!</span>
+                </div>
+            </div>
+        </div>
+        <form (keydown.enter)="$event.preventDefault()" class="compact" #formPageTwo="ngForm">
+            <section class="form-block">
+                <label>Adicionar Ingrediente</label>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <label class="required">Ingrediente:</label>
+
+                    </div>
+                    <div class="col-md-2">
+
+                        <div class="select">
+                            <select name="ingredienteCad.ingrediente" class="form-control" [(ngModel)]="ingredienteCad.ingrediente">
+                                                                     <option [ngValue]="null" disabled>Selecione</option>
+                                                                    <option [ngValue]="ing" *ngFor="let ing of allIngredientes">{{ing.nome}}</option>
+                                                                </select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="required">Un. Medida: </label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="select">
+                            <select class="form-control" name="ingredienteCad.uMedida" [(ngModel)]="ingredienteCad.uMedida">
+                                        <option [ngValue]="null" disabled>Selecione</option>
+                                        <option [ngValue]="med" *ngFor="let med of medidas">{{med.desc}}</option>
+                                    </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="required">Quantidade:</label>
+                    </div>
+                    <div class="col-md-1">
+                        <input class="form-control" min="0" name="ingredienteCad.quant" [(ngModel)]="ingredienteCad.quant" type="number" placeholder="Qtde">
+                    </div>
+
+                </div>
+                <button class="btn btn-primary btn-sm" (click)="adicionarIngrediente()">Adicionar</button>
+                <button class="btn btn-outline btn-sm" (click)="limparIngrediente()">Limpar</button>
+
+            </section>
+
+            <section class="form-block">
+                <label>Ingredientes Cadastrados</label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Unidade de Medida</th>
+                            <th>Quantidade</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ingt of receita.ingts">
+                            <td>{{ingt.ingrediente.nome}}</td>
+                            <td>{{ingt.uMedida.desc}}</td>
+                            <td>{{ingt.quant}}</td>
+                            <td>
+                                <clr-icon shape="trash"></clr-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </form>
+    </clr-wizard-page>
+
+    <clr-wizard-page>
+        <ng-template clrPageNavTitle>Modo de Preparo</ng-template>
+        <ng-template clrPageTitle>
+            <clr-icon shape="tasks" size="48"></clr-icon>
+            <label>Modo de Preparo</label>
+        </ng-template>
+
+        <clr-alert>
+            <div class="alert-item">
+                <span class="alert-text">
+                        Represente o modo de preparo  através da definição de etapas e passos, utilize o cronometro para tarefas tempo definido e a estrela para a identificação de dicas.    
+                    </span>
+            </div>
+        </clr-alert>
+
+        <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
+
+            <h4 class="stack-header">
+                <span class="stack-title"></span>
+                <span class="stack-actions">
+                        <button class="stack-action btn btn-sm btn-link" type="button" (click)="redefinirEtapas()">Redefinir</button>
+                    <button class="stack-action btn btn-sm btn-link" type="button" (click)="addNewEtapa()">Adicionar Etapa</button>
+                </span>
+            </h4>
+            <dl class="stack-view">
+                <div class="stack-block stack-block-expandable stack-block-expanded" *ngFor="let etapa of receita.etapas">
+                    <dd class="stack-block-content" (dblclick)="editarEtapa(etapa)">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10">
+                                <div *ngIf="etapa != this.etapaEdited">
+                                    {{etapa.nome}}
+                                </div>
+                                <div *ngIf="etapa == this.etapaEdited">
+                                    <input type="text" appAutofocus id="etapa.nome" required name="etapa.nome" [(ngModel)]="etapa.nome" (focusout)="salvarEtapa()"
+                                        trim="blur" placeholder="Nome da Etapa">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="text-right">
+                                    <clr-icon shape="plus" (click)="adicionarNovoPasso(etapa)"></clr-icon>
+                                    <clr-icon shape="trash" (click)="excluirEtapa(etapa)"></clr-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                    <div class="stack-children">
+                        <div class="stack-block" *ngFor="let passo of etapa.passos">
+                            <dd class="stack-block-content" (dblclick)="editarPasso(passo)">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-10 col-xs-10">
+                                        <div *ngIf="passo != this.passoEdited">
+                                            {{passo.nome}}
+                                        </div>
+                                        <div *ngIf="passo == this.passoEdited">
+                                            <input (focusout)="salvarPasso()" size="{{passo.nome.length}}" type="text" appAutofocus id="passo.nome" required name="passo.nome"
+                                                [(ngModel)]="passo.nome" trim="blur" placeholder="Descrição do Passo">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-lg-2">
+                                        <div class="text-right">
+                                            <clr-signpost>
+                                                <clr-icon shape="chat-bubble" clrSignpostTrigger></clr-icon>
+                                                <clr-signpost-content clrPosition="left-middle" *clrIfOpen>
+                                                    <div class="form-group">
+                                                        <label>Duração (minutos): </label>
+                                                        <input type="number" step="5">
+                                                    </div>
+                                                </clr-signpost-content>
+                                            </clr-signpost>
+
+                                            <clr-signpost>
+                                                <clr-icon shape="alarm-clock" clrSignpostTrigger></clr-icon>
+                                                <clr-signpost-content clrPosition="left-middle" *clrIfOpen>
+                                                    <div class="form-group">
+                                                        <label>Duração (minutos): </label>
+                                                        <input type="number" step="5">
+                                                    </div>
+                                                </clr-signpost-content>
+                                            </clr-signpost>
+                                            <!-- <clr-icon shape="pencil" (click)="editarPasso(passo)"></clr-icon> -->
+                                            <clr-icon shape="trash" (click)="excluirPasso(passo, etapa)"></clr-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+            </dl>
+        </form>
+
+    </clr-wizard-page>
+
+    <clr-wizard-page>
+        <ng-template clrPageNavTitle>Resumo</ng-template>
+        <ng-template clrPageTitle>
+            <clr-icon shape="tasks" size="48"></clr-icon>
+            <label>Resumo</label>
+            <resumo-receita-component [(receita)]="receita"></resumo-receita-component>
+        </ng-template>
+
+        <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
+        </form>
+    </clr-wizard-page>
+
+
+
+</clr-wizard>
+
+{{receita | json}}

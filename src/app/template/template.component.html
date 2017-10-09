@@ -1,0 +1,53 @@
+<clr-alert [clrAlertType]="'alert-info'" *ngIf="holderService.alert.detail" [clrAlertAppLevel]="true">
+    <clr-alert-item>
+        <span class="alert-text">
+                    {{ holderService.alert.detail }}
+                    </span>
+    </clr-alert-item>
+</clr-alert>
+
+<div class="main-container">
+
+    <header class="header header-4">
+        <div class="branding">
+            <a class="nav-link">
+                <clr-icon shape="vmw-app"></clr-icon>
+                <span class="title">Let's Cook</span>
+            </a>
+        </div>
+        <div class="header-nav">
+            <a class="nav-link nav-icon" (click)="adminNav('IndexPageComponent')">
+                <clr-icon shape="share"></clr-icon>
+            </a>
+            <a class="nav-link nav-icon">
+                <clr-icon shape="search"></clr-icon>
+            </a>
+            <a class="nav-link nav-icon" *ngIf="holderService.userLogado" (click)="menuCozinheiro()">
+                <clr-icon shape="user"></clr-icon>
+            </a>
+        </div>
+        <div class="header-actions">
+            <clr-dropdown>
+                <button class="nav-icon" clrDropdownTrigger>
+                    <clr-icon shape="view-list"></clr-icon>
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                    <a clrDropdownItem (click)="changeCase('PainelDeControleComponent');" *ngIf="holderService.userLogado">Meu Perfil</a>
+                    <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
+                    <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
+                </clr-dropdown-menu>
+            </clr-dropdown>
+        </div>
+    </header>
+    <subnav [menus]="menus"></subnav>
+    <div class="content-container">
+        <div class="content-area">
+            <dynamic-component [componentData]="useCase"></dynamic-component>
+            <login-component></login-component>
+        </div>
+        <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed">
+            <sidenav-component></sidenav-component>
+        </clr-vertical-nav>
+    </div>
+</div>
