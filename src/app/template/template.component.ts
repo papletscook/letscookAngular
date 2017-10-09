@@ -30,8 +30,7 @@ export class TemplateComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.menus = Vizitante;
-        this.changeCase('IndexPageComponent')
+        this.menuVizitante()
     }
 
     public entrar() {
@@ -46,23 +45,40 @@ export class TemplateComponent implements OnInit {
 
     }
 
+    public desativarMenu() {
+        for (let e of this.menus) {
+            e.ativo = false;
+        }
+    }
+
     public changeCase(str: string): void {
-        console.log('changeCase -> ' + str)
+        this.desativarMenu();
         this.useCase = this.templateService.createComp(str)
     }
 
+    public subNavChangeCase(menu: MenuSubnav): void{
+        this.changeCase(menu.component)
+        menu.ativo = true;
+    }
+
     public adminNav(b: boolean): void {
-        if(!b){
-            this.menus = Vizitante;            
-        }else{
-            this.menus = Cozinheiro;            
+        if (!b) {
+            this.menus = Vizitante;
+        } else {
+            this.menus = Cozinheiro;
         }
 
     }
 
-    public menuCozinheiro(){
-        this.changeCase('')
+    public menuVizitante() {
+        this.adminNav(false);
+        this.changeCase('IndexPageComponent')
+    }
+
+    public menuCozinheiro() {
         this.adminNav(true);
+        this.changeCase('PainelDeControleComponent')
+        
     }
 
 

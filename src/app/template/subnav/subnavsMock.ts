@@ -9,11 +9,11 @@ import { PrepararReceitaComponent } from "app/template/menu-receita/preparar-rec
 
 
 export const Vizitante: MenuSubnav[] = [
-    { nome: 'Página Inicial', component: IndexPageComponent }
+    { nome: 'Página Inicial', component: IndexPageComponent, ativo: true}
 ]
 
 export const Cozinheiro: MenuSubnav[] = [
-    { nome:  'Receitas', component: 'PainelDeControleComponent' },
+    { nome:  'Receitas', component: 'PainelDeControleComponent', ativo: true},
     { nome: 'Preparar Receita', component: 'PrepararReceitaComponent' },
     { nome: 'Publicar Receita', component: 'PublicarReceitaComponent' }
 
