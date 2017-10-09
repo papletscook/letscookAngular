@@ -79,6 +79,7 @@ export class PublicarReceitaComponent implements OnInit {
         this.carregarCampos()
         const r = MockReceita;
         this.receita = r;
+        console.log('init publicar')
     }
 
     toggleStepTwo() {

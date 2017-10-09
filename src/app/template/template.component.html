@@ -40,7 +40,11 @@
             </clr-dropdown>
         </div>
     </header>
-    <subnav [menus]="menus"></subnav>
+    <nav class="subnav">
+        <ul class="nav">
+            <subnav [menu]="menu" (click)="changeCase(menu.component);"  *ngFor="let menu of menus"></subnav>
+        </ul>
+    </nav>
     <div class="content-container">
         <div class="content-area">
             <dynamic-component [componentData]="useCase"></dynamic-component>

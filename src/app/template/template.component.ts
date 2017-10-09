@@ -2,7 +2,7 @@
 import { PainelDeControleComponent } from './painel-de-controle/painel-de-controle.component';
 import { ComponentInfo } from 'app/viewmodel/template/componentInfo';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { TemplateService } from 'app/service/template.service';
 import { ValidLoginService } from 'app/service/valid-login.service';
 import { HolderService } from 'app/service/holder.service';
@@ -16,6 +16,7 @@ import { IndexPageComponent } from 'app/template/index-page/index-page.component
     providers: [TemplateService, HolderService]
 })
 
+@Injectable()
 export class TemplateComponent implements OnInit {
 
     public useCase: any;
@@ -46,6 +47,7 @@ export class TemplateComponent implements OnInit {
     }
 
     public changeCase(str: string): void {
+        console.log('changeCase -> ' + str)
         this.useCase = this.templateService.createComp(str)
     }
 

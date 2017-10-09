@@ -1,3 +1,4 @@
+import { TemplateService } from 'app/service/template.service';
 import { TemplateComponent } from 'app/template/template.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { HolderService } from 'app/service/holder.service';
@@ -7,22 +8,16 @@ import { MenuSubnav } from 'app/viewmodel/template/menu-subnav/menu-subnav';
     selector: 'subnav',
     templateUrl: 'subnav.component.html',
     styleUrls: ['subnav.component.css'],
-    providers: [TemplateComponent]
+    providers: [TemplateComponent, TemplateService]
 })
 
 export class SubnavComponent implements OnInit {
 
-    @Input() menus: MenuSubnav[];
+    @Input() menu: MenuSubnav;
 
-    constructor(
-        private holderService: HolderService,
-        private template: TemplateComponent) { }
 
     ngOnInit() { }
 
-    private abreComponent(menu) {
-        this.template.changeCase(menu)
-    }
 
 
 }
