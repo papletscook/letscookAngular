@@ -2,7 +2,7 @@ import { CategoriaService } from 'app/service/categoria.service';
 import { HolderService } from 'app/service/holder.service';
 import { ReceitaService } from 'app/service/receita.service';
 import { IngredienteService } from 'app/service/ingrediente.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { MockReceita } from './../mock/mockReceita';
 import { MedidaService } from 'app/service/medida.service';
 
@@ -18,6 +18,7 @@ import { Receita } from 'app/viewmodel/template/receita/receita';
 import { IngredienteReceita } from 'app/viewmodel/template/receita/ingredienteReceita';
 import { Alert } from 'app/viewmodel/template/alert';
 
+import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 
 
 @Component({
@@ -30,14 +31,17 @@ import { Alert } from 'app/viewmodel/template/alert';
         IngredienteService,
         MedidaService,
         ReceitaService,
-        HolderService]
+        HolderService,],
 })
 
 
 export class PublicarReceitaComponent implements OnInit {
 
-    nome: string = "Publicar Receita"
-    component: any = this
+    cropperSettings: CropperSettings;
+
+    img: any;
+
+
     private allIngredientes: Ingrediente[];
 
     private etapaEdited: Etapa;
@@ -69,9 +73,25 @@ export class PublicarReceitaComponent implements OnInit {
         private ingredientesService: IngredienteService,
         private categoriaService: CategoriaService,
         private medidaService: MedidaService) {
-
+        this.preparaCropper()
     }
 
+
+    preparaCropper() {
+        this.img = {}
+        this.cropperSettings = new CropperSettings();
+        this.cropperSettings.width = 350;
+        this.cropperSettings.height = 200;
+        this.cropperSettings.croppedWidth = 350;
+        this.cropperSettings.croppedHeight = 200;
+        this.cropperSettings.canvasWidth = 350;
+        this.cropperSettings.canvasHeight = 200;
+    }
+
+    convertImage() {
+        let img = this.img.image;
+        this.receita.foto = img;
+    }
 
     ngOnInit() {
         this.receita = new Receita();
@@ -80,6 +100,17 @@ export class PublicarReceitaComponent implements OnInit {
         const r = MockReceita;
         this.receita = r;
         console.log('init publicar')
+    }
+
+    contaPalavras(str: string): number {
+        try {
+            if(str.length < 1){
+                throw "";
+            }
+            return str.length;
+        } catch (error) {
+            return 10;
+        }
     }
 
     toggleStepTwo() {

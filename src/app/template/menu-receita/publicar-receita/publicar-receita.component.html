@@ -31,26 +31,14 @@
                     <label class="required">Categoria: </label>
                     <div class="select">
                         <select name="receita.categoria" [(ngModel)]="receita.categoria">
-                                    <option [ngValue]="null" disabled>Selecione</option>
-                                    <option [ngValue]="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>  
-                            </select>
+                            <option [ngValue]="null" disabled>Selecione</option>
+                            <option [ngValue]="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>
+                        </select>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Imagem: </label>
-                    <input type="file" accept="image" (change)="changeListener($event)">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="card-img">
-                                <img *ngIf="receita.foto" [src]="receita.foto">
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <div class="form-group">
                     <label class="required">Descrição: </label>
-                    <textarea name="receita.descricao" [(ngModel)]="receita.descricao" rows="3"></textarea>
+                    <textarea name="receita.descricao" [(ngModel)]="receita.descricao"></textarea>
                 </div>
             </section>
         </form>
@@ -62,16 +50,18 @@
             <label>Ingredientes</label>
         </ng-template>
         <ng-template clrPageNavTitle>Ingredientes</ng-template>
-        <div class="alert alert-info">
-            <div class="alert-items">
-                <div class="alert-item static">
-                    <div class="alert-icon-wrapper">
-                        <clr-icon class="alert-icon" shape="info-standard"></clr-icon>
-                    </div>
-                    <span class="alert-text">Adicione todos os ingredientes necessários para o preparo da receita!</span>
-                </div>
+
+
+        <clr-alert [clrAlertSizeSmall]="true">
+            <div class="alert-item">
+                <span class="alert-text">
+                    Adicione todos os ingredientes necessários para o preparo da receita!
+                </span>
             </div>
-        </div>
+        </clr-alert>
+
+
+
         <form (keydown.enter)="$event.preventDefault()" class="compact" #formPageTwo="ngForm">
             <section class="form-block">
                 <label>Adicionar Ingrediente</label>
@@ -84,9 +74,9 @@
 
                         <div class="select">
                             <select name="ingredienteCad.ingrediente" class="form-control" [(ngModel)]="ingredienteCad.ingrediente">
-                                                                     <option [ngValue]="null" disabled>Selecione</option>
-                                                                    <option [ngValue]="ing" *ngFor="let ing of allIngredientes">{{ing.nome}}</option>
-                                                                </select>
+                                <option [ngValue]="null" disabled>Selecione</option>
+                                <option [ngValue]="ing" *ngFor="let ing of allIngredientes">{{ing.nome}}</option>
+                            </select>
                         </div>
 
                     </div>
@@ -97,9 +87,9 @@
                     <div class="col-md-2">
                         <div class="select">
                             <select class="form-control" name="ingredienteCad.uMedida" [(ngModel)]="ingredienteCad.uMedida">
-                                        <option [ngValue]="null" disabled>Selecione</option>
-                                        <option [ngValue]="med" *ngFor="let med of medidas">{{med.desc}}</option>
-                                    </select>
+                                <option [ngValue]="null" disabled>Selecione</option>
+                                <option [ngValue]="med" *ngFor="let med of medidas">{{med.desc}}</option>
+                            </select>
                         </div>
                     </div>
 
@@ -149,25 +139,26 @@
             <label>Modo de Preparo</label>
         </ng-template>
 
-        <clr-alert>
+        <clr-alert [clrAlertSizeSmall]="true">
             <div class="alert-item">
                 <span class="alert-text">
-                        Represente o modo de preparo  através da definição de etapas e passos, utilize o cronometro para tarefas tempo definido e a estrela para a identificação de dicas.    
-                    </span>
+                    Represente o modo de preparo através da definição de etapas e passos, utilize o cronometro para tarefas tempo definido e
+                    a estrela para a identificação de dicas.
+                </span>
             </div>
         </clr-alert>
 
         <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
 
             <h4 class="stack-header">
-                <span class="stack-title"></span>
+                <span class="stack-title">Adicione Etapas e Passos</span>
                 <span class="stack-actions">
-                        <button class="stack-action btn btn-sm btn-link" type="button" (click)="redefinirEtapas()">Redefinir</button>
+                    <button class="stack-action btn btn-sm btn-link" type="button" (click)="redefinirEtapas()">Redefinir</button>
                     <button class="stack-action btn btn-sm btn-link" type="button" (click)="addNewEtapa()">Adicionar Etapa</button>
                 </span>
             </h4>
             <dl class="stack-view">
-                <div class="stack-block stack-block-expandable stack-block-expanded" *ngFor="let etapa of receita.etapas">
+                <div class="stack-block stack-block-expanded" *ngFor="let etapa of receita.etapas">
                     <dd class="stack-block-content" (dblclick)="editarEtapa(etapa)">
                         <div class="row">
                             <div class="col-lg-10 col-md-10">
@@ -196,7 +187,7 @@
                                             {{passo.nome}}
                                         </div>
                                         <div *ngIf="passo == this.passoEdited">
-                                            <input (focusout)="salvarPasso()" size="{{passo.nome.length}}" type="text" appAutofocus id="passo.nome" required name="passo.nome"
+                                            <input (focusout)="salvarPasso()" size="{{contaPalavras(passo.nome)}}" type="text" appAutofocus id="passo.nome" required name="passo.nome"
                                                 [(ngModel)]="passo.nome" trim="blur" placeholder="Descrição do Passo">
                                         </div>
                                     </div>
@@ -236,18 +227,20 @@
     </clr-wizard-page>
 
     <clr-wizard-page>
-        <ng-template clrPageNavTitle>Resumo</ng-template>
+        <ng-template clrPageNavTitle>Imagem da Receita</ng-template>
         <ng-template clrPageTitle>
             <clr-icon shape="tasks" size="48"></clr-icon>
-            <label>Resumo</label>
-            <resumo-receita-component [(receita)]="receita"></resumo-receita-component>
+            <label>Imagem da Receita</label>
+            <!-- <resumo-receita-component [(receita)]="receita"></resumo-receita-component> -->
         </ng-template>
-
         <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
+            <div class="form-group">
+                <label class="required">Imagem: </label>
+                <img-cropper [image]="img" [settings]="cropperSettings"></img-cropper>
+                <!-- <img [src]="img.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight"> -->
+            </div>
         </form>
     </clr-wizard-page>
-
-
 
 </clr-wizard>
 

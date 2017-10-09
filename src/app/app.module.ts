@@ -4,7 +4,6 @@ import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
 import { ValidLoginService } from './service/valid-login.service';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { WizardModule } from 'ng2-archwizard';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from 'clarity-angular';
@@ -28,6 +27,7 @@ import { AppComponent } from './app.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DynamicComponent } from 'app/template/dynamic-component/dynamic.component';
 import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita/resumo-receita.component';
+import { ImageCropperComponent } from 'ng2-img-cropper';
 
 
 @NgModule({
@@ -47,7 +47,8 @@ import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita
         ResumoReceitaComponent,
         PrepararReceitaComponent,
         AutofocusDirective,
-        InputTrimDirective
+        InputTrimDirective,
+        ImageCropperComponent
     ],
     imports: [
         BrowserModule,
@@ -56,7 +57,6 @@ import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita
         ClarityModule.forRoot(),
         BrowserAnimationsModule,
         AppRoutingModule,
-        WizardModule,
         Ng2CompleterModule],
     providers: [
         ValidLoginService,
