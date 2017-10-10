@@ -26,7 +26,7 @@
     "@types/node": "^6.0.88",
     "@webcomponents/custom-elements": "^1.0.2",
     "blueimp-canvas-to-blob": "^3.14.0",
-    "clarity-angular": "^0.10.3",
+    "clarity-angular": "^0.10.8",
     "clarity-icons": "^0.10.8",
     "clarity-ui": "^0.10.3",
     "core-js": "^2.5.1",
