@@ -1,3 +1,4 @@
+import { SessionService } from './session.service';
 
 import { Injectable } from '@angular/core';
 import { GenericService } from 'app/service/generic.service';
@@ -9,11 +10,11 @@ import { Receita } from 'app/viewmodel/template/receita/receita';
 @Injectable()
 export class ReceitaService extends GenericService implements CrudService<Receita> {
 
-
     private infoRequest: InfoRequest;
 
     constructor(
-        private urlServiceService: UrlServiceService) {
+        private urlServiceService: UrlServiceService,
+        private session: SessionService) {
         super();
     }
 
@@ -30,8 +31,12 @@ export class ReceitaService extends GenericService implements CrudService<Receit
     }
 
     public cadastrar(t: Receita): Promise<Receita> {
+        t.criador = this.session.consultarUsuario();
+        console.log(t)
+
         this.infoRequest = {
-            rqst: 'post', command: this.urlServiceService.pathLetsCook + '/receita', timeout: 6000
+            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'receita', timeout: 6000,
+            _data: t
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
@@ -42,7 +47,7 @@ export class ReceitaService extends GenericService implements CrudService<Receit
 
     getById(t: Receita): Promise<Receita> {
         this.infoRequest = {
-            rqst: 'get', command: this.urlServiceService.pathLetsCook + '/receita/' + t.id, timeout: 6000
+            rqst: 'get', command: this.urlServiceService.pathLetsCook + 'receita/' + t.id, timeout: 6000
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
@@ -54,7 +59,7 @@ export class ReceitaService extends GenericService implements CrudService<Receit
 
     public atualizar(t: Receita): Promise<Receita> {
         this.infoRequest = {
-            rqst: 'put', command: this.urlServiceService.pathLetsCook + '/receita', timeout: 6000
+            rqst: 'put', command: this.urlServiceService.pathLetsCook + 'receita', timeout: 6000
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

@@ -1,6 +1,6 @@
+import { SessionService } from './../../service/session.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ValidLoginService } from 'app/service/valid-login.service';
 import { HolderService } from 'app/service/holder.service';
 import { IngredienteService } from 'app/service/ingrediente.service';
 
@@ -9,18 +9,18 @@ import { IngredienteService } from 'app/service/ingrediente.service';
     templateUrl: 'menu-receita.component.html',
     styleUrls: ['menu-receita.component.css'],
     providers: [
-        HolderService, ValidLoginService
+        HolderService
     ]
 })
 
 export class MenuReceitaComponent implements OnInit {
 
     constructor(
-        private validLoginService: ValidLoginService,
+        private session: SessionService,
         public holderService: HolderService) { }
 
     ngOnInit() {
-        this.validLoginService.isLogado()
+        this.session.isLogado()
             .then((result: boolean) => {
                 if (!result) {
                     //this.router.navigate(['./letscook/']);

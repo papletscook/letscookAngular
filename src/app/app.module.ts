@@ -1,8 +1,8 @@
+import { SessionService } from './service/session.service';
 
 import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
-import { ValidLoginService } from './service/valid-login.service';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +28,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DynamicComponent } from 'app/template/dynamic-component/dynamic.component';
 import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita/resumo-receita.component';
 import { ImageCropperComponent } from 'ng2-img-cropper';
+import { LoginService } from 'app/service/login.service';
 
 
 @NgModule({
@@ -59,10 +60,12 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
         AppRoutingModule,
         Ng2CompleterModule],
     providers: [
-        ValidLoginService,
         HolderService,
         UrlServiceService,
-        AlertIconAndTypesService
+        AlertIconAndTypesService,
+        SessionService,
+        HolderService, SessionService,
+        LoginService
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

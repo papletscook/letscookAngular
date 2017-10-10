@@ -9,21 +9,33 @@ import { User } from 'app/viewmodel/template/login/mock';
 @Injectable()
 export class LoginService {
 
-    private infoResquest: InfoRequest;
+    private infoRequest: InfoRequest;
 
     constructor(private urlServiceService: UrlServiceService) { }
 
     public loga(usuario: Usuario): Promise<Boolean> {
         let user = new LoginUsuario(usuario.email, usuario.senha);
-        this.infoResquest = {
+        this.infoRequest = {
             rqst: "post",
             command: this.urlServiceService.pathLetsCook + "usuario/verificarCredencial/",
             timeout: 5000,
             _data: user
         }
-        return this.urlServiceService.request(this.infoResquest)
+        return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as Boolean
+            })
+            .catch(this.handleError);
+    }
+
+    public consultar(usuario: Usuario): Promise<Usuario> {
+        this.infoRequest = {
+            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'usuario/findByEmail', timeout: 6000,
+            _data: {email: usuario.email}
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Usuario[]
             })
             .catch(this.handleError);
     }

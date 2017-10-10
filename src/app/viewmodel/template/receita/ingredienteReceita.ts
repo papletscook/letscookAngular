@@ -3,6 +3,6 @@ import { Ingrediente } from './ingrediente';
 export class IngredienteReceita {
     id?: number;
     ingrediente: Ingrediente = null;
-    uMedida: Medida = null;
-    quant: number;
+    uMedida: string = null;
+    quant?: number = 1;
 }
