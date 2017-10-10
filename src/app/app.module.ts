@@ -1,6 +1,5 @@
-import { SessionService } from './service/session.service';
-
 import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
+import { SessionService } from './service/session.service';
 import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
 import { Ng2CompleterModule } from 'ng2-completer';
