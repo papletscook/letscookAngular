@@ -27,8 +27,6 @@ import { DynamicComponent } from 'app/template/dynamic-component/dynamic.compone
 import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita/resumo-receita.component';
 import { ImageCropperComponent } from 'ng2-img-cropper';
 import { LoginService } from 'app/service/login.service';
-import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
-
 
 @NgModule({
     declarations: [
@@ -61,9 +59,9 @@ import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/provide
     providers: [
         HolderService,
         UrlServiceService,
-        AlertIconAndTypesService,
         SessionService,
-        HolderService, SessionService,
+        HolderService,
+        SessionService,
         LoginService
     ],
     bootstrap: [AppComponent],
