@@ -1,4 +1,3 @@
-import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 import { SessionService } from './service/session.service';
 import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
@@ -61,9 +60,9 @@ import { LoginService } from 'app/service/login.service';
     providers: [
         HolderService,
         UrlServiceService,
-        AlertIconAndTypesService,
         SessionService,
-        HolderService, SessionService,
+        HolderService, 
+        SessionService,
         LoginService
     ],
     bootstrap: [AppComponent],
