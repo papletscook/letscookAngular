@@ -126,10 +126,34 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let ingt of receita.ingts">
-                            <td>{{ingt.ingrediente.nome}}</td>
-                            <td>{{detailMedida(ingt.uMedida).desc}}</td>
-                            <td>{{ingt.quant}}</td>
+                            <td *ngIf="ingt != ingrEdited">
+                                {{ingt.ingrediente.nome}}
+                            </td>
+                            <td *ngIf="ingt == ingrEdited">
+                                <div class="select">
+                                    <select name="ingt.ingrediente" class="form-control" [(ngModel)]="ingt.ingrediente">
+                                        <option [ngValue]="null" disabled>Selecione</option>
+                                        <option [ngValue]="ing" *ngFor="let ing of allIngredientes">{{ing.nome}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td *ngIf="ingt != ingrEdited">{{detailMedida(ingt.uMedida).desc}}</td>
+                            <td *ngIf="ingt == ingrEdited">
+                                <div class="select">
+                                    <select class="form-control" name="ingt.uMedida" [(ngModel)]="ingt.uMedida">
+                                        <option [ngValue]="null" disabled>Selecione</option>
+                                        <option [ngValue]="med.name" *ngFor="let med of medidas">{{med.desc}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td *ngIf="ingt != ingrEdited">{{ingt.quant}}</td>
+                            <td *ngIf="ingt == ingrEdited">
+                                <input class="form-control" min="0" name="ingt.quant" [(ngModel)]="ingt.quant" type="number" placeholder="Qtde">
+                            </td>
+
                             <td>
+                                <clr-icon *ngIf="ingt == ingrEdited" shape="floppy" (click)="salvarIngrediente()"></clr-icon>
+                                <clr-icon *ngIf="ingt != ingrEdited" shape="pencil" (click)="editarIngrediente(ingt)"></clr-icon>
                                 <clr-icon shape="trash" (click)="excluirIngrediente(ingt)"></clr-icon>
                             </td>
                         </tr>
@@ -203,10 +227,8 @@
                                             <clr-signpost>
                                                 <clr-icon shape="chat-bubble" clrSignpostTrigger></clr-icon>
                                                 <clr-signpost-content clrPosition="left-middle" *clrIfOpen>
-                                                    <div class="form-group">
-                                                        <label>Duração (minutos): </label>
-                                                        <input type="number" step="5">
-                                                    </div>
+                                                    <h3>Inserir Dica</h3>
+                                                    <textarea ></textarea>
                                                 </clr-signpost-content>
                                             </clr-signpost>
 

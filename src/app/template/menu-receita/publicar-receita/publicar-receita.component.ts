@@ -18,7 +18,8 @@ import { IngredienteReceita } from 'app/viewmodel/template/receita/ingredienteRe
 import { Alert } from 'app/viewmodel/template/alert';
 
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
-
+import { AlertService } from 'app/service/alert.service';
+import * as _ from "lodash";
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -45,6 +46,7 @@ export class PublicarReceitaComponent implements OnInit {
 
     private etapaEdited: Etapa;
     private passoEdited: Passo;
+    private ingrEdited: IngredienteReceita;
 
     protected searchStr: string;
     protected dataService: CompleterData;
@@ -74,7 +76,9 @@ export class PublicarReceitaComponent implements OnInit {
         private ingredientesService: IngredienteService,
         private categoriaService: CategoriaService,
         private session: SessionService,
-        private medidaService: MedidaService) {
+        private medidaService: MedidaService,
+        private alert: AlertService
+    ) {
         this.preparaCropper()
     }
 
@@ -105,8 +109,8 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita = new Receita();
         this.ingredienteCad = new IngredienteReceita();
         this.carregarCampos()
-        const r = new Receita();
-        //const r = MockReceita;
+        // const r = new Receita();
+        const r = MockReceita;
         this.receita = r;
         this.receita.criador = this.session.consultarUsuario();
     }
@@ -136,12 +140,13 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     publicarReceita(): void {
+        this.receita.foto = this.img.image;
         if (this.receita) {
             this.receitaService.cadastrar(this.receita)
                 .then(data => {
                     this.receita = data;
                 }, error => {
-                    this.holderService.alert = new Alert('Falha ao publicar Receita!');
+                    this.alert.error("Falha ao Publicar Receita!")
                 })
         }
     }
@@ -170,6 +175,18 @@ export class PublicarReceitaComponent implements OnInit {
         this.passoEdited = null;
     }
 
+    editarIngrediente(ingr: IngredienteReceita): void {
+        this.ingrEdited = ingr;
+    }
+
+    salvarIngrediente(): void {
+        if (this.ingrEdited.quant == 0) {
+            this.excluirIngrediente(this.ingrEdited)
+        }
+        this.ingrEdited = null;
+    }
+
+
     editarPasso(passo: Passo): void {
         this.passoEdited = passo;
         this.etapaEdited = null;
@@ -189,7 +206,7 @@ export class PublicarReceitaComponent implements OnInit {
 
     private detailMedida(medida: string): Medida {
         for (let med of this.medidas) {
-            if (med.name == medida){
+            if (med.name == medida) {
                 return med;
             }
         }
@@ -257,15 +274,18 @@ export class PublicarReceitaComponent implements OnInit {
     public getIngredientes() {
         this.ingredientesService.list()
             .then(data => {
-                this.allIngredientes = data;
+                this.allIngredientes = _.orderBy(data, ['nome'], ['asc']);;
             }, error => {
 
             });
     }
 
     public redefinirEtapas() {
-        this.receita.etapas = [];
-        this.addNewEtapa();
+        if (confirm('Deseja redefinir as Etapas?')) {
+            this.receita.etapas = [];
+            this.addNewEtapa();
+        }
+
     }
 
     public addNewEtapa() {
@@ -281,7 +301,7 @@ export class PublicarReceitaComponent implements OnInit {
         if (!this.categorias) {
             this.categoriaService.list()
                 .then(data => {
-                    this.categorias = data;
+                    this.categorias = _.orderBy(data, ['nome'], ['asc']);;
                 }, error => {
                 })
         }
@@ -291,7 +311,7 @@ export class PublicarReceitaComponent implements OnInit {
         if (!this.categorias) {
             this.medidaService.list()
                 .then(data => {
-                    this.medidas = data;
+                    this.medidas = _.orderBy(data, ['desc'], ['asc']);
                 }, error => {
                 })
         }

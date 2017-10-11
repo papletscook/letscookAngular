@@ -13,7 +13,7 @@
                 <img [src]="receita.foto">
             </div>
             <div class="card-block">
-                <h4 class="card-title">Nome: {{receita.nome}}</h4>
+                <h4 class="card-title">Nome: {{receita.nome}}  <span class="badge badge-3">{{receita.categoria.nome}} </span></h4>
                 <p class="card-text">
                     Descrição: {{receita.descricao}}
                 </p>
@@ -33,7 +33,7 @@
             <div class="card-block">
                 <ol class="list">
                     <li *ngFor="let etapa of receita.etapas">
-                        {{etapa.nome | uppercase}}
+                        {{etapa.nome | uppercase    }}
                         <ol class="list">
                             <li *ngFor="let passo of etapa.passos">{{passo.descricao}}</li>
                         </ol>

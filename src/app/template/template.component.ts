@@ -10,11 +10,12 @@ import { HolderService } from 'app/service/holder.service';
 import { MenuSubnav } from 'app/viewmodel/template/menu-subnav/menu-subnav';
 import { Vizitante, Cozinheiro } from 'app/template/subnav/subnavsMock';
 import { IndexPageComponent } from 'app/template/index-page/index-page.component';
+import { AlertService } from 'app/service/alert.service';
 
 @Component({
     templateUrl: 'template.component.html',
     styleUrls: ['template.component.css'],
-    providers: [TemplateService]
+    providers: [TemplateService, AlertService, SessionService, HolderService]
 })
 
 @Injectable()
@@ -27,7 +28,8 @@ export class TemplateComponent implements OnInit {
     constructor(private router: Router,
         public holderService: HolderService,
         private templateService: TemplateService,
-        private session: SessionService
+        private session: SessionService,
+        private alert : AlertService
     ) { }
 
     ngOnInit(): void {

@@ -30,6 +30,7 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
 import { LoginService } from 'app/service/login.service';
 import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { AlertService } from 'app/service/alert.service';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
         HolderService,
         SessionService,
         LoginService,
-        AlertIconAndTypesService],
+        AlertIconAndTypesService,
+        AlertService],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [
