@@ -2,7 +2,7 @@ import { LoginService } from './../service/login.service';
 import { SessionService } from './../service/session.service';
 
 import { PainelDeControleComponent } from './painel-de-controle/painel-de-controle.component';
-import { ComponentInfo } from 'app/viewmodel/template/componentInfo';
+import { ComponentInfo } from 'app/viewmodel/template/componentInfo';1
 import { Router } from '@angular/router';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { TemplateService } from 'app/service/template.service';

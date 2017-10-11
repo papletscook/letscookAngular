@@ -8,7 +8,10 @@ import 'rxjs/Rx';
 export class UrlServiceService {
 
     // IPs
-    private urlIp = 'http://localhost:8080/'; // PC-Rato
+    // private urlIp = 'http://localhost:8080/'; // Localhost
+    private urlIp = 'http://letscookapi.jelasticlw.com.br/'; // Prod
+    
+    
 
     // Path names
     public pathLetsCook = 'letscookAPI/';

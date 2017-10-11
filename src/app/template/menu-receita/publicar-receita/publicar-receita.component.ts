@@ -272,7 +272,7 @@ export class PublicarReceitaComponent implements OnInit {
         const et: Etapa = new Etapa();
         et.nome = 'Nova Etapa'
         const passos = [];
-        passos.push({ nome: 'Novo Passo' })
+        passos.push({ descricao: 'Novo Passo' })
         et.passos = passos;
         this.receita.etapas.push(et);
     }

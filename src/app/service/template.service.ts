@@ -4,6 +4,7 @@ import { IndexPageComponent } from 'app/template/index-page/index-page.component
 import { PainelDeControleComponent } from 'app/template/painel-de-controle/painel-de-controle.component';
 import { MenuSubnav } from 'app/viewmodel/template/menu-subnav/menu-subnav';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
+import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-receita.component';
 
 @Injectable()
 export class TemplateService {
@@ -45,6 +46,14 @@ export class TemplateService {
         if (param == 'IndexPageComponent') {
             return {
                 component: IndexPageComponent,
+                inputs: [
+                ]
+            }
+        }
+
+        if (param == 'VerReceitaComponent') {
+            return {
+                component: VerReceitaComponent,
                 inputs: [
                 ]
             }

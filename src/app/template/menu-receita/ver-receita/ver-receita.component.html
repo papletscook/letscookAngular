@@ -1,0 +1,65 @@
+<div class="row" *ngIf="loading">
+    <div class="col-xs text-center">
+        <span class="spinner">
+            Loading...
+        </span>
+    </div>
+</div>
+
+<div class="row" *ngIf="!loading">
+    <div class="col-xs-12 col-sm-4">
+        <div class="card">
+            <div class="card-img">
+                <img [src]="receita.foto">
+            </div>
+            <div class="card-block">
+                <h4 class="card-title">Nome: {{receita.nome}}</h4>
+                <p class="card-text">
+                    Descrição: {{receita.descricao}}
+                </p>
+            </div>
+
+            <div class="card-footer">
+                <a href="..." class="btn btn-sm btn-link">Preparar Receita</a>
+                <a href="..." class="btn btn-sm btn-link">Lista de Compras</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Modo de Preparo</h4>
+            </div>
+            <div class="card-block">
+                <ol class="list">
+                    <li *ngFor="let etapa of receita.etapas">
+                        {{etapa.nome | uppercase}}
+                        <ol class="list">
+                            <li *ngFor="let passo of etapa.passos">{{passo.descricao}}</li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-4">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Criador</h4>
+                <p class="card-text">{{receita.criador.email}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="..." class="card-link">Ver Perfil</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Ingredientes</h4>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let ingt of receita.ingts">{{ingt.quant}} {{detailMedida(ingt.uMedida).desc}} de {{ingt.ingrediente.nome}}.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>

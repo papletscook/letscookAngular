@@ -1,7 +1,7 @@
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
 import { CompleterService } from 'ng2-completer';
 import { IngredienteService } from 'app/service/ingrediente.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';
 import { ReceitaService } from 'app/service/receita.service';
@@ -20,17 +20,15 @@ import { Receita } from 'app/viewmodel/template/receita/receita';
 })
 
 
-export class PrepararReceitaComponent implements OnInit, ComponentInfo{
-    nome: string = "Preparar Receita"
-    component: any = this
+export class PrepararReceitaComponent implements OnInit{
 
+    @Input()
     private receita: Receita;
 
     constructor(
         private receitaService: ReceitaService) { }
 
     ngOnInit() {
-        this.receita = new Receita();
     }
 
 

@@ -1,3 +1,4 @@
+import { VerReceitaComponent } from './template/menu-receita/ver-receita/ver-receita.component';
 import { SessionService } from './service/session.service';
 import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
@@ -27,6 +28,9 @@ import { DynamicComponent } from 'app/template/dynamic-component/dynamic.compone
 import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita/resumo-receita.component';
 import { ImageCropperComponent } from 'ng2-img-cropper';
 import { LoginService } from 'app/service/login.service';
+import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+
 
 @NgModule({
     declarations: [
@@ -46,13 +50,15 @@ import { LoginService } from 'app/service/login.service';
         PrepararReceitaComponent,
         AutofocusDirective,
         InputTrimDirective,
-        ImageCropperComponent
+        ImageCropperComponent,
+        VerReceitaComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
         ClarityModule.forRoot(),
+        ToastModule.forRoot(),
         BrowserAnimationsModule,
         AppRoutingModule,
         Ng2CompleterModule],
@@ -62,8 +68,8 @@ import { LoginService } from 'app/service/login.service';
         SessionService,
         HolderService,
         SessionService,
-        LoginService
-    ],
+        LoginService,
+        AlertIconAndTypesService],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [
@@ -72,7 +78,8 @@ import { LoginService } from 'app/service/login.service';
         MinhasReceitasComponent,
         IndexPageComponent,
         PainelDeControleComponent,
-        PrepararReceitaComponent
+        PrepararReceitaComponent,
+        VerReceitaComponent
     ]
 })
 
