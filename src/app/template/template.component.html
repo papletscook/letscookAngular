@@ -6,9 +6,9 @@
     </clr-alert-item>
 </clr-alert>
 
-<div class="main-container">
+<clr-main-container>
 
-    <header class="header header-4">
+    <clr-header class="header-4">
         <div class="branding">
             <a class="nav-link">
                 <clr-icon shape="vmw-app"></clr-icon>
@@ -39,8 +39,8 @@
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
-    </header>
-    <nav class="subnav">
+    </clr-header>
+    <nav class="subnav" [clr-nav-level]="1">
         <ul class="nav">
             <subnav [menu]="menu" (click)="changeCase(menu.component);" *ngFor="let menu of menus"></subnav>
         </ul>
@@ -50,8 +50,8 @@
             <dynamic-component [componentData]="useCase"></dynamic-component>
             <login-component></login-component>
         </div>
-        <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed">
+        <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">
             <sidenav-component></sidenav-component>
         </clr-vertical-nav>
     </div>
-</div>
+</clr-main-container>
