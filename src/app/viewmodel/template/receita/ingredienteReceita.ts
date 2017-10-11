@@ -5,4 +5,5 @@ export class IngredienteReceita {
     ingrediente: Ingrediente = null;
     uMedida: string = null;
     quant?: number = 1;
+    checked: boolean = false;
 }

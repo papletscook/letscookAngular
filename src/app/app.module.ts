@@ -1,10 +1,11 @@
+import { PassoComponent } from './template/menu-receita/preparar-receita/passo/passo.component';
 import { VerReceitaComponent } from './template/menu-receita/ver-receita/ver-receita.component';
 import { SessionService } from './service/session.service';
 import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from 'clarity-angular';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -52,17 +53,21 @@ import { AlertService } from 'app/service/alert.service';
         AutofocusDirective,
         InputTrimDirective,
         ImageCropperComponent,
-        VerReceitaComponent
+        VerReceitaComponent,
+        PassoComponent
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule,
         FormsModule,
         HttpModule,
         ClarityModule.forRoot(),
         ToastModule.forRoot(),
         BrowserAnimationsModule,
         AppRoutingModule,
-        Ng2CompleterModule],
+        Ng2CompleterModule
+    ],
     providers: [
         HolderService,
         UrlServiceService,

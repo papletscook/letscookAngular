@@ -41,32 +41,24 @@ export class PublicarReceitaComponent implements OnInit {
 
     img: any;
 
-
     private allIngredientes: Ingrediente[];
 
     private etapaEdited: Etapa;
     private passoEdited: Passo;
     private ingrEdited: IngredienteReceita;
 
-    protected searchStr: string;
-    protected dataService: CompleterData;
-
-    private modalEtapa = false;
-    private modalPasso = false;
-
     private categorias: Categoria[];
     private medidas: Medida[];
+    private ingredientes: IngredienteReceita[] = [];
 
     private receita: Receita;
 
     private ingredienteCad: IngredienteReceita;
-    private ingredientes: IngredienteReceita[] = [];
 
     private alertIngrediente: boolean = false;
 
 
     @ViewChild('wizard') wizard: Wizard;
-    skipStepTwo = true;
     _open = true;
 
     constructor(
@@ -126,9 +118,7 @@ export class PublicarReceitaComponent implements OnInit {
         }
     }
 
-    toggleStepTwo() {
-        this.skipStepTwo = !this.skipStepTwo;
-    }
+
 
     validationStepOne(): boolean {
         let r = this.receita;

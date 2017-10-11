@@ -13,27 +13,29 @@
                 <img [src]="receita.foto">
             </div>
             <div class="card-block">
-                <h4 class="card-title">Nome: {{receita.nome}}  <span class="badge badge-3">{{receita.categoria.nome}} </span></h4>
+                <h4 class="card-title">Nome: {{receita.nome}}
+                    <span class="badge badge-3">{{receita.categoria.nome}} </span>
+                </h4>
                 <p class="card-text">
                     Descrição: {{receita.descricao}}
                 </p>
             </div>
 
             <div class="card-footer">
-                <a href="..." class="btn btn-sm btn-link">Preparar Receita</a>
-                <a href="..." class="btn btn-sm btn-link">Lista de Compras</a>
+                <button class="btn btn-sm btn-link" (click)="prepararReceita()">Preparar Receita</button>
+                <button class="btn btn-sm btn-link">Lista de Compras</button>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-sm-4">
         <div class="card">
             <div class="card-block">
-                <h4 class="card-title">Modo de Preparo</h4>
+                <h4 class="card-title">Resumo: Modo de Preparo</h4>
             </div>
             <div class="card-block">
                 <ol class="list">
                     <li *ngFor="let etapa of receita.etapas">
-                        {{etapa.nome | uppercase    }}
+                        {{etapa.nome | uppercase }}
                         <ol class="list">
                             <li *ngFor="let passo of etapa.passos">{{passo.descricao}}</li>
                         </ol>
@@ -61,5 +63,5 @@
             </ul>
         </div>
     </div>
-
 </div>
+<preparar-receita-component [open]="preparar" [receita]="receita" [medidas]="medidas"></preparar-receita-component>
