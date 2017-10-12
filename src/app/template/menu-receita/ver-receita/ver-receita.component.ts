@@ -27,7 +27,7 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
 export class VerReceitaComponent implements OnInit {
     preparar: boolean;
 
-    medidas: any;
+    medidas: any = null;
 
     @Input()
     private receita: Receita;
@@ -48,7 +48,13 @@ export class VerReceitaComponent implements OnInit {
     ngOnInit() {
         this.receita = new Receita();
         this.receita.id = 28
-        this.getMedidas()
+        
+        this.medidaService.list()
+            .then(data => {
+                this.medidas = data;
+            }, error => {
+            });
+
         this.receitaService.getById(this.receita).then(data => {
             this.receita = data;
             this.loading = false;
@@ -57,13 +63,6 @@ export class VerReceitaComponent implements OnInit {
         });
     }
 
-    public getMedidas() {
-        this.medidaService.list()
-            .then(data => {
-                this.medidas = data;
-            }, error => {
-            })
-    }
 
     private prepararReceita() {
         this.receita.etapas[0].passos[0].checked = true;

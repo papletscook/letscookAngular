@@ -96,10 +96,11 @@ export class PrepararReceitaComponent implements OnInit {
         this.open = false;
     }
 
+
+
     proximoPasso(passo: Passo, etapa: Etapa) {
         try {
             etapa.passos[etapa.passos.indexOf(passo) + 1].checked = true;
-            passo.checked = false;
         } catch (error) {
             try {
                 this.wizard.next();
@@ -108,6 +109,8 @@ export class PrepararReceitaComponent implements OnInit {
             } catch (error) {
 
             }
+        } finally {
+            passo.checked = false;
         }
     }
 

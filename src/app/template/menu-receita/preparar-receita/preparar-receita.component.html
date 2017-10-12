@@ -65,7 +65,7 @@
                     <clr-alert *ngIf="passo.dica">
                         <div class="alert-item">
                             <span class="alert-text">
-                                {{passo.dica}}
+                                Dica do Criador: {{passo.dica}}.
                             </span>
                         </div>
                     </clr-alert>
@@ -87,6 +87,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12" *ngIf="passo.checked && passo.minPasso">
+                    <div class="card">
+                        <h4 class="card-title">Cronômetro</h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">00:00:00</li>
+                    </ul>
+                    <div class="card-footer">
+                        <a class="btn btn-sm btn-link" (click)="proximoPasso(passo, etapa)">Próximo Passo</a>
+                    </div>
+                </div>
+
             </div>
 
         </form>
