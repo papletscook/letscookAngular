@@ -1,4 +1,3 @@
-import { countdownData, countdownOptions } from 'ng2-countdown/index';
 import { Etapa } from './../../../viewmodel/template/receita/etapa';
 import { Passo } from './../../../viewmodel/template/receita/passo';
 import { IngredientePreparo } from './../../../viewmodel/template/receita/ingrediente-preparo';
@@ -136,7 +135,7 @@ export class PrepararReceitaComponent implements OnInit {
         return true;
     }
 
-    reiniciarReceita(){
+    reiniciarReceita() {
         let ings = this.receita.ingts;
     }
 

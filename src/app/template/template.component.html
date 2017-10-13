@@ -34,6 +34,7 @@
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                     <a clrDropdownItem (click)="changeCase('PainelDeControleComponent');" *ngIf="holderService.userLogado">Meu Perfil</a>
+                    <a clrDropdownItem *ngIf="holderService.userLogado">Despensa</a>
                     <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
                     <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
                 </clr-dropdown-menu>

@@ -16,6 +16,5 @@ export const Cozinheiro: MenuSubnav[] = [
     { nome: 'Receitas', component: 'PainelDeControleComponent', ativo: true },
     { nome: 'Preparar Receita', component: 'PrepararReceitaComponent' },
     { nome: 'Publicar Receita', component: 'PublicarReceitaComponent' },
-    { nome: 'Ver Receita', component: 'VerReceitaComponent' },
-
+    { nome: 'Ver Receita', component: 'VerReceitaComponent' }
 ]
