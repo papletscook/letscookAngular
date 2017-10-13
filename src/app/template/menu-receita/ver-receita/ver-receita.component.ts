@@ -1,6 +1,5 @@
 import { PrepararReceitaComponent } from 'app/template/menu-receita/preparar-receita/preparar-receita.component';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
-import { CompleterService } from 'ng2-completer';
 import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { CategoriaService } from 'app/service/categoria.service';

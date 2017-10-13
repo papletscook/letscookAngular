@@ -1,5 +1,4 @@
 
-import { CompleterService } from 'ng2-completer';
 import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, Input, ViewChild, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
 import { CategoriaService } from 'app/service/categoria.service';

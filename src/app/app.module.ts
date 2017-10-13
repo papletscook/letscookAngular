@@ -3,7 +3,6 @@ import { VerReceitaComponent } from './template/menu-receita/ver-receita/ver-rec
 import { SessionService } from './service/session.service';
 import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
-import { Ng2CompleterModule } from 'ng2-completer';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from 'clarity-angular';
@@ -32,7 +31,6 @@ import { LoginService } from 'app/service/login.service';
 import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AlertService } from 'app/service/alert.service';
-
 
 @NgModule({
     declarations: [
@@ -65,8 +63,7 @@ import { AlertService } from 'app/service/alert.service';
         ClarityModule.forRoot(),
         ToastModule.forRoot(),
         BrowserAnimationsModule,
-        AppRoutingModule,
-        Ng2CompleterModule
+        AppRoutingModule
     ],
     providers: [
         HolderService,
@@ -76,9 +73,9 @@ import { AlertService } from 'app/service/alert.service';
         SessionService,
         LoginService,
         AlertIconAndTypesService,
-        AlertService],
+        AlertService
+    ],
     bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [
         PublicarReceitaComponent,
         MenuReceitaComponent,

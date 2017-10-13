@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-md-12">
-        <clr-icon *ngIf="passo.checked" shape="caret" dir="right" size="24" class="is-solid"></clr-icon>{{passo.descricao}}
-    </div>
-</div>
+<li class="list-group-item" [class.checked]="passo.checked">
+    <clr-icon *ngIf="passo.checked" shape="caret" dir="right" size="24" class="is-solid"></clr-icon>
+    <clr-icon *ngIf="passo.done" shape="success-standard" class="is-success"></clr-icon>
+    {{passo.descricao}}
+</li>

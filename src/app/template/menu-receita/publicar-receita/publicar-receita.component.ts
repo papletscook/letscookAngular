@@ -7,7 +7,6 @@ import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { MockReceita } from './../mock/mockReceita';
 import { MedidaService } from 'app/service/medida.service';
-import { CompleterData, CompleterService } from 'ng2-completer';
 import { Wizard } from 'clarity-angular';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
 import { Etapa } from 'app/viewmodel/template/receita/etapa';
@@ -64,7 +63,6 @@ export class PublicarReceitaComponent implements OnInit {
     constructor(
         private holderService: HolderService,
         private receitaService: ReceitaService,
-        private completerService: CompleterService,
         private ingredientesService: IngredienteService,
         private categoriaService: CategoriaService,
         private session: SessionService,
