@@ -1,3 +1,4 @@
+import { DespensaComponent } from './template/despensa/despensa.component';
 import { PassoComponent } from './template/menu-receita/preparar-receita/passo/passo.component';
 import { VerReceitaComponent } from './template/menu-receita/ver-receita/ver-receita.component';
 import { SessionService } from './service/session.service';
@@ -51,7 +52,8 @@ import { AlertService } from 'app/service/alert.service';
         InputTrimDirective,
         ImageCropperComponent,
         VerReceitaComponent,
-        PassoComponent
+        PassoComponent,
+        DespensaComponent
     ],
     imports: [
         BrowserModule,
@@ -81,7 +83,8 @@ import { AlertService } from 'app/service/alert.service';
         IndexPageComponent,
         PainelDeControleComponent,
         PrepararReceitaComponent,
-        VerReceitaComponent
+        VerReceitaComponent,
+        DespensaComponent
     ]
 })
 

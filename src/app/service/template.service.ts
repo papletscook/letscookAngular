@@ -1,3 +1,4 @@
+import { DespensaComponent } from './../template/despensa/despensa.component';
 import { PrepararReceitaComponent } from './../template/menu-receita/preparar-receita/preparar-receita.component';
 import { Injectable, ComponentFactoryResolver } from '@angular/core';
 import { IndexPageComponent } from 'app/template/index-page/index-page.component';
@@ -54,6 +55,14 @@ export class TemplateService {
         if (param == 'VerReceitaComponent') {
             return {
                 component: VerReceitaComponent,
+                inputs: [
+                ]
+            }
+        }
+
+        if (param == 'DespensaComponent') {
+            return {
+                component: DespensaComponent,
                 inputs: [
                 ]
             }

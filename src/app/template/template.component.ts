@@ -54,7 +54,7 @@ export class TemplateComponent implements OnInit {
         }
     }
 
-    public changeCase(str: string): void {
+    public changeCase(str: string): void {        
         this.desativarMenu();
         this.useCase = this.templateService.createComp(str)
     }
