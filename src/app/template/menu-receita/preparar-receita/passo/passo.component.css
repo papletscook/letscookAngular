@@ -2,6 +2,10 @@ clr-icon {
     cursor: pointer;
 }
 
-checked {
-    background-color: #F0E68C;
+.checked {
+    background-color: #f1f7a0;
+}
+
+.done {
+    background-color: #f0f0f0;
 }

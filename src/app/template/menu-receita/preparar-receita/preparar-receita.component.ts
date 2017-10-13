@@ -39,6 +39,8 @@ export class PrepararReceitaComponent implements OnInit {
 
     private cronometro: any;
 
+    private passoCrono: Passo;
+
     private timer: any = null;
 
     private segundos: number;
@@ -64,28 +66,42 @@ export class PrepararReceitaComponent implements OnInit {
         this.wizard.reset();
     }
 
-    playCrono(mins: number) {
-        if (this.timer) {
-            this.timer = false;
-        } else {
-            this.iniciarCrono(mins);
+    playCrono(passo: Passo) {
+        this.passoCrono = passo;
+        this.definirCrono(passo)
+        this.iniciarTimer()
+    }
+
+    pauseCrono() {
+        this.timer.unsubscribe();
+        this.timer = null;
+        // this.segundos = null;
+    }
+
+
+    definirCrono(passo: Passo): void {
+        let sgs = this.passoCrono.minPasso * 60;
+        this.segundos = sgs;
+        this.iniciarTimer()
+    }
+
+    iniciarTimer() {
+        if (!this.timer) {
+            this.timer = Observable.interval(1000).subscribe(res => {
+                this.cronoFunc()
+            });
         }
 
     }
 
-
-    iniciarCrono(mins: number) {
-        this.timer = Observable.timer(2000, 1000);
-        this.segundos = mins * 60;
-        this.timer.subscribe(t => this.cronoFunc());
+    cronoFunc() {
+        this.segundos -= 1;
+        this.cronometro = this.secondsToHms(this.segundos)
     }
 
-    cronoFunc() {
-        console.log(this.segundos)
-        this.segundos -= 1;
-        console.log(this.segundos)
-        this.cronometro = this.secondsToHms(this.segundos)
-        console.log(this.cronometro)
+    concluirCase() {
+        console.log("concluirCase")
+        this.cancelar();
     }
 
 
@@ -95,6 +111,10 @@ export class PrepararReceitaComponent implements OnInit {
         var m = Math.floor(d % 3600 / 60);
         var s = Math.floor(d % 3600 % 60);
         return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+    }
+
+    minToSec(min: number) {
+        return min * 60;
     }
 
 
@@ -116,6 +136,10 @@ export class PrepararReceitaComponent implements OnInit {
         return true;
     }
 
+    reiniciarReceita(){
+        let ings = this.receita.ingts;
+    }
+
 
     selecionarTodos() {
         let ings = this.receita.ingts;
@@ -134,26 +158,31 @@ export class PrepararReceitaComponent implements OnInit {
 
     cancelar() {
         this.open = false;
+        this.wizard.reset();
     }
 
+    processarProximoPasso(passo: Passo) {
+        passo.checked = true;
+        if (passo.minPasso) {
+            this.playCrono(passo)
+        }
+    }
 
 
     proximoPasso(passo: Passo, etapa: Etapa) {
         try {
-            etapa.passos[etapa.passos.indexOf(passo) + 1].checked = true;
+            this.processarProximoPasso(etapa.passos[etapa.passos.indexOf(passo) + 1])
         } catch (error) {
             try {
                 this.wizard.next();
                 etapa.done = true;
                 this.validationStepTwo[this.receita.etapas.indexOf(etapa)] = true;
-                this.receita.etapas[this.receita.etapas.indexOf(etapa) + 1].passos[0].checked = true;
+                let futuroPasso = this.receita.etapas[this.receita.etapas.indexOf(etapa) + 1].passos[0];
+                this.processarProximoPasso(futuroPasso)
             } catch (error) {
 
             }
         } finally {
-            if (passo.minPasso) {
-                this.playCrono(passo.minPasso)
-            }
             passo.checked = false;
             passo.done = true;
         }

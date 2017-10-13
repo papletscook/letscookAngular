@@ -4,7 +4,7 @@
     <clr-wizard-button [type]="'cancel'" (click)="cancelar()">Cancelar</clr-wizard-button>
     <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
     <clr-wizard-button [type]="'next'">Avançar</clr-wizard-button>
-    <clr-wizard-button [type]="'finish'" (click)="alert('oi')">Concluir</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'" (click)="concluirCase()">Concluir</clr-wizard-button>
 
     <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepOne()">
         <ng-template clrPageTitle>
@@ -12,6 +12,9 @@
             <label>Separação dos Ingredientes</label>
         </ng-template>
         <ng-template clrPageNavTitle>Separação dos Ingredientes</ng-template>
+        <ng-template clrPageButtons>
+            <clr-wizard-button [type]="'next'">Avançar</clr-wizard-button>
+        </ng-template>
         <form #form="ngForm" novalidate>
 
             <div class="row">
@@ -19,34 +22,37 @@
                     Para continuarmos com a receita, selecione e realize a separação dos ingredientes abaixo:
                 </div>
                 <div class="col-md-12">
-                    <ul class="list">
-                        <li *ngFor="let ingt of receita.ingts; let i = index;">
-                            <div class="checkbox">
-                                <input id="checkrads_{{i}}" type="checkbox" [checked]="ingt.checked" (change)="handleChange(i)">
-                                <label for="checkrads_{{i}}">
-                                    <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
-                                    <b>{{ingt.ingrediente.nome}}</b>.</label>
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">Ingredientes</h4>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let ingt of receita.ingts; let i = index;">
+                                <div class="checkbox">
+                                    <input id="checkrads_{{i}}" type="checkbox" [checked]="ingt.checked" (change)="handleChange(i)">
+                                    <label for="checkrads_{{i}}">
+                                        <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
+                                        <b>{{ingt.ingrediente.nome}}</b>.</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="card-footer">
+                            <div class="btn-group btn-primary btn-sm">
+                                <button class="btn" (click)="selecionarTodos()">
+                                    <clr-icon shape="cursor-arrow"></clr-icon>
+                                    Selecionar todos</button>
+                                <button class="btn btn-success">
+                                    <clr-icon shape="bundle"></clr-icon>
+                                    Sacar da Despensa</button>
+                                <button class="btn btn-danger" (click)="removerTodos()">
+                                    <clr-icon shape="trash"></clr-icon>
+                                    Remover todos</button>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row flex-items-xs-bottom">
-                <div class="col-xs">
-                    <div class="btn-group btn-primary btn-sm">
-                        <button class="btn" (click)="selecionarTodos()">
-                            <clr-icon shape="cursor-arrow"></clr-icon>
-                            Selecionar todos</button>
-                        <button class="btn btn-success">
-                            <clr-icon shape="bundle"></clr-icon>
-                            Sacar da Despensa</button>
-                        <button class="btn btn-danger" (click)="removerTodos()">
-                            <clr-icon shape="trash"></clr-icon>
-                            Remover todos</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </form>
     </clr-wizard-page>
 
@@ -61,8 +67,10 @@
 
             <div class="row">
 
-
-                <div class="col-md-12">
+                <div class="col-xs-2">
+                    <label>% da Receita:</label>
+                </div>
+                <div class="col-md-10">
                     <div class="progress success">
                         <progress value="0" max="{{etapa.passos.length}}"></progress>
                     </div>
@@ -92,7 +100,14 @@
                         </ul>
                         <div *ngFor="let passo of etapa.passos; let ip = index;">
                             <div class="card-footer" *ngIf="passo.checked">
-                                <a class="btn btn-sm btn-link" (click)="proximoPasso(passo, etapa)">Próximo Passo</a>
+                                <button class="btn" (click)="anteriorPasso(passo, etapa)">
+                                    <clr-icon shape="undo"></clr-icon>
+                                    Voltar Passo
+                                </button>
+                                <button class="btn" (click)="proximoPasso(passo, etapa)">
+                                    <clr-icon shape="redo"></clr-icon>
+                                    Próximo Passo
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -101,14 +116,17 @@
                     <div class="card" *ngIf="pas.checked && pas.minPasso">
                         <div class="card-block">
                             <h4 class="card-title">Cronômetro</h4>
-                            <div class="card-text">
+                            <div *ngIf="pas != passoCrono" class="card-text text-center">
+                                {{ secondsToHms(minToSec(pas.minPasso)) }}
+                            </div>
+                            <div *ngIf="pas == passoCrono" class="card-text text-center">
                                 {{ cronometro }}
                             </div>
                         </div>
                         <div class="card-footer">
-                            <clr-icon shape="play" (click)="playCrono(pas.minPasso)"></clr-icon>
-                            <clr-icon shape="stop"></clr-icon>
-                            <clr-icon shape="refresh"></clr-icon>
+                            <clr-icon shape="play" *ngIf="!timer" (click)="iniciarTimer()"></clr-icon>
+                            <clr-icon shape="stop" *ngIf="timer" (click)="pauseCrono()"></clr-icon>
+                            <clr-icon shape="refresh" (click)="definirCrono(pas)"></clr-icon>
                         </div>
                     </div>
                 </div>
