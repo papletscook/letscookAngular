@@ -62,7 +62,14 @@ export class PrepararReceitaComponent implements OnInit {
         private alert: AlertService) { }
 
     ngOnInit(): void {
-        this.wizard.reset();
+    }
+
+    iniciarPreparo() {
+        if (this.validationStepOne()) {
+            this.receita.etapas[0].passos[0].checked = true;
+            this.wizard.next()
+        }
+
     }
 
     playCrono(passo: Passo) {

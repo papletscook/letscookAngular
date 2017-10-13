@@ -64,7 +64,6 @@ export class VerReceitaComponent implements OnInit {
 
 
     private prepararReceita() {
-        this.receita.etapas[0].passos[0].checked = true;
         this.preparar = true
     }
 

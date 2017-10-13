@@ -4,7 +4,7 @@ import { CategoriaService } from 'app/service/categoria.service';
 import { HolderService } from 'app/service/holder.service';
 import { ReceitaService } from 'app/service/receita.service';
 import { IngredienteService } from 'app/service/ingrediente.service';
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { MockReceita } from './../mock/mockReceita';
 import { MedidaService } from 'app/service/medida.service';
 import { Wizard } from 'clarity-angular';
@@ -50,6 +50,7 @@ export class PublicarReceitaComponent implements OnInit {
     private medidas: Medida[];
     private ingredientes: IngredienteReceita[] = [];
 
+    @Input()
     private receita: Receita;
 
     private ingredienteCad: IngredienteReceita;
@@ -102,7 +103,6 @@ export class PublicarReceitaComponent implements OnInit {
         // const r = new Receita();
         const r = MockReceita;
         this.receita = r;
-        this.receita.criador = this.session.consultarUsuario();
     }
 
     contaPalavras(str: string): number {
@@ -128,13 +128,24 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     publicarReceita(): void {
-        this.receita.foto = this.img.image;
-        if (this.receita) {
+        if (this.img.image) {
+            this.receita.foto = this.img.image;
+        }
+        if (!this.receita.id) {
+            console.log('cadastrar')
             this.receitaService.cadastrar(this.receita)
                 .then(data => {
                     this.receita = data;
                 }, error => {
-                    this.alert.error("Falha ao Publicar Receita!")
+                    this.alert.error("Falha ao publicar Receita!")
+                })
+        } else {
+            console.log('atualizar')
+            this.receitaService.atualizar(this.receita)
+                .then(data => {
+                    this.receita = data;
+                }, error => {
+                    this.alert.error("Falha ao atualizar Receita!")
                 })
         }
     }

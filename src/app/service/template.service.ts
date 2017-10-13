@@ -10,65 +10,55 @@ import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-r
 @Injectable()
 export class TemplateService {
 
+    public component : any; 
+
+    private components: any = [{
+        nome: 'PrepararReceitaComponent',
+        component: PrepararReceitaComponent,
+        inputs: [
+        ]
+    }, {
+        nome: 'PublicarReceitaComponent',
+        component: PublicarReceitaComponent,
+        inputs: [
+        ]
+    }, {
+        nome: 'PainelDeControleComponent',
+        component: PainelDeControleComponent,
+        inputs: [
+        ]
+    }, {
+        nome: 'IndexPageComponent',
+        component: IndexPageComponent,
+        inputs: [
+        ]
+    }, {
+        nome: 'VerReceitaComponent',
+        component: VerReceitaComponent,
+        inputs: [
+        ]
+    }]
+
     constructor() { }
 
     public createIndexComponent() {
         return {
-            component: IndexPageComponent
+            component: IndexPageComponent,
+            inputs: [
+            ]
         }
     }
 
     public createComp(param: string): any {
-        if (param == 'PrepararReceitaComponent') {
-            return {
-                component: PrepararReceitaComponent,
-                inputs: [
-                ]
+        for (let comp of this.components) {
+            if (comp.nome == param) {
+                this.component = {
+                    component: comp.component,
+                    inputs: comp.inputs
+                }
+                return this.component;
             }
         }
-
-        if (param == 'PublicarReceitaComponent') {
-            return {
-                component: PublicarReceitaComponent,
-                inputs: [
-                ]
-            }
-        }
-
-
-        if (param == 'PainelDeControleComponent') {
-            return {
-                component: PainelDeControleComponent,
-                inputs: [
-                ]
-            }
-        }
-
-        if (param == 'IndexPageComponent') {
-            return {
-                component: IndexPageComponent,
-                inputs: [
-                ]
-            }
-        }
-
-        if (param == 'VerReceitaComponent') {
-            return {
-                component: VerReceitaComponent,
-                inputs: [
-                ]
-            }
-        }
-
-        if (param == 'DespensaComponent') {
-            return {
-                component: DespensaComponent,
-                inputs: [
-                ]
-            }
-        }
-
-
     }
 
     public createPainelDeControle() {

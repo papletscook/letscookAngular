@@ -1,8 +1,11 @@
-<clr-alert [clrAlertType]="'alert.clrAlertType'" *ngIf="alert.msg" [clrAlertAppLevel]="true">
+<clr-alert [clrAlertType]="alert.clrAlertType" *ngIf="alert.msg" [clrAlertAppLevel]="true">
     <clr-alert-item>
         <span class="alert-text">
             {{ alert.msg }}
         </span>
+        <div class="alert-actions">
+            <button class="btn alert-action">Tentar novamente</button>
+        </div>
     </clr-alert-item>
 </clr-alert>
 
@@ -48,7 +51,7 @@
     </nav>
     <div class="content-container">
         <div class="content-area">
-            <dynamic-component [componentData]="useCase"></dynamic-component>
+            <dynamic-component [componentData]="templateService.component"></dynamic-component>
             <login-component></login-component>
         </div>
         <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">

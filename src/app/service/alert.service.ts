@@ -17,7 +17,7 @@ export class AlertService {
     public doAction() {
         setTimeout(function () {
             this.msg = null;
-        }, 3000);
+        }, 5000);
     }
 
 }

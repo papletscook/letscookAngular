@@ -12,11 +12,7 @@
             <label>Separação dos Ingredientes</label>
         </ng-template>
         <ng-template clrPageNavTitle>Separação dos Ingredientes</ng-template>
-        <ng-template clrPageButtons>
-            <clr-wizard-button [type]="'next'">Avançar</clr-wizard-button>
-        </ng-template>
         <form #form="ngForm" novalidate>
-
             <div class="row">
                 <div class="col-md-12">
                     Para continuarmos com a receita, selecione e realize a separação dos ingredientes abaixo:
@@ -52,8 +48,10 @@
                     </div>
                 </div>
             </div>
-
         </form>
+        <ng-template clrPageButtons>
+            <clr-wizard-button [type]="'custom-next'" (click)="iniciarPreparo()">Avançar</clr-wizard-button>
+        </ng-template>
     </clr-wizard-page>
 
     <clr-wizard-page *ngFor="let etapa of receita.etapas; let i = index;" [clrWizardPageNextDisabled]="!validationStepTwo[i]">
