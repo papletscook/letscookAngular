@@ -7,7 +7,6 @@ import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { MockReceita } from './../mock/mockReceita';
 import { MedidaService } from 'app/service/medida.service';
-import { CompleterData, CompleterService } from 'ng2-completer';
 import { Wizard } from 'clarity-angular';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
 import { Etapa } from 'app/viewmodel/template/receita/etapa';
@@ -41,38 +40,29 @@ export class PublicarReceitaComponent implements OnInit {
 
     img: any;
 
-
     private allIngredientes: Ingrediente[];
 
     private etapaEdited: Etapa;
     private passoEdited: Passo;
     private ingrEdited: IngredienteReceita;
 
-    protected searchStr: string;
-    protected dataService: CompleterData;
-
-    private modalEtapa = false;
-    private modalPasso = false;
-
     private categorias: Categoria[];
     private medidas: Medida[];
+    private ingredientes: IngredienteReceita[] = [];
 
     private receita: Receita;
 
     private ingredienteCad: IngredienteReceita;
-    private ingredientes: IngredienteReceita[] = [];
 
     private alertIngrediente: boolean = false;
 
 
     @ViewChild('wizard') wizard: Wizard;
-    skipStepTwo = true;
     _open = true;
 
     constructor(
         private holderService: HolderService,
         private receitaService: ReceitaService,
-        private completerService: CompleterService,
         private ingredientesService: IngredienteService,
         private categoriaService: CategoriaService,
         private session: SessionService,
@@ -126,9 +116,7 @@ export class PublicarReceitaComponent implements OnInit {
         }
     }
 
-    toggleStepTwo() {
-        this.skipStepTwo = !this.skipStepTwo;
-    }
+
 
     validationStepOne(): boolean {
         let r = this.receita;

@@ -1,7 +1,7 @@
+import { PrepararReceitaComponent } from 'app/template/menu-receita/preparar-receita/preparar-receita.component';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
-import { CompleterService } from 'ng2-completer';
 import { IngredienteService } from 'app/service/ingrediente.service';
-import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';
 import { ReceitaService } from 'app/service/receita.service';
@@ -24,13 +24,17 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
 
 
 export class VerReceitaComponent implements OnInit {
+    preparar: boolean;
 
-    medidas: any;
+    medidas: any = null;
 
     @Input()
     private receita: Receita;
 
     private loading: boolean = true;
+
+    @ViewChild(PrepararReceitaComponent)
+    private prepararComp: PrepararReceitaComponent;
 
 
     constructor(private receitaService: ReceitaService,
@@ -43,25 +47,26 @@ export class VerReceitaComponent implements OnInit {
     ngOnInit() {
         this.receita = new Receita();
         this.receita.id = 28
-        this.getMedidas()
+        
+        this.medidaService.list()
+            .then(data => {
+                this.medidas = data;
+            }, error => {
+            });
+
         this.receitaService.getById(this.receita).then(data => {
             this.receita = data;
             this.loading = false;
         }, error => {
             this.toastr.error('Ocorreu um erro ao obter receita!', 'Oops!');
         });
-
-
     }
 
-    public getMedidas() {
-        this.medidaService.list()
-            .then(data => {
-                this.medidas = data;
-            }, error => {
-            })
-    }
 
+    private prepararReceita() {
+        this.receita.etapas[0].passos[0].checked = true;
+        this.preparar = true
+    }
 
     private detailMedida(medida: string): Medida {
         for (let med of this.medidas) {

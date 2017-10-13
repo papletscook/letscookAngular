@@ -5,5 +5,8 @@ export class Etapa {
     nome: string;
     passos: Passo[] = [];
     ordem?: number;
+    checked?: boolean = false;
+    done?: boolean = false;
+
 
 }

@@ -25,7 +25,6 @@ export class SessionService {
     public consultarUsuario(): Usuario {
         try {
             let sessionObj = JSON.parse(sessionStorage.getItem("user"));
-            console.log(sessionObj)
             return sessionObj;
         } catch (error) {
             return null;
