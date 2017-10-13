@@ -1,13 +1,11 @@
 .image-resize {
-    max-width: 200px;
-    max-height: 150px;
+    max-width: 150px;
+    max-height: 100px;
     width: auto;
     height: auto;
 }
 
 .card-size {
-    max-width: 250px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
+    max-width: 200px;
+    max-height: 150px;
 }
