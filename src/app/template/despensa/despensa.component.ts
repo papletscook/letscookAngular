@@ -34,6 +34,17 @@ export class DespensaComponent implements OnInit {
         if (index !== -1) {
             this.despensa.ings.splice(index, 1);
         }
+        this.atualizarDespensa();
+    }
+
+    public atualizarDespensa() {
+        this.despensaService.atualizarDespensa(this.despensa)
+            .then(data => {
+                this.despensa = data;
+            }, error => {
+                console.log("Erro ao atualizar Despensa");
+
+            });
     }
 
 }

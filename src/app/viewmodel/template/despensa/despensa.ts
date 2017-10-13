@@ -6,7 +6,7 @@ export class Despensa {
     ings: [
         {
             id: number;
-            i: Ingrediente;
+            ingrediente: Ingrediente;
         }
     ]
 }

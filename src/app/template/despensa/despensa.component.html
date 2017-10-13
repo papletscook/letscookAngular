@@ -6,16 +6,18 @@
             <div class="card-size">
                 <div class="card" *ngFor="let ings of despensa.ings">
                     <div class="card-img">
-                        <img class="image-resize" [src]="ings.i.foto">
+                        <div>
+                            <img class="image-resize" [src]="ings.ingrediente.foto">
+                        </div>
                     </div>
                     <div class="card-block">
                         <p class="card-text" style="text-align: center;">
-                            <label>{{ings.i.nome}}</label>
-                            <!-- {{ings.i.tipo}} -->
+                            <label>{{ings.ingrediente.nome}}</label>
+                            <!-- {{ings.ingrediente.tipo}} -->
                         </p>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-link">Remover</button>
+                        <button class="btn btn-link" (click)="removeItemDespensa(ings)">Remover</button>
                     </div>
                 </div>
             </div>

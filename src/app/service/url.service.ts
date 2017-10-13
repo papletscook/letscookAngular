@@ -10,8 +10,8 @@ export class UrlServiceService {
     // IPs
     // private urlIp = 'http://localhost:8080/'; // Localhost
     private urlIp = 'http://letscookapi.jelasticlw.com.br/'; // Prod
-    
-    
+
+
 
     // Path names
     public pathLetsCook = 'letscookAPI/';
@@ -31,6 +31,8 @@ export class UrlServiceService {
                 return this.httpGetRequest(infoRequest);
             case 'post':
                 return this.httpPostRequest(infoRequest);
+            case 'put':
+                return this.httpPutRequest(infoRequest);
         }
     }
 
@@ -54,6 +56,17 @@ export class UrlServiceService {
         }
         const url = `${this.url}` + rstlink;
         return this.http.get(url, this.options)
+            .timeout(infoResquest.timeout)
+            .toPromise()
+            .then(response => {
+                return response.json()
+            })
+            .catch(this.handleError);
+    }
+
+    private httpPutRequest(infoResquest: InfoRequest) {
+        const url = `${this.url}` + infoResquest.command;
+        return this.http.put(url, JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {

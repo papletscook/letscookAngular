@@ -26,4 +26,15 @@ export class DespensaService extends GenericService {
             .catch(this.handleError);
     }
 
+    public atualizarDespensa(despensa: Despensa) {
+        this.infoRequest = {
+            rqst: 'put', command: this.urlServiceService.pathLetsCook + 'despensa', timeout: 6000, _data: despensa
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Despensa
+            })
+            .catch(this.handleError);
+    }
+
 }
