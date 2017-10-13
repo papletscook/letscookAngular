@@ -160,24 +160,44 @@ export class PrepararReceitaComponent implements OnInit {
         this.wizard.reset();
     }
 
-    processarProximoPasso(passo: Passo) {
+    processarPasso(passo: Passo) {
+        passo.done = false;
         passo.checked = true;
         if (passo.minPasso) {
             this.playCrono(passo)
         }
     }
 
+    anteriorPasso(passo: Passo, etapa: Etapa) {
+        try {
+            this.processarPasso(etapa.passos[etapa.passos.indexOf(passo) - 1])
+        } catch (error) {
+            try {
+                this.wizard.previous();
+                etapa.done = true;
+                this.validationStepTwo[this.receita.etapas.indexOf(etapa)] = true;
+                let futuroPasso = this.receita.etapas[this.receita.etapas.indexOf(etapa) - 1].passos[0];
+                this.processarPasso(futuroPasso)
+            } catch (error) {
+
+            }
+        } finally {
+            passo.checked = false;
+            passo.done = false;
+        }
+    }
+
 
     proximoPasso(passo: Passo, etapa: Etapa) {
         try {
-            this.processarProximoPasso(etapa.passos[etapa.passos.indexOf(passo) + 1])
+            this.processarPasso(etapa.passos[etapa.passos.indexOf(passo) + 1])
         } catch (error) {
             try {
                 this.wizard.next();
                 etapa.done = true;
                 this.validationStepTwo[this.receita.etapas.indexOf(etapa)] = true;
                 let futuroPasso = this.receita.etapas[this.receita.etapas.indexOf(etapa) + 1].passos[0];
-                this.processarProximoPasso(futuroPasso)
+                this.processarPasso(futuroPasso)
             } catch (error) {
 
             }

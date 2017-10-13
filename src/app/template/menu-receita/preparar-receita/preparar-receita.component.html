@@ -21,7 +21,7 @@
                 <div class="col-md-12">
                     Para continuarmos com a receita, selecione e realize a separação dos ingredientes abaixo:
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="card">
                         <div class="card-block">
                             <h4 class="card-title">Ingredientes</h4>
@@ -102,11 +102,11 @@
                             <div class="card-footer" *ngIf="passo.checked">
                                 <button class="btn" (click)="anteriorPasso(passo, etapa)">
                                     <clr-icon shape="undo"></clr-icon>
-                                    Voltar Passo
+                                    Voltar
                                 </button>
                                 <button class="btn" (click)="proximoPasso(passo, etapa)">
                                     <clr-icon shape="redo"></clr-icon>
-                                    Próximo Passo
+                                    Avançar
                                 </button>
                             </div>
                         </div>

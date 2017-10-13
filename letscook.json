@@ -1,0 +1,819 @@
+{
+  "front-version": "2.10.1",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "ee128242-03b6-4935-80dd-c0b3ea7171f8",
+      "lastModified": "2017-10-12T17:42:59.188-03:00",
+      "name": "Letscook"
+    },
+    {
+      "type": "Service",
+      "id": "54204f75-aa1e-4868-9666-6b959e3ffc04",
+      "lastModified": "2017-09-04T21:12:41.560-03:00",
+      "name": "Categoria Receita",
+      "parentId": "ee128242-03b6-4935-80dd-c0b3ea7171f8"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\"nome\": \"Carnes\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/categoriaReceita/"
+      },
+      "id": "7d7c3a9a-3cdf-429d-bb8f-56fb99490457",
+      "lastModified": "2017-09-23T17:57:58.065-03:00",
+      "name": "Cadastrar",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "54204f75-aa1e-4868-9666-6b959e3ffc04"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/categoriaReceita/"
+      },
+      "id": "8b068912-c868-47e3-8413-62c64ca48b3a",
+      "lastModified": "2017-10-10T20:26:03.200-03:00",
+      "name": "Listar",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "54204f75-aa1e-4868-9666-6b959e3ffc04"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": ""
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/categoriaReceita/5"
+      },
+      "id": "f712e803-bafa-44dc-b526-c62fb64f7eb1",
+      "lastModified": "2017-09-23T18:00:54.954-03:00",
+      "name": "Remover",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "54204f75-aa1e-4868-9666-6b959e3ffc04"
+    },
+    {
+      "type": "Service",
+      "id": "591c8031-0cf6-444f-9131-4dfdaf59cda2",
+      "lastModified": "2017-09-10T10:49:52.854-03:00",
+      "name": "Despensa Usuário",
+      "parentId": "ee128242-03b6-4935-80dd-c0b3ea7171f8"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\"id\": 1,\n\"dono\":{\n\"id\": 1,\n\"email\": \"henmerlin@gmail.com\",\n\"senha\": \"e8d95a51f3af4a3b134bf6bb680a213a\",\n\"dataNasc\": 1504901642000\n},\n\"ings\":[\n{\n\"id\": 1,\n\"i\":{\n\"id\": 1,\n\"nome\": \"Pão Forma\",\n\"tipo\": \"SOLIDO\",\n\"foto\": \"imagem\"\n}\n},\n{\n\"id\": 2,\n\"i\":{\n\"id\": 2,\n\"nome\": \"Óleo\",\n\"tipo\": \"LIQUIDO\",\n\"foto\": \"foto\"\n}\n}\n]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/despensa/"
+      },
+      "id": "080c482a-5c4b-45ab-b1c1-7407e60462d0",
+      "lastModified": "2017-10-10T23:17:15.413-03:00",
+      "name": "Atualizar",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "591c8031-0cf6-444f-9131-4dfdaf59cda2"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/despensa/1"
+      },
+      "id": "674b5996-6a7c-4c1e-a47f-bbfde513775a",
+      "lastModified": "2017-09-10T10:57:07.471-03:00",
+      "name": "Consultar",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "591c8031-0cf6-444f-9131-4dfdaf59cda2"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded"
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\"id\": 1,\n\"email\": \"henmerlin@gmail.com\",\n\"senha\": \"e8d95a51f3af4a3b134bf6bb680a213a\",\n\"dataNasc\": 1504901642000\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/despensa/buscarPorUsuario"
+      },
+      "id": "c05b924f-5647-4634-908a-2a348b50d66d",
+      "lastModified": "2017-09-10T11:08:29.070-03:00",
+      "name": "Consultar Por Usuário",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "591c8031-0cf6-444f-9131-4dfdaf59cda2"
+    },
+    {
+      "type": "Service",
+      "id": "be5a1ecb-fa32-4e6f-99f6-3911c1003f96",
+      "lastModified": "2017-09-04T21:10:25.261-03:00",
+      "name": "Ingrediente",
+      "parentId": "ee128242-03b6-4935-80dd-c0b3ea7171f8"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\"nome\": \"Pão\",\n\"tipo\": \"SOLIDO\",\n\"foto\": \"base64\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/ingrediente/"
+      },
+      "id": "0082588f-a8ee-4891-b755-919e73c44662",
+      "lastModified": "2017-09-23T17:57:03.476-03:00",
+      "name": "Cadastrar",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "be5a1ecb-fa32-4e6f-99f6-3911c1003f96"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/ingrediente/1"
+      },
+      "id": "4fd95c51-7049-4b9b-8c11-4e7be9b29cfa",
+      "lastModified": "2017-09-04T21:11:08.664-03:00",
+      "name": "Consultar",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "be5a1ecb-fa32-4e6f-99f6-3911c1003f96"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/ingrediente/list"
+      },
+      "id": "e676466f-59a9-4d09-b138-f40328c1150c",
+      "lastModified": "2017-09-18T20:40:37.358-03:00",
+      "name": "Listar",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "be5a1ecb-fa32-4e6f-99f6-3911c1003f96"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\"p\"}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/ingrediente/listarPorNome"
+      },
+      "id": "a6f0f882-8486-430c-99de-cc6c9c3b91d9",
+      "lastModified": "2017-09-11T21:25:21.493-03:00",
+      "name": "Listar Por Nome",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "be5a1ecb-fa32-4e6f-99f6-3911c1003f96"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": ""
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/ingrediente/5"
+      },
+      "id": "e1a3640f-93e1-47f6-b8d2-4e26a805d861",
+      "lastModified": "2017-10-10T23:18:00.153-03:00",
+      "name": "Remover",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "be5a1ecb-fa32-4e6f-99f6-3911c1003f96"
+    },
+    {
+      "type": "Service",
+      "id": "aa8bb2fe-7dba-46bd-a090-f5af18620284",
+      "lastModified": "2017-09-19T20:15:19.339-03:00",
+      "name": "Unidade de Medida",
+      "parentId": "ee128242-03b6-4935-80dd-c0b3ea7171f8"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/unidadeMedida/list"
+      },
+      "id": "bcedc2b9-92b1-4f50-9b89-2c61c5810b1e",
+      "lastModified": "2017-09-19T20:16:08.384-03:00",
+      "name": "Listar",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "aa8bb2fe-7dba-46bd-a090-f5af18620284"
+    },
+    {
+      "type": "Service",
+      "id": "470fe23b-1ac8-4354-a3bc-acf8d96eff4c",
+      "lastModified": "2017-09-04T20:57:40.552-03:00",
+      "name": "Usuario",
+      "parentId": "ee128242-03b6-4935-80dd-c0b3ea7171f8"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\"email\": \"henmerlin@gmail.com\",\n\"senha\": \"e8d95a51f3af4a3b134bf6bb680a213a\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/usuario/verificarCredencial"
+      },
+      "id": "1e0cd38c-1acc-44a9-9fb7-7d8e1a1b9ec4",
+      "lastModified": "2017-09-04T20:57:46.767-03:00",
+      "name": "Autenticar",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "470fe23b-1ac8-4354-a3bc-acf8d96eff4c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/usuario/1"
+      },
+      "id": "e04553fb-caeb-4c23-b1ad-f8079ff6929f",
+      "lastModified": "2017-09-10T10:28:59.974-03:00",
+      "name": "Consultar",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "470fe23b-1ac8-4354-a3bc-acf8d96eff4c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\"email\": \"henmerlin@gmail.com\"}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/usuario/findByEmail"
+      },
+      "id": "abe99586-05c0-4d19-957b-0187440db9d1",
+      "lastModified": "2017-10-10T16:06:59.650-03:00",
+      "name": "Consultar Por Email",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "470fe23b-1ac8-4354-a3bc-acf8d96eff4c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\"email\": \"henmerlin@gmail.com\",\n\"senha\": \"e8d95a51f3af4a3b134bf6bb680a213a\",\n\"dataNasc\": 1504901642000\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/usuario/add"
+      },
+      "id": "f4a3be9b-8cf0-419f-8efd-013447c4e746",
+      "lastModified": "2017-09-08T17:14:57.823-03:00",
+      "name": "Criar",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "470fe23b-1ac8-4354-a3bc-acf8d96eff4c"
+    },
+    {
+      "type": "Scenario",
+      "id": "4e8d1172-dd8e-42fb-937a-c4cf95949256",
+      "lastModified": "2017-09-23T17:12:09.050-03:00",
+      "name": "Receita",
+      "requestOrder": [
+        "Consultar",
+        "Cadastrar",
+        "Atualizar",
+        "Remover"
+      ],
+      "parentId": "ee128242-03b6-4935-80dd-c0b3ea7171f8"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/receita/28"
+      },
+      "id": "04d97b56-eedd-4efc-8a8c-2f1c4ee8c5b3",
+      "lastModified": "2017-10-12T17:42:59.189-03:00",
+      "name": "Consultar",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "4e8d1172-dd8e-42fb-937a-c4cf95949256"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{  \n   \"nome\":\"nome 2\",\n   \"categoria\":{  \n      \"id\":4,\n      \"nome\":\"Carnes\"\n   },\n   \"descricao\":\"desc\",\n   \"foto\":\"foto\",\n   \"minsPreparo\":0,\n   \"status\":\"POSTADA\",\n   \"ingts\":[  \n      {  \n         \"ingrediente\":{  \n            \"id\":2,\n            \"nome\":\"Leite\",\n            \"tipo\":\"LIQUIDO\",\n            \"foto\":\"leite\"\n         },\n         \"uMedida\":\"XICARA\",\n         \"quant\":1\n      }\t\n   ],\n   \"etapas\":[  \n      {  \n         \"nome\":\"etapa 1\",\n         \"passos\":[  \n            {  \n               \"descricao\":\"passo 1 - etapa 1\",\n               \"dica\":null,\n               \"tipo\":\"NORMAL\",\n               \"minPasso\":null,\n               \"ordem\":1\n            },\n            {  \n               \"descricao\":\"passo 1 - etapa 2\",\n               \"dica\":null,\n               \"tipo\":\"NORMAL\",\n               \"minPasso\":null,\n               \"ordem\":2\n            }\n         ],\n         \"ordem\":1\n      }\n   ],\n   \"criador\":{  \n      \"id\":3,\n      \"email\":\"admin@letscook.com\",\n      \"senha\":\"e77989ed21758e78331b20e477fc5582\",\n      \"dataNasc\":1505781995000\n   }\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/receita/"
+      },
+      "id": "c4773882-468e-4fe0-80ed-4de635e1e923",
+      "lastModified": "2017-09-23T17:58:18.400-03:00",
+      "name": "Cadastrar",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "4e8d1172-dd8e-42fb-937a-c4cf95949256"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{  \n   \"id\":24,\n   \"nome\":\"nome 2 - novo\",\n   \"categoria\":{  \n      \"id\":4,\n      \"nome\":\"Carnes\"\n   },\n   \"descricao\":\"desc\",\n   \"foto\":\"foto\",\n   \"minsPreparo\":0,\n   \"status\":\"POSTADA\",\n   \"ingts\":[  \n      {  \n         \"id\":4,\n         \"ingrediente\":{  \n            \"id\":2,\n            \"nome\":\"Leite\",\n            \"tipo\":\"LIQUIDO\",\n            \"foto\":\"leite\"\n         },\n         \"uMedida\":\"XICARA\",\n         \"quant\":1\n      }\n   ],\n   \"etapas\":[  \n      {  \n         \"id\":16,\n         \"nome\":\"etapa 1\",\n         \"passos\":[  \n            {  \n               \"id\":14,\n               \"descricao\":\"passo 1 - etapa 1\",\n               \"dica\":null,\n               \"tipo\":\"NORMAL\",\n               \"minPasso\":null,\n               \"ordem\":1\n            },\n            {  \n               \"id\":15,\n               \"descricao\":\"passo 1 - etapa 2\",\n               \"dica\":null,\n               \"tipo\":\"NORMAL\",\n               \"minPasso\":null,\n               \"ordem\":2\n            }\n         ],\n         \"ordem\":1\n      }\n   ],\n   \"criador\":{  \n      \"id\":3,\n      \"email\":\"admin@letscook.com\",\n      \"senha\":\"e77989ed21758e78331b20e477fc5582\",\n      \"dataNasc\":1505781995000\n   }\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/receita/"
+      },
+      "id": "ede3d7ae-4f6a-4117-aefe-453387982560",
+      "lastModified": "2017-09-23T17:43:11.184-03:00",
+      "name": "Atualizar",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "4e8d1172-dd8e-42fb-937a-c4cf95949256"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"ip\"}",
+        "path": "/letscookAPI/receita/5"
+      },
+      "id": "5343a247-89c4-4c4f-ac2e-f9330ba14a5c",
+      "lastModified": "2017-09-23T17:28:02.255-03:00",
+      "name": "Remover",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "4e8d1172-dd8e-42fb-937a-c4cf95949256"
+    },
+    {
+      "type": "Context",
+      "id": "dbd1e071-7612-4848-a93f-24ee4b0e06ff",
+      "lastModified": "2017-08-30T15:11:23.865-03:00",
+      "name": "crm",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "ip",
+          "value": "dprcuradm0111:8080"
+        }
+      ]
+    },
+    {
+      "type": "Context",
+      "id": "FE885962-BB5C-4184-B424-F7ADD689953D",
+      "lastModified": "2017-08-16T10:09:08.399-03:00",
+      "name": "dev",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "ip",
+          "value": "localhost:8080"
+        }
+      ]
+    },
+    {
+      "type": "Context",
+      "id": "e85186f3-e013-4ec9-8ec5-d53bdb265623",
+      "lastModified": "2017-10-10T18:42:11.791-03:00",
+      "name": "locaweb",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "ip",
+          "value": "letscookapi.jelasticlw.com.br"
+        }
+      ]
+    },
+    {
+      "type": "Context",
+      "id": "52A6678B-2FA2-429B-92B5-8014A629492F",
+      "lastModified": "2017-08-16T10:09:01.776-03:00",
+      "name": "prod",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "ip",
+          "value": "10.200.35.67:80"
+        }
+      ]
+    },
+    {
+      "type": "Context",
+      "id": "3158FDED-32DA-4E93-9E63-F4F8423A33DB",
+      "lastModified": "2017-08-16T10:09:12.359-03:00",
+      "name": "qa",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "ip",
+          "value": "10.40.195.81:8080"
+        }
+      ]
+    }
+  ]
+}
