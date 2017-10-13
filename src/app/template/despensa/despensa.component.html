@@ -1,6 +1,6 @@
 <div>
     <h3>Despensa</h3>
-    <button class="btn btn-primary btn-block">Adicionar Item na Despensa</button>
+    <!-- <button class="btn btn-primary btn-block">Adicionar Item na Despensa</button> -->
     <div *ngIf="despensa">
         <div class="card-columns">
             <div class="card-size">
@@ -9,8 +9,8 @@
                         <img class="image-resize" [src]="ings.i.foto">
                     </div>
                     <div class="card-block">
-                        <p class="card-text">
-                            {{ings.i.nome}}
+                        <p class="card-text" style="text-align: center;">
+                            <label>{{ings.i.nome}}</label>
                             <!-- {{ings.i.tipo}} -->
                         </p>
                     </div>

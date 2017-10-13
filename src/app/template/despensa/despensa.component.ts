@@ -29,4 +29,11 @@ export class DespensaComponent implements OnInit {
             });
     }
 
+    public removeItemDespensa(ings: any) {
+        const index: number = this.despensa.ings.indexOf(ings);
+        if (index !== -1) {
+            this.despensa.ings.splice(index, 1);
+        }
+    }
+
 }
