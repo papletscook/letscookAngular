@@ -22,5 +22,7 @@ export const MockReceita: Receita = {
     ],
     minsPreparo: 40,
     foto: 'string',
-    criador: null
+    criador: null,
+    avaliacoes: [],
+    comentarios: []
 }

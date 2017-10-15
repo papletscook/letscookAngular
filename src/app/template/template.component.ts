@@ -2,7 +2,7 @@ import { LoginService } from './../service/login.service';
 import { SessionService } from './../service/session.service';
 
 import { PainelDeControleComponent } from './painel-de-controle/painel-de-controle.component';
-import { ComponentInfo } from 'app/viewmodel/template/componentInfo';1
+import { ComponentInfo } from 'app/viewmodel/template/componentInfo'; 1
 import { Router } from '@angular/router';
 import { Component, OnInit, Injectable } from '@angular/core';
 import { TemplateService } from 'app/service/template.service';
@@ -29,7 +29,7 @@ export class TemplateComponent implements OnInit {
         public holderService: HolderService,
         private templateService: TemplateService,
         private session: SessionService,
-        private alert : AlertService
+        private alert: AlertService
     ) { }
 
     ngOnInit(): void {
@@ -54,9 +54,9 @@ export class TemplateComponent implements OnInit {
         }
     }
 
-    public changeCase(str: string): void {        
+    public changeCase(str: string, inputs?: any): void {
         this.desativarMenu();
-        this.useCase = this.templateService.createComp(str)
+        this.templateService.createComp(str, inputs)
     }
 
     public subNavChangeCase(menu: MenuSubnav): void {

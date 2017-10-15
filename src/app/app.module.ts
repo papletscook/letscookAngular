@@ -1,3 +1,4 @@
+import { TemplateService } from './service/template.service';
 import { DespensaComponent } from './template/despensa/despensa.component';
 import { PassoComponent } from './template/menu-receita/preparar-receita/passo/passo.component';
 import { VerReceitaComponent } from './template/menu-receita/ver-receita/ver-receita.component';
@@ -31,6 +32,7 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
 import { LoginService } from 'app/service/login.service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AlertService } from 'app/service/alert.service';
+import {RatingModule} from "ngx-rating";
 
 @NgModule({
     declarations: [
@@ -64,7 +66,8 @@ import { AlertService } from 'app/service/alert.service';
         ClarityModule.forRoot(),
         ToastModule.forRoot(),
         BrowserAnimationsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        RatingModule
     ],
     providers: [
         HolderService,
@@ -73,7 +76,8 @@ import { AlertService } from 'app/service/alert.service';
         HolderService,
         SessionService,
         LoginService,
-        AlertService
+        AlertService,
+        TemplateService
     ],
     bootstrap: [AppComponent],
     entryComponents: [

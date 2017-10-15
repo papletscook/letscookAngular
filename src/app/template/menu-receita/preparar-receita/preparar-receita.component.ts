@@ -1,3 +1,6 @@
+import { AvaliacaoService } from './../../../service/avaliacao.service';
+import { AvaliacaoReceita } from './../../../viewmodel/template/receita/avaliacao';
+import { element } from 'protractor';
 import { Etapa } from './../../../viewmodel/template/receita/etapa';
 import { Passo } from './../../../viewmodel/template/receita/passo';
 import { IngredientePreparo } from './../../../viewmodel/template/receita/ingrediente-preparo';
@@ -28,7 +31,8 @@ import { Observable } from 'rxjs/Observable';
         ReceitaService,
         IngredienteService,
         CategoriaService,
-        MedidaService
+        MedidaService,
+        AvaliacaoService
     ]
 })
 
@@ -54,22 +58,49 @@ export class PrepararReceitaComponent implements OnInit {
     wizard: Wizard;
 
     @Input()
-    open = false;
+    open;
 
-    validationStepTwo: boolean[] = [false, false]
+    validationStepTwo: boolean[] = [];
+
+    private inicioPreparo: Date;
+    private fimPreparo: Date;
+
+    private duracao: any;
+
+    private avaliacao: AvaliacaoReceita = new AvaliacaoReceita();
 
     constructor(
-        private alert: AlertService) { }
+        private alert: AlertService,
+        private session: SessionService,
+        private avaliacaoService: AvaliacaoService) { }
 
     ngOnInit(): void {
     }
 
+    doCancel(): void {
+        console.log('doCancel')
+        this.wizard.close();
+    }
+
+    isDonoReceita(): boolean {
+        return this.receita.criador.email == this.session.consultarUsuario().email
+    }
+
     iniciarPreparo() {
         if (this.validationStepOne()) {
+            this.reiniciarReceita();
+            this.avaliacao.receita = this.receita;
             this.receita.etapas[0].passos[0].checked = true;
             this.wizard.next()
+            this.inicioPreparo = new Date();
         }
 
+    }
+
+    finalizarPreparo() {
+        console.log('finalizarPreparo')
+        this.fimPreparo = new Date();
+        this.duracao = this.secondsToHms(Math.abs(((this.inicioPreparo.getTime() - this.fimPreparo.getTime()) / 1000)))
     }
 
     playCrono(passo: Passo) {
@@ -81,7 +112,6 @@ export class PrepararReceitaComponent implements OnInit {
     pauseCrono() {
         this.timer.unsubscribe();
         this.timer = null;
-        // this.segundos = null;
     }
 
 
@@ -105,8 +135,19 @@ export class PrepararReceitaComponent implements OnInit {
         this.cronometro = this.secondsToHms(this.segundos)
     }
 
+    avaliar() {
+        this.avaliacaoService.cadastrar(this.avaliacao)
+            .then(data => {
+                this.avaliacao = data;
+            }, error => {
+                this.alert.error("Falha ao avaliar Receita!")
+            })
+    }
+
     concluirCase() {
         console.log("concluirCase")
+        this.avaliar()
+        this.wizard.reset();
         this.cancelar();
     }
 
@@ -143,7 +184,18 @@ export class PrepararReceitaComponent implements OnInit {
     }
 
     reiniciarReceita() {
-        let ings = this.receita.ingts;
+        this.validationStepTwo.forEach(element => {
+            element = false;
+        });
+        let etapas = this.receita.etapas;
+        etapas.forEach(element => {
+            element.checked = false;
+            element.done = false;
+            element.passos.forEach(element => {
+                element.checked = false;
+                element.done = false;
+            });
+        });
     }
 
 
@@ -203,10 +255,13 @@ export class PrepararReceitaComponent implements OnInit {
                 this.wizard.next();
                 etapa.done = true;
                 this.validationStepTwo[this.receita.etapas.indexOf(etapa)] = true;
-                let futuroPasso = this.receita.etapas[this.receita.etapas.indexOf(etapa) + 1].passos[0];
-                this.processarPasso(futuroPasso)
+                try {
+                    let futuroPasso = this.receita.etapas[this.receita.etapas.indexOf(etapa) + 1].passos[0];
+                    this.processarPasso(futuroPasso)
+                } catch (error) {
+                    this.finalizarPreparo();
+                }
             } catch (error) {
-
             }
         } finally {
             passo.checked = false;

@@ -1,3 +1,5 @@
+import { TemplateComponent } from 'app/template/template.component';
+import { TemplateService } from 'app/service/template.service';
 import { Receita } from './../../../viewmodel/template/receita/receita';
 import { SessionService } from './../../../service/session.service';
 import { CategoriaService } from 'app/service/categoria.service';
@@ -25,16 +27,19 @@ import * as _ from "lodash";
     selector: 'publicar-receita-component',
     templateUrl: 'publicar-receita.component.html',
     styleUrls: ['publicar-receita.component.css'],
-    providers: [IngredienteService,
+    providers: [
+        IngredienteService,
         CategoriaService,
         IngredienteService,
         MedidaService,
-        ReceitaService,
-        HolderService,],
+        ReceitaService
+    ],
 })
 
 
 export class PublicarReceitaComponent implements OnInit {
+
+    private loading: boolean = false;
 
     cropperSettings: CropperSettings;
 
@@ -62,7 +67,6 @@ export class PublicarReceitaComponent implements OnInit {
     _open = true;
 
     constructor(
-        private holderService: HolderService,
         private receitaService: ReceitaService,
         private ingredientesService: IngredienteService,
         private categoriaService: CategoriaService,
@@ -128,6 +132,7 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     publicarReceita(): void {
+        this.loading = true;
         if (this.img.image) {
             this.receita.foto = this.img.image;
         }
@@ -136,6 +141,7 @@ export class PublicarReceitaComponent implements OnInit {
             this.receitaService.cadastrar(this.receita)
                 .then(data => {
                     this.receita = data;
+                    // this.template.changeCase('VerReceitaComponent', { receita: this.receita })
                 }, error => {
                     this.alert.error("Falha ao publicar Receita!")
                 })
@@ -148,6 +154,7 @@ export class PublicarReceitaComponent implements OnInit {
                     this.alert.error("Falha ao atualizar Receita!")
                 })
         }
+        this.loading = false;
     }
 
 

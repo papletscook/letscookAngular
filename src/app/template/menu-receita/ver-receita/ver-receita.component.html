@@ -5,7 +5,6 @@
         </span>
     </div>
 </div>
-
 <div class="row" *ngIf="!loading">
     <div class="col-xs-12 col-sm-4">
         <div class="card">
@@ -50,10 +49,20 @@
                 <h4 class="card-title">Criador</h4>
                 <p class="card-text">{{receita.criador.email}}</p>
             </div>
-            <div class="card-footer">
-                <a href="..." class="card-link">Ver Perfil</a>
+            <div class="card-footer" *ngIf="isDonoReceita()">
+                <a class="btn btn-sm btn-link" (click)="editarReceita()">Editar Receita</a>
+            </div>
+            <div class="card-footer" *ngIf="!isDonoReceita()">
+                <a class="btn btn-sm btn-link">Ver Perfil</a>
             </div>
         </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Tempo de Preparo</h4>
+                <p class="card-text">{{receita.minsPreparo}}</p>
+            </div>
+        </div>
+
         <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Ingredientes</h4>
@@ -64,4 +73,5 @@
         </div>
     </div>
 </div>
-<preparar-receita-component [open]="preparar" [receita]="receita" [medidas]="medidas"></preparar-receita-component>
+<preparar-receita-component [receita]="receita" [medidas]="medidas"></preparar-receita-component>
+<publicar-receita-component *ngIf="editedReceita" [receita]="editedReceita"></publicar-receita-component>
