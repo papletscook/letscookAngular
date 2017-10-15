@@ -105,8 +105,8 @@ export class PublicarReceitaComponent implements OnInit {
         this.ingredienteCad = new IngredienteReceita();
         this.carregarCampos()
         // const r = new Receita();
-        const r = MockReceita;
-        this.receita = r;
+        // // const r = MockReceita;
+        // this.receita = r;
     }
 
     contaPalavras(str: string): number {

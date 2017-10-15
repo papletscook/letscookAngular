@@ -32,7 +32,8 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
 import { LoginService } from 'app/service/login.service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AlertService } from 'app/service/alert.service';
-import {RatingModule} from "ngx-rating";
+import { RatingModule } from "ngx-rating";
+import { Ng2CompleterModule } from "ng2-completer";
 
 @NgModule({
     declarations: [
@@ -67,7 +68,8 @@ import {RatingModule} from "ngx-rating";
         ToastModule.forRoot(),
         BrowserAnimationsModule,
         AppRoutingModule,
-        RatingModule
+        RatingModule,
+        Ng2CompleterModule
     ],
     providers: [
         HolderService,

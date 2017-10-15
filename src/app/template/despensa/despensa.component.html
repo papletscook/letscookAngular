@@ -1,5 +1,38 @@
-<div>
+<div class="row" *ngIf="loading">
+    <div class="col-xs text-center">
+        <span class="spinner">
+            Loading...
+        </span>
+    </div>
+</div>
+<div *ngIf="!loading">
+
     <h3>Despensa</h3>
+    <div class="row">
+        <p class="col-md-12">
+            Através da despensa você poderá adicionar ingredientes para realizar a busca das receitas:
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Adicionar Ingrediente</h4>
+                    <div class="card-text">
+                        <div class="form-group">
+                            <label for="ingrediente">Nome: </label>
+                            <ng2-completer id="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!" placeholder="Nome do Ingrediente..."
+                                [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-link" (click)="adicionarIngrediente()">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- <button class="btn btn-primary btn-block">Adicionar Item na Despensa</button> -->
     <div *ngIf="despensa">
         <div class="card-columns">
@@ -11,7 +44,7 @@
                         </div>
                     </div>
                     <div class="card-block">
-                        <p class="card-text" style="text-align: center;">
+                        <p class="card-text">
                             <label>{{ings.ingrediente.nome}}</label>
                             <!-- {{ings.ingrediente.tipo}} -->
                         </p>

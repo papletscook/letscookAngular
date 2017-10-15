@@ -5,7 +5,7 @@ export class Despensa {
     dono: UserFull;
     ings: [
         {
-            id: number;
+            id?: number;
             ingrediente: Ingrediente;
         }
     ]
