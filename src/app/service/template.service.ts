@@ -38,6 +38,11 @@ export class TemplateService {
         component: VerReceitaComponent,
         inputs: [
         ]
+    }, {
+        nome: 'DespensaComponent',
+        component: DespensaComponent,
+        inputs: [
+        ]
     }]
 
     public createIndexComponent() {

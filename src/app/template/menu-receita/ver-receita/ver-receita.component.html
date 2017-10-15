@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row" *ngIf="!loading">
-    <div class="col-xs-12 col-sm-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-img">
                 <img [src]="receita.foto">
@@ -26,10 +26,10 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-4">
-        <div class="card">
+    <div class="col-md-5 col-sm-12 col-xs-6">
+        <div class="card col-sm-12 col-xs-12">
             <div class="card-block">
-                <h4 class="card-title">Resumo: Modo de Preparo</h4>
+                <h4 class="card-title">Resumo do Modo de Preparo</h4>
             </div>
             <div class="card-block">
                 <ol class="list">
@@ -42,9 +42,17 @@
                 </ol>
             </div>
         </div>
-    </div>
-    <div class="col-xs-6 col-sm-4">
         <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Ingredientes</h4>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let ingt of receita.ingts">{{ingt.quant}} {{detailMedida(ingt.uMedida).desc}} de {{ingt.ingrediente.nome}}.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12 card">
             <div class="card-block">
                 <h4 class="card-title">Criador</h4>
                 <p class="card-text">{{receita.criador.email}}</p>
@@ -56,20 +64,11 @@
                 <a class="btn btn-sm btn-link">Ver Perfil</a>
             </div>
         </div>
-        <div class="card">
+        <div class="col-md-6 col-sm-12 col-xs-12 card">
             <div class="card-block">
                 <h4 class="card-title">Tempo de Preparo</h4>
-                <p class="card-text">{{receita.minsPreparo}}</p>
+                <p class="card-text">{{receita.minsPreparo}} minutos.</p>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">Ingredientes</h4>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngFor="let ingt of receita.ingts">{{ingt.quant}} {{detailMedida(ingt.uMedida).desc}} de {{ingt.ingrediente.nome}}.</li>
-            </ul>
         </div>
     </div>
 </div>
