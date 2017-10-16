@@ -1,2 +1,74 @@
-<h3>Painel de Controle</h3>
-<p>Aqui você pode alterar qualquer assunto a respeito do seu cadastro e receitas...</p>
+<div>
+    <h3>Painel de Controle</h3>
+
+
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    Nome da Pessoa....
+                </div>
+                <div class="card-img">
+                    <img-cropper [image]="img" [settings]="cropperSettings"></img-cropper>
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title">Meu Perfil</h4>
+                    <p class="card-text">
+                        <label>Sobre você: </label>
+                        <textarea name="" id="" cols="30" rows="5"></textarea>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary btn-block">Atualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    Cadastro
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title"></h4>
+                    <section class="form-block">
+                        <label>Nome: </label>
+                        <div class="form-group">
+                            <input type="text" placeholder="Nome">
+                        </div>
+                        <label>Email: </label>
+                        <div class="form-group">
+                            <input type="text" placeholder="Email">
+                        </div>
+                    </section>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary btn-block">Atualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    Senha
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title"></h4>
+                    <section class="form-block">
+                        <label>Senha: </label>
+                        <div class="form-group">
+                            <input type="text" placeholder="Senha">
+                        </div>
+
+                        <label>Repetir Senha: </label>
+                        <div class="form-group">
+                            <input type="text" placeholder="Senha">
+                        </div>
+                    </section>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary btn-block">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
