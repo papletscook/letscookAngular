@@ -1,3 +1,4 @@
+import { AlertService } from './../../service/alert.service';
 import { PainelDeControleService } from './painel-de-controle.service';
 import { UserFull } from './../../viewmodel/template/login/userFull';
 import { Component, OnInit } from '@angular/core';
@@ -25,7 +26,12 @@ export class PainelDeControleComponent implements OnInit {
 
     private base64Image: string = "";
 
-    constructor(private painelDeControleService: PainelDeControleService) {
+    private modificandoUsuario: boolean = false;
+    private btnNameModificandoUsuario: string = "Atualizar";
+
+    constructor(
+        private painelDeControleService: PainelDeControleService,
+        public alertService: AlertService) {
     }
 
     public ngOnInit() {
@@ -40,7 +46,9 @@ export class PainelDeControleComponent implements OnInit {
 
 
     public modificaUsuario() {
-        console.log(this.userFull);
+
+        this.modificandoUsuario = true;
+        this.btnNameModificandoUsuario = "Aguarde...";
         // Ve se password foi modificado....
         if (this.passwordChangeOld || this.passwordChangeOne || this.passwordChangeTwo) {
             this.veSePasswordConfere();
@@ -49,9 +57,14 @@ export class PainelDeControleComponent implements OnInit {
             .modificaUsuario(this.userFull)
             .then(data => {
                 this.userFull = data;
+                this.modificandoUsuario = false;
+                this.btnNameModificandoUsuario = "Atualizar";
+                this.alertService.info("Dados Atualizados com sucesso...");
             }, error => {
-                console.log("Erro ao modificar...");
-            })
+                this.alertService.error(error.message)
+                this.modificandoUsuario = false;
+                this.btnNameModificandoUsuario = "Atualizar";
+            });
     }
 
     private imageToBase64(evt) {
@@ -72,17 +85,16 @@ export class PainelDeControleComponent implements OnInit {
 
     private veSePasswordConfere() {
         if (Md5.hashAsciiStr(this.passwordChangeOld).toString() === this.userFull.senha) {
-            console.log("Senha antiga Ok.");
             if (this.passwordChangeOne === this.passwordChangeTwo) {
-                console.log("Modificar Password.");
+                this.userFull.senha = Md5.hashAsciiStr(this.passwordChangeOld).toString();
             } else {
-                console.log("Senhas digitadas não conferem.");
+                this.alertService.error("Senhas digitadas não conferem.");
                 this.passwordChangeOne = "";
                 this.passwordChangeTwo = "";
                 this.passwordChangeNPreenchido = true;
             }
         } else {
-            console.log("Senha antiga não confere.");
+            this.alertService.error("Senha antiga não confere.");
             this.passwordChangeOld = "";
             this.passwordChangeNPreenchido = true;
         }

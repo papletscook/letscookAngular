@@ -16,8 +16,10 @@ export class AlertService {
     }
 
     public info(str: string): void {
+        console.log(str);
+        
         this.msg = str;
-        this.clrAlertType = '';
+        this.clrAlertType = 'alert-info';
         this.doAction();
     }
 

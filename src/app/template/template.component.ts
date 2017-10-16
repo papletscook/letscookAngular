@@ -28,7 +28,7 @@ export class TemplateComponent implements OnInit {
         public holderService: HolderService,
         private templateService: TemplateService,
         private session: SessionService,
-        private alert: AlertService
+        public alert: AlertService
     ) { }
 
     ngOnInit(): void {

@@ -1,3 +1,4 @@
+import { AlertService } from './service/alert.service';
 import { LoginService } from './template/login/login.service';
 import { TemplateService } from './service/template.service';
 import { DespensaComponent } from './template/despensa/despensa.component';
@@ -31,7 +32,6 @@ import { DynamicComponent } from 'app/template/dynamic-component/dynamic.compone
 import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita/resumo-receita.component';
 import { ImageCropperComponent } from 'ng2-img-cropper';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
-import { AlertService } from 'app/service/alert.service';
 import { RatingModule } from "ngx-rating";
 import { Ng2CompleterModule } from "ng2-completer";
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';

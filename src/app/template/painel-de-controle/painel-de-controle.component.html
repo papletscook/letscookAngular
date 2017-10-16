@@ -6,7 +6,7 @@
                 <div class="card-header">
                     {{userFull.nome}}
                 </div>
-                <div class="card-img">                    
+                <div class="card-img">
                     <img [src]="userFull.imagem" class="image-style">
                     <br>
                     <input type="file" (change)="imageToBase64($event)">
@@ -19,7 +19,7 @@
                     </p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()">Atualizar</button>
+                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()" [disabled]="modificandoUsuario">{{btnNameModificandoUsuario}}</button>
                 </div>
             </div>
         </div>
@@ -42,12 +42,11 @@
                         <label>Data de Nascimento:</label>
                         <div class="form-group">
                             <label>{{((dataNascimento / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY'}}</label>
-                            <!-- <input type="text" placeholder="Data de Nascimento" > -->
                         </div>
                     </section>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()">Atualizar</button>
+                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()" [disabled]="modificandoUsuario">{{btnNameModificandoUsuario}}</button>
                 </div>
             </div>
         </div>
@@ -89,7 +88,7 @@
                     </section>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()">Atualizar</button>
+                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()" [disabled]="modificandoUsuario">{{btnNameModificandoUsuario}}</button>
                 </div>
             </div>
         </div>
