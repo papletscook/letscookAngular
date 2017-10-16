@@ -34,6 +34,8 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AlertService } from 'app/service/alert.service';
 import { RatingModule } from "ngx-rating";
 import { Ng2CompleterModule } from "ng2-completer";
+import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
+import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 import { MomentModule } from 'angular2-moment';
 
 @NgModule({
@@ -57,7 +59,8 @@ import { MomentModule } from 'angular2-moment';
         ImageCropperComponent,
         VerReceitaComponent,
         PassoComponent,
-        DespensaComponent
+        DespensaComponent,
+        CadastrarIngredienteComponent
     ],
     imports: [
         BrowserModule,
@@ -81,7 +84,8 @@ import { MomentModule } from 'angular2-moment';
         SessionService,
         LoginService,
         AlertService,
-        TemplateService
+        TemplateService,
+        AlertIconAndTypesService
     ],
     bootstrap: [AppComponent],
     entryComponents: [
@@ -92,7 +96,8 @@ import { MomentModule } from 'angular2-moment';
         PainelDeControleComponent,
         PrepararReceitaComponent,
         VerReceitaComponent,
-        DespensaComponent
+        DespensaComponent,
+        CadastrarIngredienteComponent
     ]
 })
 

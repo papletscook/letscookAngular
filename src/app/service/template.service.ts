@@ -6,6 +6,7 @@ import { PainelDeControleComponent } from 'app/template/painel-de-controle/paine
 import { MenuSubnav } from 'app/viewmodel/template/menu-subnav/menu-subnav';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
 import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-receita.component';
+import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
 
 
 @Injectable()
@@ -41,6 +42,12 @@ export class TemplateService {
     }, {
         nome: 'DespensaComponent',
         component: DespensaComponent,
+        inputs: [
+        ]
+    },
+    {
+        nome: 'CadastrarIngredienteComponent',
+        component: CadastrarIngredienteComponent,
         inputs: [
         ]
     }]

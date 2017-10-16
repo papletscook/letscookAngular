@@ -11,6 +11,13 @@ export class AlertService {
 
     public error(str: string): void {
         this.msg = str;
+        this.clrAlertType = 'alert-danger';
+        this.doAction();
+    }
+
+    public info(str: string): void {
+        this.msg = str;
+        this.clrAlertType = '';
         this.doAction();
     }
 

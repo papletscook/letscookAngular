@@ -15,7 +15,7 @@ import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
 import { Receita } from 'app/viewmodel/template/receita/receita';
 import { Medida } from 'app/viewmodel/template/receita/medida';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
-import { IngredienteReceita } from 'app/viewmodel/template/receita/ingredienteReceita';
+import { IngredienteReceita } from 'app/viewmodel/template/receita/ingrediente-receita';
 import { Categoria } from 'app/viewmodel/template/receita/categoria';
 import { Wizard } from 'clarity-angular';
 import { SessionService } from 'app/service/session.service';
@@ -75,6 +75,7 @@ export class PrepararReceitaComponent implements OnInit {
         private avaliacaoService: AvaliacaoService) { }
 
     ngOnInit(): void {
+        Notification.requestPermission();
     }
 
     doCancel(): void {

@@ -22,6 +22,7 @@ export class DespensaComponent implements OnInit {
     private ingredientes: Ingrediente[];
     private despensa: Despensa;
     private loading: boolean = true;
+    private loadingBusca: boolean = false;
 
     protected searchStr: string;
     protected dataService: any;
@@ -45,17 +46,21 @@ export class DespensaComponent implements OnInit {
         private ingredienteService: IngredienteService,
         private alert: AlertService
     ) {
+
+    }
+
+    public buscarIngredientes() {
         this.ingredienteService.list().then(data => {
             this.ingredientes = data;
-            this.dataService = completerService.local(data, 'nome', 'nome');
-            this.loading = false;
-        }, error => {
+            this.dataService = this.completerService.local(data, 'nome', 'nome');
+        }), error => {
             this.loading = false;
         });
     }
 
     public ngOnInit() {
         this.buscarPorUsuario();
+        this.buscarIngredientes();
     }
 
     public adicionarIngrediente() {
@@ -66,6 +71,7 @@ export class DespensaComponent implements OnInit {
                 if (!this.existeIngredienteDespensa(element)) {
                     this.despensa.ings.push({ ingrediente: element })
                     this.atualizarDespensa();
+                    this.buscarReceitasCompatives();
                     this.searchStr = null;
                 }
             }
@@ -78,7 +84,8 @@ export class DespensaComponent implements OnInit {
 
     public limparDespensa() {
         this.despensa.ings = [];
-
+        this.atualizarDespensa();
+        this.scores = [];
     }
 
     protected existeIngredienteDespensa(param: any): boolean {
@@ -96,8 +103,8 @@ export class DespensaComponent implements OnInit {
             ingredientes.push(ing.ingrediente)
         }
         this.despensaService.buscarPorIngredientes(ingredientes).then(data => {
-            this.scores = data;
-            console.log(this.scores)
+            this.scores = _.orderBy(data, ['score'], ['desc']);
+            this.loading = false;
         }, error => {
             this.alert.error("Falha ao buscar Despensa!")
         });
@@ -107,6 +114,7 @@ export class DespensaComponent implements OnInit {
         this.despensaService.buscarPorUsuario()
             .then(data => {
                 this.despensa = data;
+                this.buscarReceitasCompatives()
             }, error => {
                 this.alert.error("Falha ao buscar Despensa!")
             });

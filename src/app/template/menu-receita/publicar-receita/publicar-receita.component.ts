@@ -15,7 +15,7 @@ import { Etapa } from 'app/viewmodel/template/receita/etapa';
 import { Passo } from 'app/viewmodel/template/receita/passo';
 import { Categoria } from 'app/viewmodel/template/receita/categoria';
 import { Medida } from 'app/viewmodel/template/receita/medida';
-import { IngredienteReceita } from 'app/viewmodel/template/receita/ingredienteReceita';
+import { IngredienteReceita } from 'app/viewmodel/template/receita/ingrediente-receita';
 import { Alert } from 'app/viewmodel/template/alert';
 
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
@@ -280,7 +280,7 @@ export class PublicarReceitaComponent implements OnInit {
     public getIngredientes() {
         this.ingredientesService.list()
             .then(data => {
-                this.allIngredientes = _.orderBy(data, ['nome'], ['asc']);;
+                this.allIngredientes = _.orderBy(data, ['nome'], ['asc']);
             }, error => {
 
             });
@@ -307,7 +307,7 @@ export class PublicarReceitaComponent implements OnInit {
         if (!this.categorias) {
             this.categoriaService.list()
                 .then(data => {
-                    this.categorias = _.orderBy(data, ['nome'], ['asc']);;
+                    this.categorias = _.orderBy(data, ['nome'], ['asc']);
                 }, error => {
                 })
         }
