@@ -49,7 +49,9 @@ export class DespensaComponent implements OnInit {
             this.ingredientes = data;
             this.dataService = completerService.local(data, 'nome', 'nome');
             this.loading = false;
-        })
+        }, error => {
+            this.loading = false;
+        });
     }
 
     public ngOnInit() {
