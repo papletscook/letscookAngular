@@ -1,5 +1,6 @@
-import { UrlServiceService } from './url.service';
-import { InfoRequest } from './../viewmodel/url-service/info-request';
+import { UrlServiceService } from 'app/service/url.service';
+import { InfoRequest } from './../../viewmodel/url-service/info-request';
+
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Usuario } from 'app/viewmodel/template/login/usuario';
@@ -31,7 +32,7 @@ export class LoginService {
     public consultar(usuario: Usuario): Promise<Usuario> {
         this.infoRequest = {
             rqst: 'post', command: this.urlServiceService.pathLetsCook + 'usuario/findByEmail', timeout: 6000,
-            _data: {email: usuario.email}
+            _data: { email: usuario.email }
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

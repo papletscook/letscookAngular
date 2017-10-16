@@ -1,3 +1,4 @@
+import { LoginService } from './template/login/login.service';
 import { TemplateService } from './service/template.service';
 import { DespensaComponent } from './template/despensa/despensa.component';
 import { PassoComponent } from './template/menu-receita/preparar-receita/passo/passo.component';
@@ -29,7 +30,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DynamicComponent } from 'app/template/dynamic-component/dynamic.component';
 import { ResumoReceitaComponent } from 'app/template/menu-receita/resumo-receita/resumo-receita.component';
 import { ImageCropperComponent } from 'ng2-img-cropper';
-import { LoginService } from 'app/service/login.service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AlertService } from 'app/service/alert.service';
 import { RatingModule } from "ngx-rating";

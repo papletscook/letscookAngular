@@ -8,8 +8,8 @@ import 'rxjs/Rx';
 export class UrlServiceService {
 
     // IPs
-    private urlIp = 'http://localhost:8080/'; // Localhost
-    // private urlIp = 'http://letscookapi.jelasticlw.com.br/'; // Prod
+    // private urlIp = 'http://localhost:8080/'; // Localhost
+    private urlIp = 'http://letscookapi.jelasticlw.com.br/'; // Prod
 
 
 

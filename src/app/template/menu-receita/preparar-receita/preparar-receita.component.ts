@@ -1,4 +1,4 @@
-import { AvaliacaoService } from './../../../service/avaliacao.service';
+import { AvaliacaoService } from './avaliacao.service';
 import { AvaliacaoReceita } from './../../../viewmodel/template/receita/avaliacao';
 import { element } from 'protractor';
 import { Etapa } from './../../../viewmodel/template/receita/etapa';

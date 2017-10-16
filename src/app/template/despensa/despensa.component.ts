@@ -1,9 +1,9 @@
+import { DespensaService } from './despensa.service';
 import { ScoreReceita } from 'app/viewmodel/template/despensa/score-receita';
 import { AlertService } from './../../service/alert.service';
 import { element } from 'protractor';
 import { IngredienteService } from 'app/service/ingrediente.service';
 import { Despensa } from './../../viewmodel/template/despensa/despensa';
-import { DespensaService } from './../../service/despensa.service';
 import { Component, OnInit } from '@angular/core';
 import { CompleterService, CompleterData } from 'ng2-completer';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
