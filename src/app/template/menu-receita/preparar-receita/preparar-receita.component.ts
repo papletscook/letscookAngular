@@ -75,6 +75,7 @@ export class PrepararReceitaComponent implements OnInit {
         private avaliacaoService: AvaliacaoService) { }
 
     ngOnInit(): void {
+        Notification.requestPermission();
     }
 
     doCancel(): void {

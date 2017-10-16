@@ -35,6 +35,7 @@ import { AlertService } from 'app/service/alert.service';
 import { RatingModule } from "ngx-rating";
 import { Ng2CompleterModule } from "ng2-completer";
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
+import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastra
         SessionService,
         LoginService,
         AlertService,
-        TemplateService
+        TemplateService,
+        AlertIconAndTypesService
     ],
     bootstrap: [AppComponent],
     entryComponents: [
