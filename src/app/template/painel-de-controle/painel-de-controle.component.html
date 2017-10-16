@@ -1,2 +1,95 @@
-<h3>Painel de Controle</h3>
-<p>Aqui você pode alterar qualquer assunto a respeito do seu cadastro e receitas...</p>
+<div>
+    <h3 class="header-margin-top">Painel de Controle</h3>
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    {{userFull.nome}}
+                </div>
+                <div class="card-img">
+                    <img-cropper [image]="img" [settings]="cropperSettings"></img-cropper>
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title">Meu Perfil</h4>
+                    <p class="card-text">
+                        <label>Sobre você: </label>
+                        <textarea cols="30" rows="5" style="max-height: 200px;" [(ngModel)]="userFull.descricao"></textarea>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()">Atualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    Cadastro
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title"></h4>
+                    <section class="form-block">
+                        <label>Nome: </label>
+                        <div class="form-group">
+                            <input type="text" placeholder="Nome" [(ngModel)]="userFull.nome">
+                        </div>
+                        <label>Email: </label>
+                        <div class="form-group">
+                            <input type="text" placeholder="Email" [(ngModel)]="userFull.email">
+                        </div>
+                        <label>Data de Nascimento:</label>
+                        <div class="form-group">
+                            <label>{{((dataNascimento / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY'}}</label>
+                            <!-- <input type="text" placeholder="Data de Nascimento" > -->
+                        </div>
+                    </section>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()">Atualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    Senha
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title"></h4>
+                    <section class="form-block">
+                        <label>Senha Atual:</label>
+                        <div class="form-group">
+                            <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left" [class.invalid]="passwordChangeNPreenchido">
+                                <input type="password" placeholder="Senha Atual" name="passwordChangeOld" [(ngModel)]="passwordChangeOld">
+                                <span class="tooltip-content">
+                                    Por favor preencha o campo.
+                                </span>
+                            </label>
+                        </div>
+                        <label>Senha Nova:</label>
+                        <div class="form-group">
+                            <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left" [class.invalid]="passwordChangeNPreenchido">
+                                <input type="password" placeholder="Senha Nova" name="passwordChangeOne" [(ngModel)]="passwordChangeOne">
+                                <span class="tooltip-content">
+                                    Por favor preencha o campo.
+                                </span>
+                            </label>
+                        </div>
+                        <label>Repita a Senha Nova:</label>
+                        <div class="form-group">
+                            <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left" [class.invalid]="passwordChangeNPreenchido">
+                                <input type="password" placeholder="Repita a Senha Nova" name="passwordChangeTwo" [(ngModel)]="passwordChangeTwo">
+                                <span class="tooltip-content">
+                                    Por favor preencha o campo.
+                                </span>
+                            </label>
+                        </div>
+                    </section>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary btn-block" (click)="modificaUsuario()">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

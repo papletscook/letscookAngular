@@ -1,5 +1,5 @@
+import { Despensa } from './../../viewmodel/template/despensa/despensa';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
-import { Despensa } from './../viewmodel/template/despensa/despensa';
 import { GenericService } from 'app/service/generic.service';
 import { UrlServiceService } from 'app/service/url.service';
 import { InfoRequest } from 'app/viewmodel/url-service/info-request';

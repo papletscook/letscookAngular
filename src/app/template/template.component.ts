@@ -1,4 +1,3 @@
-import { LoginService } from './../service/login.service';
 import { SessionService } from './../service/session.service';
 
 import { PainelDeControleComponent } from './painel-de-controle/painel-de-controle.component';

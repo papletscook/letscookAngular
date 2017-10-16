@@ -1,6 +1,9 @@
 export class UserFull {
     id: number;
+    nome: string;
+    imagem: string;
     email: string;
-    senha: string;
     dataNasc: number;
+    senha: string;
+    descricao: string;
 }

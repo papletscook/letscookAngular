@@ -1,5 +1,5 @@
-import { AvaliacaoReceita } from './../viewmodel/template/receita/avaliacao';
-import { SessionService } from './session.service';
+import { SessionService } from 'app/service/session.service';
+import { AvaliacaoReceita } from './../../../viewmodel/template/receita/avaliacao';
 
 import { Injectable } from '@angular/core';
 import { GenericService } from 'app/service/generic.service';

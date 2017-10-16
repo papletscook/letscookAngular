@@ -1,7 +1,7 @@
+import { LoginService } from './login.service';
 import { SessionService } from './../../service/session.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'app/service/login.service';
 import { HolderService } from 'app/service/holder.service';
 import { Usuario } from 'app/viewmodel/template/login/usuario';
 
