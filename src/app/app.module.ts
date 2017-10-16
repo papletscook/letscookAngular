@@ -34,6 +34,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AlertService } from 'app/service/alert.service';
 import { RatingModule } from "ngx-rating";
 import { Ng2CompleterModule } from "ng2-completer";
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
     declarations: [
@@ -69,7 +70,8 @@ import { Ng2CompleterModule } from "ng2-completer";
         BrowserAnimationsModule,
         AppRoutingModule,
         RatingModule,
-        Ng2CompleterModule
+        Ng2CompleterModule,
+        MomentModule
     ],
     providers: [
         HolderService,

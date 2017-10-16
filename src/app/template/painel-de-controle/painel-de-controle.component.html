@@ -1,12 +1,10 @@
 <div>
     <h3>Painel de Controle</h3>
-
-
     <div class="row">
         <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="card-header">
-                    Nome da Pessoa....
+                    {{userFull.nome}}
                 </div>
                 <div class="card-img">
                     <img-cropper [image]="img" [settings]="cropperSettings"></img-cropper>
@@ -33,11 +31,16 @@
                     <section class="form-block">
                         <label>Nome: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="Nome">
+                            <input type="text" placeholder="Nome" [(ngModel)]="userFull.nome">
                         </div>
                         <label>Email: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="Email">
+                            <input type="text" placeholder="Email" [(ngModel)]="userFull.email">
+                        </div>
+                        <label>Data de Nascimento:</label>
+                        <div class="form-group">
+                            <label>{{((dataNascimento / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY'}}</label>
+                            <!-- <input type="text" placeholder="Data de Nascimento" > -->
                         </div>
                     </section>
                 </div>
@@ -54,14 +57,17 @@
                 <div class="card-block">
                     <h4 class="card-title"></h4>
                     <section class="form-block">
-                        <label>Senha: </label>
+                        <label>Senha Antiga: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="Senha">
+                            <input type="password" placeholder="Senha Antiga" [(ngModel)]="passwordChangeOld">
                         </div>
-
-                        <label>Repetir Senha: </label>
+                        <label>Nova Senha: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="Senha">
+                            <input type="password" placeholder="Senha" [(ngModel)]="passwordChangeOne">
+                        </div>
+                        <label>Repetir Nova Senha: </label>
+                        <div class="form-group">
+                            <input type="password" placeholder="Repetir a senha" [(ngModel)]="passwordChangeTwo">
                         </div>
                     </section>
                 </div>

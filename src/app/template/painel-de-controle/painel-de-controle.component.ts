@@ -1,3 +1,4 @@
+import { UserFull } from './../../viewmodel/template/login/userFull';
 import { Component, OnInit } from '@angular/core';
 
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
@@ -10,14 +11,23 @@ import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 export class PainelDeControleComponent implements OnInit {
 
     public cropperSettings: CropperSettings;
-
     public img: any;
+
+    public userFull: UserFull;
+
+    public passwordChangeOld: string;
+    public passwordChangeOne: string;
+    public passwordChangeTwo: string;
+
+    public dataNascimento: string;
 
     constructor() {
         this.preparaCropper()
     }
 
-    ngOnInit() { }
+    public ngOnInit() {
+        this.getUserInfos();
+    }
 
     preparaCropper() {
         this.img = {}
@@ -29,4 +39,11 @@ export class PainelDeControleComponent implements OnInit {
         this.cropperSettings.canvasWidth = 350;
         this.cropperSettings.canvasHeight = 200;
     }
+
+    public getUserInfos() {
+        let sessionObj = JSON.parse(sessionStorage.getItem("user"));
+        this.userFull = sessionObj;
+        this.dataNascimento = this.userFull.dataNasc.toString();
+    }
+
 }
