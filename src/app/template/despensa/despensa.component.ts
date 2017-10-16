@@ -1,3 +1,4 @@
+import { ScoreReceita } from 'app/viewmodel/template/despensa/score-receita';
 import { AlertService } from './../../service/alert.service';
 import { element } from 'protractor';
 import { IngredienteService } from 'app/service/ingrediente.service';
@@ -17,6 +18,7 @@ import * as _ from "lodash";
 })
 
 export class DespensaComponent implements OnInit {
+    private scores: ScoreReceita[];
     private ingredientes: Ingrediente[];
     private despensa: Despensa;
     private loading: boolean = true;
@@ -32,6 +34,8 @@ export class DespensaComponent implements OnInit {
         { color: 'yellow', value: '#ff0' },
         { color: 'black', value: '#000' }
     ];
+
+    private modalAdd: boolean = false;
 
     private ingredienteAdd: any;
 
@@ -54,21 +58,47 @@ export class DespensaComponent implements OnInit {
 
     public adicionarIngrediente() {
         console.log('adicionarIngrediente')
+        this.modalAdd = false;
         this.ingredientes.forEach(element => {
             if (element.nome == this.searchStr) {
-                this.despensa.ings.push({ ingrediente: element })
-                this.atualizarDespensa();
+                if (!this.existeIngredienteDespensa(element)) {
+                    this.despensa.ings.push({ ingrediente: element })
+                    this.atualizarDespensa();
+                    this.searchStr = null;
+                }
             }
         });
     }
 
-    protected existeIngrediente(param: any, array: Array<any>): boolean {
-        for (let element of array) {
-            if (element.id == param.id) {
+    public abrirModalAddIngrediente() {
+        this.modalAdd = true;
+    }
+
+    public limparDespensa() {
+        this.despensa.ings = [];
+
+    }
+
+    protected existeIngredienteDespensa(param: any): boolean {
+        for (let element of this.despensa.ings) {
+            if (element.ingrediente.id == param.id) {
                 return true;
             }
         }
         return false;
+    }
+
+    public buscarReceitasCompatives() {
+        let ingredientes: Ingrediente[] = [];
+        for (let ing of this.despensa.ings) {
+            ingredientes.push(ing.ingrediente)
+        }
+        this.despensaService.buscarPorIngredientes(ingredientes).then(data => {
+            this.scores = data;
+            console.log(this.scores)
+        }, error => {
+            this.alert.error("Falha ao buscar Despensa!")
+        });
     }
 
     public buscarPorUsuario() {

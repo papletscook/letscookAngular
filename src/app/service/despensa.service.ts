@@ -1,8 +1,10 @@
+import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
 import { Despensa } from './../viewmodel/template/despensa/despensa';
 import { GenericService } from 'app/service/generic.service';
 import { UrlServiceService } from 'app/service/url.service';
 import { InfoRequest } from 'app/viewmodel/url-service/info-request';
 import { Injectable } from '@angular/core';
+import { ScoreReceita } from 'app/viewmodel/template/despensa/score-receita';
 
 @Injectable()
 export class DespensaService extends GenericService {
@@ -22,6 +24,18 @@ export class DespensaService extends GenericService {
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as Despensa
+            })
+            .catch(this.handleError);
+    }
+
+    public buscarPorIngredientes(ingts: Ingrediente[]) {
+        let data = ingts;
+        this.infoRequest = {
+            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'despensa/buscarPorIngredientes', timeout: 6000, _data: data
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as ScoreReceita[]
             })
             .catch(this.handleError);
     }

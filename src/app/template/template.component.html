@@ -49,13 +49,12 @@
             <subnav [menu]="menu" (click)="changeCase(menu.component);" *ngFor="let menu of menus"></subnav>
         </ul>
     </nav>
-    <div class="content-container">
-        <div class="content-area">
-            <dynamic-component [componentData]="templateService.component"></dynamic-component>
-            <login-component></login-component>
-        </div>
-        <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">
-            <sidenav-component></sidenav-component>
-        </clr-vertical-nav>
-    </div>
+
+    <dynamic-component [componentData]="templateService.component"></dynamic-component>
+    <login-component></login-component>
+
+    <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">
+        <sidenav-component></sidenav-component>
+    </clr-vertical-nav>
+    
 </clr-main-container>

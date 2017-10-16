@@ -9,3 +9,12 @@
     max-width: 200px;
     max-height: 150px;
 }
+
+.completer-dropdown{
+    z-index: 1000;
+}
+
+.modal-body {
+    z-index: 1000;  
+    height: 100px;
+}

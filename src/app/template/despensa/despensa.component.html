@@ -13,47 +13,85 @@
             Através da despensa você poderá adicionar ingredientes para realizar a busca das receitas:
         </p>
     </div>
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-4">
-            <div class="card">
-                <div class="card-block">
-                    <h4 class="card-title">Adicionar Ingrediente</h4>
-                    <div class="card-text">
-                        <div class="form-group">
-                            <label for="ingrediente">Nome: </label>
-                            <ng2-completer id="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!" placeholder="Nome do Ingrediente..."
-                                [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-sm btn-link" (click)="adicionarIngrediente()">Adicionar</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- <button class="btn btn-primary btn-block">Adicionar Item na Despensa</button> -->
-    <div *ngIf="despensa">
-        <div class="card-columns">
-            <div class="card-size">
-                <div class="card" *ngFor="let ings of despensa.ings">
-                    <div class="card-img">
-                        <div>
-                            <img class="image-resize" [src]="ings.ingrediente.foto">
+    <div class="row" *ngIf="despensa">
+        <div class="col-md-6">
+            <h4>Ingredientes Cadastrados</h4>
+
+            <clr-datagrid>
+                <clr-dg-action-bar>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-secondary" (click)="abrirModalAddIngrediente()">
+                            <clr-icon shape="plus"></clr-icon> Ingrediente</button>
+                        <button type="button" class="btn btn-sm btn-secondary" (click)="limparDespensa()">
+                            <clr-icon shape="close"></clr-icon> Limpar</button>
+                    </div>
+                </clr-dg-action-bar>
+                <clr-dg-column>Nome</clr-dg-column>
+
+                <clr-dg-row *ngFor="let ings of despensa.ings">
+                    <clr-dg-cell>{{ings.ingrediente.nome}}</clr-dg-cell>
+
+                    <clr-dg-action-overflow>
+                        <button class="action-item" (click)="removeItemDespensa(ings)">Excluir</button>
+                    </clr-dg-action-overflow>
+
+                </clr-dg-row>
+
+                <clr-dg-footer>{{despensa.ings.length}} ingrediente(es).</clr-dg-footer>
+            </clr-datagrid>
+            <button class="btn btn-success btn-block" (click)="buscarReceitasCompatives()">Buscar Receitas</button>
+        </div>
+        <div class="col-md-6">
+            <h4>Receitas Compatíveis</h4>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Header
                         </div>
-                    </div>
-                    <div class="card-block">
-                        <p class="card-text">
-                            <label>{{ings.ingrediente.nome}}</label>
-                            <!-- {{ings.ingrediente.tipo}} -->
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-link" (click)="removeItemDespensa(ings)">Remover</button>
+                        <div class="card-block">
+                            <div class="card-media-block">
+                                <img src="" class="card-media-image">
+                                <div class="card-media-description">
+                                    <span class="card-media-title">
+                                        Project A
+                                    </span>
+                                    <span class="card-media-text">
+                                        Owner: John Doe
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-text">
+                                ...
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-sm btn-link">Action</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="modalAdd">
+    <h3 class="modal-title">Adicionar Ingrediente</h3>
+    <div class="modal-body">
+        <div class="form-group row">
+            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                <label for="gForm_1">Ingrediente: </label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <ng2-completer id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!" placeholder="Nome do Ingrediente..."
+                    [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
+                <br/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="modalAdd = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="adicionarIngrediente()">Adicionar</button>
+    </div>
+</clr-modal>
