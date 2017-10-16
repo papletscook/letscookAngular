@@ -19,14 +19,14 @@
             </a>
         </div>
         <div class="header-nav">
-            <a class="nav-link nav-icon" (click)="menuVizitante()">
-                <clr-icon shape="share"></clr-icon>
+            <a class="nav-link nav-icon" [class.active]="templateService.component.nome == 'IndexPageComponent' " (click)="menuVizitante()">
+                <clr-icon shape="home"></clr-icon>
             </a>
             <a class="nav-link nav-icon">
                 <clr-icon shape="search"></clr-icon>
             </a>
             <a class="nav-link nav-icon" *ngIf="holderService.userLogado" (click)="menuCozinheiro()">
-                <clr-icon shape="user"></clr-icon>
+                <clr-icon shape="cog"></clr-icon>
             </a>
         </div>
         <div class="header-actions">

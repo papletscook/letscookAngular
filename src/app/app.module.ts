@@ -34,6 +34,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AlertService } from 'app/service/alert.service';
 import { RatingModule } from "ngx-rating";
 import { Ng2CompleterModule } from "ng2-completer";
+import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { Ng2CompleterModule } from "ng2-completer";
         ImageCropperComponent,
         VerReceitaComponent,
         PassoComponent,
-        DespensaComponent
+        DespensaComponent,
+        CadastrarIngredienteComponent
     ],
     imports: [
         BrowserModule,
@@ -90,7 +92,8 @@ import { Ng2CompleterModule } from "ng2-completer";
         PainelDeControleComponent,
         PrepararReceitaComponent,
         VerReceitaComponent,
-        DespensaComponent
+        DespensaComponent,
+        CadastrarIngredienteComponent
     ]
 })
 

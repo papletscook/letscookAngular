@@ -44,32 +44,71 @@
         </div>
         <div class="col-md-6">
             <h4>Receitas Compatíveis</h4>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Header
+
+            <div *ngIf="scores">
+                <div *ngIf="despensa.ings.length == 0">
+                    <br>
+                    <clr-alert>
+                        <div class="alert-item">
+                            <span class="alert-text">
+                                Para obter receitas compatíveis adicione os ingredientes na despensa.
+                            </span>
                         </div>
-                        <div class="card-block">
-                            <div class="card-media-block">
-                                <img src="" class="card-media-image">
-                                <div class="card-media-description">
-                                    <span class="card-media-title">
-                                        Project A
-                                    </span>
-                                    <span class="card-media-text">
-                                        Owner: John Doe
-                                    </span>
+                    </clr-alert>
+                </div>
+                <div *ngIf="scores.length == 0 && despensa.ings.length != 0">
+                    <clr-alert>
+                        <div class="alert-item">
+                            <span class="alert-text">
+                                Não foi possível encontrar receita compatível com os ingredientes da despensa.
+                            </span>
+                        </div>
+                    </clr-alert>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="text-center spinnerBusca" *ngIf="loadingBusca">
+                        <span class="spinner spinner-inline">
+                            Buscando receitas com Ingredientes compatíveis...
+                        </span>
+                        <span>
+                            Buscando receitas com Ingredientes compatíveis...
+                        </span>
+                    </div>
+                    <div *ngIf="!loadingBusca">
+                        <div class="card" *ngFor="let score of scores">
+                            <div class="card-header">
+                                <div class="row flex-items-xs-between">
+                                    <div class="col-xs">
+                                        <label>{{ score.receita.nome | uppercase}}</label>
+                                    </div>
+                                    <div class="col-xs text-right">
+                                        <span class="badge badge-blue">{{ score.score }}</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-text">
-                                ...
+                            <div class="card-block">
+                                <div class="card-media-block">
+                                    <img [src]="score.receita.foto" class="card-media-image">
+                                    <div class="card-media-description">
+                                        <span class="card-media-title">
+                                            Tempo de Preparo: {{ score.receita.minsPreparo}}
+                                        </span>
+                                        <span class="card-media-title">
+                                            Categoria: {{ score.receita.categoria.nome}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-text">
+                                    {{ score.receita.descricao}}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-sm btn-link">Ver Receita</button>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button class="btn btn-sm btn-link">Action</button>
-                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -84,8 +123,8 @@
                 <label for="gForm_1">Ingrediente: </label>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <ng2-completer id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!" placeholder="Nome do Ingrediente..."
-                    [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
+                <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
+                    placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
                 <br/>
             </div>
         </div>

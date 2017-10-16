@@ -1,9 +1,9 @@
 import { AvaliacaoReceita } from './avaliacao';
 import { Etapa } from './etapa';
 import { Usuario } from './../login/usuario';
-import { IngredienteReceita } from './ingredienteReceita';
 import { Categoria } from './categoria';
 import { ComentarioReceita } from 'app/viewmodel/template/receita/comentario';
+import { IngredienteReceita } from 'app/viewmodel/template/receita/ingrediente-receita';
 
 export class Receita {
     id?: number;

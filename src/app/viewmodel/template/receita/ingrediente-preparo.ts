@@ -1,9 +1,9 @@
-import { IngredienteReceita } from './ingredienteReceita';
+import { IngredienteReceita } from './ingrediente-receita';
 import { Ingrediente } from "app/viewmodel/template/receita/ingrediente";
 
 
 
-export class IngredientePreparo extends IngredienteReceita {
+export class IngredientePreparo extends IngredienteReceita{
 
     public checked: boolean = false;
 
