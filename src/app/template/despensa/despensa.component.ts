@@ -53,7 +53,7 @@ export class DespensaComponent implements OnInit {
         this.ingredienteService.list().then(data => {
             this.ingredientes = data;
             this.dataService = this.completerService.local(data, 'nome', 'nome');
-        }), error => {
+        }, error => {
             this.loading = false;
         });
     }

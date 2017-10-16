@@ -6,8 +6,10 @@
                 <div class="card-header">
                     {{userFull.nome}}
                 </div>
-                <div class="card-img">
-                    <img-cropper [image]="img" [settings]="cropperSettings"></img-cropper>
+                <div class="card-img">                    
+                    <img [src]="userFull.imagem" class="image-style">
+                    <br>
+                    <input type="file" (change)="imageToBase64($event)">
                 </div>
                 <div class="card-block">
                     <h4 class="card-title">Meu Perfil</h4>

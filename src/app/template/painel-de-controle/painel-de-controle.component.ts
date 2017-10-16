@@ -4,8 +4,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Md5 } from 'ts-md5/dist/md5';
 
-import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
-
 @Component({
     selector: 'painel-de-controle-component',
     templateUrl: 'painel-de-controle.component.html',
@@ -14,9 +12,6 @@ import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 })
 
 export class PainelDeControleComponent implements OnInit {
-
-    public cropperSettings: CropperSettings;
-    public img: any;
 
     public userFull: UserFull;
 
@@ -31,29 +26,16 @@ export class PainelDeControleComponent implements OnInit {
     private base64Image: string = "";
 
     constructor(private painelDeControleService: PainelDeControleService) {
-        this.preparaCropper()
     }
 
     public ngOnInit() {
         this.getUserInfos();
     }
 
-    preparaCropper() {
-        this.img = {}
-        this.cropperSettings = new CropperSettings();
-        this.cropperSettings.width = 350;
-        this.cropperSettings.height = 200;
-        this.cropperSettings.croppedWidth = 350;
-        this.cropperSettings.croppedHeight = 200;
-        this.cropperSettings.canvasWidth = 350;
-        this.cropperSettings.canvasHeight = 200;
-    }
-
     public getUserInfos() {
         let sessionObj = JSON.parse(sessionStorage.getItem("user"));
         this.userFull = sessionObj;
         this.dataNascimento = this.userFull.dataNasc.toString();
-        this.img = this.userFull.imagem;
     }
 
 
@@ -85,7 +67,7 @@ export class PainelDeControleComponent implements OnInit {
     private _handleReaderLoaded(readerEvt) {
         var binaryString = readerEvt.target.result;
         this.base64Image = btoa(binaryString);
-        console.log(btoa(binaryString));
+        this.userFull.imagem = "data:image/jpeg;base64," + this.base64Image;
     }
 
     private veSePasswordConfere() {

@@ -6,3 +6,10 @@
 .header-margin-top {
     margin-top: -25px;
 }
+
+.image-style {
+    max-width: 150px;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+}
