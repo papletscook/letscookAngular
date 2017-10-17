@@ -16,39 +16,32 @@ export class TemplateService {
     private components: any[] = [{
         nome: 'PrepararReceitaComponent',
         component: PrepararReceitaComponent,
-        inputs: [
-        ]
+        inputs: []
     }, {
         nome: 'PublicarReceitaComponent',
         component: PublicarReceitaComponent,
-        inputs: [
-        ]
+        inputs: []
     }, {
         nome: 'PainelDeControleComponent',
         component: PainelDeControleComponent,
-        inputs: [
-        ]
+        inputs: []
     }, {
         nome: 'IndexPageComponent',
         component: IndexPageComponent,
-        inputs: [
-        ]
+        inputs: []
     }, {
         nome: 'VerReceitaComponent',
         component: VerReceitaComponent,
-        inputs: [
-        ]
+        inputs: []
     }, {
         nome: 'DespensaComponent',
         component: DespensaComponent,
-        inputs: [
-        ]
+        inputs: []
     },
     {
         nome: 'CadastrarIngredienteComponent',
         component: CadastrarIngredienteComponent,
-        inputs: [
-        ]
+        inputs: []
     }]
 
     public createComp(component: any): any {

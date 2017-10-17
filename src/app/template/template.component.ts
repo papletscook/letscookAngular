@@ -25,12 +25,14 @@ export class TemplateComponent implements OnInit {
 
     public menus: MenuSubnav[];
 
+    private subNavAtivo: boolean = false;
+
     constructor(private router: Router,
         public holderService: HolderService,
         private templateService: TemplateService,
         private session: SessionService,
         public alert: AlertService
-    ) { this.menuVizitante(); }
+    ) { }
 
     public ngOnInit(): void {
 
@@ -48,20 +50,13 @@ export class TemplateComponent implements OnInit {
 
     }
 
-    public desativarMenu() {
-        for (let e of this.menus) {
-            e.ativo = false;
-        }
-    }
-
     public changeCase(component: any): void {
-        this.desativarMenu();
         this.templateService.createComp(component);
+        this.holderService.qualMenuEstaAtivo = component;
     }
 
     public subNavChangeCase(menu: MenuSubnav): void {
         this.changeCase(menu.component)
-        menu.ativo = true;
     }
 
     public adminNav(b: boolean): void {
@@ -70,25 +65,22 @@ export class TemplateComponent implements OnInit {
         } else {
             this.menus = Cozinheiro;
         }
-
     }
 
-    public menuVizitante() {
-        this.adminNav(false);
-        this.changeCase(IndexPageComponent);
-    }
-
-    public menuCozinheiro() {
-        this.adminNav(true);
-        this.changeCase(PainelDeControleComponent);
-
-    }
-
-    private openDespensa() {
-        this.changeCase(DespensaComponent);
-    }
-    private painelDeControle() {
-        this.changeCase(PainelDeControleComponent);
+    private abrirComponentesGenericoDaIndex(component: string) {
+        switch (component) {
+            case "DespensaComponent":
+                this.subNavAtivo = true;
+                this.changeCase(DespensaComponent);
+                break;
+            case "PainelDeControleComponent":
+                this.subNavAtivo = true;
+                this.changeCase(PainelDeControleComponent);
+                break;
+            case "IndexPageComponent":
+                this.changeCase(IndexPageComponent);
+                break;
+        }
     }
 
 }

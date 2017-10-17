@@ -19,13 +19,13 @@
             </a>
         </div>
         <div class="header-nav">
-            <a class="nav-link nav-icon" [class.active]="templateService.components.nome == 'IndexPageComponent' " (click)="menuVizitante()">
+            <a class="nav-link nav-icon" [class.active]="true" (click)="abrirComponentesGenericoDaIndex('IndexPageComponent')">
                 <clr-icon shape="home"></clr-icon>
             </a>
             <a class="nav-link nav-icon">
                 <clr-icon shape="search"></clr-icon>
             </a>
-            <a class="nav-link nav-icon" *ngIf="holderService.userLogado" (click)="menuCozinheiro()">
+            <a class="nav-link nav-icon" *ngIf="holderService.userLogado" (click)="abrirComponentesGenericoDaIndex('PainelDeControleComponent')">
                 <clr-icon shape="cog"></clr-icon>
             </a>
         </div>
@@ -36,15 +36,15 @@
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <a clrDropdownItem (click)="painelDeControle();;" *ngIf="holderService.userLogado">Meu Perfil</a>
-                    <a clrDropdownItem (click)="openDespensa();" *ngIf="holderService.userLogado">Despensa</a>
+                    <a clrDropdownItem (click)="abrirComponentesGenericoDaIndex('PainelDeControleComponent')" *ngIf="holderService.userLogado">Meu Perfil</a>
+                    <a clrDropdownItem (click)="abrirComponentesGenericoDaIndex('DespensaComponent')" *ngIf="holderService.userLogado">Despensa</a>
                     <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
                     <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
     </clr-header>
-    <nav class="subnav" [clr-nav-level]="1">
+    <nav class="subnav" [clr-nav-level]="1" *ngIf="subNavAtivo">
         <ul class="nav">
             <subnav [menu]="menu" (click)="changeCase(menu.component);" *ngFor="let menu of menus"></subnav>
         </ul>
