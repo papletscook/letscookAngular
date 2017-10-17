@@ -5,8 +5,9 @@
         </span>
     </div>
 </div>
-<div *ngIf="!loading">
-    <form class="compact">
+<form class="compact" (keydown.enter)="$event.preventDefault()">
+    <div *ngIf="!loading">
+
         <section class="form-block">
             <label>Cadastrar Ingrediente</label>
             <div class="form-group">
@@ -29,7 +30,5 @@
             <button type="submit" class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarIngrediente()">Salvar</button>
             <button class="btn btn-secondary" (click)="abort()">Cancelar</button>
         </section>
-    </form>
-
-    {{ingrediente | json}}
-</div>
+    </div>
+</form>

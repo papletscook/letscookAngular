@@ -14,7 +14,7 @@ export class Receita {
     ingts: IngredienteReceita[] = [];
     etapas: Etapa[]= [];
     minsPreparo: number;
-    foto: string;
+    imagem: string;
     criador: Usuario;
     avaliacoes: AvaliacaoReceita[] = [];
     comentarios: ComentarioReceita[] = [];

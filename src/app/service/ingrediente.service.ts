@@ -30,7 +30,7 @@ export class IngredienteService extends GenericService implements Service<Ingred
     public cadastrar(t: Ingrediente): Promise<Ingrediente> {
         console.log(t)
         this.infoRequest = {
-            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'ingrediente', timeout: 6000,
+            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'ingrediente/', timeout: 6000,
             _data: t
         };
         return this.urlServiceService.request(this.infoRequest)

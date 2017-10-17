@@ -95,7 +95,7 @@ export class PublicarReceitaComponent implements OnInit {
 
     convertImage() {
         let img = this.img.image;
-        this.receita.foto = img;
+        this.receita.imagem = img;
     }
 
 
@@ -134,7 +134,7 @@ export class PublicarReceitaComponent implements OnInit {
     publicarReceita(): void {
         this.loading = true;
         if (this.img.image) {
-            this.receita.foto = this.img.image;
+            this.receita.imagem = this.img.image;
         }
         if (!this.receita.id) {
             console.log('cadastrar')
@@ -272,7 +272,7 @@ export class PublicarReceitaComponent implements OnInit {
         const myReader: FileReader = new FileReader();
 
         myReader.onloadend = (e) => {
-            this.receita.foto = myReader.result;
+            this.receita.imagem = myReader.result;
         }
         myReader.readAsDataURL(file);
     }

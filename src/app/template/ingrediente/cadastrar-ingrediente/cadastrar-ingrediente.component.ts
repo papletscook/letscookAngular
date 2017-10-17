@@ -58,7 +58,7 @@ export class CadastrarIngredienteComponent implements OnInit {
     }
 
     public validation(): boolean {
-        if (this.ingrediente.foto
+        if (this.ingrediente.imagem
             && this.ingrediente.nome) {
             return true;
         }
@@ -75,25 +75,28 @@ export class CadastrarIngredienteComponent implements OnInit {
         myReader.onloadend = function (loadEvent: any) {
             image.src = loadEvent.target.result;
             that.cropper.setImage(image);
-            that.ingrediente.foto = image.src;
+            that.ingrediente.imagem = image.src;
         };
         myReader.readAsDataURL(file);
     }
 
     abort() {
+        this.img = {}        
         this.ingrediente = new Ingrediente();
     }
 
     private cadastrarIngrediente() {
+        console.log(this.validation())
         if (this.validation()) {
+            this.loading = true;
             this.service.cadastrar(this.ingrediente).then(data => {
-                this.ingrediente = data;
                 this.loading = false;
-                this.alert.info('Ingrediente ' + this.ingrediente.nome + ' cadastrado!');
+                this.alert.error('Ingrediente ' + data.nome + ' cadastrado!');
                 this.ingrediente = new Ingrediente();
             }, error => {
                 this.alert.error('Ocorreu um erro ao cadastrar Ingrediente!');
             });
+
         }
     }
 
