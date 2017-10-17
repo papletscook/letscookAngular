@@ -1,4 +1,4 @@
-import { TemplateService } from 'app/service/template.service';
+import { TemplateService } from './../template.service';
 import { TemplateComponent } from 'app/template/template.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { HolderService } from 'app/service/holder.service';

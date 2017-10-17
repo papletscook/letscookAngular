@@ -1,10 +1,11 @@
+import { DespensaComponent } from './despensa/despensa.component';
+import { TemplateService } from './template.service';
 import { SessionService } from './../service/session.service';
 
 import { PainelDeControleComponent } from './painel-de-controle/painel-de-controle.component';
 import { ComponentInfo } from 'app/viewmodel/template/componentInfo'; 1
 import { Router } from '@angular/router';
 import { Component, OnInit, Injectable } from '@angular/core';
-import { TemplateService } from 'app/service/template.service';
 import { HolderService } from 'app/service/holder.service';
 import { MenuSubnav } from 'app/viewmodel/template/menu-subnav/menu-subnav';
 import { Vizitante, Cozinheiro } from 'app/template/subnav/subnavsMock';
@@ -29,10 +30,10 @@ export class TemplateComponent implements OnInit {
         private templateService: TemplateService,
         private session: SessionService,
         public alert: AlertService
-    ) { }
+    ) { this.menuVizitante(); }
 
-    ngOnInit(): void {
-        this.menuVizitante()
+    public ngOnInit(): void {
+
     }
 
     public entrar() {
@@ -53,9 +54,9 @@ export class TemplateComponent implements OnInit {
         }
     }
 
-    public changeCase(str: string, inputs?: any): void {
+    public changeCase(component: any): void {
         this.desativarMenu();
-        this.templateService.createComp(str, inputs)
+        this.templateService.createComp(component);
     }
 
     public subNavChangeCase(menu: MenuSubnav): void {
@@ -74,15 +75,20 @@ export class TemplateComponent implements OnInit {
 
     public menuVizitante() {
         this.adminNav(false);
-        this.changeCase('IndexPageComponent')
+        this.changeCase(IndexPageComponent);
     }
 
     public menuCozinheiro() {
         this.adminNav(true);
-        this.changeCase('PainelDeControleComponent')
+        this.changeCase(PainelDeControleComponent);
 
     }
 
-
+    private openDespensa() {
+        this.changeCase(DespensaComponent);
+    }
+    private painelDeControle() {
+        this.changeCase(PainelDeControleComponent);
+    }
 
 }

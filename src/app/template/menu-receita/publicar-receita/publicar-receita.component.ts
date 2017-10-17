@@ -1,5 +1,4 @@
 import { TemplateComponent } from 'app/template/template.component';
-import { TemplateService } from 'app/service/template.service';
 import { Receita } from './../../../viewmodel/template/receita/receita';
 import { SessionService } from './../../../service/session.service';
 import { CategoriaService } from 'app/service/categoria.service';

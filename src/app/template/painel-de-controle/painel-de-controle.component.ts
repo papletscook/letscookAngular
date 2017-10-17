@@ -1,3 +1,4 @@
+import { SessionService } from './../../service/session.service';
 import { AlertService } from './../../service/alert.service';
 import { PainelDeControleService } from './painel-de-controle.service';
 import { UserFull } from './../../viewmodel/template/login/userFull';
@@ -31,7 +32,8 @@ export class PainelDeControleComponent implements OnInit {
 
     constructor(
         private painelDeControleService: PainelDeControleService,
-        public alertService: AlertService) {
+        public alertService: AlertService,
+        private sessionService: SessionService) {
     }
 
     public ngOnInit() {
@@ -57,6 +59,7 @@ export class PainelDeControleComponent implements OnInit {
             .modificaUsuario(this.userFull)
             .then(data => {
                 this.userFull = data;
+                this.sessionService.definirUsuario(data);
                 this.modificandoUsuario = false;
                 this.btnNameModificandoUsuario = "Atualizar";
                 this.alertService.info("Dados Atualizados com sucesso...");

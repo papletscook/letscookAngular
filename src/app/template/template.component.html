@@ -19,7 +19,7 @@
             </a>
         </div>
         <div class="header-nav">
-            <a class="nav-link nav-icon" [class.active]="templateService.component.nome == 'IndexPageComponent' " (click)="menuVizitante()">
+            <a class="nav-link nav-icon" [class.active]="templateService.components.nome == 'IndexPageComponent' " (click)="menuVizitante()">
                 <clr-icon shape="home"></clr-icon>
             </a>
             <a class="nav-link nav-icon">
@@ -36,8 +36,8 @@
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <a clrDropdownItem (click)="changeCase('PainelDeControleComponent');" *ngIf="holderService.userLogado">Meu Perfil</a>
-                    <a clrDropdownItem (click)="changeCase('DespensaComponent')" *ngIf="holderService.userLogado">Despensa</a>
+                    <a clrDropdownItem (click)="painelDeControle();;" *ngIf="holderService.userLogado">Meu Perfil</a>
+                    <a clrDropdownItem (click)="openDespensa();" *ngIf="holderService.userLogado">Despensa</a>
                     <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
                     <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
                 </clr-dropdown-menu>
@@ -56,5 +56,5 @@
     <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">
         <sidenav-component></sidenav-component>
     </clr-vertical-nav>
-    
+
 </clr-main-container>

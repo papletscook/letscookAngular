@@ -8,7 +8,6 @@ import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-rec
 import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-receita.component';
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
 
-
 @Injectable()
 export class TemplateService {
 
@@ -52,39 +51,15 @@ export class TemplateService {
         ]
     }]
 
-    public createIndexComponent() {
-
-        this.component = {
-            component: IndexPageComponent,
-            inputs: [
-            ]
-        }
-        return this.component;
-    }
-
-    public createComp(param: string, inputs?: any): any {
-        let input: any
-        if (inputs) {
-            input = inputs
-        } else {
-            input = {};
-        }
-
-
+    public createComp(component: any): any {
         for (let comp of this.components) {
-            if (comp.nome == param) {
+            if (comp.component == component) {
                 this.component = {
                     component: comp.component,
-                    inputs: input
+                    inputs: ""
                 }
                 return this.component;
             }
-        }
-    }
-
-    public createPainelDeControle() {
-        return {
-            component: PainelDeControleComponent
         }
     }
 

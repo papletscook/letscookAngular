@@ -1,3 +1,5 @@
+import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
+import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-receita.component';
 import { PainelDeControleComponent } from './../painel-de-controle/painel-de-controle.component';
 
 import { MenuSubnav } from "app/viewmodel/template/menu-subnav/menu-subnav";
@@ -13,10 +15,10 @@ export const Vizitante: MenuSubnav[] = [
 ]
 
 export const Cozinheiro: MenuSubnav[] = [
-    { nome: 'Receitas', component: 'PainelDeControleComponent', ativo: true },
-    { nome: 'Publicar Receita', component: 'PublicarReceitaComponent' },
-    { nome: 'Ver Receita', component: 'VerReceitaComponent'},
-    { nome: 'Cadastrar Ingrediente', component: 'CadastrarIngredienteComponent'
+    { nome: 'Receitas', component: PainelDeControleComponent, ativo: true },
+    { nome: 'Publicar Receita', component: PublicarReceitaComponent },
+    { nome: 'Ver Receita', component: VerReceitaComponent},
+    { nome: 'Cadastrar Ingrediente', component: CadastrarIngredienteComponent
     
 }
 ]

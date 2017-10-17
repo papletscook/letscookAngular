@@ -1,6 +1,6 @@
+import { TemplateService } from './template/template.service';
 import { AlertService } from './service/alert.service';
 import { LoginService } from './template/login/login.service';
-import { TemplateService } from './service/template.service';
 import { DespensaComponent } from './template/despensa/despensa.component';
 import { PassoComponent } from './template/menu-receita/preparar-receita/passo/passo.component';
 import { VerReceitaComponent } from './template/menu-receita/ver-receita/ver-receita.component';
