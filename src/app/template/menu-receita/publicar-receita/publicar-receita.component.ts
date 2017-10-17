@@ -131,30 +131,41 @@ export class PublicarReceitaComponent implements OnInit {
         return this.receita.ingts.length > 0;
     }
 
+    validationStepThree(): boolean {
+        return this.receita.etapas.length > 0;
+    }
+
+    validationStepFour(): boolean {
+        return this.img.image
+    }
+
+
     publicarReceita(): void {
-        this.loading = true;
-        if (this.img.image) {
-            this.receita.imagem = this.img.image;
+        if (this.validationStepFour()) {
+            this.loading = true;
+            if (this.img.image) {
+                this.receita.imagem = this.img.image;
+            }
+            if (!this.receita.id) {
+                console.log('cadastrar')
+                this.receitaService.cadastrar(this.receita)
+                    .then(data => {
+                        this.receita = data;
+                        // this.template.changeCase('VerReceitaComponent', { receita: this.receita })
+                    }, error => {
+                        this.alert.error("Falha ao publicar Receita!")
+                    })
+            } else {
+                console.log('atualizar')
+                this.receitaService.atualizar(this.receita)
+                    .then(data => {
+                        this.receita = data;
+                    }, error => {
+                        this.alert.error("Falha ao atualizar Receita!")
+                    })
+            }
+            this.loading = false;
         }
-        if (!this.receita.id) {
-            console.log('cadastrar')
-            this.receitaService.cadastrar(this.receita)
-                .then(data => {
-                    this.receita = data;
-                    // this.template.changeCase('VerReceitaComponent', { receita: this.receita })
-                }, error => {
-                    this.alert.error("Falha ao publicar Receita!")
-                })
-        } else {
-            console.log('atualizar')
-            this.receitaService.atualizar(this.receita)
-                .then(data => {
-                    this.receita = data;
-                }, error => {
-                    this.alert.error("Falha ao atualizar Receita!")
-                })
-        }
-        this.loading = false;
     }
 
 

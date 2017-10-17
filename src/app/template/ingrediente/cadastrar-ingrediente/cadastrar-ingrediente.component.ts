@@ -96,6 +96,7 @@ export class CadastrarIngredienteComponent implements OnInit {
         if (this.validation()) {
             this.loading = true;
             this.service.cadastrar(this.ingrediente).then(data => {
+                console.log(data)
                 this.loading = false;
                 this.alert.error('Ingrediente ' + data.nome + ' cadastrado!');
                 this.ingrediente = new Ingrediente();

@@ -156,7 +156,7 @@
             </form>
         </clr-wizard-page>
 
-        <clr-wizard-page>
+        <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepThree()">
             <ng-template clrPageNavTitle>Modo de Preparo</ng-template>
             <ng-template clrPageTitle>
                 <clr-icon shape="tasks" size="48"></clr-icon>
@@ -223,6 +223,7 @@
                                                 <clr-signpost>
                                                     <clr-icon shape="alarm-clock" [class.is-solid]="passo.minPasso" clrSignpostTrigger></clr-icon>
                                                     <clr-signpost-content clrPosition="left-middle" *clrIfOpen>
+                                                        <h4>Cronômetro</h4>
                                                         <div class="form-group">
                                                             <label>Duração (minutos): </label>
                                                             <input [(ngModel)]="passo.minPasso" name="minPasso" type="number" step="5">
@@ -243,7 +244,7 @@
 
         </clr-wizard-page>
 
-        <clr-wizard-page [clrWizardPageNextDisabled]="!img.image">
+        <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepFour()">
             <ng-template clrPageNavTitle>Imagem da Receita</ng-template>
             <ng-template clrPageTitle>
                 <clr-icon shape="tasks" size="48"></clr-icon>
