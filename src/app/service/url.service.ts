@@ -82,6 +82,7 @@ export class UrlServiceService {
     }
 
     public handleError(error: any): Promise<any> {
+        console.log(error)
         let er: any;
         if (error.message === 'Timeout has occurred') {
             er = {

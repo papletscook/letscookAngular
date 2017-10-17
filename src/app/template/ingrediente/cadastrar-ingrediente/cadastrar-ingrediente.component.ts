@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { AlertService } from 'app/service/alert.service';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
@@ -24,7 +25,7 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
     templateUrl: 'cadastrar-ingrediente.component.html',
     styleUrls: ['cadastrar-ingrediente.component.css'],
     providers: [
-        IngredienteService, AlertService
+        IngredienteService
     ]
 })
 
@@ -55,6 +56,13 @@ export class CadastrarIngredienteComponent implements OnInit {
         this.img = {}
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
+        this.cropperSettings = new CropperSettings();
+        this.cropperSettings.width = 350;
+        this.cropperSettings.height = 200;
+        this.cropperSettings.croppedWidth = 350;
+        this.cropperSettings.croppedHeight = 200;
+        this.cropperSettings.canvasWidth = 350;
+        this.cropperSettings.canvasHeight = 200;
     }
 
     public validation(): boolean {
@@ -64,8 +72,6 @@ export class CadastrarIngredienteComponent implements OnInit {
         }
         return false;
     }
-
-
 
     fileChangeListener($event) {
         var image: any = new Image();

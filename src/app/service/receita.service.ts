@@ -59,7 +59,7 @@ export class ReceitaService extends GenericService implements CrudService<Receit
 
     public atualizar(t: Receita): Promise<Receita> {
         this.infoRequest = {
-            rqst: 'put', command: this.urlServiceService.pathLetsCook + 'receita', timeout: 6000
+            rqst: 'put', command: this.urlServiceService.pathLetsCook + 'receita', timeout: 20000
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

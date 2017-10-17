@@ -5,30 +5,39 @@
         </span>
     </div>
 </div>
-<form class="compact" (keydown.enter)="$event.preventDefault()">
-    <div *ngIf="!loading">
-
+<div *ngIf="!loading">
+    <h3 class="header-margin-top">Cadastrar Ingrediente</h3>
+    <form class="compact" (keydown.enter)="$event.preventDefault()">
         <section class="form-block">
-            <label>Cadastrar Ingrediente</label>
+            <label>Formulário</label>
             <div class="form-group">
                 <label class="required" for="nome">Nome</label>
                 <input type="text" id="nome" autofocus="true" name="nome" [(ngModel)]="ingrediente.nome" placeholder="Nome do Ingrediente...">
             </div>
             <div class="form-group">
                 <label class="required" for="imagem">Imagem</label>
-                <div>
-                    <div class="file-upload">
-                        <input id="custom-input" type="file" (change)="fileChangeListener($event)">
-                    </div>
-                    <img-cropper #cropper [image]="img" [settings]="cropperSettings"></img-cropper>
-                    <br>
-                    <span class="result rounded" *ngIf="img.image">
-                        <img [src]="img.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-                    </span>
-                </div>
+                <label class="btn btn-primary">
+                    Adicionar foto
+                    <input id="custom-input" type="file" class="btn btn-primary btn-block" (change)="fileChangeListener($event)">
+                </label>
+                <img-cropper #cropper [image]="img" [settings]="cropperSettings"></img-cropper>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarIngrediente()">Salvar</button>
+
+
+<!-- 
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <label href="..." class="card clickable">
+                            <input id="custom-input" type="file" class="btn btn-primary btn-block" (change)="fileChangeListener($event)">
+                            <div class="card-img">
+                                <img *ngIf="img.image" [src]="img.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight"> </div>
+                        </label>
+                    </div>
+                </div>
+            </div> -->
+            <button class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarIngrediente()">Salvar</button>
             <button class="btn btn-secondary" (click)="abort()">Cancelar</button>
         </section>
-    </div>
-</form>
+    </form>
+</div>
