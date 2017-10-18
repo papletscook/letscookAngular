@@ -41,6 +41,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div *ngIf="!categorias">
+                <p>Lista vazia ou com erro na busca utilize o botão abaixo para tentar novamente...</p>
+                <button class="btn btn-primary btn-block btn-sm" (click)="listarCategoria()">Atualizar Lista</button>
+            </div>
         </div>
     </div>
 

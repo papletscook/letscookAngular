@@ -20,6 +20,8 @@ export class CadastrarIngredienteComponent implements OnInit {
 
     private ingrediente: Ingrediente = new Ingrediente();
 
+    private ingredientes: Ingrediente[];
+
     public cropperSettings: CropperSettings;
     public img: any;
 
@@ -35,6 +37,7 @@ export class CadastrarIngredienteComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.listarIngredientes();
     }
 
     preparaCropper() {
@@ -105,6 +108,18 @@ export class CadastrarIngredienteComponent implements OnInit {
                 this.abort();
             });
         }
+    }
+
+    private listarIngredientes() {
+        this.loading = true;
+        this.ingredienteService.list()
+            .then(data => {
+                this.ingredientes = data;
+                this.loading = false;
+            }, error => {
+                this.alertService.error("Ocorreu um erro ao buscar Ingredientes!");
+                this.loading = false;
+            })
     }
 
 }
