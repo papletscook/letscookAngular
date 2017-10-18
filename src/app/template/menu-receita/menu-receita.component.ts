@@ -2,7 +2,6 @@ import { SessionService } from './../../service/session.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HolderService } from 'app/service/holder.service';
-import { IngredienteService } from 'app/service/ingrediente.service';
 
 @Component({
     selector: 'menu-receita-component',

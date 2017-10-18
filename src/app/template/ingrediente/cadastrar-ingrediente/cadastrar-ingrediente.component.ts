@@ -1,3 +1,4 @@
+import { IngredienteService } from './ingrediente.service';
 import { state } from '@angular/animations';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { AlertService } from 'app/service/alert.service';
@@ -8,7 +9,6 @@ import { Usuario } from './../../../viewmodel/template/login/usuario';
 import { SessionService } from './../../../service/session.service';
 import { PrepararReceitaComponent } from 'app/template/menu-receita/preparar-receita/preparar-receita.component';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
-import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';
@@ -24,9 +24,7 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
     selector: 'cadastrar-ingrediente',
     templateUrl: 'cadastrar-ingrediente.component.html',
     styleUrls: ['cadastrar-ingrediente.component.css'],
-    providers: [
-        IngredienteService
-    ]
+    providers: [IngredienteService]
 })
 
 
@@ -36,21 +34,21 @@ export class CadastrarIngredienteComponent implements OnInit {
 
     private ingrediente: Ingrediente = new Ingrediente();
 
-    cropperSettings: CropperSettings;
-    img: any;
+    public cropperSettings: CropperSettings;
+    public img: any;
+
+    private showImg: boolean = false;
 
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
-
 
     constructor(private service: IngredienteService,
         private alert: AlertService) {
         this.preparaCropper()
     }
 
-    ngOnInit() {
+    public ngOnInit() {
     }
-
 
     preparaCropper() {
         this.img = {}
@@ -73,7 +71,7 @@ export class CadastrarIngredienteComponent implements OnInit {
         return false;
     }
 
-    fileChangeListener($event) {
+    private fileChangeListener($event) {
         var image: any = new Image();
         var file: File = $event.target.files[0];
         var myReader: FileReader = new FileReader();
@@ -84,26 +82,42 @@ export class CadastrarIngredienteComponent implements OnInit {
             that.ingrediente.imagem = image.src;
         };
         myReader.readAsDataURL(file);
+        this.imageToBase64($event);
     }
 
-    abort() {
-        this.img = {}        
+    private imageToBase64(evt) {
+        var files = evt.target.files;
+        var file = files[0];
+        if (files && file) {
+            var reader = new FileReader();
+            reader.onload = this._handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(file);
+        }
+    }
+
+    private _handleReaderLoaded(readerEvt) {
+        var binaryString = readerEvt.target.result;
+        this.img.image = "data:image/jpeg;base64," + btoa(binaryString);
+        this.showImg = true;
+    }
+
+    private abort() {
+        this.img = {}
         this.ingrediente = new Ingrediente();
     }
 
     private cadastrarIngrediente() {
-        console.log(this.validation())
         if (this.validation()) {
             this.loading = true;
             this.service.cadastrar(this.ingrediente).then(data => {
                 console.log(data)
                 this.loading = false;
-                this.alert.error('Ingrediente ' + data.nome + ' cadastrado!');
-                this.ingrediente = new Ingrediente();
+                this.alert.info('Ingrediente ' + data.nome + ' cadastrado!');
+                this.abort();
             }, error => {
                 this.alert.error('Ocorreu um erro ao cadastrar Ingrediente!');
+                this.abort();
             });
-
         }
     }
 

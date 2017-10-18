@@ -4,7 +4,6 @@ import { Usuario } from './../../../viewmodel/template/login/usuario';
 import { SessionService } from './../../../service/session.service';
 import { PrepararReceitaComponent } from 'app/template/menu-receita/preparar-receita/preparar-receita.component';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
-import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';

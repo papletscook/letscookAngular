@@ -1,3 +1,12 @@
 input[type="file"] {
-    display: none;
-  }
+  display: none;
+}
+
+.forcar-tamanho {
+  width: 350;
+  height: 200;
+}
+
+.margin-header-top {
+  margin-top: -12px;
+}

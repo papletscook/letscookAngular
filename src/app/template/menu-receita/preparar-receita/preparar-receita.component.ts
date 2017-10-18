@@ -1,3 +1,4 @@
+import { IngredienteService } from './../../ingrediente/cadastrar-ingrediente/ingrediente.service';
 import { AvaliacaoService } from './avaliacao.service';
 import { AvaliacaoReceita } from './../../../viewmodel/template/receita/avaliacao';
 import { element } from 'protractor';
@@ -5,7 +6,6 @@ import { Etapa } from './../../../viewmodel/template/receita/etapa';
 import { Passo } from './../../../viewmodel/template/receita/passo';
 import { IngredientePreparo } from './../../../viewmodel/template/receita/ingrediente-preparo';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
-import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, Input, ViewChild, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
 import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';

@@ -7,7 +7,7 @@
 </div>
 <div *ngIf="!loading">
     <h3 class="header-margin-top">Cadastrar Ingrediente</h3>
-    <form class="compact" (keydown.enter)="$event.preventDefault()">
+    <form class="compact">
         <section class="form-block">
             <label>Formulário</label>
             <div class="form-group">
@@ -20,22 +20,15 @@
                     Adicionar foto
                     <input id="custom-input" type="file" class="btn btn-primary btn-block" (change)="fileChangeListener($event)">
                 </label>
-                <img-cropper #cropper [image]="img" [settings]="cropperSettings"></img-cropper>
+                <img-cropper #cropper [image]="img" [settings]="cropperSettings" style="display: none;"></img-cropper>
             </div>
-
-
-<!-- 
-            <div class="form-group row">
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <label href="..." class="card clickable">
-                            <input id="custom-input" type="file" class="btn btn-primary btn-block" (change)="fileChangeListener($event)">
-                            <div class="card-img">
-                                <img *ngIf="img.image" [src]="img.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight"> </div>
-                        </label>
-                    </div>
+            <div class="form-group">
+                <div class="forcar-tamanho">
+                    <span *ngIf="img.image">
+                        <img #cropper [src]="img.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                    </span>
                 </div>
-            </div> -->
+            </div>
             <button class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarIngrediente()">Salvar</button>
             <button class="btn btn-secondary" (click)="abort()">Cancelar</button>
         </section>

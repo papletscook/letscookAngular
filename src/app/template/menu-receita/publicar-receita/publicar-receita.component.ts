@@ -1,10 +1,10 @@
+import { IngredienteService } from './../../ingrediente/cadastrar-ingrediente/ingrediente.service';
 import { TemplateComponent } from 'app/template/template.component';
 import { Receita } from './../../../viewmodel/template/receita/receita';
 import { SessionService } from './../../../service/session.service';
 import { CategoriaService } from 'app/service/categoria.service';
 import { HolderService } from 'app/service/holder.service';
 import { ReceitaService } from 'app/service/receita.service';
-import { IngredienteService } from 'app/service/ingrediente.service';
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { MockReceita } from './../mock/mockReceita';
 import { MedidaService } from 'app/service/medida.service';
@@ -29,7 +29,6 @@ import * as _ from "lodash";
     providers: [
         IngredienteService,
         CategoriaService,
-        IngredienteService,
         MedidaService,
         ReceitaService
     ],
