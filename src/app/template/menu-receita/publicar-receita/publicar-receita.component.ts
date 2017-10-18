@@ -39,6 +39,8 @@ export class PublicarReceitaComponent implements OnInit {
 
     private loading: boolean = false;
 
+    private exibirReceita: boolean = false;
+
     cropperSettings: CropperSettings;
 
     img: any;
@@ -49,7 +51,7 @@ export class PublicarReceitaComponent implements OnInit {
     private passoEdited: Passo;
     private ingrEdited: IngredienteReceita;
 
-    private categorias: Categoria[];
+    private categorias: Categoria[] = [];
     private medidas: Medida[];
     private ingredientes: IngredienteReceita[] = [];
 
@@ -62,6 +64,8 @@ export class PublicarReceitaComponent implements OnInit {
 
 
     @ViewChild('wizard') wizard: Wizard;
+
+    @Input()
     _open = true;
 
     constructor(
@@ -73,11 +77,16 @@ export class PublicarReceitaComponent implements OnInit {
         private alert: AlertService
     ) {
         this.preparaCropper()
+        this.ingredienteCad = new IngredienteReceita()
+        this.carregarCampos()
     }
 
-
-    byId(item1: Categoria, item2: Categoria) {
-        return item1.id === item2.id;
+    customCompareCategoria(o1: Categoria, o2: Categoria) {
+        try {
+            return o1.id == o2.id;
+        } catch (error) {
+            return false;
+        }
     }
 
     preparaCropper() {
@@ -99,12 +108,6 @@ export class PublicarReceitaComponent implements OnInit {
 
 
     ngOnInit() {
-        this.receita = new Receita();
-        this.ingredienteCad = new IngredienteReceita();
-        this.carregarCampos()
-        // const r = new Receita();
-        // // const r = MockReceita;
-        // this.receita = r;
     }
 
     contaPalavras(str: string): number {
@@ -137,6 +140,26 @@ export class PublicarReceitaComponent implements OnInit {
         return this.img.image
     }
 
+    atualizarReceita(): void {
+
+        if (this.validationStepFour()) {
+            this.loading = true;
+            if (this.img.image) {
+                this.receita.imagem = this.img.image;
+            }
+
+            this.receitaService.atualizar(this.receita)
+                .then(data => {
+                    this.receita = data;
+                    this.alert.info("Receita atualizada!")
+                }, error => {
+                    this.alert.error("Falha ao atualizar Receita!")
+                })
+
+            this.loading = false;
+        }
+    }
+
 
     publicarReceita(): void {
         if (this.validationStepFour()) {
@@ -144,24 +167,16 @@ export class PublicarReceitaComponent implements OnInit {
             if (this.img.image) {
                 this.receita.imagem = this.img.image;
             }
-            if (!this.receita.id) {
-                console.log('cadastrar')
-                this.receitaService.cadastrar(this.receita)
-                    .then(data => {
-                        this.receita = data;
-                        // this.template.changeCase('VerReceitaComponent', { receita: this.receita })
-                    }, error => {
-                        this.alert.error("Falha ao publicar Receita!")
-                    })
-            } else {
-                console.log('atualizar')
-                this.receitaService.atualizar(this.receita)
-                    .then(data => {
-                        this.receita = data;
-                    }, error => {
-                        this.alert.error("Falha ao atualizar Receita!")
-                    })
-            }
+
+            this.receitaService.cadastrar(this.receita)
+                .then(data => {
+                    this.receita = data;
+                    this.alert.info("Receita cadastrada!")
+                    this.exibirReceita = true;
+                }, error => {
+                    this.alert.error("Falha ao publicar Receita!")
+                })
+
             this.loading = false;
         }
     }
@@ -169,6 +184,11 @@ export class PublicarReceitaComponent implements OnInit {
 
     open() {
         this._open = !this.open;
+    }
+
+    close() {
+        console.log('close')
+        this.wizard.close();
     }
 
     excluirEtapa(etapa: Etapa): void {
@@ -266,7 +286,7 @@ export class PublicarReceitaComponent implements OnInit {
         this.ingredienteCad = new IngredienteReceita();
     }
 
-    protected carregarCampos() {
+    carregarCampos() {
         this.getCategorias();
         this.getIngredientes();
         this.getMedidas();
@@ -312,24 +332,24 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita.etapas.push(et);
     }
 
+    public validarCarregamento() {
+        return this.categorias && this.ingredientes && this.medidas;
+    }
+
     public getCategorias() {
-        if (!this.categorias) {
-            this.categoriaService.list()
-                .then(data => {
-                    this.categorias = _.orderBy(data, ['nome'], ['asc']);
-                }, error => {
-                })
-        }
+        this.categoriaService.list()
+            .then(data => {
+                this.categorias = _.orderBy(data, ['nome'], ['asc']);
+            }, error => {
+            })
     }
 
     public getMedidas() {
-        if (!this.categorias) {
-            this.medidaService.list()
-                .then(data => {
-                    this.medidas = _.orderBy(data, ['desc'], ['asc']);
-                }, error => {
-                })
-        }
+        this.medidaService.list()
+            .then(data => {
+                this.medidas = _.orderBy(data, ['desc'], ['asc']);
+            }, error => {
+            })
     }
 
 }
