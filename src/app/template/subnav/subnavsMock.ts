@@ -1,3 +1,4 @@
+import { CadastrarCategoriaComponent } from './../categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
 import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-receita.component';
 import { PainelDeControleComponent } from './../painel-de-controle/painel-de-controle.component';
@@ -19,5 +20,6 @@ export const Cozinheiro: MenuSubnav[] = [
     { nome: 'Ver Receita', component: VerReceitaComponent },
     { nome: 'Publicar Receita', component: PublicarReceitaComponent },
     { nome: 'Cadastrar Ingrediente', component: CadastrarIngredienteComponent },
+    { nome: 'Cadastrar Categoria', component: CadastrarCategoriaComponent },
     { nome: 'Meu Perfil', component: PainelDeControleComponent }
 ]

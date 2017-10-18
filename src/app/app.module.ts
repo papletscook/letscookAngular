@@ -1,3 +1,4 @@
+import { CadastrarCategoriaComponent } from './template/categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { TemplateService } from './template/template.service';
 import { AlertService } from './service/alert.service';
 import { LoginService } from './template/login/login.service';
@@ -59,7 +60,8 @@ import { MomentModule } from 'angular2-moment';
         VerReceitaComponent,
         PassoComponent,
         DespensaComponent,
-        CadastrarIngredienteComponent
+        CadastrarIngredienteComponent,
+        CadastrarCategoriaComponent
     ],
     imports: [
         BrowserModule,
@@ -95,7 +97,8 @@ import { MomentModule } from 'angular2-moment';
         PrepararReceitaComponent,
         VerReceitaComponent,
         DespensaComponent,
-        CadastrarIngredienteComponent
+        CadastrarIngredienteComponent,
+        CadastrarCategoriaComponent
     ]
 })
 

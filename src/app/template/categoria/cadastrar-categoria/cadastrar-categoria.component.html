@@ -1,0 +1,21 @@
+<div class="row" *ngIf="loading">
+    <div class="col-xs text-center">
+        <span class="spinner">
+            Loading...
+        </span>
+    </div>
+</div>
+<div *ngIf="!loading">
+    <h3 class="header-margin-top">Cadastrar Categoria</h3>
+    <form class="compact">
+        <section class="form-block">
+            <label>Formulário</label>
+            <div class="form-group">
+                <label class="required" for="nome">Nome</label>
+                <input type="text" id="nome" autofocus="true" name="nome" [(ngModel)]="categoria.nome" placeholder="Nome da Categoria...">
+            </div>            
+            <button class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarIngrediente()">Salvar</button>
+            <button class="btn btn-secondary" (click)="abort()">Cancelar</button>
+        </section>
+    </form>
+</div>

@@ -1,4 +1,3 @@
-import { IngredienteService } from './../../ingrediente/cadastrar-ingrediente/ingrediente.service';
 import { AvaliacaoService } from './avaliacao.service';
 import { AvaliacaoReceita } from './../../../viewmodel/template/receita/avaliacao';
 import { element } from 'protractor';
@@ -7,7 +6,6 @@ import { Passo } from './../../../viewmodel/template/receita/passo';
 import { IngredientePreparo } from './../../../viewmodel/template/receita/ingrediente-preparo';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
 import { Component, OnInit, Input, ViewChild, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
-import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';
 import { ReceitaService } from 'app/service/receita.service';
 import { HolderService } from 'app/service/holder.service';
@@ -29,8 +27,6 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['preparar-receita.component.css'],
     providers: [
         ReceitaService,
-        IngredienteService,
-        CategoriaService,
         MedidaService,
         AvaliacaoService
     ]

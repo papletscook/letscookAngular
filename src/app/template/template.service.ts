@@ -1,3 +1,4 @@
+import { CadastrarCategoriaComponent } from './categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { DespensaComponent } from './../template/despensa/despensa.component';
 import { PrepararReceitaComponent } from './../template/menu-receita/preparar-receita/preparar-receita.component';
 import { Injectable, ComponentFactoryResolver } from '@angular/core';
@@ -41,6 +42,11 @@ export class TemplateService {
     {
         nome: 'CadastrarIngredienteComponent',
         component: CadastrarIngredienteComponent,
+        inputs: []
+    },
+    {
+        nome: 'CadastrarCategoriaComponent',
+        component: CadastrarCategoriaComponent,
         inputs: []
     }]
 

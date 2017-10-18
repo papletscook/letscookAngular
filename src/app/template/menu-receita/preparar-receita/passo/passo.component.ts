@@ -1,7 +1,4 @@
-import { IngredienteService } from './../../../ingrediente/cadastrar-ingrediente/ingrediente.service';
-
 import { Component, OnInit, Input, ViewChild, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
-import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';
 import { ReceitaService } from 'app/service/receita.service';
 import { HolderService } from 'app/service/holder.service';
@@ -26,7 +23,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
     templateUrl: 'passo.component.html',
     styleUrls: ['passo.component.css'],
     providers: [
-        ReceitaService, IngredienteService, CategoriaService, MedidaService],
+        ReceitaService, MedidaService],
     animations: [
         trigger('flyInOut', [
             state('in', style({ opacity: 1, transform: 'translateX(0)' })),

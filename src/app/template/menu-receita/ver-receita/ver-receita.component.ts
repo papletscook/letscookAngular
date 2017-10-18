@@ -5,7 +5,6 @@ import { SessionService } from './../../../service/session.service';
 import { PrepararReceitaComponent } from 'app/template/menu-receita/preparar-receita/preparar-receita.component';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { CategoriaService } from 'app/service/categoria.service';
 import { MedidaService } from 'app/service/medida.service';
 import { ReceitaService } from 'app/service/receita.service';
 import { HolderService } from 'app/service/holder.service';

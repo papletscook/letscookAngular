@@ -1,23 +1,9 @@
-import { IngredienteService } from './ingrediente.service';
+import { IngredienteService } from './../ingrediente.service';
 import { state } from '@angular/animations';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { AlertService } from 'app/service/alert.service';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
-import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
-import { Receita } from 'app/viewmodel/template/receita/receita';
-import { Usuario } from './../../../viewmodel/template/login/usuario';
-import { SessionService } from './../../../service/session.service';
-import { PrepararReceitaComponent } from 'app/template/menu-receita/preparar-receita/preparar-receita.component';
-import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-import { CategoriaService } from 'app/service/categoria.service';
-import { MedidaService } from 'app/service/medida.service';
-import { ReceitaService } from 'app/service/receita.service';
-import { HolderService } from 'app/service/holder.service';
-import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
-import { ToastsManager } from 'ng2-toastr';
-import { Medida } from 'app/viewmodel/template/receita/medida';
-
 
 
 @Component({
@@ -42,8 +28,9 @@ export class CadastrarIngredienteComponent implements OnInit {
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
 
-    constructor(private service: IngredienteService,
-        private alert: AlertService) {
+    constructor(
+        private ingredienteService: IngredienteService,
+        private alertService: AlertService) {
         this.preparaCropper()
     }
 
@@ -109,13 +96,12 @@ export class CadastrarIngredienteComponent implements OnInit {
     private cadastrarIngrediente() {
         if (this.validation()) {
             this.loading = true;
-            this.service.cadastrar(this.ingrediente).then(data => {
-                console.log(data)
+            this.ingredienteService.cadastrar(this.ingrediente).then(data => {
                 this.loading = false;
-                this.alert.info('Ingrediente ' + data.nome + ' cadastrado!');
+                this.alertService.info('Ingrediente ' + data.nome + ' cadastrado!');
                 this.abort();
             }, error => {
-                this.alert.error('Ocorreu um erro ao cadastrar Ingrediente!');
+                this.alertService.error('Ocorreu um erro ao cadastrar Ingrediente!');
                 this.abort();
             });
         }

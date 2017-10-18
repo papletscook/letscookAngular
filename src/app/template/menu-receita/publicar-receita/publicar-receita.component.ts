@@ -1,8 +1,8 @@
-import { IngredienteService } from './../../ingrediente/cadastrar-ingrediente/ingrediente.service';
+import { CategoriaService } from './../../categoria/categoria.service';
+import { IngredienteService } from './../../ingrediente/ingrediente.service';
 import { TemplateComponent } from 'app/template/template.component';
 import { Receita } from './../../../viewmodel/template/receita/receita';
 import { SessionService } from './../../../service/session.service';
-import { CategoriaService } from 'app/service/categoria.service';
 import { HolderService } from 'app/service/holder.service';
 import { ReceitaService } from 'app/service/receita.service';
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input } from '@angular/core';
