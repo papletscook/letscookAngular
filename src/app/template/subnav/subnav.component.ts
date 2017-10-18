@@ -15,9 +15,17 @@ export class SubnavComponent implements OnInit {
 
     @Input() menu: MenuSubnav;
 
+    constructor(
+        public holderService: HolderService) { }
 
-    ngOnInit() { }
+    public ngOnInit() { }
 
-
+    public veQualMenuEstaAtivo(): Boolean {
+        let valid: boolean = false;
+        if (this.holderService.qualMenuEstaAtivo === this.menu.component) {
+            valid = true;
+        }
+        return valid;
+    }
 
 }

@@ -11,14 +11,13 @@ import { PrepararReceitaComponent } from "app/template/menu-receita/preparar-rec
 
 
 export const Vizitante: MenuSubnav[] = [
-    { nome: 'Página Inicial', component: 'IndexPageComponent', ativo: true }
+    { nome: 'Página Inicial', component: 'IndexPageComponent' }
 ]
 
 export const Cozinheiro: MenuSubnav[] = [
-    { nome: 'Receitas', component: PainelDeControleComponent, ativo: true },
+    { nome: 'Buscar Receitas?', component: "" },
+    { nome: 'Ver Receita', component: VerReceitaComponent },
     { nome: 'Publicar Receita', component: PublicarReceitaComponent },
-    { nome: 'Ver Receita', component: VerReceitaComponent},
-    { nome: 'Cadastrar Ingrediente', component: CadastrarIngredienteComponent
-    
-}
+    { nome: 'Cadastrar Ingrediente', component: CadastrarIngredienteComponent },
+    { nome: 'Meu Perfil', component: PainelDeControleComponent }
 ]
