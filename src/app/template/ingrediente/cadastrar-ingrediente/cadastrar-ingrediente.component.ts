@@ -1,10 +1,9 @@
+import { Ingrediente } from './../../../viewmodel/template/receita/ingrediente';
 import { IngredienteService } from './../ingrediente.service';
 import { state } from '@angular/animations';
 import { CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 import { AlertService } from 'app/service/alert.service';
-import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
-
 
 @Component({
     selector: 'cadastrar-ingrediente',
@@ -22,8 +21,13 @@ export class CadastrarIngredienteComponent implements OnInit {
 
     private ingredientes: Ingrediente[];
 
+    private ingredienteMod: Ingrediente;
+    private btnModIngredienteDisable: boolean = false;
+    private modalOpenCloseStatus: boolean = false;
+
     public cropperSettings: CropperSettings;
     public img: any;
+    public imgMod: any;
 
     private showImg: boolean = false;
 
@@ -42,6 +46,7 @@ export class CadastrarIngredienteComponent implements OnInit {
 
     preparaCropper() {
         this.img = {}
+        this.imgMod = {}
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
         this.cropperSettings = new CropperSettings();
@@ -87,8 +92,36 @@ export class CadastrarIngredienteComponent implements OnInit {
 
     private _handleReaderLoaded(readerEvt) {
         var binaryString = readerEvt.target.result;
-        this.img.image = "data:image/jpeg;base64," + btoa(binaryString);
-        this.showImg = true;
+        this.imgMod.image = "data:image/jpeg;base64," + btoa(binaryString);
+    }
+
+    private fileChangeListenerMod($event) {
+        var image: any = new Image();
+        var file: File = $event.target.files[0];
+        var myReader: FileReader = new FileReader();
+        var that = this;
+        myReader.onloadend = function (loadEvent: any) {
+            image.src = loadEvent.target.result;
+            that.cropper.setImage(image);
+            that.ingredienteMod.imagem = image.src;
+        };
+        myReader.readAsDataURL(file);
+        this.imageToBase64Mod($event);
+    }
+
+    private imageToBase64Mod(evt) {
+        var files = evt.target.files;
+        var file = files[0];
+        if (files && file) {
+            var reader = new FileReader();
+            reader.onload = this._handleReaderLoadedMod.bind(this);
+            reader.readAsBinaryString(file);
+        }
+    }
+
+    private _handleReaderLoadedMod(readerEvt) {
+        var binaryString = readerEvt.target.result;
+        this.imgMod.image = "data:image/jpeg;base64," + btoa(binaryString);
     }
 
     private abort() {
@@ -120,6 +153,35 @@ export class CadastrarIngredienteComponent implements OnInit {
                 this.alertService.error("Ocorreu um erro ao buscar Ingredientes!");
                 this.loading = false;
             })
+    }
+
+    private atualizarIngrediente() {
+        this.btnModIngredienteDisable = true;
+        this.ingredienteService.atualizar(this.ingredienteMod)
+            .then(data => {
+                this.btnModIngredienteDisable = false;
+                this.alertService.info("Ingrediente " + data.nome + " atualizado com sucesso.");
+                this.modalOpenCloseStatus = false;
+                this.ingredientes = null;
+                this.listarIngredientes();
+            }, error => {
+                this.alertService.error("Ocorreu um erro ao Atualizar Ingrediente!");
+                this.btnModIngredienteDisable = false;
+                this.modalOpenCloseStatus = true;
+            });
+    }
+
+    private findAndSpliceAddArrayIngrediente(ingrediente: Ingrediente) {
+        this.ingredientes.forEach(ing => {
+            if (ing.id === ingrediente.id) {
+
+            }
+        });
+    }
+
+    private modificaIngrediente(ingrediente: Ingrediente) {
+        this.ingredienteMod = ingrediente;
+        this.modalOpenCloseStatus = true;
     }
 
 }
