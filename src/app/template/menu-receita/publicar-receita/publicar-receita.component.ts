@@ -1,3 +1,4 @@
+import { MedidaService } from './../medida.service';
 import { ReceitaService } from './../receita.service';
 import { CategoriaService } from './../../categoria/categoria.service';
 import { IngredienteService } from './../../ingrediente/ingrediente.service';
@@ -7,7 +8,6 @@ import { SessionService } from './../../../service/session.service';
 import { HolderService } from 'app/service/holder.service';
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { MockReceita } from './../mock/mockReceita';
-import { MedidaService } from 'app/service/medida.service';
 import { Wizard } from 'clarity-angular';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
 import { Etapa } from 'app/viewmodel/template/receita/etapa';

@@ -1,3 +1,4 @@
+import { MedidaService } from './../medida.service';
 import { ReceitaService } from './../receita.service';
 import { AvaliacaoService } from './avaliacao.service';
 import { AvaliacaoReceita } from './../../../viewmodel/template/receita/avaliacao';
@@ -7,7 +8,6 @@ import { Passo } from './../../../viewmodel/template/receita/passo';
 import { IngredientePreparo } from './../../../viewmodel/template/receita/ingrediente-preparo';
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
 import { Component, OnInit, Input, ViewChild, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
-import { MedidaService } from 'app/service/medida.service';
 import { HolderService } from 'app/service/holder.service';
 import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
 import { Receita } from 'app/viewmodel/template/receita/receita';
