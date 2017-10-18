@@ -1,6 +1,6 @@
+import { ReceitaService } from './../../receita.service';
 import { Component, OnInit, Input, ViewChild, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
 import { MedidaService } from 'app/service/medida.service';
-import { ReceitaService } from 'app/service/receita.service';
 import { HolderService } from 'app/service/holder.service';
 import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
 import { Receita } from 'app/viewmodel/template/receita/receita';

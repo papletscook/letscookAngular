@@ -1,3 +1,4 @@
+import { ReceitaService } from './../receita.service';
 import { AvaliacaoService } from './avaliacao.service';
 import { AvaliacaoReceita } from './../../../viewmodel/template/receita/avaliacao';
 import { element } from 'protractor';
@@ -7,7 +8,6 @@ import { IngredientePreparo } from './../../../viewmodel/template/receita/ingred
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
 import { Component, OnInit, Input, ViewChild, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
 import { MedidaService } from 'app/service/medida.service';
-import { ReceitaService } from 'app/service/receita.service';
 import { HolderService } from 'app/service/holder.service';
 import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
 import { Receita } from 'app/viewmodel/template/receita/receita';

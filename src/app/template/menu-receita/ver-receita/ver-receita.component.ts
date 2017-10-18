@@ -1,3 +1,4 @@
+import { ReceitaService } from './../receita.service';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
 import { Receita } from 'app/viewmodel/template/receita/receita';
 import { Usuario } from './../../../viewmodel/template/login/usuario';
@@ -6,7 +7,6 @@ import { PrepararReceitaComponent } from 'app/template/menu-receita/preparar-rec
 import { ComponentInfo } from './../../../viewmodel/template/componentInfo';
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { MedidaService } from 'app/service/medida.service';
-import { ReceitaService } from 'app/service/receita.service';
 import { HolderService } from 'app/service/holder.service';
 import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
 import { ToastsManager } from 'ng2-toastr';

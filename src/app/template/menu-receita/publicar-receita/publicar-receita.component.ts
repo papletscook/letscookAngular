@@ -1,10 +1,10 @@
+import { ReceitaService } from './../receita.service';
 import { CategoriaService } from './../../categoria/categoria.service';
 import { IngredienteService } from './../../ingrediente/ingrediente.service';
 import { TemplateComponent } from 'app/template/template.component';
 import { Receita } from './../../../viewmodel/template/receita/receita';
 import { SessionService } from './../../../service/session.service';
 import { HolderService } from 'app/service/holder.service';
-import { ReceitaService } from 'app/service/receita.service';
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { MockReceita } from './../mock/mockReceita';
 import { MedidaService } from 'app/service/medida.service';

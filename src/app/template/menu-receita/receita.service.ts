@@ -1,5 +1,4 @@
-import { SessionService } from './session.service';
-
+import { SessionService } from './../../service/session.service';
 import { Injectable } from '@angular/core';
 import { GenericService } from 'app/service/generic.service';
 import { UrlServiceService } from 'app/service/url.service';
