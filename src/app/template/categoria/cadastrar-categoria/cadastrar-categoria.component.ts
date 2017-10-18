@@ -36,13 +36,16 @@ export class CadastrarCategoriaComponent implements OnInit {
                 .then(data => {
                     this.loading = false;
                     this.alertService.info("Categoria: " + data.nome + " cadastrada com sucesso.")
+                    this.limpar();
                 }, error => {
                     this.alertService.error("Ocorreu um erro ao cadastrar Categoria!");
+                    this.limpar();
+                    this.loading = false;
                 });
         }
     }
 
-    private cancelar() {
+    private limpar() {
         this.categoria = new Categoria();
     }
 }

@@ -14,8 +14,8 @@
                 <label class="required" for="nome">Nome</label>
                 <input type="text" id="nome" autofocus="true" name="nome" [(ngModel)]="categoria.nome" placeholder="Nome da Categoria...">
             </div>            
-            <button class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarIngrediente()">Salvar</button>
-            <button class="btn btn-secondary" (click)="abort()">Cancelar</button>
+            <button class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarCategoria()">Salvar</button>
+            <button class="btn btn-secondary" (click)="limpar()">Cancelar</button>
         </section>
     </form>
 </div>
