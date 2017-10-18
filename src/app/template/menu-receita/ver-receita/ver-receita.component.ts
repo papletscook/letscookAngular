@@ -25,7 +25,8 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
 
 
 export class VerReceitaComponent implements OnInit {
-    preparar: boolean;
+
+    preparar: boolean = false;
 
     medidas: any = null;
 
@@ -80,6 +81,8 @@ export class VerReceitaComponent implements OnInit {
         this.prepararComp.open = true;
     }
 
+
+
     private detailMedida(medida: string): Medida {
         for (let med of this.medidas) {
             if (med.name == medida) {
@@ -95,6 +98,7 @@ export class VerReceitaComponent implements OnInit {
 
     editarReceita() {
         let r = this.receita;
+        this.editarComp.carregarCampos();
         this.editedReceita = r;
         this.editarComp._open = true;
     }

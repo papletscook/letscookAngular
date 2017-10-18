@@ -5,16 +5,18 @@
         </span>
     </div>
 </div>
-<div *ngIf="!loading">
-    <ver-receita-component *ngIf="receita.id" [receita]="receita"></ver-receita-component>
-    <clr-wizard #wizard [(clrWizardOpen)]="_open" clrWizardSize="xl">
+<div *ngIf="!loading && receita">
+    <ver-receita-component *ngIf="exibirReceita" [receita]="receita"></ver-receita-component>
+    <clr-wizard #wizard [(clrWizardOpen)]="_open" clrWizardSize="xl" (clrWizardOnCancel)="close()" [clrWizardPreventDefaultCancel]="true">
         <clr-wizard-title *ngIf="receita.id">Editar Receita</clr-wizard-title>
         <clr-wizard-title *ngIf="!receita.id">Publicar Receita</clr-wizard-title>
 
         <clr-wizard-button [type]="'cancel'">Cancelar</clr-wizard-button>
         <clr-wizard-button [type]="'previous'">Voltar</clr-wizard-button>
         <clr-wizard-button [type]="'next'">Avançar</clr-wizard-button>
-        <clr-wizard-button [type]="'finish'" (click)="publicarReceita()">Publicar</clr-wizard-button>
+
+        <clr-wizard-button *ngIf="receita.id" [type]="'finish'" (click)="atualizarReceita()">Atualizar</clr-wizard-button>
+        <clr-wizard-button *ngIf="!receita.id" [type]="'finish'" (click)="publicarReceita()">Publicar</clr-wizard-button>
 
         <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepOne()">
             <ng-template clrPageNavTitle>
@@ -39,7 +41,7 @@
                     <div class="form-group">
                         <label class="required">Categoria: </label>
                         <div class="select">
-                            <select name="receita.categoria" [(ngModel)]="receita.categoria">
+                            <select name="categoria" [(ngModel)]="receita.categoria" [compareWith]='customCompareCategoria'>
                                 <option [ngValue]="null" disabled>Selecione</option>
                                 <option [ngValue]="cat" *ngFor="let cat of categorias">{{cat.nome}}</option>
                             </select>
@@ -47,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label class="required">Descrição: </label>
-                        <textarea name="receita.descricao" [(ngModel)]="receita.descricao" placeholder="Descrição"></textarea>
+                        <textarea rows="4" name="descricao" [(ngModel)]="receita.descricao" placeholder="Descrição"></textarea>
                     </div>
                 </section>
             </form>

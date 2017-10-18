@@ -5,7 +5,7 @@
         </span>
     </div>
 </div>
-<div class="row" *ngIf="!loading">
+<div class="row" *ngIf="!loading && receita">
     <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-img">
@@ -46,8 +46,10 @@
             <div class="card-block">
                 <h4 class="card-title">Ingredientes</h4>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngFor="let ingt of receita.ingts">{{ingt.quant}} {{detailMedida(ingt.uMedida).desc}} de {{ingt.ingrediente.nome}}.</li>
+            <ul class="list-unstyled">
+                <li *ngFor="let ingt of receita.ingts">
+                    <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
+                    <b>{{ingt.ingrediente.nome}}</b>.</li>
             </ul>
         </div>
     </div>
@@ -73,4 +75,4 @@
     </div>
 </div>
 <preparar-receita-component [receita]="receita" [medidas]="medidas"></preparar-receita-component>
-<publicar-receita-component *ngIf="editedReceita" [receita]="editedReceita"></publicar-receita-component>
+<publicar-receita-component [receita]="editedReceita"></publicar-receita-component>

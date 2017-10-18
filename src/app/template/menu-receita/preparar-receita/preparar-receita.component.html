@@ -22,15 +22,15 @@
                         <div class="card-block">
                             <h4 class="card-title">Ingredientes</h4>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" *ngFor="let ingt of receita.ingts; let i = index;">
+                        <ul class="list-unstyled">
+                            <li *ngFor="let ingt of receita.ingts; let i = index;">
                                 <div class="checkbox">
                                     <input id="checkrads_{{i}}" type="checkbox" [checked]="ingt.checked" (change)="handleChange(i)">
                                     <label for="checkrads_{{i}}">
                                         <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
                                         <b>{{ingt.ingrediente.nome}}</b>.</label>
                                 </div>
-                            </li>
+                                </li>
                         </ul>
                         <div class="card-footer">
                             <div class="btn-group btn-primary btn-sm">
