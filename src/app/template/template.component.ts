@@ -35,7 +35,7 @@ export class TemplateComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-
+        this.abrirComponentesGenericoDaIndex("IndexPageComponent");
     }
 
     public entrar() {
@@ -61,8 +61,10 @@ export class TemplateComponent implements OnInit {
 
     public adminNav(b: boolean): void {
         if (!b) {
-            this.menus = Vizitante;
+            this.subNavAtivo = false
+            this.menus = null;
         } else {
+            this.subNavAtivo = true;
             this.menus = Cozinheiro;
         }
     }
@@ -70,14 +72,15 @@ export class TemplateComponent implements OnInit {
     private abrirComponentesGenericoDaIndex(component: string) {
         switch (component) {
             case "DespensaComponent":
-                this.subNavAtivo = true;
+                this.adminNav(true);
                 this.changeCase(DespensaComponent);
                 break;
             case "PainelDeControleComponent":
-                this.subNavAtivo = true;
+                this.adminNav(true);
                 this.changeCase(PainelDeControleComponent);
                 break;
             case "IndexPageComponent":
+                this.adminNav(false);
                 this.changeCase(IndexPageComponent);
                 break;
         }
