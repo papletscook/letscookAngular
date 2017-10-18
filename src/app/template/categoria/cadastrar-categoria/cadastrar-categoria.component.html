@@ -7,15 +7,41 @@
 </div>
 <div *ngIf="!loading">
     <h3 class="header-margin-top">Cadastrar Categoria</h3>
-    <form class="compact">
-        <section class="form-block">
-            <label>Formulário</label>
-            <div class="form-group">
-                <label class="required" for="nome">Nome</label>
-                <input type="text" id="nome" autofocus="true" name="nome" [(ngModel)]="categoria.nome" placeholder="Nome da Categoria...">
-            </div>            
-            <button class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarCategoria()">Salvar</button>
-            <button class="btn btn-secondary" (click)="limpar()">Cancelar</button>
-        </section>
-    </form>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="compact">
+                <section class="form-block">
+                    <label>Formulário</label>
+                    <div class="form-group">
+                        <label class="required" for="nome">Nome</label>
+                        <input type="text" id="nome" autofocus="true" name="nome" [(ngModel)]="categoria.nome" placeholder="Nome da Categoria...">
+                    </div>
+                    <button class="btn btn-primary" [disabled]="!validation()" (click)="cadastrarCategoria()">Salvar</button>
+                    <button class="btn btn-secondary" (click)="limpar()">Cancelar</button>
+                </section>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h4>Lista de Categorias</h4>
+            <table class="table table-compact" *ngIf="categorias">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let categoria of categorias">
+                        <td>{{categoria.nome}}</td>
+                        <td>
+                            <button class="btn btn-icon btn-sm" (click)="deletarCategoria(categoria)">
+                                <clr-icon shape="times"></clr-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>

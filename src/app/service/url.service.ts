@@ -33,6 +33,8 @@ export class UrlServiceService {
                 return this.httpPostRequest(infoRequest);
             case 'put':
                 return this.httpPutRequest(infoRequest);
+            case 'delete':
+                return this.httpDeleteRequest(infoRequest);
         }
     }
 
@@ -67,6 +69,23 @@ export class UrlServiceService {
     private httpPutRequest(infoResquest: InfoRequest) {
         const url = `${this.url}` + infoResquest.command;
         return this.http.put(url, JSON.stringify(infoResquest._data), this.options)
+            .timeout(infoResquest.timeout)
+            .toPromise()
+            .then(response => {
+                return response.json()
+            })
+            .catch(this.handleError);
+    }
+
+    private httpDeleteRequest(infoResquest: InfoRequest) {
+        let rstlink;
+        if (infoResquest._data) {
+            rstlink = infoResquest.command + infoResquest._data;
+        } else {
+            rstlink = infoResquest.command;
+        }
+        const url = `${this.url}` + rstlink;
+        return this.http.delete(url, this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {

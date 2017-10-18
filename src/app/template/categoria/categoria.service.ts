@@ -40,5 +40,19 @@ export class CategoriaService extends GenericService implements Service<Categori
             .catch(this.handleError);
     }
 
+    public deletar(categoria: Categoria) {
+        this.infoRequest = {
+            rqst: "delete",
+            command: this.urlServiceService.pathLetsCook + "categoriaReceita",
+            timeout: 6000,
+            _data: categoria.id
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Categoria[];
+            })
+            .catch(this.handleError);
+    }
+
 
 }

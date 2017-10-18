@@ -16,11 +16,17 @@ export class CadastrarCategoriaComponent implements OnInit {
 
     private categoria: Categoria = new Categoria();
 
+    private categorias: Categoria[];
+
+    private 
+
     constructor(
         private categoriaService: CategoriaService,
         private alertService: AlertService) { }
 
-    public ngOnInit() { }
+    public ngOnInit() {
+        this.listarCategoria();
+    }
 
     public validation(): boolean {
         if (this.categoria.nome) {
@@ -37,12 +43,39 @@ export class CadastrarCategoriaComponent implements OnInit {
                     this.loading = false;
                     this.alertService.info("Categoria: " + data.nome + " cadastrada com sucesso.")
                     this.limpar();
+                    this.listarCategoria();
                 }, error => {
                     this.alertService.error("Ocorreu um erro ao cadastrar Categoria!");
                     this.limpar();
                     this.loading = false;
                 });
         }
+    }
+
+    private listarCategoria() {
+        this.loading = true;
+        this.categoriaService.list()
+            .then(data => {
+                this.categorias = data;
+                this.loading = false;
+            }, error => {
+                this.alertService.error("Ocorreu um erro ao buscar Categorias!");
+                this.loading = false;
+            });
+    }
+
+    private deletarCategoria(categoria: Categoria) {
+        this.loading = true;
+        this.categoriaService.deletar(categoria)
+            .then(data => {
+                this.alertService.info("Categoria: " + categoria.nome + " deletada com sucesso.");
+                //this.listarCategoria();
+                this.categorias = data;
+                this.loading = false;
+            }, error => {
+                this.alertService.error("Ocorreu um erro ao deletar Categoria!");
+                this.loading = false;
+            });
     }
 
     private limpar() {
