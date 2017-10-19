@@ -8,15 +8,23 @@
 <div class="row" *ngIf="!loading && receita">
     <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{receita.nome}}</h4>
+            </div>
             <div class="card-img">
                 <img [src]="receita.imagem">
             </div>
             <div class="card-block">
-                <h4 class="card-title">Nome: {{receita.nome}}
-                    <span class="badge badge-3">{{receita.categoria.nome}} </span>
-                </h4>
+                <!-- <span class="badge badge-3">{{receita.categoria.nome}} </span> -->
+                <!-- <a class="label label-blue">
+                    San Jose
+                    <span class="badge">66</span>
+                </a> -->
+                <div class="card-title">
+                    Descrição
+                </div>
                 <p class="card-text">
-                    Descrição: {{receita.descricao}}
+                    {{receita.descricao}}
                 </p>
             </div>
 
@@ -26,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5 col-sm-12 col-xs-6">
+    <div class="col-md-8 col-sm-12 col-xs-12">
         <div class="card col-sm-12 col-xs-12">
             <div class="card-block">
                 <h4 class="card-title">Resumo do Modo de Preparo</h4>
@@ -53,7 +61,7 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="col-md-6 col-sm-12 col-xs-12 card">
             <div class="card-block">
                 <h4 class="card-title">Criador</h4>
@@ -72,6 +80,9 @@
                 <p class="card-text">{{receita.minsPreparo}} minutos.</p>
             </div>
         </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <app-comentario-receita [comentarios]="receita.comentarios"></app-comentario-receita>
     </div>
 </div>
 <preparar-receita-component [receita]="receita" [medidas]="medidas"></preparar-receita-component>

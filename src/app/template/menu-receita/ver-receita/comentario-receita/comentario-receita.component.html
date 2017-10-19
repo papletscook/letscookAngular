@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-header">
+    Comentários
+  </div>
+  <div class="card-block" *ngFor="let coment of comentarios">
+    <div class="card-media-block">
+      <img [src]="coment.usuario.imagem" class="card-media-image">
+      <div class="card-media-description">
+        <span class="card-media-title">
+          <i>Comentário:</i>
+        </span>
+        <span class="card-media-text">
+          {{coment.conteudo}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-sm btn-link">Action</button>
+  </div>
+</div>

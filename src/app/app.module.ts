@@ -37,6 +37,7 @@ import { RatingModule } from "ngx-rating";
 import { Ng2CompleterModule } from "ng2-completer";
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
 import { MomentModule } from 'angular2-moment';
+import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receita/comentario-receita/comentario-receita.component';
 
 @NgModule({
     declarations: [
@@ -61,7 +62,8 @@ import { MomentModule } from 'angular2-moment';
         PassoComponent,
         DespensaComponent,
         CadastrarIngredienteComponent,
-        CadastrarCategoriaComponent
+        CadastrarCategoriaComponent,
+        ComentarioReceitaComponent
     ],
     imports: [
         BrowserModule,

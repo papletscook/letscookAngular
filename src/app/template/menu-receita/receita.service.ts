@@ -46,7 +46,7 @@ export class ReceitaService extends GenericService implements CrudService<Receit
 
     getById(t: Receita): Promise<Receita> {
         this.infoRequest = {
-            rqst: 'get', command: this.urlServiceService.pathLetsCook + 'receita/' + t.id, timeout: 10000
+            rqst: 'get', command: this.urlServiceService.pathLetsCook + 'receita/' + t.id, timeout: 20000
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
@@ -57,8 +57,10 @@ export class ReceitaService extends GenericService implements CrudService<Receit
 
 
     public atualizar(t: Receita): Promise<Receita> {
+        console.log(t)
         this.infoRequest = {
-            rqst: 'put', command: this.urlServiceService.pathLetsCook + 'receita', timeout: 20000
+            rqst: 'put', command: this.urlServiceService.pathLetsCook + 'receita', timeout: 60000,
+            _data: t
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

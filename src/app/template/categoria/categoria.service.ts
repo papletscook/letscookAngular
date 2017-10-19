@@ -43,7 +43,7 @@ export class CategoriaService extends GenericService implements Service<Categori
     public deletar(categoria: Categoria) {
         this.infoRequest = {
             rqst: "delete",
-            command: this.urlServiceService.pathLetsCook + "categoriaReceita",
+            command: this.urlServiceService.pathLetsCook + "categoriaReceita/",
             timeout: 6000,
             _data: categoria.id
         };
