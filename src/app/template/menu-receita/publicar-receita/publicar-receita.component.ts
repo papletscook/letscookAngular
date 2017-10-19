@@ -63,7 +63,7 @@ export class PublicarReceitaComponent implements OnInit {
     private alertIngrediente: boolean = false;
 
 
-    @ViewChild('wizard') wizard: Wizard;
+    @ViewChild('wizardPublicar') wizard: Wizard;
 
     @Input()
     _open = true;

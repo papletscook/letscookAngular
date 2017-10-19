@@ -9,7 +9,16 @@
     <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">{{receita.nome}}</h4>
+                <h4 class="card-title">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{receita.nome}}
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
+                        </div>
+                    </div>
+                </h4>
             </div>
             <div class="card-img">
                 <img [src]="receita.imagem">
@@ -50,17 +59,18 @@
             <div class="card-block">
                 <h4 class="card-title">Ingredientes</h4>
             </div>
+
             <ul class="list-unstyled">
                 <li *ngFor="let ingt of receita.ingts">
                     <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
                     <b>{{ingt.ingrediente.nome}}</b>.</li>
             </ul>
-
-            
+ 
             <div class="card-footer">
-                    <button class="btn btn-sm btn-link" (click)="prepararReceita()">Preparar Receita</button>
-                    <button class="btn btn-sm btn-link">Lista de Compras</button>
-                </div>
+                <button class="btn btn-sm btn-link" (click)="prepararReceita()">Preparar Receita</button>
+                <!-- <button class="btn btn-sm btn-link">Lista de Compras</button> -->
+
+            </div>
         </div>
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
