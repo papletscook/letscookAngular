@@ -39,27 +39,25 @@
         </div>
         <div class="col-md-6">
             <h4>Lista de Ingredientes</h4>
-            <table class="table table-compact" *ngIf="ingredientes">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let ingrediente of ingredientes">
-                        <td (dbclick)="modificaIngrediente(ingrediente)">{{ingrediente.nome}}</td>
-                        <td>
-                            <button class="btn btn-icon btn-sm">
-                                <clr-icon shape="times"></clr-icon>
-                            </button>
-                            <button class="btn btn-icon btn-sm" (click)="modificaIngrediente(ingrediente)">
-                                <clr-icon shape="bars"></clr-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <clr-datagrid *ngIf="ingredientes">
+                <clr-dg-column>Nome</clr-dg-column>
+                <clr-dg-column>Ações</clr-dg-column>
+                <clr-dg-row *clrDgItems="let ingrediente of ingredientes">
+                    <clr-dg-cell>{{ingrediente.nome}}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <button class="btn btn-icon btn-sm">
+                            <clr-icon shape="times"></clr-icon>
+                        </button>
+                        <button class="btn btn-icon btn-sm" (click)="modificaIngrediente(ingrediente)">
+                            <clr-icon shape="bars"></clr-icon>
+                        </button>
+                    </clr-dg-cell>
+                </clr-dg-row>
+                <clr-dg-footer>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} Ingredientes
+                    <clr-dg-pagination #pagination [clrDgPageSize]="6"></clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>            
             <div *ngIf="!ingredientes">
                 <p>Lista vazia ou com erro na busca utilize o botão abaixo para tentar novamente...</p>
                 <button class="btn btn-primary btn-block btn-sm" (click)="listarIngredientes()">Atualizar Lista</button>

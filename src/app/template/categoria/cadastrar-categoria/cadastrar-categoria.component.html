@@ -23,27 +23,25 @@
         </div>
         <div class="col-md-6">
             <h4>Lista de Categorias</h4>
-            <table class="table table-compact" *ngIf="categorias">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let categoria of categorias">
-                        <td>{{categoria.nome}}</td>
-                        <td>
-                            <button class="btn btn-icon btn-sm" (click)="deletarCategoria(categoria)">
-                                <clr-icon shape="times"></clr-icon>
-                            </button>
-                            <button class="btn btn-icon btn-sm" (click)="modificaCategoria(categoria)">
-                                <clr-icon shape="bars"></clr-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <clr-datagrid *ngIf="categorias">
+                <clr-dg-column>Nome</clr-dg-column>
+                <clr-dg-column>Ações</clr-dg-column>
+                <clr-dg-row *clrDgItems="let categoria of categorias">
+                    <clr-dg-cell>{{categoria.nome}}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <button class="btn btn-icon btn-sm" (click)="deletarCategoria(categoria)">
+                            <clr-icon shape="times"></clr-icon>
+                        </button>
+                        <button class="btn btn-icon btn-sm" (click)="modificaCategoria(categoria)">
+                            <clr-icon shape="bars"></clr-icon>
+                        </button>
+                    </clr-dg-cell>
+                </clr-dg-row>
+                <clr-dg-footer>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} Categorias
+                    <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
             <div *ngIf="!categorias">
                 <p>Lista vazia ou com erro na busca utilize o botão abaixo para tentar novamente...</p>
                 <button class="btn btn-primary btn-block btn-sm" (click)="listarCategoria()">Atualizar Lista</button>
