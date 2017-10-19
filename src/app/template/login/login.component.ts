@@ -53,6 +53,10 @@ export class LoginComponent implements OnInit {
             })
     }
 
+    private registrar() {
+        
+    }
+
     //Mock so use se nao estiver binbando backend...
     public entrarInMock() {
         if (this.loginService.validInMock(this.usuario)) {

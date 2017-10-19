@@ -1,3 +1,4 @@
+import { RegistroComponent } from './template/registro/registro.component';
 import { CadastrarCategoriaComponent } from './template/categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { TemplateService } from './template/template.service';
 import { AlertService } from './service/alert.service';
@@ -63,7 +64,8 @@ import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receit
         DespensaComponent,
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
-        ComentarioReceitaComponent
+        ComentarioReceitaComponent,
+        RegistroComponent
     ],
     imports: [
         BrowserModule,
@@ -100,7 +102,8 @@ import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receit
         VerReceitaComponent,
         DespensaComponent,
         CadastrarIngredienteComponent,
-        CadastrarCategoriaComponent
+        CadastrarCategoriaComponent,
+        RegistroComponent
     ]
 })
 
