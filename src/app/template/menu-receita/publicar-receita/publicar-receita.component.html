@@ -7,7 +7,7 @@
 </div>
 <div *ngIf="!loading && receita">
     <ver-receita-component *ngIf="exibirReceita" [receita]="receita"></ver-receita-component>
-    <clr-wizard #wizard [(clrWizardOpen)]="_open" clrWizardSize="xl" (clrWizardOnCancel)="close()" [clrWizardPreventDefaultCancel]="true">
+    <clr-wizard #wizardPublicar [(clrWizardOpen)]="_open" clrWizardSize="xl" (clrWizardOnCancel)="close()" [clrWizardPreventDefaultCancel]="true">
         <clr-wizard-title *ngIf="receita.id">Editar Receita</clr-wizard-title>
         <clr-wizard-title *ngIf="!receita.id">Publicar Receita</clr-wizard-title>
 

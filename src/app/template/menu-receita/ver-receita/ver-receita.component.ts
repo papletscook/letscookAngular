@@ -26,6 +26,8 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
 
 export class VerReceitaComponent implements OnInit {
 
+    avgRatingReceita: number;
+
     preparar: boolean = false;
 
     medidas: any = null;
@@ -58,7 +60,6 @@ export class VerReceitaComponent implements OnInit {
             this.receita.id = 28
         }
 
-
         this.medidaService.list()
             .then(data => {
                 this.medidas = data;
@@ -68,7 +69,7 @@ export class VerReceitaComponent implements OnInit {
         this.receitaService.getById(this.receita).then(data => {
             this.receita = data;
             this.loading = false;
-            console.log(this.isDonoReceita())
+            this.ratingReceita();
         }, error => {
             this.toastr.error('Ocorreu um erro ao obter receita!', 'Oops!');
         });
@@ -79,6 +80,18 @@ export class VerReceitaComponent implements OnInit {
 
     private prepararReceita() {
         this.prepararComp.open = true;
+    }
+
+    private ratingReceita() {
+        let avas = this.receita.avaliacoes;
+        if (!avas) {
+            return;
+        }
+        let sum = 0;
+        for (let ava of avas) {
+            sum += ava.valor;
+        }
+        this.avgRatingReceita = sum / avas.length;
     }
 
 

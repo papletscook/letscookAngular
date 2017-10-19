@@ -15,7 +15,12 @@
       </div>
     </div>
   </div>
-  <div class="card-footer">
-    <button class="btn btn-sm btn-link">Action</button>
+  <div class="card-footer" *ngIf="!comentar">
+    <button class="btn btn-sm btn-link" (click)="comentar = true">Comentar</button>
+  </div>
+  <div class="card-footer" *ngIf="comentar">
+    <div class="form-group">
+      <input type="text" id="comentario" name="comentario" placeholder="Comentário..." size="45">
+    </div>
   </div>
 </div>

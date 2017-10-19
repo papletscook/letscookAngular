@@ -11,6 +11,10 @@ export class ComentarioReceitaComponent implements OnInit {
   @Input()
   private comentarios: ComentarioReceita[];
 
+  private comentar: boolean = false;
+
+  private comentario: ComentarioReceita = new ComentarioReceita();
+
   constructor() { }
 
   ngOnInit() {
