@@ -28,10 +28,6 @@
                 </p>
             </div>
 
-            <div class="card-footer">
-                <button class="btn btn-sm btn-link" (click)="prepararReceita()">Preparar Receita</button>
-                <button class="btn btn-sm btn-link">Lista de Compras</button>
-            </div>
         </div>
     </div>
     <div class="col-md-8 col-sm-12 col-xs-12">
@@ -59,10 +55,16 @@
                     <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
                     <b>{{ingt.ingrediente.nome}}</b>.</li>
             </ul>
+
+            
+            <div class="card-footer">
+                    <button class="btn btn-sm btn-link" (click)="prepararReceita()">Preparar Receita</button>
+                    <button class="btn btn-sm btn-link">Lista de Compras</button>
+                </div>
         </div>
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="col-md-6 col-sm-12 col-xs-12 card">
+        <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Criador</h4>
                 <p class="card-text">{{receita.criador.email}}</p>
@@ -74,16 +76,21 @@
                 <a class="btn btn-sm btn-link">Ver Perfil</a>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 col-xs-12 card">
+    </div>
+
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <app-comentario-receita [comentarios]="receita.comentarios"></app-comentario-receita>
+    </div>
+
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Tempo de Preparo</h4>
                 <p class="card-text">{{receita.minsPreparo}} minutos.</p>
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-sm-12 col-xs-12">
-        <app-comentario-receita [comentarios]="receita.comentarios"></app-comentario-receita>
-    </div>
+
 </div>
 <preparar-receita-component [receita]="receita" [medidas]="medidas"></preparar-receita-component>
 <publicar-receita-component [receita]="editedReceita"></publicar-receita-component>
