@@ -37,6 +37,9 @@
                             <button class="btn btn-icon btn-sm" (click)="deletarCategoria(categoria)">
                                 <clr-icon shape="times"></clr-icon>
                             </button>
+                            <button class="btn btn-icon btn-sm" (click)="modificaCategoria(categoria)">
+                                <clr-icon shape="bars"></clr-icon>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -47,5 +50,24 @@
             </div>
         </div>
     </div>
-
+    <clr-modal [(clrModalOpen)]="modalOpenCloseStatus">
+        <h3 class="modal-title">Modificar Categoria</h3>
+        <div class="modal-body">
+            <div *ngIf="categoriaMod">
+                <form class="compact">
+                    <section class="form-block">
+                        <label>Formulário</label>
+                        <div class="form-group">
+                            <label class="required" for="nome">Nome</label>
+                            <input type="text" id="nome" autofocus="true" name="nome" [(ngModel)]="categoriaMod.nome" placeholder="Nome da Categoria...">
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" [disabled]="btnModCategoriaDisable" (click)="atualizaCategoria()">Atualizar</button>
+            <button type="button" class="btn btn-outline" (click)="modalOpenCloseStatus = false;">Fechar</button>
+        </div>
+    </clr-modal>
 </div>

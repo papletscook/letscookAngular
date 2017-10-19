@@ -18,7 +18,9 @@ export class CadastrarCategoriaComponent implements OnInit {
 
     private categorias: Categoria[];
 
-    private 
+    private modalOpenCloseStatus: boolean = false;
+    private categoriaMod: Categoria;
+    private btnModCategoriaDisable: boolean = false;
 
     constructor(
         private categoriaService: CategoriaService,
@@ -81,4 +83,24 @@ export class CadastrarCategoriaComponent implements OnInit {
     private limpar() {
         this.categoria = new Categoria();
     }
+
+    private modificaCategoria(categoria: Categoria) {
+        this.categoriaMod = categoria;
+        this.modalOpenCloseStatus = true;
+    }
+
+    private atualizaCategoria() {
+        this.btnModCategoriaDisable = true;
+        this.categoriaService.atualizar(this.categoriaMod)
+            .then(data => {
+                this.alertService.info("Ingrediente " + data.nome + " atualizado com sucesso.");
+                this.modalOpenCloseStatus = false;
+                this.btnModCategoriaDisable = false;
+            }, error => {
+                this.alertService.error("Ocorreu um erro ao Atualizar Categoria!");
+                this.modalOpenCloseStatus = false;
+                this.btnModCategoriaDisable = false;
+            })
+    }
+
 }

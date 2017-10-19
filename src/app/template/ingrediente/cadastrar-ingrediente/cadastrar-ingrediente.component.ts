@@ -162,8 +162,6 @@ export class CadastrarIngredienteComponent implements OnInit {
                 this.btnModIngredienteDisable = false;
                 this.alertService.info("Ingrediente " + data.nome + " atualizado com sucesso.");
                 this.modalOpenCloseStatus = false;
-                this.ingredientes = null;
-                this.listarIngredientes();
             }, error => {
                 this.alertService.error("Ocorreu um erro ao Atualizar Ingrediente!");
                 this.btnModIngredienteDisable = false;
