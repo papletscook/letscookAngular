@@ -22,7 +22,6 @@ import { AlertService } from 'app/service/alert.service';
 import * as _ from "lodash";
 
 @Component({
-    // tslint:disable-next-line:component-selector
     selector: 'publicar-receita-component',
     templateUrl: 'publicar-receita.component.html',
     styleUrls: ['publicar-receita.component.css'],
@@ -43,7 +42,7 @@ export class PublicarReceitaComponent implements OnInit {
 
     cropperSettings: CropperSettings;
 
-    img: any;
+    img: any = {}
 
     private allIngredientes: Ingrediente[];
 
@@ -64,6 +63,9 @@ export class PublicarReceitaComponent implements OnInit {
 
 
     @ViewChild('wizardPublicar') wizard: Wizard;
+
+    @ViewChild('cropper', undefined)
+    cropper: ImageCropperComponent;
 
     @Input()
     _open = true;
@@ -105,9 +107,20 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita.imagem = img;
     }
 
-
-
     ngOnInit() {
+    }
+
+    loadImage() {
+        console.log('loadImage')
+        let base64 = this.receita.imagem;
+        let image = new Image();
+        image.src = base64;
+        this.cropper.setImage(image)
+    }
+
+    proximaPagina(){
+        this.loadImage()
+        this.wizard.next()
     }
 
     contaPalavras(str: string): number {
@@ -120,8 +133,6 @@ export class PublicarReceitaComponent implements OnInit {
             return 10;
         }
     }
-
-
 
     validationStepOne(): boolean {
         let r = this.receita;
@@ -141,7 +152,6 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     atualizarReceita(): void {
-
         if (this.validationStepFour()) {
             this.loading = true;
             if (this.img.image) {
@@ -157,6 +167,7 @@ export class PublicarReceitaComponent implements OnInit {
                 })
 
             this.loading = false;
+            this.wizard.reset()
         }
     }
 
@@ -176,8 +187,9 @@ export class PublicarReceitaComponent implements OnInit {
                 }, error => {
                     this.alert.error("Falha ao publicar Receita!")
                 })
-
             this.loading = false;
+            this.wizard.reset()
+
         }
     }
 
@@ -239,7 +251,7 @@ export class PublicarReceitaComponent implements OnInit {
         this.etapaEdited = null;
     }
 
-    private detailMedida(medida: string): Medida {
+    detailMedida(medida: string): Medida {
         for (let med of this.medidas) {
             if (med.name == medida) {
                 return med;
@@ -248,7 +260,7 @@ export class PublicarReceitaComponent implements OnInit {
         return null;
     }
 
-    private adicionarIngrediente() {
+    adicionarIngrediente() {
 
         if (this.ingredienteCad.ingrediente &&
             this.ingredienteCad.uMedida &&
@@ -290,28 +302,17 @@ export class PublicarReceitaComponent implements OnInit {
         this.getCategorias();
         this.getIngredientes();
         this.getMedidas();
-    }
-
-    changeListener($event): void {
-        this.readThis($event.target);
-    }
-
-    readThis(inputValue: any): void {
-        const file: File = inputValue.files[0];
-        const myReader: FileReader = new FileReader();
-
-        myReader.onloadend = (e) => {
-            this.receita.imagem = myReader.result;
+        if (this.receita) {
+            this.loadImage()
         }
-        myReader.readAsDataURL(file);
     }
+
 
     public getIngredientes() {
         this.ingredientesService.list()
             .then(data => {
                 this.allIngredientes = _.orderBy(data, ['nome'], ['asc']);
             }, error => {
-
             });
     }
 
@@ -320,7 +321,6 @@ export class PublicarReceitaComponent implements OnInit {
             this.receita.etapas = [];
             this.addNewEtapa();
         }
-
     }
 
     public addNewEtapa() {

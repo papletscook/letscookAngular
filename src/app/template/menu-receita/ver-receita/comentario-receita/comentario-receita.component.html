@@ -20,7 +20,8 @@
   </div>
   <div class="card-footer" *ngIf="comentar">
     <div class="form-group">
-      <input type="text" id="comentario" name="comentario" placeholder="Comentário..." size="45">
+      <textarea id="comentario" name="comentario" placeholder="Comentário..."></textarea>
+      <button class="btn btn-success-outline"  (click)="confirmarComentario()">Comentar</button>
     </div>
   </div>
 </div>

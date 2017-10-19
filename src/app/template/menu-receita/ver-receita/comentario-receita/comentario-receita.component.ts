@@ -1,5 +1,7 @@
-import { ComentarioReceita } from 'app/viewmodel/template/receita/comentario';
+
 import { Component, OnInit, Input } from '@angular/core';
+import { SessionService } from 'app/service/session.service';
+import { ComentarioReceita } from 'app/viewmodel/template/receita/comentario';
 
 @Component({
   selector: 'app-comentario-receita',
@@ -19,5 +21,11 @@ export class ComentarioReceitaComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  confirmarComentario() {
+    this.comentar = false;
+    this.comentario = new ComentarioReceita();
+  }
+
 
 }

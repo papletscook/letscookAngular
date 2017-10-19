@@ -49,7 +49,6 @@ export class CadastrarIngredienteComponent implements OnInit {
         this.imgMod = {}
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
-        this.cropperSettings = new CropperSettings();
         this.cropperSettings.width = 350;
         this.cropperSettings.height = 200;
         this.cropperSettings.croppedWidth = 350;
