@@ -65,7 +65,7 @@
                     <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
                     <b>{{ingt.ingrediente.nome}}</b>.</li>
             </ul>
- 
+
             <div class="card-footer">
                 <button class="btn btn-sm btn-link" (click)="prepararReceita()">Preparar Receita</button>
                 <!-- <button class="btn btn-sm btn-link">Lista de Compras</button> -->
@@ -89,7 +89,7 @@
     </div>
 
     <div class="col-md-8 col-sm-12 col-xs-12">
-        <app-comentario-receita [comentarios]="receita.comentarios"></app-comentario-receita>
+        <app-comentario-receita [receita]="receita"></app-comentario-receita>
     </div>
 
     <div class="col-md-4 col-sm-12 col-xs-12">

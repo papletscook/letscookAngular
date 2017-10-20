@@ -38,6 +38,7 @@ import { Ng2CompleterModule } from "ng2-completer";
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
 import { MomentModule } from 'angular2-moment';
 import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receita/comentario-receita/comentario-receita.component';
+import { ComentarioService } from 'app/template/menu-receita/ver-receita/comentario-receita/comentario.service';
 
 @NgModule({
     declarations: [
@@ -87,7 +88,8 @@ import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receit
         SessionService,
         LoginService,
         AlertService,
-        TemplateService
+        TemplateService,
+        ComentarioService
     ],
     bootstrap: [AppComponent],
     entryComponents: [

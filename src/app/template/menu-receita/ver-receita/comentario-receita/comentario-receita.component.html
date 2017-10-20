@@ -2,12 +2,12 @@
   <div class="card-header">
     Comentários
   </div>
-  <div class="card-block" *ngFor="let coment of comentarios">
+  <div class="card-block" *ngFor="let coment of receita.comentarios">
     <div class="card-media-block">
       <img [src]="coment.usuario.imagem" class="card-media-image">
       <div class="card-media-description">
         <span class="card-media-title">
-          <i>Comentário:</i>
+          Comentário:
         </span>
         <span class="card-media-text">
           {{coment.conteudo}}
@@ -20,8 +20,8 @@
   </div>
   <div class="card-footer" *ngIf="comentar">
     <div class="form-group">
-      <textarea id="comentario" name="comentario" placeholder="Comentário..."></textarea>
-      <button class="btn btn-success-outline"  (click)="confirmarComentario()">Comentar</button>
+      <textarea id="comentario" name="comentario" [(ngModel)]="comentario.conteudo" placeholder="Comentário..."></textarea>
+      <button class="btn btn-success-outline" (click)="confirmarComentario()">Comentar</button>
     </div>
   </div>
 </div>
