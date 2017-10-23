@@ -3,5 +3,6 @@ import { Usuario } from './../login/usuario';
 export class ComentarioReceita {
     conteudo: string;
     dataComentario: Date;
+    receita : Receita;
     usuario: Usuario;
 }

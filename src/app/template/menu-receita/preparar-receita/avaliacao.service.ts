@@ -32,9 +32,8 @@ export class AvaliacaoService extends GenericService implements CrudService<Aval
 
     public cadastrar(t: AvaliacaoReceita): Promise<AvaliacaoReceita> {
         t.usuario = this.session.consultarUsuario();
-        console.log(t)
         this.infoRequest = {
-            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'receita/avaliar', timeout: 6000,
+            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'receita/avaliar', timeout: 30000,
             _data: t
         };
         return this.urlServiceService.request(this.infoRequest)

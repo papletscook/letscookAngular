@@ -91,7 +91,6 @@ export class PrepararReceitaComponent implements OnInit {
             this.wizard.next()
             this.inicioPreparo = new Date();
         }
-
     }
 
     finalizarPreparo() {

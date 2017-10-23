@@ -20,8 +20,9 @@
   </div>
   <div class="card-footer" *ngIf="comentar">
     <div class="form-group">
-      <textarea id="comentario" name="comentario" [(ngModel)]="comentario.conteudo" placeholder="Comentário..."></textarea>
+      <textarea appAutofocus id="comentario" name="comentario" [(ngModel)]="comentario.conteudo" placeholder="Comentário..."></textarea>
       <button class="btn btn-success-outline" (click)="confirmarComentario()">Comentar</button>
+      <button class="btn btn-warning-outline" (click)="cancelarComentario()">Cancelar</button>
     </div>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import { ComentarioReceita } from './../../../../viewmodel/template/receita/comentario';
 import { UrlServiceService } from 'app/service/url.service';
-
 import { GenericService } from 'app/service/generic.service';
 import { Injectable } from '@angular/core';
 import { InfoRequest } from 'app/viewmodel/url-service/info-request';
@@ -36,12 +35,12 @@ export class ComentarioService extends GenericService implements Service<Comenta
     public cadastrar(t: ComentarioReceita): Promise<ComentarioReceita> {
         t.usuario = this.session.consultarUsuario();
         console.log(t)
-        this.infoRequest = {
-            rqst: 'post', 
-            command: this.urlServiceService.pathLetsCook + 'receita/comentar',
-            _data: t
-        };
-        
+
+        this.infoRequest = new InfoRequest()
+        this.infoRequest.rqst = 'post';
+        this.infoRequest.command = this.urlServiceService.pathLetsCook + 'receita/comentar';
+        this.infoRequest._data = t;
+
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as ComentarioReceita[]

@@ -38,6 +38,25 @@
             </div>
 
         </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Criador</h4>
+                <p class="card-text">{{receita.criador.email}}</p>
+            </div>
+            <div class="card-footer" *ngIf="isDonoReceita()">
+                <a class="btn btn-sm btn-link" (click)="editarReceita()">Editar Receita</a>
+            </div>
+            <div class="card-footer" *ngIf="!isDonoReceita()">
+                <a class="btn btn-sm btn-link">Ver Perfil</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Tempo de Preparo</h4>
+                <p class="card-text">{{receita.minsPreparo}} minutos.</p>
+            </div>
+        </div>
     </div>
     <div class="col-md-8 col-sm-12 col-xs-12">
         <div class="card col-sm-12 col-xs-12">
@@ -72,34 +91,10 @@
 
             </div>
         </div>
-    </div>
-    <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">Criador</h4>
-                <p class="card-text">{{receita.criador.email}}</p>
-            </div>
-            <div class="card-footer" *ngIf="isDonoReceita()">
-                <a class="btn btn-sm btn-link" (click)="editarReceita()">Editar Receita</a>
-            </div>
-            <div class="card-footer" *ngIf="!isDonoReceita()">
-                <a class="btn btn-sm btn-link">Ver Perfil</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-8 col-sm-12 col-xs-12">
         <app-comentario-receita [receita]="receita"></app-comentario-receita>
     </div>
 
-    <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">Tempo de Preparo</h4>
-                <p class="card-text">{{receita.minsPreparo}} minutos.</p>
-            </div>
-        </div>
-    </div>
+
 
 </div>
 <preparar-receita-component [receita]="receita" [medidas]="medidas"></preparar-receita-component>
