@@ -1,3 +1,4 @@
+import { TemplateComponent } from './../template.component';
 import { LoginService } from './login.service';
 import { SessionService } from './../../service/session.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router,
         private loginService: LoginService,
         private session: SessionService,
-        public holderService: HolderService) { }
+        public holderService: HolderService,
+        public templateComponent: TemplateComponent) { }
 
     public ngOnInit(): void {
         this.usuario.email = "admin@letscook.com";
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
                     this.holderService.userLogado = true;
                     this.loginService.consultar(this.usuario).then(data => {
                         this.session.definirUsuario(data)
-                    })
+                    });
                     this.holderService.modalOpen = false;
                 } else {
                     this.erroLogar = true;
@@ -54,7 +56,8 @@ export class LoginComponent implements OnInit {
     }
 
     private registrar() {
-        
+        this.templateComponent.abrirComponentesGenericoDaIndex("RegistroComponent");
+        this.holderService.modalOpen = false;
     }
 
     //Mock so use se nao estiver binbando backend...

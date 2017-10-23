@@ -1,3 +1,4 @@
+import { RegistroComponent } from './registro/registro.component';
 import { DespensaComponent } from './despensa/despensa.component';
 import { TemplateService } from './template.service';
 import { SessionService } from './../service/session.service';
@@ -69,7 +70,7 @@ export class TemplateComponent implements OnInit {
         }
     }
 
-    private abrirComponentesGenericoDaIndex(component: string) {
+    public abrirComponentesGenericoDaIndex(component: string) {
         switch (component) {
             case "DespensaComponent":
                 this.adminNav(true);
@@ -82,6 +83,10 @@ export class TemplateComponent implements OnInit {
             case "IndexPageComponent":
                 this.adminNav(false);
                 this.changeCase(IndexPageComponent);
+                break;
+            case "RegistroComponent":
+                this.adminNav(false);
+                this.changeCase(RegistroComponent);
                 break;
         }
     }

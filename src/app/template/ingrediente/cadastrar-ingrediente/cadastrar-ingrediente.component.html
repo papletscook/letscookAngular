@@ -40,24 +40,20 @@
         <div class="col-md-6">
             <h4>Lista de Ingredientes</h4>
             <clr-datagrid *ngIf="ingredientes">
+                <clr-dg-placeholder>Não existe ingredientes cadastrados.</clr-dg-placeholder>
                 <clr-dg-column>Nome</clr-dg-column>
-                <clr-dg-column>Ações</clr-dg-column>
                 <clr-dg-row *clrDgItems="let ingrediente of ingredientes">
                     <clr-dg-cell>{{ingrediente.nome}}</clr-dg-cell>
-                    <clr-dg-cell>
-                        <button class="btn btn-icon btn-sm">
-                            <clr-icon shape="times"></clr-icon>
-                        </button>
-                        <button class="btn btn-icon btn-sm" (click)="modificaIngrediente(ingrediente)">
-                            <clr-icon shape="bars"></clr-icon>
-                        </button>
-                    </clr-dg-cell>
+                    <clr-dg-action-overflow>
+                        <button class="action-item" (click)="modificaIngrediente(ingrediente)">Editar</button>
+                        <button class="action-item">Excluir</button>
+                    </clr-dg-action-overflow>
                 </clr-dg-row>
                 <clr-dg-footer>
                     {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} Ingredientes
                     <clr-dg-pagination #pagination [clrDgPageSize]="6"></clr-dg-pagination>
                 </clr-dg-footer>
-            </clr-datagrid>            
+            </clr-datagrid>
             <div *ngIf="!ingredientes">
                 <p>Lista vazia ou com erro na busca utilize o botão abaixo para tentar novamente...</p>
                 <button class="btn btn-primary btn-block btn-sm" (click)="listarIngredientes()">Atualizar Lista</button>
