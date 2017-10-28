@@ -6,16 +6,29 @@
     </div>
 </div>
 <div class="row" *ngIf="!loading && receita">
+    <div class="col-md-12" *ngIf="!receitaInativa">
+        <div class="alert alert-danger">
+            <div class="alert-items">
+                <div class="alert-item static">
+                    <div class="alert-icon-wrapper">
+                        <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                    </div>
+                    <span class="alert-text">Receita desativada!</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             {{receita.nome}}
                         </div>
-                        <div class="col-md-6 text-right">
+                        <div class="col-md-8 text-right">
                             <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
+                            <span class="p8">({{this.receita.avaliacoes.length}}) avaliações</span>                            
                         </div>
                     </div>
                 </h4>
@@ -45,6 +58,7 @@
             </div>
             <div class="card-footer" *ngIf="isDonoReceita()">
                 <a class="btn btn-sm btn-link" (click)="editarReceita()">Editar Receita</a>
+                <a class="btn btn-sm btn-link" (click)="excluir = true">Excluir</a>
             </div>
             <div class="card-footer" *ngIf="!isDonoReceita()">
                 <a class="btn btn-sm btn-link">Ver Perfil</a>
@@ -99,3 +113,13 @@
 </div>
 <preparar-receita-component [receita]="receita" [medidas]="medidas"></preparar-receita-component>
 <publicar-receita-component [receita]="editedReceita"></publicar-receita-component>
+<clr-modal [(clrModalOpen)]="excluir">
+    <h3 class="modal-title">Excluir Receita</h3>
+    <div class="modal-body">
+        <p>Deseja excluir receita?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="excluir = false">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="excluirReceita()">Excluir</button>
+    </div>
+</clr-modal>

@@ -1,19 +1,42 @@
 import { ComponentInfo } from './../../viewmodel/template/componentInfo';
 import { Component, OnInit } from '@angular/core';
+import { Receita } from 'app/viewmodel/template/receita/receita';
+import { Categoria } from 'app/viewmodel/template/receita/categoria';
+import { ReceitaService } from 'app/template/menu-receita/receita.service';
+import { CategoriaService } from 'app/template/categoria/categoria.service';
+import { AlertService } from 'app/service/alert.service';
+import { SessionService } from 'app/service/session.service';
+import { HolderService } from 'app/service/holder.service';
+import * as _ from "lodash";
+
 
 @Component({
     selector: 'index-page-component',
     templateUrl: 'index-page.component.html',
-    styleUrls: ['index-page.component.css']
+    styleUrls: ['index-page.component.css'],
+    providers: [AlertService, SessionService, HolderService, ReceitaService, CategoriaService]
+
 })
 
-export class IndexPageComponent implements OnInit, ComponentInfo {
-    nome: string = "Página Inicial"
-    component: any = this;
+export class IndexPageComponent implements OnInit {
+    private receitas: Receita[];
+    private categorias: Categoria[];
 
-    constructor() { }
+    constructor(
+        private service: ReceitaService,
+        private catServ: CategoriaService,
+        private alert: AlertService
+    ) { }
 
     ngOnInit() {
+        this.listarCategorias()
+    }
 
+    private listarCategorias() {
+        this.catServ.list().then(data => {
+            this.categorias = _.orderBy(data, ['nome'], ['asc']);
+        }, error => {
+            this.alert.error("Falha consultar!")
+        });
     }
 }

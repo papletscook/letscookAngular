@@ -15,6 +15,7 @@ import { AlertService } from 'app/service/alert.service';
 @Component({
     templateUrl: 'template.component.html',
     styleUrls: ['template.component.css'],
+    selector: 'template-component',
     providers: [TemplateService, AlertService, SessionService, HolderService]
 })
 

@@ -39,6 +39,7 @@ import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastra
 import { MomentModule } from 'angular2-moment';
 import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receita/comentario-receita/comentario-receita.component';
 import { ComentarioService } from 'app/template/menu-receita/ver-receita/comentario-receita/comentario.service';
+import { TopavaliacaoComponent } from './template/index-page/topavaliacao/topavaliacao.component';
 
 @NgModule({
     declarations: [
@@ -64,7 +65,8 @@ import { ComentarioService } from 'app/template/menu-receita/ver-receita/comenta
         DespensaComponent,
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
-        ComentarioReceitaComponent
+        ComentarioReceitaComponent,
+        TopavaliacaoComponent
     ],
     imports: [
         BrowserModule,
@@ -102,7 +104,8 @@ import { ComentarioService } from 'app/template/menu-receita/ver-receita/comenta
         VerReceitaComponent,
         DespensaComponent,
         CadastrarIngredienteComponent,
-        CadastrarCategoriaComponent
+        CadastrarCategoriaComponent,
+        TopavaliacaoComponent
     ]
 })
 

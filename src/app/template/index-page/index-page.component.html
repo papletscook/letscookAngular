@@ -1,88 +1,25 @@
-<h3>Página inicial</h3>
-<p>Aqui segue conteudo inicial...</p>
-
-<p>Colocar slides e fotos com de receitas populares.....</p>
-
-<div class="row">
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                Header
-            </div>  
-            <div class="card-block">
-                <div class="card-media-block">
-                    <img src="" class="card-media-image">
-                    <div class="card-media-description">
-                        <span class="card-media-title">
-                                Project A
-                            </span>
-                        <span class="card-media-text">
-                                Owner: John Doe
-                            </span>
-                    </div>
-                </div>
-                <div class="card-text">
-                    ...
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-sm btn-link">Action</button>
-            </div>
+<div class="main-container">
+    <div class="content-container">
+        <div class="content-area">
+            <router-outlet></router-outlet>
         </div>
-    </div>
-
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                Header
-            </div>
-            <div class="card-block">
-                <div class="card-media-block">
-                    <img src="" class="card-media-image">
-                    <div class="card-media-description">
-                        <span class="card-media-title">
-                                    Project A
-                                </span>
-                        <span class="card-media-text">
-                                    Owner: John Doe
-                                </span>
+        <clr-vertical-nav>
+            <a clrVerticalNavLink routerLink="./topavaliacao" routerLinkActive="active">
+                <clr-icon clrVerticalNavIcon shape="star"></clr-icon>
+                Bem Avaliados</a>
+            <clr-vertical-nav-group routerLinkActive="active">
+                <clr-icon shape="view-cards" clrVerticalNavIcon></clr-icon>
+                Categorias
+                <clr-vertical-nav-group-children *clrIfExpanded="true">
+                    <div *ngFor="let cat of categorias">
+                        <a clrVerticalNavLink routerLink="./categoria/{{cat.id}}" routerLinkActive="active">
+                            {{cat.nome}}
+                        </a>
                     </div>
-                </div>
-                <div class="card-text">
-                    ...
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-sm btn-link">Action</button>
-            </div>
-        </div>
-    </div>
+                </clr-vertical-nav-group-children>
+            </clr-vertical-nav-group>
+        </clr-vertical-nav>
 
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                Header
-            </div>
-            <div class="card-block">
-                <div class="card-media-block">
-                    <img src="" class="card-media-image">
-                    <div class="card-media-description">
-                        <span class="card-media-title">
-                                        Project A
-                                    </span>
-                        <span class="card-media-text">
-                                        Owner: John Doe
-                                    </span>
-                    </div>
-                </div>
-                <div class="card-text">
-                    ...
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-sm btn-link">Action</button>
-            </div>
-        </div>
-    </div>
 
+    </div>
 </div>

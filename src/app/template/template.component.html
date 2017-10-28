@@ -20,7 +20,7 @@
         </div>
         <div class="header-nav">
             <a class="nav-link nav-icon" [class.active]="true" (click)="abrirComponentesGenericoDaIndex('IndexPageComponent')">
-                <clr-icon shape="home"></clr-icon>
+                <clr-icon shape="view-cards"></clr-icon>
             </a>
             <a class="nav-link nav-icon">
                 <clr-icon shape="search"></clr-icon>
@@ -50,7 +50,17 @@
         </ul>
     </nav>
 
-    <dynamic-component [componentData]="templateService.component"></dynamic-component>
+    <div class="content-container" *ngIf="subNavAtivo">
+        <div class="content-area">
+            <dynamic-component [componentData]="templateService.component"></dynamic-component>
+        </div>
+    </div>
+
+    <div *ngIf="!subNavAtivo">
+        <dynamic-component [componentData]="templateService.component"></dynamic-component>
+    </div>
+
+
     <login-component></login-component>
 
     <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">

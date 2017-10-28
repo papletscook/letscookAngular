@@ -55,6 +55,17 @@ export class ReceitaService extends GenericService implements CrudService<Receit
             .catch(this.handleError);
     }
 
+    excluir(t: Receita): Promise<Receita> {
+        this.infoRequest = {
+            rqst: 'delete', command: this.urlServiceService.pathLetsCook + 'receita/' + t.id, timeout: 20000
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Receita[]
+            })
+            .catch(this.handleError);
+    }
+
 
     public atualizar(t: Receita): Promise<Receita> {
         console.log(t)

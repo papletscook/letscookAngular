@@ -1,3 +1,4 @@
+import { AlertService } from 'app/service/alert.service';
 import { MedidaService } from './../medida.service';
 import { ReceitaService } from './../receita.service';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
@@ -26,6 +27,10 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
 
 export class VerReceitaComponent implements OnInit {
 
+    receitaInativa: boolean = false;
+
+    excluir: boolean;
+
     avgRatingReceita: number;
 
     preparar: boolean = false;
@@ -47,17 +52,16 @@ export class VerReceitaComponent implements OnInit {
 
 
     constructor(private receitaService: ReceitaService,
-        public toastr: ToastsManager,
-        vcr: ViewContainerRef,
         private session: SessionService,
-        private medidaService: MedidaService) {
-        this.toastr.setRootViewContainerRef(vcr);
+        private medidaService: MedidaService,
+        private alert: AlertService) {
     }
+
 
     ngOnInit() {
         if (!this.receita) {
             this.receita = new Receita();
-            this.receita.id = 28
+            this.receita.id = 35
         }
 
         this.medidaService.list()
@@ -71,10 +75,17 @@ export class VerReceitaComponent implements OnInit {
             this.loading = false;
             this.ratingReceita();
         }, error => {
-            this.toastr.error('Ocorreu um erro ao obter receita!', 'Oops!');
+            this.alert.error('Ocorreu um erro ao obter receita!');
         });
 
 
+    }
+
+
+    private receitaAtiva() {
+        if (this.receita.status != 'POSTADA') {
+            this.receitaInativa = true;
+        }
     }
 
 
@@ -114,6 +125,16 @@ export class VerReceitaComponent implements OnInit {
         this.editarComp.carregarCampos();
         this.editedReceita = r;
         this.editarComp._open = true;
+    }
+
+    excluirReceita() {
+        this.receita.status = 'DESATIVADA';
+        this.receitaService.atualizar(this.receita).then(data => {
+            location.reload();
+        }, error => {
+            this.alert.error('Ocorreu um erro ao excluir receita!');
+        });
+        this.excluir = false;
     }
 
 
