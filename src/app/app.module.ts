@@ -42,6 +42,7 @@ import { ComentarioService } from 'app/template/menu-receita/ver-receita/comenta
 import { TopavaliacaoComponent } from './template/index-page/topavaliacao/topavaliacao.component';
 import { CategoriaComponent } from './template/index-page/categoria/categoria.component';
 import { ListaComprasComponent } from './template/lista-compras/lista-compras.component';
+import { CardReceitaComponent } from './template/card-receita/card-receita.component';
 
 @NgModule({
     declarations: [
@@ -70,7 +71,8 @@ import { ListaComprasComponent } from './template/lista-compras/lista-compras.co
         ComentarioReceitaComponent,
         TopavaliacaoComponent,
         CategoriaComponent,
-        ListaComprasComponent
+        ListaComprasComponent,
+        CardReceitaComponent
     ],
     imports: [
         BrowserModule,

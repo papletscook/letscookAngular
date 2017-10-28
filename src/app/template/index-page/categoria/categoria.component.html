@@ -1,36 +1,45 @@
-<h2>Categoria</h2>
-<h3>{{categoria.nome | uppercase}}</h3>
-<div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <div class="card" *ngFor="let receita of receitas">
-            <div class="card-header">
-                <div class="row flex-items-xs-between">
-                    <div class="col-xs">
-                        <label>{{ receita.nome | uppercase}}</label>
-                    </div>
-                    <div class="col-xs text-right">
-                        <!-- <span class="badge badge-blue">{{ receita.score }}</span> -->
-                    </div>
-                </div>
-            </div>
-            <div class="card-block">
-                <div class="card-media-block">
-                    <img [src]="receita.foto" class="card-media-image">
-                    <div class="card-media-description">
-                        <span class="card-media-title">
-                            Tempo de Preparo: {{ receita.minsPreparo}}
-                        </span>
-                        <span class="card-media-title">
-                            Categoria: {{ receita.categoria.nome}}
-                        </span>
+<div *ngIf="loading">
+    <div class="text-center center loading">
+        <span class="spinner">
+            Loading...
+        </span>
+    </div>
+</div>
+<div *ngIf="!loading">
+    <h2>Categoria</h2>
+    <h3>{{categoria.nome | uppercase}}</h3>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngFor="let receita of receitas">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row flex-items-xs-between">
+                        <div class="col-xs">
+                            <label>{{ receita.nome | uppercase}}</label>
+                        </div>
+                        <div class="col-xs text-right">
+                            <!-- <span class="badge badge-blue">{{ receita.score }}</span> -->
+                        </div>
                     </div>
                 </div>
-                <div class="card-text">
-                    {{ receita.descricao}}
+                <div class="card-block">
+                    <div class="card-media-block">
+                        <img [src]="receita.foto" class="card-media-image">
+                        <div class="card-media-description">
+                            <span class="card-media-title">
+                                Tempo de Preparo: {{ receita.minsPreparo}}
+                            </span>
+                            <span class="card-media-title">
+                                Categoria: {{ receita.categoria.nome}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-text">
+                        {{ receita.descricao}}
+                    </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-sm btn-link" href="./receita/{{receita.id}}">Ver Receita</a>
+                <div class="card-footer">
+                    <a class="btn btn-sm btn-link" href="./receita/{{receita.id}}">Ver Receita</a>
+                </div>
             </div>
         </div>
     </div>

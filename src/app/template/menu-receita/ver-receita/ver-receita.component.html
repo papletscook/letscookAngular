@@ -18,17 +18,16 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="col-md-5 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
                     <div class="row">
-                        <div class="col-md">
+                        <div class="col-md-4">
                             {{receita.nome}}
                         </div>
-                        <div class="col-md">
+                        <div class="col-md-8 text-right">
                             <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
-                            <!-- <span class="p8">({{this.receita.avaliacoes.length}})</span> -->
                         </div>
                     </div>
                 </h4>
@@ -79,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-sm-12 col-xs-12">
+    <div class="col-md-7 col-sm-12 col-xs-12">
         <div class="card col-sm-12 col-xs-12">
             <div class="card-block">
                 <h4 class="card-title">Resumo do Modo de Preparo</h4>

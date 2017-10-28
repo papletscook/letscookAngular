@@ -16,6 +16,8 @@ export class CategoriaComponent implements OnInit {
 
   private receitas: Receita[];
   private categoria: Categoria;
+  private loading: boolean = true;
+  
 
   constructor(
     private serv: CategoriaService,
@@ -36,6 +38,7 @@ export class CategoriaComponent implements OnInit {
         this.receitaServ.listarPorCategoria(this.categoria)
           .then(data => {
             this.receitas = data;
+            this.loading = false;            
           }, error => {
             this.alert.error("Ocorreu um erro ao buscar!");
           });
