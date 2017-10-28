@@ -68,4 +68,15 @@ export class CategoriaService extends GenericService implements Service<Categori
             .catch(this.handleError);
     }
 
+    getById(t: Categoria): Promise<Categoria> {
+        this.infoRequest = {
+            rqst: 'get', command: this.urlServiceService.pathLetsCook + 'categoriaReceita/' + t.id, timeout: 20000
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Categoria[]
+            })
+            .catch(this.handleError);
+    }
+
 }
