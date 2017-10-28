@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row" *ngIf="!loading && receita">
-    <div class="col-md-12" *ngIf="!receitaInativa">
+    <div class="col-md-12" *ngIf="receitaInativa">
         <div class="alert alert-danger">
             <div class="alert-items">
                 <div class="alert-item static">
@@ -23,12 +23,12 @@
             <div class="card-header">
                 <h4 class="card-title">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md">
                             {{receita.nome}}
                         </div>
-                        <div class="col-md-8 text-right">
+                        <div class="col-md">
                             <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
-                            <span class="p8">({{this.receita.avaliacoes.length}}) avaliações</span>                            
+                            <!-- <span class="p8">({{this.receita.avaliacoes.length}})</span> -->
                         </div>
                     </div>
                 </h4>
@@ -71,6 +71,13 @@
                 <p class="card-text">{{receita.minsPreparo}} minutos.</p>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Categoria</h4>
+                <p class="card-text">{{receita.categoria.nome}}</p>
+            </div>
+        </div>
     </div>
     <div class="col-md-8 col-sm-12 col-xs-12">
         <div class="card col-sm-12 col-xs-12">
@@ -100,12 +107,12 @@
             </ul>
 
             <div class="card-footer">
-                <button class="btn btn-sm btn-link" (click)="prepararReceita()">Preparar Receita</button>
+                <button class="btn btn-sm btn-link" (click)="prepararReceita()" [disabled]="blocked">Preparar Receita</button>
                 <!-- <button class="btn btn-sm btn-link">Lista de Compras</button> -->
 
             </div>
         </div>
-        <app-comentario-receita [receita]="receita"></app-comentario-receita>
+        <app-comentario-receita [blocked]="blocked" [receita]="receita"></app-comentario-receita>
     </div>
 
 

@@ -145,6 +145,7 @@ export class PrepararReceitaComponent implements OnInit {
         this.avaliar()
         this.wizard.reset();
         this.cancelar();
+        location.reload()
     }
 
 
@@ -192,6 +193,34 @@ export class PrepararReceitaComponent implements OnInit {
                 element.done = false;
             });
         });
+    }
+
+    totalFeito(): number {
+        let etapas = this.receita.etapas;
+        let total = 0;
+        etapas.forEach(element => {
+            element.checked = false;
+            element.done = false;
+            element.passos.forEach(element => {
+                if (element.done) {
+                    total += 1;
+                }
+            });
+        });
+        return total;
+    }
+
+    totalEtapas(): number {
+        let etapas = this.receita.etapas;
+        let total = 0;
+        etapas.forEach(element => {
+            element.checked = false;
+            element.done = false;
+            element.passos.forEach(element => {
+                total += 1;
+            });
+        });
+        return total;
     }
 
 

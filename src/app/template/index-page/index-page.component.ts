@@ -1,5 +1,6 @@
+import { CategoriaComponent } from 'app/template/index-page/categoria/categoria.component';
 import { ComponentInfo } from './../../viewmodel/template/componentInfo';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Receita } from 'app/viewmodel/template/receita/receita';
 import { Categoria } from 'app/viewmodel/template/receita/categoria';
 import { ReceitaService } from 'app/template/menu-receita/receita.service';
@@ -22,6 +23,10 @@ export class IndexPageComponent implements OnInit {
     private receitas: Receita[];
     private categorias: Categoria[];
 
+
+    @ViewChild(CategoriaComponent)
+    private categoriarComp: CategoriaComponent;
+
     constructor(
         private service: ReceitaService,
         private catServ: CategoriaService,
@@ -29,7 +34,9 @@ export class IndexPageComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.listarCategorias()
+        if (!this.categorias) {
+            this.listarCategorias()
+        }
     }
 
     private listarCategorias() {

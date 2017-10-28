@@ -16,7 +16,6 @@ import { Categoria } from 'app/viewmodel/template/receita/categoria';
 import { Medida } from 'app/viewmodel/template/receita/medida';
 import { IngredienteReceita } from 'app/viewmodel/template/receita/ingrediente-receita';
 import { Alert } from 'app/viewmodel/template/alert';
-
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { AlertService } from 'app/service/alert.service';
 import * as _ from "lodash";

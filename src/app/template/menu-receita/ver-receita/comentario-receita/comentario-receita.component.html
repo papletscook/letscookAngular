@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="card-footer" *ngIf="!comentar">
-    <button class="btn btn-sm btn-link" (click)="comentar = true">Comentar</button>
+    <button class="btn btn-sm btn-link" (click)="comentar = true" [disabled]="blocked">Comentar</button>
   </div>
   <div class="card-footer" *ngIf="comentar">
     <div class="form-group">

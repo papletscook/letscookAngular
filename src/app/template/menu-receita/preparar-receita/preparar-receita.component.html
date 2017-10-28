@@ -30,7 +30,7 @@
                                         <b>{{ingt.quant}}</b> {{detailMedida(ingt.uMedida).desc}} de
                                         <b>{{ingt.ingrediente.nome}}</b>.</label>
                                 </div>
-                                </li>
+                            </li>
                         </ul>
                         <div class="card-footer">
                             <div class="btn-group btn-primary btn-sm">
@@ -64,13 +64,12 @@
         <form (keydown.enter)="$event.preventDefault()" class="compact" name="preparar">
 
             <div class="row">
-
                 <div class="col-xs-2">
                     <label>% da Receita:</label>
                 </div>
                 <div class="col-md-10">
                     <div class="progress success">
-                        <progress value="0" max="{{etapa.passos.length}}"></progress>
+                        <progress value="{{totalFeito()}}" max="{{totalEtapas()}}"></progress>
                     </div>
                 </div>
             </div>
@@ -143,6 +142,16 @@
         </ng-template>
 
         <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label>% da Receita:</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="progress success">
+                        <progress value="{{totalFeito()}}" max="{{totalEtapas()}}"></progress>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">

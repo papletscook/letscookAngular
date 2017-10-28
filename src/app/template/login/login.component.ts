@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
                     this.holderService.userLogado = true;
                     this.loginService.consultar(this.usuario).then(data => {
                         this.session.definirUsuario(data)
+                        location.reload()
                     })
                     this.holderService.modalOpen = false;
                 } else {

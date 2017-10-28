@@ -21,6 +21,9 @@ export class ComentarioReceitaComponent implements OnInit {
 
   private comentario: ComentarioReceita = new ComentarioReceita();
 
+  @Input()
+  private blocked: boolean = false;
+
   constructor(
     private session: SessionService,
     private service: ComentarioService,
