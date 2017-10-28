@@ -13,9 +13,14 @@
 
     <clr-header class="header-4">
         <div class="branding" (click)="location.reload()">
-            <clr-icon shape="vmw-app"></clr-icon>
-            <span class="title">Let's Cook</span>
+            <a href="#" class="nav-link">
+                <clr-icon class="is-inverse" shape="vmw-app"></clr-icon>
+                <span class="title">Let's Cook</span>
+            </a>
         </div>
+
+
+
         <div class="header-nav">
             <a class="nav-link nav-icon" [class.active]="true" (click)="abrirComponentesGenericoDaIndex('IndexPageComponent')">
                 <clr-icon shape="book"></clr-icon>
