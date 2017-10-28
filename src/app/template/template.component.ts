@@ -1,3 +1,4 @@
+import { DynamicRouterService } from './dynamic-router/dynamic-router.service';
 import { DespensaComponent } from './despensa/despensa.component';
 import { TemplateService } from './template.service';
 import { SessionService } from './../service/session.service';
@@ -32,11 +33,11 @@ export class TemplateComponent implements OnInit {
         public holderService: HolderService,
         private templateService: TemplateService,
         private session: SessionService,
-        public alert: AlertService
-    ) { }
+        public alert: AlertService,
+        public dynamicRouterService: DynamicRouterService) { }
 
     public ngOnInit(): void {
-        this.abrirComponentesGenericoDaIndex("IndexPageComponent");
+        this.setToDynamicComponent(IndexPageComponent)
     }
 
     public entrar() {
@@ -51,38 +52,33 @@ export class TemplateComponent implements OnInit {
 
     }
 
-    public changeCase(component: any): void {
-        this.templateService.createComp(component);
-        this.holderService.qualMenuEstaAtivo = component;
+    public setToDynamicComponent(component: any) {
+        // Sempre resetar para null antes de setar component
+        this.dynamicRouterService.component = null;
+        // Deixar timeout senão react não entende que mudou variavel na holder.
+        setTimeout(() => {
+            this.dynamicRouterService.component = component;
+        }, 1);
     }
 
-    public subNavChangeCase(menu: MenuSubnav): void {
-        this.changeCase(menu.component)
-    }
-
-    public adminNav(b: boolean): void {
-        if (!b) {
-            this.subNavAtivo = false
-            this.menus = null;
-        } else {
-            this.subNavAtivo = true;
-            this.menus = Cozinheiro;
-        }
+    private mostraSubNav(ativo: boolean, whatSubNav?: any) {
+        this.subNavAtivo = ativo;
+        this.menus = whatSubNav;
     }
 
     private abrirComponentesGenericoDaIndex(component: string) {
         switch (component) {
             case "DespensaComponent":
-                this.adminNav(true);
-                this.changeCase(DespensaComponent);
+                this.mostraSubNav(true, Cozinheiro)
+                this.setToDynamicComponent(DespensaComponent);
                 break;
             case "PainelDeControleComponent":
-                this.adminNav(true);
-                this.changeCase(PainelDeControleComponent);
+                this.mostraSubNav(true, Cozinheiro)
+                this.setToDynamicComponent(PainelDeControleComponent);
                 break;
             case "IndexPageComponent":
-                this.adminNav(false);
-                this.changeCase(IndexPageComponent);
+                this.mostraSubNav(false, null)
+                this.setToDynamicComponent(IndexPageComponent);
                 break;
         }
     }

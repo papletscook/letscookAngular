@@ -3,5 +3,5 @@ import { Component } from '@angular/core';
 export class MenuSubnav {
     nome: string;
     component: any;
-    ativo?: boolean = false;
+    link?: string;
 }

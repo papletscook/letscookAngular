@@ -54,7 +54,9 @@
 
     <div class="content-container" *ngIf="subNavAtivo">
         <div class="content-area">
-            <dynamic-component [componentData]="templateService.component"></dynamic-component>
+            <!-- <dynamic-component [componentData]="templateService.component"></dynamic-component> -->
+
+            <dynamic-router-component [component]="dynamicRouterService.component"></dynamic-router-component>
         </div>
     </div>
 

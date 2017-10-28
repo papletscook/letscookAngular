@@ -1,3 +1,5 @@
+import { DynamicRouterService } from './template/dynamic-router/dynamic-router.service';
+import { DynamicRouterComponent } from './template/dynamic-router/dynamic-router.component';
 import { CadastrarCategoriaComponent } from './template/categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { TemplateService } from './template/template.service';
 import { AlertService } from './service/alert.service';
@@ -68,7 +70,8 @@ import { CategoriaComponent } from './template/index-page/categoria/categoria.co
         CadastrarCategoriaComponent,
         ComentarioReceitaComponent,
         TopavaliacaoComponent,
-        CategoriaComponent
+        CategoriaComponent,
+        DynamicRouterComponent
     ],
     imports: [
         BrowserModule,
@@ -93,7 +96,8 @@ import { CategoriaComponent } from './template/index-page/categoria/categoria.co
         LoginService,
         AlertService,
         TemplateService,
-        ComentarioService
+        ComentarioService,
+        DynamicRouterService
     ],
     bootstrap: [AppComponent],
     entryComponents: [
