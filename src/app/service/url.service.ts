@@ -9,7 +9,7 @@ export class UrlServiceService {
 
     // IPs
     // private urlIp = 'http://localhost:8080/'; // Localhost
-    private urlIp = 'http://http://ec2-35-164-25-74.us-west-2.compute.amazonaws.com:8080/'; // Prod
+    private urlIp = 'http://ec2-35-164-25-74.us-west-2.compute.amazonaws.com:8080/'; // Prod
 
 
 
