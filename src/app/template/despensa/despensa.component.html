@@ -9,20 +9,38 @@
 
     <h3>Despensa</h3>
     <div class="row">
-        <p class="col-md-12">
+        <p class="col-md-12 col-sm-12">
             Através da despensa você poderá adicionar ingredientes para realizar a busca das receitas:
         </p>
     </div>
     <!-- <button class="btn btn-primary btn-block">Adicionar Item na Despensa</button> -->
     <div class="row" *ngIf="despensa">
-        <div class="col-md-6">
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h4>Cadastrar Ingredientes</h4>
+
+            <form>
+                <section class="form-block">
+                    <div class="form-group">
+                        <label for="aForm_1">Ingrediente:</label>
+                        <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
+                            placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
+                    </div>
+                    <button type="button" class="btn btn-outline" (click)="ingrediente = null">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="adicionarIngrediente()">Adicionar</button>
+                </section>
+            </form>
+        </div>
+
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <h4>Ingredientes Cadastrados</h4>
 
             <clr-datagrid>
+                <clr-dg-placeholder>Para obter receitas compatíveis adicione os ingredientes na despensa.</clr-dg-placeholder>
+
                 <clr-dg-action-bar>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-secondary" (click)="abrirModalAddIngrediente()">
-                            <clr-icon shape="plus"></clr-icon> Ingrediente</button>
                         <button type="button" class="btn btn-sm btn-secondary" (click)="limparDespensa()">
                             <clr-icon shape="close"></clr-icon> Limpar</button>
                     </div>
@@ -42,20 +60,10 @@
             </clr-datagrid>
             <!-- <button class="btn btn-success btn-block" (click)="buscarReceitasCompatives()">Buscar Receitas</button> -->
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <h4>Receitas Compatíveis</h4>
 
             <div *ngIf="scores">
-                <div *ngIf="despensa.ings.length == 0">
-                    <br>
-                    <clr-alert>
-                        <div class="alert-item">
-                            <span class="alert-text">
-                                Para obter receitas compatíveis adicione os ingredientes na despensa.
-                            </span>
-                        </div>
-                    </clr-alert>
-                </div>
                 <div *ngIf="scores.length == 0 && despensa.ings.length != 0">
                     <clr-alert>
                         <div class="alert-item">
@@ -76,35 +84,37 @@
                         </span>
                     </div>
                     <div *ngIf="!loadingBusca">
-                        <div class="card" *ngFor="let score of scores">
-                            <div class="card-header">
-                                <div class="row flex-items-xs-between">
-                                    <div class="col-xs">
-                                        <label>{{ score.receita.nome | uppercase}}</label>
-                                    </div>
-                                    <div class="col-xs text-right">
-                                        <span class="badge badge-blue">{{ score.score }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-block">
-                                <div class="card-media-block">
-                                    <img [src]="score.receita.foto" class="card-media-image">
-                                    <div class="card-media-description">
-                                        <span class="card-media-title">
-                                            Tempo de Preparo: {{ score.receita.minsPreparo}}
-                                        </span>
-                                        <span class="card-media-title">
-                                            Categoria: {{ score.receita.categoria.nome}}
-                                        </span>
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngFor="let score of scores">
+                            <div class="card" >
+                                <div class="card-header">
+                                    <div class="row flex-items-xs-between">
+                                        <div class="col-xs">
+                                            <label>{{ score.receita.nome | uppercase}}</label>
+                                        </div>
+                                        <div class="col-xs text-right">
+                                            <span class="badge badge-blue">{{ score.score }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-text">
-                                    {{ score.receita.descricao}}
+                                <div class="card-block">
+                                    <div class="card-media-block">
+                                        <img [src]="score.receita.foto" class="card-media-image">
+                                        <div class="card-media-description">
+                                            <span class="card-media-title">
+                                                Tempo de Preparo: {{ score.receita.minsPreparo}}
+                                            </span>
+                                            <span class="card-media-title">
+                                                Categoria: {{ score.receita.categoria.nome}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-text">
+                                        {{ score.receita.descricao}}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <a class="btn btn-sm btn-link" href="./receita/{{score.receita.id}}">Ver Receita</a>
+                                <div class="card-footer">
+                                    <a class="btn btn-sm btn-link" href="./receita/{{score.receita.id}}">Ver Receita</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,23 +124,3 @@
         </div>
     </div>
 </div>
-
-<clr-modal [(clrModalOpen)]="modalAdd">
-    <h3 class="modal-title">Adicionar Ingrediente</h3>
-    <div class="modal-body">
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                <label for="gForm_1">Ingrediente: </label>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
-                    placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
-                <br/>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="modalAdd = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="adicionarIngrediente()">Adicionar</button>
-    </div>
-</clr-modal>
