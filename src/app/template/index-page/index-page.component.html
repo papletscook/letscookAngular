@@ -1,23 +1,4 @@
-<div class="main-container">
-    <div class="content-container">
-        <div class="content-area">
-            <router-outlet></router-outlet>
-        </div>
-        <clr-vertical-nav [clrVerticalNavCollapsible]="true" *ngIf="holder.sideNav">
-            <a clrVerticalNavLink href="#" routerLink="./topavaliacao" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="star"></clr-icon>
-                Bem Avaliadas</a>
-            <clr-vertical-nav-group routerLinkActive="active">
-                <clr-icon shape="view-cards" clrVerticalNavIcon></clr-icon>
-                Categorias
-                <clr-vertical-nav-group-children *clrIfExpanded="true">
-                    <div *ngFor="let cat of categorias">
-                        <a clrVerticalNavLink [routerLink]="['/categoria', cat.id]" (click)="categoriarComp.carregarCategoria()" routerLinkActive="active">
-                            {{cat.nome}}
-                        </a>
-                    </div>
-                </clr-vertical-nav-group-children>
-            </clr-vertical-nav-group>
-        </clr-vertical-nav>
-    </div>
+<div>
+    <h3>Página Inicial</h3>
+
 </div>

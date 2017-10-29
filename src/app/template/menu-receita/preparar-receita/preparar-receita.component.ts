@@ -135,7 +135,7 @@ export class PrepararReceitaComponent implements OnInit {
         this.avaliacaoService.cadastrar(this.avaliacao)
             .then(data => {
                 this.avaliacao = data;
-                this.alert.error("Receita avaliada!")
+                this.alert.info("Receita avaliada!")
             }, error => {
                 this.alert.error("Falha ao avaliar Receita!")
             })

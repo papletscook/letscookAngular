@@ -17,11 +17,8 @@
         </div>
 
         <div class="header-nav">
-            <a class="nav-link nav-icon" (click)="abrirComponentesGenericoDaIndex('IndexPageComponent')">
+            <a class="nav-link nav-icon" href="./">
                 <clr-icon shape="book"></clr-icon>
-            </a>
-            <a class="nav-link nav-icon" href="./busca">
-                <clr-icon shape="search"></clr-icon>
             </a>
             <a class="nav-link nav-icon" *ngIf="holderService.userLogado" (click)="abrirComponentesGenericoDaIndex('PainelDeControleComponent')">
                 <clr-icon shape="cog"></clr-icon>
@@ -32,6 +29,10 @@
             <a class="nav-link nav-icon" href="./listaCompras" *ngIf="holderService.userLogado">
                 <clr-icon shape="list"></clr-icon>
             </a>
+            <a class="nav-link nav-icon" (click)="activePublicar = true" *ngIf="holderService.userLogado">
+                <clr-icon shape="archive"></clr-icon>
+            </a>
+
         </div>
         <div class="header-actions">
             <clr-dropdown>
@@ -47,29 +48,42 @@
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
+
     </clr-header>
     <nav class="subnav" [clr-nav-level]="1" *ngIf="subNavAtivo">
         <ul class="nav">
             <subnav [menu]="menu" (click)="changeCase(menu.component);" *ngFor="let menu of menus"></subnav>
         </ul>
     </nav>
-
-    <div class="content-container" *ngIf="subNavAtivo">
-        <div class="content-area">
-            <dynamic-component [componentData]="templateService.component"></dynamic-component>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="content-area">
+                <router-outlet *ngIf="!templateService.component"></router-outlet>
+                <dynamic-component *ngIf="templateService.component" [componentData]="templateService.component"></dynamic-component>
+            </div>
+            <clr-vertical-nav [clrVerticalNavCollapsible]="true" *ngIf="holderService.sideNav">
+                <a clrVerticalNavLink href="#" [routerLink]="['/busca']" routerLinkActive="active">
+                    <clr-icon clrVerticalNavIcon shape="search"></clr-icon>
+                    Buscar</a>
+                <a clrVerticalNavLink href="#" [routerLink]="['/topavaliacao']" routerLinkActive="active">
+                    <clr-icon clrVerticalNavIcon shape="star"></clr-icon>
+                    Bem Avaliadas</a>
+                <clr-vertical-nav-group routerLinkActive="active">
+                    <clr-icon shape="view-cards" clrVerticalNavIcon></clr-icon>
+                    Categorias
+                    <clr-vertical-nav-group-children *clrIfExpanded="true">
+                        <div *ngFor="let cat of categorias">
+                            <a clrVerticalNavLink [routerLink]="['/categoria', cat.id]" (click)="categoriarComp.carregarCategoria()" routerLinkActive="active">
+                                {{cat.nome}}
+                            </a>
+                        </div>
+                    </clr-vertical-nav-group-children>
+                </clr-vertical-nav-group>
+            </clr-vertical-nav>
         </div>
     </div>
 
-
-    <div *ngIf="!subNavAtivo">
-        <dynamic-component [componentData]="templateService.component"></dynamic-component>
-    </div>
-
-
     <login-component></login-component>
-
-    <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">
-        <sidenav-component></sidenav-component>
-    </clr-vertical-nav>
+    <publicar-receita-component *ngIf="activePublicar" [receita]="receita" [_open]="activePublicar"></publicar-receita-component>
 
 </clr-main-container>

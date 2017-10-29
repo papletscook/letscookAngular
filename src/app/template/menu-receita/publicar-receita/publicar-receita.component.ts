@@ -67,7 +67,7 @@ export class PublicarReceitaComponent implements OnInit {
     cropper: ImageCropperComponent;
 
     @Input()
-    _open = true;
+    _open = false
 
     constructor(
         private receitaService: ReceitaService,
@@ -80,6 +80,10 @@ export class PublicarReceitaComponent implements OnInit {
         this.preparaCropper()
         this.ingredienteCad = new IngredienteReceita()
         this.carregarCampos()
+    }
+
+    ngOnInit() {
+        this._open = true
     }
 
     customCompareCategoria(o1: Categoria, o2: Categoria) {
@@ -106,8 +110,7 @@ export class PublicarReceitaComponent implements OnInit {
         this.receita.imagem = img;
     }
 
-    ngOnInit() {
-    }
+
 
     loadImage() {
         console.log('loadImage')
@@ -117,7 +120,7 @@ export class PublicarReceitaComponent implements OnInit {
         this.cropper.setImage(image)
     }
 
-    proximaPagina(){
+    proximaPagina() {
         this.loadImage()
         this.wizard.next()
     }

@@ -8,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaComprasComponent implements OnInit {
 
-  constructor(private holder : HolderService) { }
+  private loading: boolean = true;
+
+  constructor(private holder: HolderService) { }
 
   ngOnInit() {
+    this.loading = false
   }
 
 }

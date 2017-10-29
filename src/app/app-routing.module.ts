@@ -1,3 +1,4 @@
+import { IndexPageComponent } from './template/index-page/index-page.component';
 import { DespensaComponent } from './template/despensa/despensa.component';
 import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-receita.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { PageNotFoundComponent } from 'app/template/page-not-found/page-not-foun
 
 
 const routes: Routes = [
+    { path: '', component: IndexPageComponent },
     { path: 'receita/:id', component: VerReceitaComponent },
     { path: 'categoria/:id', component: CategoriaComponent },
     { path: 'topavaliacao', component: TopavaliacaoComponent },
