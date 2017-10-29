@@ -19,6 +19,11 @@
     height: 100px;
 }
 
-.spinnerBusca  {
-    height: 200px;    
+
+.loading{
+    height: 20%;
+}
+
+.center{
+    padding: 20% 0;
 }

@@ -2,3 +2,10 @@
     cursor: pointer;
 }
 
+.loading{
+    height: 20%;
+}
+
+.center{
+    padding: 20% 0;
+}

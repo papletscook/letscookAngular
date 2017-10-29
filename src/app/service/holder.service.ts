@@ -20,6 +20,8 @@ export class HolderService {
     // Comportamento do Alert App Level
     public alert: Alert;
 
+    private sideNav : boolean = true;
+
     constructor() {
         this.alert = new Alert("")
     }

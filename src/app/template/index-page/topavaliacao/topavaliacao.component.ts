@@ -18,7 +18,32 @@ import * as _ from "lodash";
 })
 export class TopavaliacaoComponent implements OnInit {
 
+  private receitas: Receita[];
+
+  private loading: boolean = true;
+
+  constructor(
+    private alert: AlertService,
+    private receitaServ: ReceitaService
+  ) { }
+
   ngOnInit() {
+    if(!this.receitas){
+      this.carregarReceitas()
+    }
   }
+
+
+
+  carregarReceitas() {
+    this.receitaServ.buscarBemAvaliadas()
+      .then(data => {
+        this.receitas = data;
+        this.loading = false;
+      }, error => {
+        this.alert.error("Ocorreu um erro ao carregar receitas!");
+      });
+  }
+
 
 }

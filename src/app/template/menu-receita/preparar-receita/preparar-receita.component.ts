@@ -135,6 +135,7 @@ export class PrepararReceitaComponent implements OnInit {
         this.avaliacaoService.cadastrar(this.avaliacao)
             .then(data => {
                 this.avaliacao = data;
+                this.alert.error("Receita avaliada!")
             }, error => {
                 this.alert.error("Falha ao avaliar Receita!")
             })
@@ -145,7 +146,6 @@ export class PrepararReceitaComponent implements OnInit {
         this.avaliar()
         this.wizard.reset();
         this.cancelar();
-        location.reload()
     }
 
 

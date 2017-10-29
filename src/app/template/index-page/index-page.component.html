@@ -3,7 +3,7 @@
         <div class="content-area">
             <router-outlet></router-outlet>
         </div>
-        <clr-vertical-nav [clrVerticalNavCollapsible]="true">
+        <clr-vertical-nav [clrVerticalNavCollapsible]="true" *ngIf="holder.sideNav">
             <!-- Adicionar em app-routing.module -->
             <a clrVerticalNavLink href="#" routerLink="./topavaliacao" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="star"></clr-icon>

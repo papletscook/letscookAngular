@@ -30,7 +30,8 @@ export class IndexPageComponent implements OnInit {
     constructor(
         private service: ReceitaService,
         private catServ: CategoriaService,
-        private alert: AlertService
+        private alert: AlertService,
+        private holder : HolderService
     ) { }
 
     ngOnInit() {
