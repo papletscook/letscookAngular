@@ -1,3 +1,4 @@
+import { RegistroComponent } from './registro/registro.component';
 import { DynamicRouterService } from './dynamic-router/dynamic-router.service';
 import { DespensaComponent } from './despensa/despensa.component';
 import { TemplateService } from './template.service';
@@ -66,7 +67,7 @@ export class TemplateComponent implements OnInit {
         this.menus = whatSubNav;
     }
 
-    private abrirComponentesGenericoDaIndex(component: string) {
+    public abrirComponentesGenericoDaIndex(component: string) {
         switch (component) {
             case "DespensaComponent":
                 this.mostraSubNav(true, Cozinheiro)
@@ -79,6 +80,10 @@ export class TemplateComponent implements OnInit {
             case "IndexPageComponent":
                 this.mostraSubNav(false, null)
                 this.setToDynamicComponent(IndexPageComponent);
+                break;
+            case "RegistroComponent":
+                this.adminNav(false);
+                this.changeCase(RegistroComponent);
                 break;
         }
     }

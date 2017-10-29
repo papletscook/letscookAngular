@@ -1,3 +1,4 @@
+import { RegistroComponent } from './template/registro/registro.component';
 import { DynamicRouterService } from './template/dynamic-router/dynamic-router.service';
 import { DynamicRouterComponent } from './template/dynamic-router/dynamic-router.component';
 import { CadastrarCategoriaComponent } from './template/categoria/cadastrar-categoria/cadastrar-categoria.component';
@@ -69,6 +70,7 @@ import { CategoriaComponent } from './template/index-page/categoria/categoria.co
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
         ComentarioReceitaComponent,
+        RegistroComponent,
         TopavaliacaoComponent,
         CategoriaComponent,
         DynamicRouterComponent
@@ -111,6 +113,7 @@ import { CategoriaComponent } from './template/index-page/categoria/categoria.co
         DespensaComponent,
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
+        RegistroComponent,
         TopavaliacaoComponent
     ]
 })
