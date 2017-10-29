@@ -37,6 +37,7 @@ export class DespensaService extends GenericService {
         this.infoRequest.rqst = 'post';
         this.infoRequest.command = this.urlServiceService.pathLetsCook + 'despensa/buscarPorIngredientes';
         this.infoRequest._data = ingts;
+        
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as ScoreReceita[]

@@ -6,7 +6,6 @@
     </div>
 </div>
 <div *ngIf="!loading">
-
     <h3>Despensa</h3>
     <div class="row">
         <p class="col-md-12 col-sm-12">
@@ -15,7 +14,6 @@
     </div>
     <!-- <button class="btn btn-primary btn-block">Adicionar Item na Despensa</button> -->
     <div class="row" *ngIf="despensa">
-
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <h4>Cadastrar Ingredientes</h4>
 
@@ -60,21 +58,24 @@
             </clr-datagrid>
             <!-- <button class="btn btn-success btn-block" (click)="buscarReceitasCompatives()">Buscar Receitas</button> -->
         </div>
-        <div class="col-md-12">
-            <h4>Receitas Compatíveis</h4>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-            <div *ngIf="scores">
-                <div *ngIf="scores.length == 0 && despensa.ings.length != 0">
-                    <clr-alert>
-                        <div class="alert-item">
-                            <span class="alert-text">
-                                Não foi possível encontrar receita compatível com os ingredientes da despensa.
-                            </span>
-                        </div>
-                    </clr-alert>
-                </div>
+                <h4>Receitas Compatíveis</h4>
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div *ngIf="scores">
+                    <div *ngIf="scores.length == 0 && despensa.ings.length != 0">
+                        <clr-alert>
+                            <div class="alert-item">
+                                <span class="alert-text">
+                                    Não foi possível encontrar receita compatível com os ingredientes da despensa.
+                                </span>
+                            </div>
+                        </clr-alert>
+                    </div>
+
                     <div class="text-center spinnerBusca" *ngIf="loadingBusca">
                         <span class="spinner spinner-inline">
                             Buscando receitas com Ingredientes compatíveis...
@@ -84,43 +85,46 @@
                         </span>
                     </div>
                     <div *ngIf="!loadingBusca">
-                        <div class="col-md-6 col-sm-12 col-xs-12" *ngFor="let score of scores">
-                            <div class="card" >
-                                <div class="card-header">
-                                    <div class="row flex-items-xs-between">
-                                        <div class="col-xs">
-                                            <label>{{ score.receita.nome | uppercase}}</label>
-                                        </div>
-                                        <div class="col-xs text-right">
-                                            <span class="badge badge-blue">{{ score.score }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-block">
-                                    <div class="card-media-block">
-                                        <img [src]="score.receita.foto" class="card-media-image">
-                                        <div class="card-media-description">
-                                            <span class="card-media-title">
-                                                Tempo de Preparo: {{ score.receita.minsPreparo}}
-                                            </span>
-                                            <span class="card-media-title">
-                                                Categoria: {{ score.receita.categoria.nome}}
-                                            </span>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngFor="let score of scores">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row flex-items-xs-between">
+                                            <div class="col-xs">
+                                                <label>{{ score.receita.nome | uppercase}}</label>
+                                            </div>
+                                            <div class="col-xs text-right">
+                                                <span class="badge badge-blue">{{ score.score }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card-text">
-                                        {{ score.receita.descricao}}
+                                    <div class="card-block">
+                                        <div class="card-media-block">
+                                            <img [src]="score.receita.foto" class="card-media-image">
+                                            <div class="card-media-description">
+                                                <span class="card-media-title">
+                                                    Tempo de Preparo: {{ score.receita.minsPreparo}}
+                                                </span>
+                                                <span class="card-media-title">
+                                                    Categoria: {{ score.receita.categoria.nome}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="card-text">
+                                            {{ score.receita.descricao}}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-footer">
-                                    <a class="btn btn-sm btn-link" href="./receita/{{score.receita.id}}">Ver Receita</a>
+                                    <div class="card-footer">
+                                        <a class="btn btn-sm btn-link" href="./receita/{{score.receita.id}}">Ver Receita</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
         </div>
-    </div>
-</div>

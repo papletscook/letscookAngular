@@ -4,16 +4,15 @@
             <router-outlet></router-outlet>
         </div>
         <clr-vertical-nav [clrVerticalNavCollapsible]="true" *ngIf="holder.sideNav">
-            <!-- Adicionar em app-routing.module -->
             <a clrVerticalNavLink href="#" routerLink="./topavaliacao" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="star"></clr-icon>
-                Bem Avaliados</a>
+                Bem Avaliadas</a>
             <clr-vertical-nav-group routerLinkActive="active">
                 <clr-icon shape="view-cards" clrVerticalNavIcon></clr-icon>
                 Categorias
                 <clr-vertical-nav-group-children *clrIfExpanded="true">
                     <div *ngFor="let cat of categorias">
-                        <a clrVerticalNavLink routerLink="./categoria/{{cat.id}}" href="#" (click)="categoriarComp.carregarCategoria()" routerLinkActive="active">
+                        <a clrVerticalNavLink [routerLink]="['/categoria', cat.id]" (click)="categoriarComp.carregarCategoria()" routerLinkActive="active">
                             {{cat.nome}}
                         </a>
                     </div>

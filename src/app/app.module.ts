@@ -43,6 +43,8 @@ import { TopavaliacaoComponent } from './template/index-page/topavaliacao/topava
 import { CategoriaComponent } from './template/index-page/categoria/categoria.component';
 import { ListaComprasComponent } from './template/lista-compras/lista-compras.component';
 import { CardReceitaComponent } from './template/card-receita/card-receita.component';
+import { BuscaReceitaComponent } from './template/busca-receita/busca-receita.component';
+import { PageNotFoundComponent } from './template/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -72,7 +74,9 @@ import { CardReceitaComponent } from './template/card-receita/card-receita.compo
         TopavaliacaoComponent,
         CategoriaComponent,
         ListaComprasComponent,
-        CardReceitaComponent
+        CardReceitaComponent,
+        BuscaReceitaComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,

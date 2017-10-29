@@ -3,9 +3,6 @@
         <span class="alert-text">
             {{ alert.msg }}
         </span>
-        <!-- <div class="alert-actions">
-                    <button class="btn alert-action">Tentar novamente</button>
-                </div> -->
     </clr-alert-item>
 </clr-alert>
 
@@ -19,20 +16,21 @@
             </a>
         </div>
 
-
-
         <div class="header-nav">
-            <a class="nav-link nav-icon" [class.active]="true" (click)="abrirComponentesGenericoDaIndex('IndexPageComponent')">
+            <a class="nav-link nav-icon" (click)="abrirComponentesGenericoDaIndex('IndexPageComponent')">
                 <clr-icon shape="book"></clr-icon>
             </a>
-            <a class="nav-link nav-icon">
+            <a class="nav-link nav-icon" href="./busca">
                 <clr-icon shape="search"></clr-icon>
             </a>
             <a class="nav-link nav-icon" *ngIf="holderService.userLogado" (click)="abrirComponentesGenericoDaIndex('PainelDeControleComponent')">
                 <clr-icon shape="cog"></clr-icon>
             </a>
-            <a class="nav-link nav-icon" href="./despensa">
+            <a class="nav-link nav-icon" href="./despensa" *ngIf="holderService.userLogado">
                 <clr-icon shape="bundle"></clr-icon>
+            </a>
+            <a class="nav-link nav-icon" href="./listaCompras" *ngIf="holderService.userLogado">
+                <clr-icon shape="list"></clr-icon>
             </a>
         </div>
         <div class="header-actions">
@@ -44,7 +42,6 @@
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                     <a clrDropdownItem (click)="abrirComponentesGenericoDaIndex('PainelDeControleComponent')" *ngIf="holderService.userLogado">Meu Perfil</a>
-                    <a clrDropdownItem (click)="abrirComponentesGenericoDaIndex('DespensaComponent')" *ngIf="holderService.userLogado">Despensa</a>
                     <a clrDropdownItem (click)="sair()" *ngIf="holderService.userLogado">Sair</a>
                     <a clrDropdownItem (click)="entrar()" *ngIf="!holderService.userLogado">Entrar</a>
                 </clr-dropdown-menu>
@@ -63,8 +60,6 @@
         </div>
     </div>
 
-
-    
 
     <div *ngIf="!subNavAtivo">
         <dynamic-component [componentData]="templateService.component"></dynamic-component>
