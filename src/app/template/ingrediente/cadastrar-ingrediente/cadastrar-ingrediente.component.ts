@@ -49,12 +49,14 @@ export class CadastrarIngredienteComponent implements OnInit {
         this.imgMod = {}
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
-        this.cropperSettings.width = 350;
-        this.cropperSettings.height = 200;
-        this.cropperSettings.croppedWidth = 350;
-        this.cropperSettings.croppedHeight = 200;
-        this.cropperSettings.canvasWidth = 350;
-        this.cropperSettings.canvasHeight = 200;
+        var width = 350
+        var height = 250
+        this.cropperSettings.width = width;
+        this.cropperSettings.height = height;
+        this.cropperSettings.croppedWidth = width;
+        this.cropperSettings.croppedHeight = height;
+        this.cropperSettings.canvasWidth = width;
+        this.cropperSettings.canvasHeight = height;
     }
 
     public validation(): boolean {
@@ -127,19 +129,20 @@ export class CadastrarIngredienteComponent implements OnInit {
     private abort() {
         this.img = {}
         this.ingrediente = new Ingrediente();
+        this.preparaCropper()
     }
 
     private cadastrarIngrediente() {
         if (this.validation()) {
             this.loading = true;
             this.ingredienteService.cadastrar(this.ingrediente).then(data => {
-                this.loading = false;
                 this.alertService.info('Ingrediente ' + data.nome + ' cadastrado!');
                 this.abort();
             }, error => {
                 this.alertService.error('Ocorreu um erro ao cadastrar Ingrediente!');
                 this.abort();
             });
+            this.loading = false;
         }
     }
 

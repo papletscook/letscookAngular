@@ -19,6 +19,7 @@ import { Alert } from 'app/viewmodel/template/alert';
 import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { AlertService } from 'app/service/alert.service';
 import * as _ from "lodash";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'publicar-receita-component',
@@ -75,7 +76,8 @@ export class PublicarReceitaComponent implements OnInit {
         private categoriaService: CategoriaService,
         private session: SessionService,
         private medidaService: MedidaService,
-        private alert: AlertService
+        private alert: AlertService,
+        private router: Router
     ) {
         this.preparaCropper()
         this.ingredienteCad = new IngredienteReceita()
@@ -97,12 +99,14 @@ export class PublicarReceitaComponent implements OnInit {
     preparaCropper() {
         this.img = {}
         this.cropperSettings = new CropperSettings();
-        this.cropperSettings.width = 350;
-        this.cropperSettings.height = 200;
-        this.cropperSettings.croppedWidth = 350;
-        this.cropperSettings.croppedHeight = 200;
-        this.cropperSettings.canvasWidth = 350;
-        this.cropperSettings.canvasHeight = 200;
+        var width = 350
+        var height = 250
+        this.cropperSettings.width = width;
+        this.cropperSettings.height = height;
+        this.cropperSettings.croppedWidth = width;
+        this.cropperSettings.croppedHeight = height;
+        this.cropperSettings.canvasWidth = width;
+        this.cropperSettings.canvasHeight = height;
     }
 
     convertImage() {
@@ -183,15 +187,15 @@ export class PublicarReceitaComponent implements OnInit {
 
             this.receitaService.cadastrar(this.receita)
                 .then(data => {
+                    console.log(data)
                     this.receita = data;
                     this.alert.info("Receita cadastrada!")
-                    this.exibirReceita = true;
+                    this.router.navigate(['/receita', data.id]);
                 }, error => {
                     this.alert.error("Falha ao publicar Receita!")
                 })
             this.loading = false;
             this.wizard.reset()
-
         }
     }
 

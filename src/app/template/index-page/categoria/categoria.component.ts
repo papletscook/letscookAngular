@@ -32,8 +32,11 @@ export class CategoriaComponent implements OnInit {
   }
 
   public carregarCategoria() {
-    this.categoria = new Categoria()
-    this.categoria.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.route.params.subscribe(params => {
+      this.categoria = new Categoria()
+      this.categoria.id = +params['id']; // (+) converts string 'id' to a number
+    });
+
     this.serv.getById(this.categoria)
       .then(data => {
         this.categoria = data;

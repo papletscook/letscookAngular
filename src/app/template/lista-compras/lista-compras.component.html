@@ -1,13 +1,23 @@
 <div *ngIf="loading">
-        <div class="text-center center loading">
-            <span class="spinner">
-                Loading...
-            </span>
-        </div>
+    <div class="text-center center loading">
+        <span class="spinner">
+            Loading...
+        </span>
     </div>
-    <div *ngIf="!loading">
-        <h2>Lista de Compras</h2>
-        <div class="row">
+</div>
+<div *ngIf="!loading">
+    <h2>Lista de Compras</h2>
+    <clr-datagrid>
+        <clr-dg-column>Nome</clr-dg-column>
+        <clr-dg-column>Data de Criação</clr-dg-column>
 
-        </div>
-    </div>
+        <clr-dg-row *clrDgItems="let lista of listas" [clrDgItem]="lista">
+            <clr-dg-cell>{{lista.nome}}</clr-dg-cell>
+            <clr-dg-cell>{{lista.dataCriacao | date}}</clr-dg-cell>
+            <clr-dg-action-overflow>
+                <button class="action-item" (click)="editar(lista)">Ver</button>
+                <button class="action-item" (click)="excluir(lista)">Excluir</button>
+            </clr-dg-action-overflow>
+        </clr-dg-row>
+    </clr-datagrid>
+</div>
