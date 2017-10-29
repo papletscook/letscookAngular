@@ -1,3 +1,4 @@
+import { AlertService } from 'app/service/alert.service';
 import { MedidaService } from './../medida.service';
 import { ReceitaService } from './../receita.service';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
@@ -11,6 +12,7 @@ import { HolderService } from 'app/service/holder.service';
 import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
 import { ToastsManager } from 'ng2-toastr';
 import { Medida } from 'app/viewmodel/template/receita/medida';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -25,6 +27,10 @@ import { Medida } from 'app/viewmodel/template/receita/medida';
 
 
 export class VerReceitaComponent implements OnInit {
+
+    receitaInativa: boolean = false;
+
+    excluir: boolean;
 
     avgRatingReceita: number;
 
@@ -45,20 +51,22 @@ export class VerReceitaComponent implements OnInit {
     @ViewChild(PublicarReceitaComponent)
     private editarComp: PublicarReceitaComponent;
 
+    private blocked: boolean = false;
+
 
     constructor(private receitaService: ReceitaService,
-        public toastr: ToastsManager,
-        vcr: ViewContainerRef,
         private session: SessionService,
-        private medidaService: MedidaService) {
-        this.toastr.setRootViewContainerRef(vcr);
+        private medidaService: MedidaService,
+        private alert: AlertService,
+        private holder: HolderService,
+        private route: ActivatedRoute,
+    ) {
     }
 
+
     ngOnInit() {
-        if (!this.receita) {
-            this.receita = new Receita();
-            this.receita.id = 28
-        }
+        this.receita = new Receita()
+        this.receita.id = Number(this.route.snapshot.paramMap.get('id'));
 
         this.medidaService.list()
             .then(data => {
@@ -70,11 +78,20 @@ export class VerReceitaComponent implements OnInit {
             this.receita = data;
             this.loading = false;
             this.ratingReceita();
+            this.receitaAtiva();
+            this.blocked = !this.isLogged();
         }, error => {
-            this.toastr.error('Ocorreu um erro ao obter receita!', 'Oops!');
+            this.alert.error('Ocorreu um erro ao obter receita!');
         });
 
 
+    }
+
+
+    private receitaAtiva() {
+        if (this.receita.status != 'POSTADA') {
+            this.receitaInativa = true;
+        }
     }
 
 
@@ -105,8 +122,16 @@ export class VerReceitaComponent implements OnInit {
         return null;
     }
 
+    isLogged(): boolean {
+        return this.session.consultarUsuario() != null;
+    }
+
     isDonoReceita(): boolean {
-        return this.receita.criador.email == this.session.consultarUsuario().email
+        try {
+            return this.receita.criador.email == this.session.consultarUsuario().email
+        } catch (error) {
+            return false;
+        }
     }
 
     editarReceita() {
@@ -114,6 +139,16 @@ export class VerReceitaComponent implements OnInit {
         this.editarComp.carregarCampos();
         this.editedReceita = r;
         this.editarComp._open = true;
+    }
+
+    excluirReceita() {
+        this.receita.status = 'DESATIVADA';
+        this.receitaService.atualizar(this.receita).then(data => {
+            location.reload();
+        }, error => {
+            this.alert.error('Ocorreu um erro ao excluir receita!');
+        });
+        this.excluir = false;
     }
 
 

@@ -3,5 +3,6 @@ export class InfoRequest {
     command: string;
     _data?: any;
     otherUrl?: string;
-    timeout?: number = 15000;
+    timeout?: number = 30000;
+
 }

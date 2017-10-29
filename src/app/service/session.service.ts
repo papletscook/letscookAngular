@@ -1,3 +1,4 @@
+import { UserFull } from './../viewmodel/template/login/userFull';
 import { LoginService } from './../template/login/login.service';
 import { Usuario } from './../viewmodel/template/login/usuario';
 import { Injectable } from '@angular/core';
@@ -22,7 +23,7 @@ export class SessionService {
         return Promise.resolve(false);
     }
 
-    public consultarUsuario(): Usuario {
+    public consultarUsuario(): UserFull {
         try {
             let sessionObj = JSON.parse(sessionStorage.getItem("user"));
             return sessionObj;

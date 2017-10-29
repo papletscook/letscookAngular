@@ -7,7 +7,8 @@
 </div>
 <div *ngIf="!loading && receita">
     <ver-receita-component *ngIf="exibirReceita" [receita]="receita"></ver-receita-component>
-    <clr-wizard #wizardPublicar [(clrWizardOpen)]="_open" clrWizardSize="xl" (clrWizardOnCancel)="close()" [clrWizardPreventDefaultCancel]="true">
+    <clr-wizard #wizardPublicar [clrWizardPreventNavigation]="loading" [(clrWizardOpen)]="_open" clrWizardSize="xl" (clrWizardOnCancel)="close()"
+        [clrWizardPreventDefaultCancel]="true">
         <clr-wizard-title *ngIf="receita.id">Editar Receita</clr-wizard-title>
         <clr-wizard-title *ngIf="!receita.id">Publicar Receita</clr-wizard-title>
 
@@ -244,6 +245,9 @@
                 </dl>
             </form>
 
+            <ng-template clrPageButtons>
+                <clr-wizard-button [type]="'custom-next'" (click)="proximaPagina()">Avançar</clr-wizard-button>
+            </ng-template>
         </clr-wizard-page>
 
         <clr-wizard-page [clrWizardPageNextDisabled]="!validationStepFour()">
@@ -256,10 +260,11 @@
             <form (keydown.enter)="$event.preventDefault()" class="compact" name="imagem">
                 <div class="form-group">
                     <label class="required">Imagem: </label>
-                    <img-cropper [image]="img" [settings]="cropperSettings"></img-cropper>
-                    <!-- <img [src]="img.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight"> -->
+                    <img-cropper #cropper [image]="img" [settings]="cropperSettings"></img-cropper>
                 </div>
             </form>
+
+
         </clr-wizard-page>
 
     </clr-wizard>

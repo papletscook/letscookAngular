@@ -22,7 +22,7 @@ export class TemplateService {
     }, {
         nome: 'PublicarReceitaComponent',
         component: PublicarReceitaComponent,
-        inputs: []
+        inputs: [{ _open: true }]
     }, {
         nome: 'PainelDeControleComponent',
         component: PainelDeControleComponent,

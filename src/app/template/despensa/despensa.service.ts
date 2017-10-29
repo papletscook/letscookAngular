@@ -1,3 +1,4 @@
+import { SessionService } from './../../service/session.service';
 import { Despensa } from './../../viewmodel/template/despensa/despensa';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
 import { GenericService } from 'app/service/generic.service';
@@ -12,15 +13,17 @@ export class DespensaService extends GenericService {
     private infoRequest: InfoRequest;
 
     constructor(
-        private urlServiceService: UrlServiceService) {
+        private urlServiceService: UrlServiceService,
+        private session: SessionService) {
         super();
     }
 
     public buscarPorUsuario() {
-        let sessionObjUser = JSON.parse(sessionStorage.getItem("user"));
-        this.infoRequest = {
-            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'despensa/buscarPorUsuario', timeout: 6000, _data: sessionObjUser
-        };
+        this.infoRequest = new InfoRequest();
+        this.infoRequest.rqst = 'post';
+        this.infoRequest.command = this.urlServiceService.pathLetsCook + 'despensa/buscarPorUsuario';
+        this.infoRequest._data = this.session.consultarUsuario();
+
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as Despensa
@@ -29,10 +32,11 @@ export class DespensaService extends GenericService {
     }
 
     public buscarPorIngredientes(ingts: Ingrediente[]) {
-        let data = ingts;
-        this.infoRequest = {
-            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'despensa/buscarPorIngredientes', timeout: 6000, _data: data
-        };
+
+        this.infoRequest = new InfoRequest();
+        this.infoRequest.rqst = 'post';
+        this.infoRequest.command = this.urlServiceService.pathLetsCook + 'despensa/buscarPorIngredientes';
+        this.infoRequest._data = ingts;
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as ScoreReceita[]
@@ -41,9 +45,12 @@ export class DespensaService extends GenericService {
     }
 
     public atualizarDespensa(despensa: Despensa) {
-        this.infoRequest = {
-            rqst: 'put', command: this.urlServiceService.pathLetsCook + 'despensa', timeout: 6000, _data: despensa
-        };
+        despensa.dono = this.session.consultarUsuario();
+        this.infoRequest = new InfoRequest();
+        this.infoRequest.rqst = 'put';
+        this.infoRequest.command = this.urlServiceService.pathLetsCook + 'despensa';
+        this.infoRequest._data = despensa;
+
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as Despensa

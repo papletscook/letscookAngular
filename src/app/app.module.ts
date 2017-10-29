@@ -1,4 +1,6 @@
 import { RegistroComponent } from './template/registro/registro.component';
+import { DynamicRouterService } from './template/dynamic-router/dynamic-router.service';
+import { DynamicRouterComponent } from './template/dynamic-router/dynamic-router.component';
 import { CadastrarCategoriaComponent } from './template/categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { TemplateService } from './template/template.service';
 import { AlertService } from './service/alert.service';
@@ -39,6 +41,9 @@ import { Ng2CompleterModule } from "ng2-completer";
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
 import { MomentModule } from 'angular2-moment';
 import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receita/comentario-receita/comentario-receita.component';
+import { ComentarioService } from 'app/template/menu-receita/ver-receita/comentario-receita/comentario.service';
+import { TopavaliacaoComponent } from './template/index-page/topavaliacao/topavaliacao.component';
+import { CategoriaComponent } from './template/index-page/categoria/categoria.component';
 
 @NgModule({
     declarations: [
@@ -65,7 +70,10 @@ import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receit
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
         ComentarioReceitaComponent,
-        RegistroComponent
+        RegistroComponent,
+        TopavaliacaoComponent,
+        CategoriaComponent,
+        DynamicRouterComponent
     ],
     imports: [
         BrowserModule,
@@ -89,7 +97,9 @@ import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receit
         SessionService,
         LoginService,
         AlertService,
-        TemplateService
+        TemplateService,
+        ComentarioService,
+        DynamicRouterService
     ],
     bootstrap: [AppComponent],
     entryComponents: [
@@ -103,7 +113,8 @@ import { ComentarioReceitaComponent } from 'app/template/menu-receita/ver-receit
         DespensaComponent,
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
-        RegistroComponent
+        RegistroComponent,
+        TopavaliacaoComponent
     ]
 })
 

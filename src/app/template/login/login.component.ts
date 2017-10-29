@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
                 if (data) {
                     this.holderService.userLogado = true;
                     this.loginService.consultar(this.usuario).then(data => {
-                        this.session.definirUsuario(data)
+                      this.session.definirUsuario(data);
                     });
                     this.holderService.modalOpen = false;
                 } else {

@@ -1,3 +1,4 @@
+import { Categoria } from 'app/viewmodel/template/receita/categoria';
 import { SessionService } from './../../service/session.service';
 import { Injectable } from '@angular/core';
 import { GenericService } from 'app/service/generic.service';
@@ -32,9 +33,20 @@ export class ReceitaService extends GenericService implements CrudService<Receit
     public cadastrar(t: Receita): Promise<Receita> {
         t.criador = this.session.consultarUsuario();
         console.log(t)
-
         this.infoRequest = {
             rqst: 'post', command: this.urlServiceService.pathLetsCook + 'receita', timeout: 60000,
+            _data: t
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Receita[]
+            })
+            .catch(this.handleError);
+    }
+
+    public listarPorCategoria(t: Categoria): Promise<Receita[]> {
+        this.infoRequest = {
+            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'receita/buscarPorCategoria', timeout: 45000,
             _data: t
         };
         return this.urlServiceService.request(this.infoRequest)
@@ -47,6 +59,17 @@ export class ReceitaService extends GenericService implements CrudService<Receit
     getById(t: Receita): Promise<Receita> {
         this.infoRequest = {
             rqst: 'get', command: this.urlServiceService.pathLetsCook + 'receita/' + t.id, timeout: 20000
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Receita[]
+            })
+            .catch(this.handleError);
+    }
+
+    excluir(t: Receita): Promise<Receita> {
+        this.infoRequest = {
+            rqst: 'delete', command: this.urlServiceService.pathLetsCook + 'receita/' + t.id, timeout: 20000
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

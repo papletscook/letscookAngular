@@ -12,15 +12,13 @@
 <clr-main-container>
 
     <clr-header class="header-4">
-        <div class="branding">
-            <a class="nav-link">
-                <clr-icon shape="vmw-app"></clr-icon>
-                <span class="title">Let's Cook</span>
-            </a>
+        <div class="branding" (click)="location.reload()">
+            <clr-icon shape="vmw-app"></clr-icon>
+            <span class="title">Let's Cook</span>
         </div>
         <div class="header-nav">
             <a class="nav-link nav-icon" [class.active]="true" (click)="abrirComponentesGenericoDaIndex('IndexPageComponent')">
-                <clr-icon shape="home"></clr-icon>
+                <clr-icon shape="book"></clr-icon>
             </a>
             <a class="nav-link nav-icon">
                 <clr-icon shape="search"></clr-icon>
@@ -28,11 +26,15 @@
             <a class="nav-link nav-icon" *ngIf="holderService.userLogado" (click)="abrirComponentesGenericoDaIndex('PainelDeControleComponent')">
                 <clr-icon shape="cog"></clr-icon>
             </a>
+            <a class="nav-link nav-icon" href="./despensa">
+                <clr-icon shape="bundle"></clr-icon>
+            </a>
         </div>
         <div class="header-actions">
             <clr-dropdown>
                 <button class="nav-icon" clrDropdownTrigger>
-                    <clr-icon shape="view-list"></clr-icon>
+                    <clr-icon shape="user" *ngIf="holderService.userLogado"></clr-icon>
+                    <clr-icon shape="login" *ngIf="!holderService.userLogado"></clr-icon>
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
@@ -50,7 +52,19 @@
         </ul>
     </nav>
 
-    <dynamic-component [componentData]="templateService.component"></dynamic-component>
+    <div class="content-container" *ngIf="subNavAtivo">
+        <div class="content-area">
+            <!-- <dynamic-component [componentData]="templateService.component"></dynamic-component> -->
+
+            <dynamic-router-component [component]="dynamicRouterService.component"></dynamic-router-component>
+        </div>
+    </div>
+
+    <div *ngIf="!subNavAtivo">
+        <dynamic-component [componentData]="templateService.component"></dynamic-component>
+    </div>
+
+
     <login-component></login-component>
 
     <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">

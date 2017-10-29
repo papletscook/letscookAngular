@@ -10,21 +10,14 @@ export class AlertService {
     constructor() { }
 
     public error(str: string): void {
-        this.msg = str;
         this.clrAlertType = 'alert-danger';
-        this.doAction();
+        this.msg = str;
     }
 
     public info(str: string): void {
-        this.msg = str;
         this.clrAlertType = 'alert-info';
-        this.doAction();
+        this.msg = str;
     }
 
-    public doAction() {
-        setTimeout(function () {
-            this.msg = null;
-        }, 5000);
-    }
 
 }

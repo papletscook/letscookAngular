@@ -49,7 +49,6 @@ export class CadastrarIngredienteComponent implements OnInit {
         this.imgMod = {}
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
-        this.cropperSettings = new CropperSettings();
         this.cropperSettings.width = 350;
         this.cropperSettings.height = 200;
         this.cropperSettings.croppedWidth = 350;
@@ -95,7 +94,7 @@ export class CadastrarIngredienteComponent implements OnInit {
         this.imgMod.image = "data:image/jpeg;base64," + btoa(binaryString);
     }
 
-    private fileChangeListenerMod($event) {
+    private fileChangeListenerMod($event, imagem) {
         var image: any = new Image();
         var file: File = $event.target.files[0];
         var myReader: FileReader = new FileReader();
@@ -108,6 +107,7 @@ export class CadastrarIngredienteComponent implements OnInit {
         myReader.readAsDataURL(file);
         this.imageToBase64Mod($event);
     }
+
 
     private imageToBase64Mod(evt) {
         var files = evt.target.files;

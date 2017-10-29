@@ -101,6 +101,7 @@ export class DespensaComponent implements OnInit {
         });
     }
 
+
     public buscarPorUsuario() {
         this.despensaService.buscarPorUsuario()
             .then(data => {
@@ -117,6 +118,7 @@ export class DespensaComponent implements OnInit {
             this.despensa.ings.splice(index, 1);
         }
         this.atualizarDespensa();
+        this.buscarReceitasCompatives();
     }
 
     public atualizarDespensa() {
