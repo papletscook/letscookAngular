@@ -7,7 +7,7 @@
       <img [src]="coment.usuario.imagem" class="card-media-image">
       <div class="card-media-description">
         <span class="card-media-title">
-          {{coment.usuario.nome}}:
+          {{coment.usuario.nome}} em <i>{{((coment.dataComentario / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm'}}:</i>
         </span>
         <span class="card-media-text">
           {{coment.conteudo}}
