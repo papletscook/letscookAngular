@@ -21,16 +21,14 @@
     <div class="col-md-5 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
-                    <div class="row">
-                        <div class="col-md-4">
-                            {{receita.nome | uppercase}}
-                        </div>
-                        <div class="col-md-8 text-right">
-                            <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
-                        </div>
+                <div class="row flex-items-xs-between">
+                    <div class="col-xs">
+                        <label>{{ receita.nome | uppercase}}</label>
                     </div>
-                </h4>
+                    <div class="col-xs text-right">
+                        <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
+                    </div>
+                </div>
             </div>
             <div class="card-img">
                 <img [src]="receita.imagem" class="imagem">

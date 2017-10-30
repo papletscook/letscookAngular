@@ -12,7 +12,7 @@ import { PageNotFoundComponent } from 'app/template/page-not-found/page-not-foun
 
 
 const routes: Routes = [
-    { path: '', component: IndexPageComponent },
+    { path: '',   redirectTo: '/topavaliacao', pathMatch: 'full' },
     { path: 'receita/:id', component: VerReceitaComponent },
     { path: 'categoria/:id', component: CategoriaComponent },
     { path: 'topavaliacao', component: TopavaliacaoComponent },
