@@ -1,3 +1,4 @@
+import { ListaCompra } from './../../viewmodel/template/lista/lista-compra';
 import { SessionService } from './../../service/session.service';
 import { Despensa } from './../../viewmodel/template/despensa/despensa';
 import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
@@ -6,7 +7,6 @@ import { UrlServiceService } from 'app/service/url.service';
 import { InfoRequest } from 'app/viewmodel/url-service/info-request';
 import { Injectable } from '@angular/core';
 import { ScoreReceita } from 'app/viewmodel/template/despensa/score-receita';
-import { ListaCompra } from 'app/viewmodel/template/lista/lista-compra';
 
 
 
@@ -21,6 +21,22 @@ export class ListaComprasService extends GenericService {
         super();
     }
 
+    public cadastrarListaDeCompra(listaCompra: ListaCompra) {
+        let sessionObj = JSON.parse(sessionStorage.getItem("user"));
+        listaCompra.usuario = sessionObj;
+        this.infoRequest = {
+            rqst: "post",
+            command: this.urlServiceService.pathLetsCook + "listaCompras/",
+            timeout: 6000,
+            _data: listaCompra
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as ListaCompra
+            })
+            .catch(this.handleError);
+    }
+
     public buscarPorUsuario() {
         this.infoRequest = new InfoRequest();
         this.infoRequest.rqst = 'post';
@@ -33,31 +49,30 @@ export class ListaComprasService extends GenericService {
             .catch(this.handleError);
     }
 
-    public buscarPorIngredientes(ingts: Ingrediente[]) {
-
-        this.infoRequest = new InfoRequest();
-        this.infoRequest.rqst = 'post';
-        this.infoRequest.command = this.urlServiceService.pathLetsCook + 'despensa/buscarPorIngredientes';
-        this.infoRequest._data = ingts;
-        
+    public atualizarListaDeCompra(listaCompra: ListaCompra) {
+        let sessionObj = JSON.parse(sessionStorage.getItem("user"));
+        listaCompra.usuario = sessionObj;
+        this.infoRequest = {
+            rqst: "put",
+            command: this.urlServiceService.pathLetsCook + "listaCompras/",
+            timeout: 6000,
+            _data: listaCompra
+        };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
-                return data as ScoreReceita[]
+                return data as ListaCompra
             })
             .catch(this.handleError);
     }
 
-    public atualizarDespensa(despensa: Despensa) {
-        despensa.dono = this.session.consultarUsuario();
-        this.infoRequest = new InfoRequest();
-        this.infoRequest.rqst = 'put';
-        this.infoRequest.command = this.urlServiceService.pathLetsCook + 'despensa';
-        this.infoRequest._data = despensa;
-
+    public deletarListaDeCompras(listaCompra: ListaCompra) {
+        this.infoRequest = {
+            rqst: "delete",
+            command: this.urlServiceService.pathLetsCook + "listaCompras/",
+            timeout: 6000,
+            _data: listaCompra.id
+        };
         return this.urlServiceService.request(this.infoRequest)
-            .then(data => {
-                return data as Despensa
-            })
             .catch(this.handleError);
     }
 

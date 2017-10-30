@@ -8,8 +8,9 @@ import 'rxjs/Rx';
 export class UrlServiceService {
 
     // IPs
-    private urlIp = 'http://localhost:8080/'; // Localhost
+    // private urlIp = 'http://localhost:8080/'; // Localhost
     // private urlIp = 'http://ec2-35-164-25-74.us-west-2.compute.amazonaws.com:8080/'; // Prod
+    private urlIp = 'http://10.40.194.73:8080/'; // Prod
 
 
 
@@ -89,7 +90,9 @@ export class UrlServiceService {
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
-                return response.json()
+                if (response.status < 200 || response.status >= 300) {
+                    console.log("This request has failed" + response.status);
+                }                
             })
             .catch(this.handleError);
     }

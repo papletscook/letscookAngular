@@ -10,14 +10,79 @@
     <clr-datagrid>
         <clr-dg-column>Nome</clr-dg-column>
         <clr-dg-column>Data de Criação</clr-dg-column>
-
         <clr-dg-row *clrDgItems="let lista of listas" [clrDgItem]="lista">
-            <clr-dg-cell>{{lista.nome}}</clr-dg-cell>
-            <clr-dg-cell>{{lista.dataCriacao | date}}</clr-dg-cell>
+            <clr-dg-cell (click)="editarLista(lista)">{{lista.nome}}</clr-dg-cell>
+            <clr-dg-cell>{{((lista.dataCriacao / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm'}}</clr-dg-cell>
             <clr-dg-action-overflow>
-                <button class="action-item" (click)="editar(lista)">Ver</button>
-                <button class="action-item" (click)="excluir(lista)">Excluir</button>
+                <button class="action-item" (click)="editarLista(lista)">Ver</button>
+                <button class="action-item" (click)="excluirLista(lista)">Excluir</button>
             </clr-dg-action-overflow>
         </clr-dg-row>
     </clr-datagrid>
+    <button type="button" class="btn btn-primary btn-block btn-sm" (click)="createLista()">Adicionar Lista de Compras</button>
 </div>
+
+<clr-modal [(clrModalOpen)]="modalModifica">
+    <h3 class="modal-title">Gerenciar Lista de Compra</h3>
+    <div class="modal-body">
+        <div *ngIf="editedLista">
+            <label for="aForm_1">Ingrediente:</label>
+            <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
+                placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
+            <button type="button" class="btn btn-success btn-sm" (click)="adicionarIngrediente()">Adicionar Ingrediente</button>
+            <h6> {{editedLista.nome}}</h6>
+            <clr-datagrid>
+                <clr-dg-column>Nome</clr-dg-column>
+                <clr-dg-row *clrDgItems="let list of editedLista.itens">
+                    <clr-dg-cell> {{list.nome}} </clr-dg-cell>
+                    <clr-dg-cell>
+                        <clr-checkbox [(clrChecked)]="list.checked"></clr-checkbox>
+                    </clr-dg-cell>
+                    <clr-dg-action-overflow>
+                        <button class="action-item" (click)="excluirIngredienteDaLista(list)">Excluir</button>
+                    </clr-dg-action-overflow>
+                </clr-dg-row>
+                <clr-dg-footer>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} Ingredientes
+                    <clr-dg-pagination #pagination [clrDgPageSize]="8"></clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="modalModifica = false">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="atualizaModificaLista()">Atualizar</button>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalCreate">
+    <h3 class="modal-title">Criar Lista de Compra</h3>
+    <div class="modal-body">
+        <div>
+            <label>Nome da Lista</label>
+            <input type="text" placeholder="Insira o nome da lista" [(ngModel)]="createdLista.nome">
+            <br>
+            <label for="aForm_1">Ingrediente:</label>
+            <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
+                placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
+            <button type="button" class="btn btn-success btn-sm" (click)="adicionaIngredienteNacreatedLista()">Adicionar Ingrediente</button>
+            <clr-datagrid>
+                <clr-dg-column>Nome</clr-dg-column>
+                <clr-dg-row *clrDgItems="let list of createdLista.itens">
+                    <clr-dg-cell> {{list.nome}} </clr-dg-cell>
+                    <clr-dg-action-overflow>
+                        <button class="action-item">Excluir</button>
+                    </clr-dg-action-overflow>
+                </clr-dg-row>
+                <clr-dg-footer>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} Ingredientes
+                    <clr-dg-pagination #pagination [clrDgPageSize]="8"></clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="modalCreate = false">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="cadastrar()" [disabled]="btnDisabledCreateLista">{{btnNameCreateLista}}</button>
+    </div>
+</clr-modal>
