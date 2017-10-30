@@ -67,6 +67,18 @@ export class ReceitaService extends GenericService implements CrudService<Receit
             .catch(this.handleError);
     }
 
+    public buscarPorNome(nome: string): Promise<Receita[]> {
+        this.infoRequest = {
+            rqst: 'post', command: this.urlServiceService.pathLetsCook + 'receita/buscarPorNome', timeout: 30000,
+            _data: {nome}
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as Receita[]
+            })
+            .catch(this.handleError);
+    }
+
     getById(t: Receita): Promise<Receita> {
         this.infoRequest = {
             rqst: 'get', command: this.urlServiceService.pathLetsCook + 'receita/' + t.id, timeout: 20000

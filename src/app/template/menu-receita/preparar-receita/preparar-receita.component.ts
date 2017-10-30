@@ -110,6 +110,10 @@ export class PrepararReceitaComponent implements OnInit {
         this.timer = null;
     }
 
+    validationThree(): boolean{
+        return this.avaliacao.valor > 0;
+    }
+
 
     definirCrono(passo: Passo): void {
         let sgs = this.passoCrono.minPasso * 60;

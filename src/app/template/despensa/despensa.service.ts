@@ -23,6 +23,7 @@ export class DespensaService extends GenericService {
         this.infoRequest.rqst = 'post';
         this.infoRequest.command = this.urlServiceService.pathLetsCook + 'despensa/buscarPorUsuario';
         this.infoRequest._data = this.session.consultarUsuario();
+        this.infoRequest.timeout = 50000
 
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

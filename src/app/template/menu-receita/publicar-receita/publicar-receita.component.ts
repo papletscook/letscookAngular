@@ -205,8 +205,9 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     close() {
-        console.log('close')
         this.wizard.close();
+        this.wizard.reset();
+        this._open = false;
     }
 
     excluirEtapa(etapa: Etapa): void {

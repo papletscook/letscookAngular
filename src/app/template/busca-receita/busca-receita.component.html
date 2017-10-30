@@ -3,11 +3,16 @@
   <section class="form-block">
     <div class="form-group">
       <label class="required">Nome</label>
-      <input type="text" placeholder="Nome da Receita..." id="requiredInput">
-      <button class="btn">
+      <input type="text" [(ngModel)]="nome" name="nome" placeholder="Nome da Receita..." id="requiredInput">
+      <button class="btn" (click)="carregar()">
         <clr-icon shape="search"></clr-icon>
       </button>
     </div>
   </section>
-
 </form>
+
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngFor="let receita of receitas">
+    <app-card-receita [receita]="receita"></app-card-receita>
+  </div>
+</div>

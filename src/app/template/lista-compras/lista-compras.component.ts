@@ -32,7 +32,6 @@ export class ListaComprasComponent implements OnInit {
     }, error => {
     });
     this.loading = false;
-
   }
 
   public editar(r: ListaCompra) {

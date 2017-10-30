@@ -55,12 +55,11 @@ export class CategoriaService extends GenericService implements Service<Categori
     }
 
     public atualizar(categoria: Categoria) {
-        this.infoRequest = {
-            rqst: "put",
-            command: this.urlServiceService.pathLetsCook + "categoriaReceita/",
-            timeout: 6000,
-            _data: categoria
-        };
+        this.infoRequest = new InfoRequest()
+        this.infoRequest.rqst = "put";
+        this.infoRequest.command = this.urlServiceService.pathLetsCook + "categoriaReceita/";
+        this.infoRequest._data = categoria
+
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as Categoria;
@@ -69,9 +68,10 @@ export class CategoriaService extends GenericService implements Service<Categori
     }
 
     getById(t: Categoria): Promise<Categoria> {
-        this.infoRequest = {
-            rqst: 'get', command: this.urlServiceService.pathLetsCook + 'categoriaReceita/' + t.id, timeout: 20000
-        };
+        this.infoRequest = new InfoRequest()
+        this.infoRequest.rqst = "get";
+        this.infoRequest.command = this.urlServiceService.pathLetsCook + "categoriaReceita/" + t.id;
+
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
                 return data as Categoria[]
