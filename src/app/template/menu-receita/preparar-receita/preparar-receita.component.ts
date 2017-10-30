@@ -150,6 +150,7 @@ export class PrepararReceitaComponent implements OnInit {
         this.avaliar()
         this.wizard.reset();
         this.cancelar();
+        location.reload()
     }
 
 

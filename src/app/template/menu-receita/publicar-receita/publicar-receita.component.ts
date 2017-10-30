@@ -68,7 +68,7 @@ export class PublicarReceitaComponent implements OnInit {
     cropper: ImageCropperComponent;
 
     @Input()
-    _open = false
+    _open;
 
     constructor(
         private receitaService: ReceitaService,
@@ -201,14 +201,12 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
 
-    open() {
-        this._open = !this.open;
+    public open() {
+        this.wizard.open()
     }
 
-    close() {
-        this._open = false;
-        this.wizard.close();
-        this.wizard.reset();
+    public close() {
+        this.wizard.close()
     }
 
     excluirEtapa(etapa: Etapa): void {

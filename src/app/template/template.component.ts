@@ -33,12 +33,12 @@ export class TemplateComponent implements OnInit {
 
     private subNavAtivo: boolean = false;
 
-    @ViewChild('publicar', undefined)
+    private publicarOpen : boolean = false;
+
+    @ViewChild('publicar')
     private publicar: PublicarReceitaComponent;
 
-    private activePublicar: boolean;
-
-    private receita : Receita = new Receita()
+    private receita: Receita = new Receita()
 
 
     constructor(private router: Router,
@@ -54,6 +54,11 @@ export class TemplateComponent implements OnInit {
             this.listarCategorias()
         }
     }
+
+    private publicarReceita() {
+        this.publicar.open()
+    }
+
 
     private listarCategorias() {
         this.catServ.list().then(data => {

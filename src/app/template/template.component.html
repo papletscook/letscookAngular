@@ -57,10 +57,10 @@
             </clr-tooltip>
 
             <clr-tooltip>
-                <a class="nav-link nav-icon" clrTooltipTrigger (click)="activePublicar = true" *ngIf="holderService.userLogado">
+                <a class="nav-link nav-icon" clrTooltipTrigger (click)="publicarReceita()" *ngIf="holderService.userLogado">
                     <clr-icon shape="archive"></clr-icon>
                 </a>
-                <clr-tooltip-content clrPosition="bottom-right" clrSize="md" *clrIfOpen>
+                <clr-tooltip-content clrPosition="bottom-right" clrSize="md">
                     <span>Publicar Receita</span>
                 </clr-tooltip-content>
             </clr-tooltip>
@@ -116,6 +116,6 @@
     </div>
 
     <login-component></login-component>
-    <publicar-receita-component [receita]="receita" [_open]="activePublicar"></publicar-receita-component>
+    <publicar-receita-component #publicar [receita]="receita" [_open]="publicarOpen"></publicar-receita-component>
 
 </clr-main-container>
