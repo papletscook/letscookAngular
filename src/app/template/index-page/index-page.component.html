@@ -1,4 +1,21 @@
 <div>
     <h3>Página Inicial</h3>
+    <div *ngIf="loading">
+        <div class="text-center center loading">
+            <span class="spinner">
+                Loading...
+            </span>
+        </div>
+    </div>
+    <div *ngIf="!loading">
+        <h4>Conheça as receitas mais poulares</h4>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngFor="let receita of receitas">
+                <app-card-receita [receita]="receita"></app-card-receita>
+            </div>
+        </div>
+
+    </div>
 
 </div>

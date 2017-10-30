@@ -22,6 +22,7 @@ import * as _ from "lodash";
 export class IndexPageComponent implements OnInit {
     private receitas: Receita[];
     private categorias: Categoria[];
+    private loading: boolean = false;
 
 
     @ViewChild(CategoriaComponent)
@@ -31,12 +32,14 @@ export class IndexPageComponent implements OnInit {
         private service: ReceitaService,
         private catServ: CategoriaService,
         private alert: AlertService,
-        private holder : HolderService
+        private holder: HolderService,
+        private receitaService: ReceitaService
     ) { }
 
-    ngOnInit() {
+    public ngOnInit() {
+        this.carregarReceitas();
         if (!this.categorias) {
-            this.listarCategorias()
+            this.listarCategorias();
         }
     }
 
@@ -46,5 +49,15 @@ export class IndexPageComponent implements OnInit {
         }, error => {
             this.alert.error("Falha consultar!")
         });
+    }
+
+    private carregarReceitas() {
+        this.receitaService.buscarBemAvaliadas()
+            .then(data => {
+                this.receitas = data;
+                this.loading = false;
+            }, error => {
+                this.alert.error("Ocorreu um erro ao carregar receitas!");
+            });
     }
 }

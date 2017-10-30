@@ -117,4 +117,8 @@ export class TemplateComponent implements OnInit {
         }
     }
 
+    private reloadIndexPage() {
+        window.location.reload();
+    }
+
 }

@@ -42,11 +42,18 @@
                     </clr-stack-content>
                     <clr-stack-block *ngFor="let list of editedLista.itens">
                         <clr-stack-label (dblclick)="editaPassoH(list)">
-                            <div *ngIf="list != itemListaH">
-                                {{list.nome}}
-                            </div>
-                            <div *ngIf="list === itemListaH">
-                                <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div *ngIf="list != itemListaH">
+                                        {{list.nome}}
+                                    </div>
+                                    <div *ngIf="list === itemListaH">
+                                        <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <clr-checkbox [(clrChecked)]="list.checked"> </clr-checkbox>
+                                </div>
                             </div>
                         </clr-stack-label>
                         <clr-stack-content style="float: right;">
@@ -90,7 +97,7 @@
                             </div>
                             <div *ngIf="list === itemListaH">
                                 <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
-                            </div>
+                            </div>                            
                         </clr-stack-label>
                         <clr-stack-content style="float: right;">
                             <clr-icon shape="trash" (click)="excluirIngredienteDaListaCreate(list)"></clr-icon>
