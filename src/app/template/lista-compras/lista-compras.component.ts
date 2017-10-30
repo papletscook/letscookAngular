@@ -95,7 +95,6 @@ export class ListaComprasComponent implements OnInit {
     }
 
     private adicionarIngrediente() {
-        let modifi = false;
         if (this.searchStr) {
             let itemLista: ItemLista;
             itemLista = {
@@ -106,29 +105,16 @@ export class ListaComprasComponent implements OnInit {
             if (this.editedLista.itens.length > 0) { // valida se lista é maior que zero
                 let index = this.listaDeIngredientes.findIndex(i => i.nome === itemLista.nome); // procura index do valor inserido no input se existe na lista...
                 if (index != -1) { // valida se achou item na lista, (-1 = não achou)
-                    this.editedLista.itens.forEach(element => {
-                        if (!modifi) {
-                            if (element.nome === itemLista.nome) {
-                                modifi = true;
-                            } else {
-                                if (!modifi) {
-                                    console.log("entrou aq");
-
-                                    this.editedLista.itens.push(itemLista);
-                                    this.atualizaListaDeCompras();
-                                    modifi = true;
-                                }
-                            }
-                        }
-                    });
+                    let indexedited = this.editedLista.itens.findIndex(i => i.nome === itemLista.nome);
+                    if (indexedited === -1) {
+                        this.editedLista.itens.push(itemLista);
+                        this.atualizaListaDeCompras();
+                    }
                 }
             } else {
-                if (!modifi) {
-                    this.editedLista.itens.push(itemLista);
-                    this.atualizaListaDeCompras();
-                    modifi = true;
-                }
-            }            
+                this.editedLista.itens.push(itemLista);
+                this.atualizaListaDeCompras();
+            }
         }
         this.searchStr = null;
     }
@@ -163,7 +149,6 @@ export class ListaComprasComponent implements OnInit {
     }
 
     private adicionaIngredienteNacreatedLista() {
-        let modifi = false;
         if (this.searchStr) {
             let itemLista: ItemLista;
             itemLista = {
@@ -171,25 +156,16 @@ export class ListaComprasComponent implements OnInit {
                 nome: this.searchStr,
                 checked: false
             }
-            if (typeof this.createdLista.itens != "undefined") {
-                this.createdLista.itens.forEach(element => {
-                    let index = this.listaDeIngredientes.findIndex(i => i.nome === this.searchStr);
-                    if (index != -1) {
-                        if (element.nome === this.searchStr) {
-                            // this.alertService.error("O item que você deseja adicionar ja existe na lista.");
-                        } else {
-                            if (!modifi) {
-                                this.createdLista.itens.push(itemLista);
-                                modifi = true;
-                            }
-                        }
+            if (typeof this.createdLista.itens != "undefined") { // valida se lista é maior que zero
+                let index = this.listaDeIngredientes.findIndex(i => i.nome === itemLista.nome); // procura index do valor inserido no input se existe na lista...
+                if (index != -1) { // valida se achou item na lista, (-1 = não achou)
+                    let indexecreated = this.createdLista.itens.findIndex(i => i.nome === itemLista.nome);
+                    if (indexecreated === -1) {
+                        this.createdLista.itens.push(itemLista);
                     }
-                });
-            } else {
-                if (!modifi) {
-                    this.createdLista.itens = [itemLista];
-                    modifi = true;
                 }
+            } else {
+                this.createdLista.itens = [itemLista];
             }
         }
         this.searchStr = null;
