@@ -1,3 +1,4 @@
+import { RegistroComponent } from './template/registro/registro.component';
 import { CadastrarCategoriaComponent } from './template/categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { TemplateService } from './template/template.service';
 import { AlertService } from './service/alert.service';
@@ -76,7 +77,8 @@ import { PageNotFoundComponent } from './template/page-not-found/page-not-found.
         ListaComprasComponent,
         CardReceitaComponent,
         BuscaReceitaComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        RegistroComponent
     ],
     imports: [
         BrowserModule,
@@ -115,7 +117,8 @@ import { PageNotFoundComponent } from './template/page-not-found/page-not-found.
         DespensaComponent,
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
-        TopavaliacaoComponent
+        TopavaliacaoComponent,
+        RegistroComponent
     ]
 })
 

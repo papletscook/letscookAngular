@@ -1,3 +1,4 @@
+import { RegistroComponent } from './registro/registro.component';
 import { CadastrarCategoriaComponent } from './categoria/cadastrar-categoria/cadastrar-categoria.component';
 import { DespensaComponent } from './../template/despensa/despensa.component';
 import { PrepararReceitaComponent } from './../template/menu-receita/preparar-receita/preparar-receita.component';
@@ -47,6 +48,12 @@ export class TemplateService {
     {
         nome: 'CadastrarCategoriaComponent',
         component: CadastrarCategoriaComponent,
+        inputs: []
+    }
+    ,
+    {
+        nome: 'RegistroComponent',
+        component: RegistroComponent,
         inputs: []
     }]
 

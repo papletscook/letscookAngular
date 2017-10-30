@@ -1,3 +1,4 @@
+import { UserFull } from './../../viewmodel/template/login/userFull';
 import { UrlServiceService } from 'app/service/url.service';
 import { InfoRequest } from './../../viewmodel/url-service/info-request';
 
@@ -48,6 +49,20 @@ export class LoginService {
         }
         return valided;
 
+    }
+
+    public criarusuario(userFull: UserFull) {
+        this.infoRequest = {
+            rqst: 'post',
+            command: this.urlServiceService.pathLetsCook + 'usuario/',
+            _data: userFull,
+            timeout: 6000
+        };
+        return this.urlServiceService.request(this.infoRequest)
+            .then(data => {
+                return data as UserFull
+            })
+            .catch(this.handleError);
     }
 
 

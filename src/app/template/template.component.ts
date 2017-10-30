@@ -1,3 +1,4 @@
+import { RegistroComponent } from './registro/registro.component';
 import { Receita } from 'app/viewmodel/template/receita/receita';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
 import { DespensaComponent } from './despensa/despensa.component';
@@ -33,7 +34,7 @@ export class TemplateComponent implements OnInit {
 
     private subNavAtivo: boolean = false;
 
-    private publicarOpen : boolean = false;
+    private publicarOpen: boolean = false;
 
     @ViewChild('publicar')
     private publicar: PublicarReceitaComponent;
@@ -99,7 +100,7 @@ export class TemplateComponent implements OnInit {
         }
     }
 
-    private abrirComponentesGenericoDaIndex(component: string) {
+    public abrirComponentesGenericoDaIndex(component: string) {
         switch (component) {
             case "DespensaComponent":
                 this.adminNav(true);
@@ -113,6 +114,10 @@ export class TemplateComponent implements OnInit {
             case "IndexPageComponent":
                 this.adminNav(false);
                 this.changeCase(IndexPageComponent);
+                break;
+            case "RegistroComponent":
+                this.adminNav(false);
+                this.changeCase(RegistroComponent);
                 break;
         }
     }

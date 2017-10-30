@@ -6,4 +6,5 @@ export class UserFull {
     dataNasc: number;
     senha: string;
     descricao: string;
+    genero: string;
 }
