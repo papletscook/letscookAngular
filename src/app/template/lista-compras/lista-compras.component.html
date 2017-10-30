@@ -36,7 +36,9 @@
                 <clr-dg-row *clrDgItems="let list of editedLista.itens">
                     <clr-dg-cell> {{list.nome}} </clr-dg-cell>
                     <clr-dg-cell>
-                        <clr-checkbox [(clrChecked)]="list.checked"></clr-checkbox>
+                        <div style="text-align: right;">
+                            <clr-checkbox [(clrChecked)]="list.checked"></clr-checkbox>
+                        </div>
                     </clr-dg-cell>
                     <clr-dg-action-overflow>
                         <button class="action-item" (click)="excluirIngredienteDaLista(list)">Excluir</button>
