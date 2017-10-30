@@ -60,11 +60,17 @@ export class CadastrarIngredienteComponent implements OnInit {
     }
 
     public validation(): boolean {
-        if (this.ingrediente.imagem
-            && this.ingrediente.nome) {
-            return true;
+        let valid: boolean = false;
+        if (this.ingrediente.imagem && this.ingrediente.nome) {
+            valid = true;
         }
-        return false;
+        return valid;
+    }
+
+    private abort() {
+        this.img = null
+        this.ingrediente = new Ingrediente();
+        this.preparaCropper();
     }
 
     private fileChangeListener($event) {
@@ -124,12 +130,6 @@ export class CadastrarIngredienteComponent implements OnInit {
     private _handleReaderLoadedMod(readerEvt) {
         var binaryString = readerEvt.target.result;
         this.imgMod.image = "data:image/jpeg;base64," + btoa(binaryString);
-    }
-
-    private abort() {
-        this.img = {}
-        this.ingrediente = new Ingrediente();
-        this.preparaCropper()
     }
 
     private cadastrarIngrediente() {
