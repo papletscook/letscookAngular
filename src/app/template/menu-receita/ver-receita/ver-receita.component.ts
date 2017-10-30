@@ -1,3 +1,4 @@
+import { TitleCasePipe } from './../../../pipe/title-case.pipe';
 import { AlertService } from 'app/service/alert.service';
 import { MedidaService } from './../medida.service';
 import { ReceitaService } from './../receita.service';
@@ -22,7 +23,8 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['ver-receita.component.css'],
     providers: [
         ReceitaService,
-        MedidaService]
+        MedidaService
+    ]
 })
 
 
