@@ -1,3 +1,6 @@
+import { ItemLista } from './../../../viewmodel/template/lista/item-lista';
+import { ListaCompra } from 'app/viewmodel/template/lista/lista-compra';
+import { ListaComprasService } from './../../lista-compras/lista-compras.service';
 import { TitleCasePipe } from './../../../pipe/title-case.pipe';
 import { AlertService } from 'app/service/alert.service';
 import { MedidaService } from './../medida.service';
@@ -23,7 +26,8 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['ver-receita.component.css'],
     providers: [
         ReceitaService,
-        MedidaService
+        MedidaService,
+        ListaComprasService
     ]
 })
 
@@ -59,10 +63,10 @@ export class VerReceitaComponent implements OnInit {
     constructor(private receitaService: ReceitaService,
         private session: SessionService,
         private medidaService: MedidaService,
-        private alert: AlertService,
+        private alertService: AlertService,
         private holder: HolderService,
         private route: ActivatedRoute,
-    ) {
+        private listaComprasService: ListaComprasService) {
     }
 
 
@@ -83,7 +87,7 @@ export class VerReceitaComponent implements OnInit {
             this.receitaAtiva();
             this.blocked = !this.isLogged();
         }, error => {
-            this.alert.error('Ocorreu um erro ao obter receita!');
+            this.alertService.error('Ocorreu um erro ao obter receita!');
         });
 
 
@@ -148,10 +152,29 @@ export class VerReceitaComponent implements OnInit {
         this.receitaService.atualizar(this.receita).then(data => {
             location.reload();
         }, error => {
-            this.alert.error('Ocorreu um erro ao excluir receita!');
+            this.alertService.error('Ocorreu um erro ao excluir receita!');
         });
         this.excluir = false;
     }
 
+
+    public adicionarIngredientesAListaDeCompras() {
+        let listaCompra: ListaCompra;
+        listaCompra = {
+            id: null,
+            nome: "Ingredientes para: " + this.receita.nome,
+            itens: []
+        }
+        this.receita.ingts.forEach(element => {
+            listaCompra.itens.push({ id: null, nome: element.ingrediente.nome });
+        });
+        this.listaComprasService
+            .cadastrarListaDeCompra(listaCompra)
+            .then(data => {
+                this.alertService.info("Lista de compras gerada com sucesso.");
+            }, error => {
+                this.alertService.error(error.message);
+            });
+    }
 
 }
