@@ -85,7 +85,6 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._open = true
     }
 
     customCompareCategoria(o1: Categoria, o2: Categoria) {
@@ -205,6 +204,7 @@ export class PublicarReceitaComponent implements OnInit {
     }
 
     close() {
+        this._open = false;
         this.wizard.close();
         this.wizard.reset();
     }
@@ -317,8 +317,12 @@ export class PublicarReceitaComponent implements OnInit {
     public getIngredientes() {
         this.ingredientesService.list()
             .then(data => {
-                this.allIngredientes = _.orderBy(data, ['nome'], ['asc']);
+                this.allIngredientes = data;
+                this.allIngredientes.sort(function (a, b) {
+                    return a.nome.localeCompare(b.nome);
+                });
             }, error => {
+                this.alert.error("Falha ao carregar Ingredientes!")
             });
     }
 

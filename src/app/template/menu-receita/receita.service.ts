@@ -62,6 +62,9 @@ export class ReceitaService extends GenericService implements CrudService<Receit
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
+                data.sort(function (a, b) {
+                    return a.nome.localeCompare(b.nome);
+                });
                 return data as Receita[]
             })
             .catch(this.handleError);
@@ -70,10 +73,13 @@ export class ReceitaService extends GenericService implements CrudService<Receit
     public buscarPorNome(nome: string): Promise<Receita[]> {
         this.infoRequest = {
             rqst: 'post', command: this.urlServiceService.pathLetsCook + 'receita/buscarPorNome', timeout: 30000,
-            _data: {nome}
+            _data: { nome }
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
+                data.sort(function (a, b) {
+                    return a.nome.localeCompare(b.nome);
+                });
                 return data as Receita[]
             })
             .catch(this.handleError);

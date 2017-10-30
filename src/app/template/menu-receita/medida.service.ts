@@ -24,6 +24,9 @@ export class MedidaService extends GenericService implements Service<Medida> {
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {
+                data.sort(function (a, b) {
+                    return a.desc.localeCompare(b.desc);
+                });
                 return data as Medida[]
             })
             .catch(this.handleError);
