@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { ItemLista } from './../../../viewmodel/template/lista/item-lista';
 import { ListaCompra } from 'app/viewmodel/template/lista/lista-compra';
 import { ListaComprasService } from './../../lista-compras/lista-compras.service';
@@ -157,7 +158,6 @@ export class VerReceitaComponent implements OnInit {
         this.excluir = false;
     }
 
-
     public adicionarIngredientesAListaDeCompras() {
         let listaCompra: ListaCompra;
         listaCompra = {
@@ -166,7 +166,7 @@ export class VerReceitaComponent implements OnInit {
             itens: []
         }
         this.receita.ingts.forEach(element => {
-            listaCompra.itens.push({ id: null, nome: element.ingrediente.nome });
+            listaCompra.itens.push({ id: null, nome: element.quant + " " + this.detailMedida(element.uMedida).desc + " de " + element.ingrediente.nome });
         });
         this.listaComprasService
             .cadastrarListaDeCompra(listaCompra)

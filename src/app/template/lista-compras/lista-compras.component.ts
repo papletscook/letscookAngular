@@ -23,6 +23,7 @@ export class ListaComprasComponent implements OnInit {
     private listas: ListaCompra[];
 
     private editedLista: ListaCompra;
+    private itemListaH: ItemLista;
     private createdLista = new ListaCompra();
 
     private modalModifica: boolean = false;
@@ -95,28 +96,13 @@ export class ListaComprasComponent implements OnInit {
     }
 
     private adicionarIngrediente() {
-        if (this.searchStr) {
-            let itemLista: ItemLista;
-            itemLista = {
-                id: null,
-                nome: this.searchStr,
-                checked: false
-            }
-            if (this.editedLista.itens.length > 0) { // valida se lista é maior que zero
-                let index = this.listaDeIngredientes.findIndex(i => i.nome === itemLista.nome); // procura index do valor inserido no input se existe na lista...
-                if (index != -1) { // valida se achou item na lista, (-1 = não achou)
-                    let indexedited = this.editedLista.itens.findIndex(i => i.nome === itemLista.nome);
-                    if (indexedited === -1) {
-                        this.editedLista.itens.push(itemLista);
-                        this.atualizaListaDeCompras();
-                    }
-                }
-            } else {
-                this.editedLista.itens.push(itemLista);
-                this.atualizaListaDeCompras();
-            }
-        }
-        this.searchStr = null;
+        let itemLista: ItemLista;
+        itemLista = {
+            id: null,
+            nome: "Nome do item",
+            checked: false
+        };
+        this.editedLista.itens.push(itemLista);
     }
 
     private listarIngredientes() {
@@ -149,26 +135,24 @@ export class ListaComprasComponent implements OnInit {
     }
 
     private adicionaIngredienteNacreatedLista() {
-        if (this.searchStr) {
-            let itemLista: ItemLista;
-            itemLista = {
-                id: null,
-                nome: this.searchStr,
-                checked: false
-            }
-            if (typeof this.createdLista.itens != "undefined") { // valida se lista é maior que zero
-                let index = this.listaDeIngredientes.findIndex(i => i.nome === itemLista.nome); // procura index do valor inserido no input se existe na lista...
-                if (index != -1) { // valida se achou item na lista, (-1 = não achou)
-                    let indexecreated = this.createdLista.itens.findIndex(i => i.nome === itemLista.nome);
-                    if (indexecreated === -1) {
-                        this.createdLista.itens.push(itemLista);
-                    }
-                }
-            } else {
-                this.createdLista.itens = [itemLista];
-            }
+        let itemLista: ItemLista;
+        itemLista = {
+            id: null,
+            nome: "Nome do item",
+            checked: false
+        };
+        if (typeof this.createdLista.itens != "undefined") {
+            this.createdLista.itens.push(itemLista);
+        } else {
+            this.createdLista.itens = [itemLista];
         }
-        this.searchStr = null;
+    }
+
+    private excluirIngredienteDaListaCreate(ingrediente: ItemLista) {
+        let index = this.createdLista.itens.indexOf(ingrediente);
+        if (index !== -1) {
+            this.createdLista.itens.splice(index, 1);
+        }
     }
 
     private atualizaModificaLista() {
@@ -176,5 +160,11 @@ export class ListaComprasComponent implements OnInit {
         this.atualizaListaDeCompras();
     }
 
+    private editaPassoH(item: ItemLista) {
+        this.itemListaH = item;
+    }
+    private outPassoH() {
+        this.itemListaH = null;
+    }
 
 }

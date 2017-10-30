@@ -42,14 +42,10 @@
                 <clr-dg-column>Ações</clr-dg-column>
                 <clr-dg-row *clrDgItems="let ingrediente of ingredientes">
                     <clr-dg-cell>{{ingrediente.nome}}</clr-dg-cell>
-                    <clr-dg-cell>
-                        <button class="btn btn-icon btn-sm">
-                            <clr-icon shape="times"></clr-icon>
-                        </button>
-                        <button class="btn btn-icon btn-sm" (click)="modificaIngrediente(ingrediente)">
-                            <clr-icon shape="bars"></clr-icon>
-                        </button>
-                    </clr-dg-cell>
+                    <clr-dg-action-overflow>
+                        <button class="action-item" (click)="modificaIngrediente(ingrediente)">Modifica</button>
+                        <button class="action-item">Excluir</button>
+                    </clr-dg-action-overflow>
                 </clr-dg-row>
                 <clr-dg-footer>
                     {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} Ingredientes

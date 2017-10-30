@@ -105,7 +105,7 @@
 
             <div class="card-footer">
                 <button class="btn btn-sm btn-link" (click)="prepararReceita()" [disabled]="blocked || receitaInativa">Preparar Receita</button>
-                <button class="btn btn-sm btn-link" (click)="adicionarIngredientesAListaDeCompras()">Lista de compras</button>
+                <button class="btn btn-sm btn-link" (click)="adicionarIngredientesAListaDeCompras()" [disabled]="blocked || receitaInativa">Lista de compras</button>
 
             </div>
         </div>

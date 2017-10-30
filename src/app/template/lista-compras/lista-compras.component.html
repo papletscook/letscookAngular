@@ -26,29 +26,37 @@
     <h3 class="modal-title">Gerenciar Lista de Compra</h3>
     <div class="modal-body">
         <div *ngIf="editedLista">
-            <label for="aForm_1">Ingrediente:</label>
-            <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
-                placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
-            <button type="button" class="btn btn-success btn-sm" (click)="adicionarIngrediente()">Adicionar Ingrediente</button>
-            <h6> {{editedLista.nome}}</h6>
-            <clr-datagrid>
-                <clr-dg-column>Nome</clr-dg-column>
-                <clr-dg-row *clrDgItems="let list of editedLista.itens">
-                    <clr-dg-cell> {{list.nome}} </clr-dg-cell>
-                    <clr-dg-cell>
-                        <div style="text-align: right;">
-                            <clr-checkbox [(clrChecked)]="list.checked"></clr-checkbox>
+            <clr-stack-view>
+                <clr-stack-header>{{editedLista.nome}}</clr-stack-header>
+
+                <clr-stack-block [clrSbExpanded]="true" [clrSbExpandable]="false">
+                    <clr-stack-label>Ingrediente</clr-stack-label>
+                    <clr-stack-content>
+                        <div class="row">
+                            <div class="col-lg-10">
+                            </div>
+                            <div class="col-lg-2">
+                                <clr-icon shape="plus" (click)="adicionarIngrediente()"></clr-icon>
+                            </div>
                         </div>
-                    </clr-dg-cell>
-                    <clr-dg-action-overflow>
-                        <button class="action-item" (click)="excluirIngredienteDaLista(list)">Excluir</button>
-                    </clr-dg-action-overflow>
-                </clr-dg-row>
-                <clr-dg-footer>
-                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} Ingredientes
-                    <clr-dg-pagination #pagination [clrDgPageSize]="8"></clr-dg-pagination>
-                </clr-dg-footer>
-            </clr-datagrid>
+                    </clr-stack-content>
+                    <clr-stack-block *ngFor="let list of editedLista.itens">
+                        <clr-stack-label (dblclick)="editaPassoH(list)">
+                            <div *ngIf="list != itemListaH">
+                                {{list.nome}}
+                            </div>
+                            <div *ngIf="list === itemListaH">
+                                <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
+                            </div>
+                        </clr-stack-label>
+                        <clr-stack-content style="float: right;">
+                            <clr-icon shape="trash" (click)="excluirIngredienteDaLista(list)" style="text-align: right"></clr-icon>
+                        </clr-stack-content>
+                    </clr-stack-block>
+
+                </clr-stack-block>
+
+            </clr-stack-view>
         </div>
     </div>
     <div class="modal-footer">
@@ -63,24 +71,33 @@
         <div>
             <label>Nome da Lista</label>
             <input type="text" placeholder="Insira o nome da lista" [(ngModel)]="createdLista.nome">
-            <br>
-            <label for="aForm_1">Ingrediente:</label>
-            <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
-                placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
-            <button type="button" class="btn btn-success btn-sm" (click)="adicionaIngredienteNacreatedLista()">Adicionar Ingrediente</button>
-            <clr-datagrid>
-                <clr-dg-column>Nome</clr-dg-column>
-                <clr-dg-row *clrDgItems="let list of createdLista.itens">
-                    <clr-dg-cell> {{list.nome}} </clr-dg-cell>
-                    <clr-dg-action-overflow>
-                        <button class="action-item">Excluir</button>
-                    </clr-dg-action-overflow>
-                </clr-dg-row>
-                <clr-dg-footer>
-                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} Ingredientes
-                    <clr-dg-pagination #pagination [clrDgPageSize]="8"></clr-dg-pagination>
-                </clr-dg-footer>
-            </clr-datagrid>
+            <clr-stack-view style="margin-top: 25px;">
+                <clr-stack-block [clrSbExpanded]="true" [clrSbExpandable]="false">
+                    <clr-stack-label>Ingrediente</clr-stack-label>
+                    <clr-stack-content>
+                        <div class="row">
+                            <div class="col-lg-10">
+                            </div>
+                            <div class="col-lg-2">
+                                <clr-icon shape="plus" (click)="adicionaIngredienteNacreatedLista()"></clr-icon>
+                            </div>
+                        </div>
+                    </clr-stack-content>
+                    <clr-stack-block *ngFor="let list of createdLista.itens">
+                        <clr-stack-label (dblclick)="editaPassoH(list)">
+                            <div *ngIf="list != itemListaH">
+                                {{list.nome}}
+                            </div>
+                            <div *ngIf="list === itemListaH">
+                                <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
+                            </div>
+                        </clr-stack-label>
+                        <clr-stack-content style="float: right;">
+                            <clr-icon shape="trash" (click)="excluirIngredienteDaListaCreate(list)"></clr-icon>
+                        </clr-stack-content>
+                    </clr-stack-block>
+                </clr-stack-block>
+            </clr-stack-view>
         </div>
     </div>
     <div class="modal-footer">

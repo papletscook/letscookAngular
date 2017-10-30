@@ -27,15 +27,11 @@
                 <clr-dg-column>Nome</clr-dg-column>
                 <clr-dg-column>Ações</clr-dg-column>
                 <clr-dg-row *clrDgItems="let categoria of categorias">
-                    <clr-dg-cell>{{categoria.nome}}</clr-dg-cell>
-                    <clr-dg-cell>
-                        <button class="btn btn-icon btn-sm" (click)="deletarCategoria(categoria)">
-                            <clr-icon shape="times"></clr-icon>
-                        </button>
-                        <button class="btn btn-icon btn-sm" (click)="modificaCategoria(categoria)">
-                            <clr-icon shape="bars"></clr-icon>
-                        </button>
-                    </clr-dg-cell>
+                    <clr-dg-cell>{{categoria.nome}}</clr-dg-cell>                    
+                    <clr-dg-action-overflow>
+                        <button class="action-item" (click)="modificaCategoria(categoria)">Modifica</button>
+                        <button class="action-item" (click)="deletarCategoria(categoria)">Excluir</button>
+                    </clr-dg-action-overflow>
                 </clr-dg-row>
                 <clr-dg-footer>
                     {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} Categorias
