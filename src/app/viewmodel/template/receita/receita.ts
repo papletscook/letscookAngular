@@ -22,8 +22,6 @@ export class Receita {
     constructor() {
         this.nome = ''
         this.descricao = ''
-        this.categoria = null;
-        this.categoria = null;
         this.ingts = Array<IngredienteReceita>();
     }
 }

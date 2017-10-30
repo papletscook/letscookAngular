@@ -5,7 +5,7 @@
         <label>{{ receita.nome | uppercase}}</label>
       </div>
       <div class="col-xs text-right">
-        <!-- <span class="badge badge-blue">{{ score.score }}</span> -->
+        <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
       </div>
     </div>
   </div>
@@ -14,15 +14,18 @@
       <img [src]="receita.imagem" class="card-media-image">
       <div class="card-media-description">
         <span class="card-media-title">
-          Tempo de Preparo: {{ receita.minsPreparo}}
+          Autor: {{ receita.criador.nome}}.
         </span>
         <span class="card-media-title">
-          Categoria: {{ receita.categoria.nome}}
+          Tempo de Preparo: {{ receita.minsPreparo}} minutos.
+        </span>
+        <span class="card-media-title">
+          Categoria: {{ receita.categoria.nome}}.
         </span>
       </div>
     </div>
     <div class="card-text">
-      {{ receita.descricao}}
+      {{ receita.descricao}}.
     </div>
   </div>
   <div class="card-footer">

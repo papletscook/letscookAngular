@@ -106,7 +106,7 @@
             </ul>
 
             <div class="card-footer">
-                <button class="btn btn-sm btn-link" (click)="prepararReceita()" [disabled]="blocked">Preparar Receita</button>
+                <button class="btn btn-sm btn-link" (click)="prepararReceita()" [disabled]="blocked || receitaInativa">Preparar Receita</button>
                 <!-- <button class="btn btn-sm btn-link">Lista de Compras</button> -->
 
             </div>

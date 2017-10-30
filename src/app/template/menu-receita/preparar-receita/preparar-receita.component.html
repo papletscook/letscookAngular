@@ -63,17 +63,6 @@
 
         <form (keydown.enter)="$event.preventDefault()" class="compact" name="preparar">
 
-            <div class="row">
-                <div class="col-xs-2">
-                    <label>% da Receita:</label>
-                </div>
-                <div class="col-md-10">
-                    <div class="progress success">
-                        <progress value="{{totalFeito()}}" max="{{totalEtapas()}}"></progress>
-                    </div>
-                </div>
-            </div>
-
             <div class="row" *ngFor="let passo of etapa.passos; let ip = index;">
                 <div class="col-md-12">
                     <clr-alert *ngIf="passo.checked && passo.dica">
@@ -90,6 +79,9 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-block">
+                            <div class="progress success top">
+                                <progress value="{{totalFeito()}}" max="{{totalEtapas()}}"></progress>
+                            </div>
                             <h4 class="card-title">{{etapa.nome}}</h4>
                         </div>
                         <ul class="list-group list-group-flush">
@@ -134,7 +126,7 @@
 
     </clr-wizard-page>
 
-    <clr-wizard-page [clrWizardPageNextDisabled]="!validationThree">
+    <clr-wizard-page [clrWizardPageNextDisabled]="!validationThree()">
         <ng-template clrPageNavTitle>Conclusão</ng-template>
         <ng-template clrPageTitle>
             <clr-icon shape="star" size="48"></clr-icon>
@@ -142,7 +134,7 @@
         </ng-template>
 
         <form (keydown.enter)="$event.preventDefault()" class="compact" name="publicar">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-xs-2">
                     <label>% da Receita:</label>
                 </div>
@@ -151,7 +143,7 @@
                         <progress value="{{totalFeito()}}" max="{{totalEtapas()}}"></progress>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">

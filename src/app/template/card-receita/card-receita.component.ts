@@ -9,6 +9,7 @@ import { ReceitaService } from 'app/template/menu-receita/receita.service';
   styleUrls: ['./card-receita.component.css']
 })
 export class CardReceitaComponent implements OnInit {
+  avgRatingReceita: number;
 
   @Input()
   private receita: Receita;
@@ -19,6 +20,20 @@ export class CardReceitaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.ratingReceita()
   }
+
+  private ratingReceita() {
+    let avas = this.receita.avaliacoes;
+    if (!avas) {
+        return;
+    }
+    let sum = 0;
+    for (let ava of avas) {
+        sum += ava.valor;
+    }
+    this.avgRatingReceita = sum / avas.length;
+}
+
 
 }
