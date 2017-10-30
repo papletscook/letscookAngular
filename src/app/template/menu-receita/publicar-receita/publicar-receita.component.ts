@@ -166,9 +166,11 @@ export class PublicarReceitaComponent implements OnInit {
             this.receitaService.atualizar(this.receita)
                 .then(data => {
                     this.receita = data;
+                    console.log(this.receita)
                     this.alert.info("Receita atualizada!")
                 }, error => {
                     this.alert.error("Falha ao atualizar Receita!")
+                    return;
                 })
 
             this.loading = false;

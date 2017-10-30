@@ -16,11 +16,11 @@
     <div class="row" *ngIf="despensa">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <h4>Cadastrar Ingredientes</h4>
-
             <form>
                 <section class="form-block">
                     <div class="form-group">
                         <label for="aForm_1">Ingrediente:</label>
+                        <br>
                         <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
                             placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
                     </div>
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="card-block">
                                         <div class="card-media-block">
-                                            <img [src]="score.receita.foto" class="card-media-image">
+                                            <img [src]="score.receita.imagem" class="card-media-image">
                                             <div class="card-media-description">
                                                 <span class="card-media-title">
                                                     Tempo de Preparo: {{ score.receita.minsPreparo}}
