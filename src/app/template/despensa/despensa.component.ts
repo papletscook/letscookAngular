@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { HolderService } from './../../service/holder.service';
 import { IngredienteService } from './../ingrediente/ingrediente.service';
 import { DespensaService } from './despensa.service';
 import { ScoreReceita } from 'app/viewmodel/template/despensa/score-receita';
@@ -33,9 +35,11 @@ export class DespensaComponent implements OnInit {
 
     constructor(
         private despensaService: DespensaService,
+        private holderService: HolderService,
         private completerService: CompleterService,
         private ingredienteService: IngredienteService,
-        private alert: AlertService
+        private alert: AlertService,
+        private router: Router
     ) {
 
     }
@@ -50,6 +54,9 @@ export class DespensaComponent implements OnInit {
     }
 
     public ngOnInit() {
+        if (!this.holderService.userLogado) {
+            this.router.navigate(['/']);
+        }
         this.buscarPorUsuario();
         this.buscarIngredientes();
     }

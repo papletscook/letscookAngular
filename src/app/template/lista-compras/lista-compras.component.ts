@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { CompleterService } from 'ng2-completer';
 import { Ingrediente } from './../../viewmodel/template/receita/ingrediente';
@@ -41,9 +42,13 @@ export class ListaComprasComponent implements OnInit {
         private listaComprasService: ListaComprasService,
         public alertService: AlertService,
         public ingredienteService: IngredienteService,
-        private completerService: CompleterService) { }
+        private completerService: CompleterService,
+        private router: Router) { }
 
     public ngOnInit() {
+        if (!this.holder.userLogado) {
+            this.router.navigate(['/']);
+        }
         this.loading = false
         this.carregar();
         this.listarIngredientes();
