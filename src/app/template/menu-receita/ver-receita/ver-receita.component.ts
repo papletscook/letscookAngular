@@ -1,3 +1,6 @@
+import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
+import { Despensa } from './../../../viewmodel/template/despensa/despensa';
+import { DespensaService } from './../../despensa/despensa.service';
 import { element } from 'protractor';
 import { ItemLista } from './../../../viewmodel/template/lista/item-lista';
 import { ListaCompra } from 'app/viewmodel/template/lista/lista-compra';
@@ -28,7 +31,8 @@ import { ActivatedRoute } from '@angular/router';
     providers: [
         ReceitaService,
         MedidaService,
-        ListaComprasService
+        ListaComprasService,
+        DespensaService
     ]
 })
 
@@ -60,6 +64,8 @@ export class VerReceitaComponent implements OnInit {
 
     private blocked: boolean = false;
 
+    private ds: Despensa;
+
 
     constructor(private receitaService: ReceitaService,
         private session: SessionService,
@@ -67,7 +73,8 @@ export class VerReceitaComponent implements OnInit {
         private alertService: AlertService,
         private holder: HolderService,
         private route: ActivatedRoute,
-        private listaComprasService: ListaComprasService) {
+        private listaComprasService: ListaComprasService,
+        private despensaService: DespensaService) {
     }
 
 
@@ -91,9 +98,15 @@ export class VerReceitaComponent implements OnInit {
             this.alertService.error('Ocorreu um erro ao obter receita!');
         });
 
-
+        this.buscarReceitaIngredientesReceita();
     }
 
+    private buscarReceitaIngredientesReceita() {
+        this.despensaService.buscarPorUsuario()
+            .then(data => {
+                this.ds = data;
+            });
+    }
 
     private receitaAtiva() {
         if (this.receita.status != 'POSTADA') {
@@ -165,16 +178,50 @@ export class VerReceitaComponent implements OnInit {
             nome: "Ingredientes para: " + this.receita.nome,
             itens: []
         }
-        this.receita.ingts.forEach(element => {
-            listaCompra.itens.push({ id: null, nome: element.quant + " " + this.detailMedida(element.uMedida).desc + " de " + element.ingrediente.nome });
+        let ingSDespensa: any[] = [];
+
+
+        this.ds.ings.forEach(element => {
+            ingSDespensa.push(element.ingrediente.nome)
         });
-        this.listaComprasService
-            .cadastrarListaDeCompra(listaCompra)
-            .then(data => {
-                this.alertService.info("Lista de compras gerada com sucesso.");
-            }, error => {
-                this.alertService.error(error.message);
-            });
+
+        console.log(ingSDespensa);
+        console.log(ingSDespensa.indexOf("Margarina"));
+
+
+
+        this.receita.ingts.forEach(element => {
+
+            // console.log(ingSDespensa.indexOf(element.ingrediente.nome));
+
+
+            // let a = ingSDespensa.indexOf(element.ingrediente.nome) < 0;
+            //console.log(a);
+
+            // if (a) {
+
+            //     //listaCompra.itens.push({ id: null, nome: element.quant + " " + this.detailMedida(element.uMedida).desc + " de " + element.ingrediente.nome });
+            // }
+        });
+
+        // console.log(ingSDespensa);
+        // console.log(listaCompra.itens);
+
+
+
+        if (listaCompra.itens.length > 0) {
+            // this.listaComprasService
+            //     .cadastrarListaDeCompra(listaCompra)
+            //     .then(data => {
+            //         this.alertService.info("Lista de compras gerada com sucesso.");
+            //     }, error => {
+            //         this.alertService.error(error.message);
+            //     });
+        } else {
+            this.alertService.error("Os itens da lista já estão cadastrados em sua lista de compras");
+        }
+
+
     }
 
 }

@@ -40,8 +40,14 @@ export class DespensaComponent implements OnInit {
         private ingredienteService: IngredienteService,
         private alert: AlertService,
         private router: Router
-    ) {
+    ) { }
 
+    public ngOnInit() {
+        if (!this.holderService.userLogado) {
+            this.router.navigate(['/']);
+        }
+        this.buscarPorUsuario();
+        this.buscarIngredientes();
     }
 
     public buscarIngredientes() {
@@ -52,15 +58,7 @@ export class DespensaComponent implements OnInit {
             this.loading = false;
         });
     }
-
-    public ngOnInit() {
-        if (!this.holderService.userLogado) {
-            this.router.navigate(['/']);
-        }
-        this.buscarPorUsuario();
-        this.buscarIngredientes();
-    }
-
+    
     public adicionarIngrediente() {
         console.log('adicionarIngrediente')
         this.modalAdd = false;

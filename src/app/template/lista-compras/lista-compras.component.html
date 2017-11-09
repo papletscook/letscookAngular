@@ -10,6 +10,7 @@
     <clr-datagrid>
         <clr-dg-column>Nome</clr-dg-column>
         <clr-dg-column>Data de Criação</clr-dg-column>
+        <clr-dg-placeholder>Nenhuma lista de compra cadastrada.</clr-dg-placeholder>
         <clr-dg-row *clrDgItems="let lista of listas" [clrDgItem]="lista">
             <clr-dg-cell (click)="editarLista(lista)">{{lista.nome}}</clr-dg-cell>
             <clr-dg-cell>{{((lista.dataCriacao / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm'}}</clr-dg-cell>
@@ -109,6 +110,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="modalCreate = false">Fechar</button>
-        <button type="button" class="btn btn-primary" (click)="cadastrar()" [disabled]="btnDisabledCreateLista">{{btnNameCreateLista}}</button>
+        <button type="button" class="btn btn-primary" (click)="validaSeJaPossuiItensDaLista()" [disabled]="btnDisabledCreateLista">{{btnNameCreateLista}}</button>
     </div>
 </clr-modal>
