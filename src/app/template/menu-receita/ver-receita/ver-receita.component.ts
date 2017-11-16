@@ -180,7 +180,6 @@ export class VerReceitaComponent implements OnInit {
         }
         let ingSDespensa: any[] = [];
 
-
         this.ds.ings.forEach(element => {
             ingSDespensa.push(element.ingrediente.nome)
         });
@@ -188,35 +187,20 @@ export class VerReceitaComponent implements OnInit {
         console.log(ingSDespensa);
         console.log(ingSDespensa.indexOf("Margarina"));
 
-
-
         this.receita.ingts.forEach(element => {
-
-            // console.log(ingSDespensa.indexOf(element.ingrediente.nome));
-
-
-            // let a = ingSDespensa.indexOf(element.ingrediente.nome) < 0;
-            //console.log(a);
-
-            // if (a) {
-
-            //     //listaCompra.itens.push({ id: null, nome: element.quant + " " + this.detailMedida(element.uMedida).desc + " de " + element.ingrediente.nome });
-            // }
+            if (ingSDespensa.indexOf(element.ingrediente.nome) < 0) {
+                listaCompra.itens.push({ id: null, nome: element.quant + " " + this.detailMedida(element.uMedida).desc + " de " + element.ingrediente.nome });
+            }
         });
 
-        // console.log(ingSDespensa);
-        // console.log(listaCompra.itens);
-
-
-
         if (listaCompra.itens.length > 0) {
-            // this.listaComprasService
-            //     .cadastrarListaDeCompra(listaCompra)
-            //     .then(data => {
-            //         this.alertService.info("Lista de compras gerada com sucesso.");
-            //     }, error => {
-            //         this.alertService.error(error.message);
-            //     });
+            this.listaComprasService
+                .cadastrarListaDeCompra(listaCompra)
+                .then(data => {
+                    this.alertService.info("Lista de compras gerada com sucesso.");
+                }, error => {
+                    this.alertService.error(error.message);
+                });
         } else {
             this.alertService.error("Os itens da lista já estão cadastrados em sua lista de compras");
         }
