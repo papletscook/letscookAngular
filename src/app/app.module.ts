@@ -11,7 +11,7 @@ import { UrlServiceService } from 'app/service/url.service';
 import { HolderService } from 'app/service/holder.service';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ClarityModule } from 'clarity-angular';
+import { ClarityModule } from "clarity-angular";
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -46,6 +46,7 @@ import { ListaComprasComponent } from './template/lista-compras/lista-compras.co
 import { CardReceitaComponent } from './template/card-receita/card-receita.component';
 import { BuscaReceitaComponent } from './template/busca-receita/busca-receita.component';
 import { PageNotFoundComponent } from './template/page-not-found/page-not-found.component';
+import { CommonModule } from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -92,7 +93,9 @@ import { PageNotFoundComponent } from './template/page-not-found/page-not-found.
         AppRoutingModule,
         RatingModule,
         Ng2CompleterModule,
-        MomentModule
+        MomentModule,
+        CommonModule,
+        BrowserModule
     ],
     providers: [
         HolderService,
@@ -119,7 +122,8 @@ import { PageNotFoundComponent } from './template/page-not-found/page-not-found.
         CadastrarCategoriaComponent,
         TopavaliacaoComponent,
         RegistroComponent
-    ]
+    ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 
 export class AppModule {
