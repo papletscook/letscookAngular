@@ -12,7 +12,9 @@ export class DynamicRouterComponent implements OnInit, OnChanges {
 
     constructor() { }
 
-    public ngOnInit() { }
+    public ngOnInit() { 
+        
+    }
 
     public ngOnChanges(changes: SimpleChanges) {
         this.setDynamicComponent();

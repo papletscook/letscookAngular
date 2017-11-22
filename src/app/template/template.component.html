@@ -46,28 +46,23 @@
             </clr-dropdown>
         </div>
     </clr-header>
-    <nav class="subnav" [clr-nav-level]="1" *ngIf="subNavAtivo">
+    <nav class="subnav" [clr-nav-level]="1" *ngIf="holderService.subNav">
         <ul class="nav">
             <subnav [menu]="menu" (click)="changeCase(menu.component);" *ngFor="let menu of menus"></subnav>
         </ul>
     </nav>
 
-    <div class="content-container" *ngIf="subNavAtivo">
+    <div class="content-container">
         <div class="content-area">
-            <!-- <dynamic-component [componentData]="templateService.component"></dynamic-component> -->
-
             <dynamic-router-component [component]="dynamicRouterService.component"></dynamic-router-component>
         </div>
-    </div>
-
-    <div *ngIf="!subNavAtivo">
-        <dynamic-component [componentData]="templateService.component"></dynamic-component>
     </div>
 
 
     <login-component></login-component>
 
-    <clr-vertical-nav *ngIf="sidenavActive" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" [clr-nav-level]="2">
+    <clr-vertical-nav *ngIf="holderService.sideNav" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed"
+        [clr-nav-level]="2">
         <sidenav-component></sidenav-component>
     </clr-vertical-nav>
 

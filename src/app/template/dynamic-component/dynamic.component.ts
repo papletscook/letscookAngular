@@ -13,10 +13,9 @@ export class DynamicComponent implements OnInit {
 
     @Input() set componentData(data: { component: any, inputs?: any }) {
         //console.log(data);
-        if (!data) {
+        if (!data.component) {
             return;
         }
-        
         let inputProviders = Object.keys(data.inputs).map((inputName) => { return { provide: inputName, useValue: data.inputs[inputName] }; });
         let resolvedInputs = ReflectiveInjector.resolve(inputProviders);
         let injector = ReflectiveInjector.fromResolvedProviders(resolvedInputs, this.dynamicComponentContainer.parentInjector);

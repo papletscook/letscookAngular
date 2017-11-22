@@ -114,7 +114,8 @@ import { CategoriaComponent } from './template/index-page/categoria/categoria.co
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
         RegistroComponent,
-        TopavaliacaoComponent
+        TopavaliacaoComponent,
+        DynamicRouterComponent
     ]
 })
 

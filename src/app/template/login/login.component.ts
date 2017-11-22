@@ -1,3 +1,4 @@
+import { RegistroComponent } from './../registro/registro.component';
 import { TemplateComponent } from './../template.component';
 import { LoginService } from './login.service';
 import { SessionService } from './../../service/session.service';
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
                 if (data) {
                     this.holderService.userLogado = true;
                     this.loginService.consultar(this.usuario).then(data => {
-                      this.session.definirUsuario(data);
+                        this.session.definirUsuario(data);
                     });
                     this.holderService.modalOpen = false;
                 } else {
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
     }
 
     private registrar() {
-        this.templateComponent.abrirComponentesGenericoDaIndex("RegistroComponent");
+        this.templateComponent.setToDynamicComponent(RegistroComponent);
         this.holderService.modalOpen = false;
     }
 
@@ -71,7 +72,4 @@ export class LoginComponent implements OnInit {
             this.erroMensagem = "Usuário ou senha incorretos, por favor verifique."
         }
     }
-
-
-
 }

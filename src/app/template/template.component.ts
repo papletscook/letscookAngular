@@ -28,8 +28,6 @@ export class TemplateComponent implements OnInit {
 
     public menus: MenuSubnav[];
 
-    private subNavAtivo: boolean = false;
-
     constructor(private router: Router,
         public holderService: HolderService,
         private templateService: TemplateService,
@@ -50,10 +48,11 @@ export class TemplateComponent implements OnInit {
         this.session.deslogar();
         this.holderService.userLogado = false;
         window.location.reload();
-
     }
 
     public setToDynamicComponent(component: any) {
+        console.log(component);
+        
         // Sempre resetar para null antes de setar component
         this.dynamicRouterService.component = null;
         // Deixar timeout senão react não entende que mudou variavel na holder.
@@ -63,7 +62,7 @@ export class TemplateComponent implements OnInit {
     }
 
     private mostraSubNav(ativo: boolean, whatSubNav?: any) {
-        this.subNavAtivo = ativo;
+        this.holderService.subNav = ativo;
         this.menus = whatSubNav;
     }
 
@@ -82,8 +81,8 @@ export class TemplateComponent implements OnInit {
                 this.setToDynamicComponent(IndexPageComponent);
                 break;
             case "RegistroComponent":
-                this.adminNav(false);
-                this.changeCase(RegistroComponent);
+                this.mostraSubNav(false);
+                this.setToDynamicComponent(RegistroComponent);
                 break;
         }
     }
