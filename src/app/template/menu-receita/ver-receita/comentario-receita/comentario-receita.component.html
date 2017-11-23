@@ -2,19 +2,27 @@
   <div class="card-header">
     Comentários
   </div>
-  <div class="card-block" *ngFor="let coment of receita.comentarios">
-    <div class="card-media-block">
-      <img [src]="coment.usuario.imagem" class="card-media-image">
-      <div class="card-media-description">
-        <span class="card-media-title">
-          {{coment.usuario.nome}} em <i>{{((coment.dataComentario / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm'}}:</i>
-        </span>
-        <span class="card-media-text">
-          {{coment.conteudo}}
-        </span>
+  <div class="card-block" *ngIf="receita.comentarios.length == 0">
+    <span>Não há comentários.</span>
+  </div>
+  <div *ngIf="receita.comentarios.length > 0">
+    <div class="card-block" *ngFor="let coment of receita.comentarios">
+      <div class="card-media-block">
+        <img [src]="coment.usuario.imagem" class="card-media-image">
+        <div class="card-media-description">
+          <span class="card-media-title">
+            {{coment.usuario.nome}} em
+            <i>{{((coment.dataComentario / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm'}}:</i>
+          </span>
+          <span class="card-media-text">
+            {{coment.conteudo}}
+          </span>
+        </div>
       </div>
     </div>
   </div>
+
+
   <div class="card-footer" *ngIf="!comentar">
     <button class="btn btn-sm btn-link" (click)="comentar = true" [disabled]="blocked">Comentar</button>
   </div>

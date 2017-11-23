@@ -71,7 +71,7 @@ export class PrepararReceitaComponent implements OnInit {
         private avaliacaoService: AvaliacaoService) { }
 
     ngOnInit(): void {
-        Notification.requestPermission();
+        //Notification.requestPermission();
     }
 
     doCancel(): void {
@@ -150,7 +150,7 @@ export class PrepararReceitaComponent implements OnInit {
         this.avaliar()
         this.wizard.reset();
         this.cancelar();
-        location.reload()
+        //location.reload()
     }
 
 
