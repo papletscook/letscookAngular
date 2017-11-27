@@ -5,7 +5,7 @@
         <label>{{ receita.nome | uppercase}}</label>
       </div>
       <div class="col-xs text-right">
-        <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="avgRatingReceita"></rating>
+        <rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="receita.rating"></rating>
       </div>
     </div>
   </div>

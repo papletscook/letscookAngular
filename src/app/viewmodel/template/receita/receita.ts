@@ -12,16 +12,23 @@ export class Receita {
     categoria: Categoria;
     status: string;
     ingts: IngredienteReceita[] = [];
-    etapas: Etapa[]= [];
+    etapas: Etapa[] = [];
     minsPreparo: number;
     imagem: string;
     criador: Usuario;
     avaliacoes: AvaliacaoReceita[] = [];
     comentarios: ComentarioReceita[] = [];
-    
+    rating: number;
+
     constructor() {
         this.nome = ''
         this.descricao = ''
         this.ingts = Array<IngredienteReceita>();
+        let avas = this.avaliacoes;
+        let sum = 0;
+        for (let ava of avas) {
+            sum += ava.valor;
+        }
     }
+
 }

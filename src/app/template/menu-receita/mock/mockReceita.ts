@@ -4,7 +4,7 @@ import { Receita } from "app/viewmodel/template/receita/receita";
 export const MockReceita: Receita = {
     nome: 'Nega Maluca',
     descricao: 'Descrição',
-    categoria:  null,
+    categoria: null,
     status: null,
     ingts: [],
     etapas: [{
@@ -24,5 +24,6 @@ export const MockReceita: Receita = {
     imagem: 'string',
     criador: null,
     avaliacoes: [],
-    comentarios: []
+    comentarios: [],
+    rating: 5
 }

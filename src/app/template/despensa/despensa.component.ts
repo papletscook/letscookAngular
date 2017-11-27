@@ -99,7 +99,7 @@ export class DespensaComponent implements OnInit {
             ingredientes.push(ing.ingrediente)
         }
         this.despensaService.buscarPorIngredientes(ingredientes).then(data => {
-            this.scores = _.orderBy(data, ['score'], ['desc']);
+            this.scores = _.orderBy(data, ['compt'], ['desc']);
             this.loading = false;
         }, error => {
             this.alert.error("Falha ao buscar Despensa!")

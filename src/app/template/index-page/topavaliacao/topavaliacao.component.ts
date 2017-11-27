@@ -38,7 +38,7 @@ export class TopavaliacaoComponent implements OnInit {
   carregarReceitas() {
     this.receitaServ.buscarBemAvaliadas()
       .then(data => {
-        this.receitas = data;
+        this.receitas = _.orderBy(data, ['rating'], ['desc']);   
         this.loading = false;
       }, error => {
         this.alert.error("Ocorreu um erro ao carregar receitas!");

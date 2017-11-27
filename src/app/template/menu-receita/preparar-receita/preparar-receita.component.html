@@ -61,7 +61,6 @@
         </ng-template>
 
         <form (keydown.enter)="$event.preventDefault()" class="compact" name="preparar">
-
             <div class="row" *ngFor="let passo of etapa.passos; let ip = index;">
                 <div class="col-md-12">
                     <clr-alert *ngIf="passo.checked && passo.dica">

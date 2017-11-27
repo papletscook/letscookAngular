@@ -23,17 +23,17 @@ export class CardReceitaComponent implements OnInit {
     this.ratingReceita()
   }
 
-  private ratingReceita() {
+  ratingReceita() {
     let avas = this.receita.avaliacoes;
     if (!avas) {
-        return;
+      return;
     }
     let sum = 0;
     for (let ava of avas) {
-        sum += ava.valor;
+      sum += ava.valor;
     }
     this.avgRatingReceita = sum / avas.length;
-}
+  }
 
 
 }
