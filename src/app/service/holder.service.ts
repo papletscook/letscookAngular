@@ -1,6 +1,7 @@
 import { MenuSubnav } from './../viewmodel/template/menu-subnav/menu-subnav';
 import { Injectable } from '@angular/core';
 import { Alert } from 'app/viewmodel/template/alert';
+import { Receita } from 'app/viewmodel/template/receita/receita';
 
 @Injectable()
 export class HolderService {
@@ -21,6 +22,9 @@ export class HolderService {
     public alert: Alert;
 
     public sideNav : boolean = true;
+
+    public receitas: Receita[];
+    public loadingSearchReceitas: boolean = true;
 
     constructor() {
         this.alert = new Alert("")

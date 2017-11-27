@@ -9,6 +9,7 @@ import { MenuSubnav } from 'app/viewmodel/template/menu-subnav/menu-subnav';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
 import { VerReceitaComponent } from 'app/template/menu-receita/ver-receita/ver-receita.component';
 import { CadastrarIngredienteComponent } from 'app/template/ingrediente/cadastrar-ingrediente/cadastrar-ingrediente.component';
+import { BuscaReceitaComponent } from 'app/template/busca-receita/busca-receita.component';
 
 @Injectable()
 export class TemplateService {
@@ -49,11 +50,15 @@ export class TemplateService {
         nome: 'CadastrarCategoriaComponent',
         component: CadastrarCategoriaComponent,
         inputs: []
-    }
-    ,
+    },
     {
         nome: 'RegistroComponent',
         component: RegistroComponent,
+        inputs: []
+    },
+    {
+        nome: 'BuscaReceitaComponent',
+        component: BuscaReceitaComponent,
         inputs: []
     }]
 

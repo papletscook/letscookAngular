@@ -1,20 +1,16 @@
-<div class="row">
-  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    <h3>Buscar Receitas</h3>
-    <form class="compact">
-      <section class="form-block">
-        <div class="form-group">
-          <label class="required">Nome</label>
-          <input type="text" [(ngModel)]="nome" name="nome" placeholder="Nome da Receita..." id="requiredInput">
-          <button class="btn" (click)="carregar()">
-            <clr-icon shape="search"></clr-icon>
-          </button>
-        </div>
-      </section>
-    </form>
-  </div>
-
-  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngFor="let receita of receitas">
-    <app-card-receita [receita]="receita"></app-card-receita>
-  </div>
+<div id="loading-spinner" *ngIf="holderService.loadingSearchReceitas">
+	<span class="spinner">Loading...</span>
+	<br/>
+	<span>Aguarde...</span>
+</div>
+<div *ngIf="!holderService.loadingSearchReceitas">
+	<h3>Receitas encontradas</h3>
+	<div *ngIf="receitas" class="row">
+		<div *ngFor="let receita of receitas" class="col-xs-12 col-md-6">
+			<app-card-receita [receita]="receita"></app-card-receita>
+		</div>
+	</div>
+	<div *ngIf="!receitas">
+		<p>Nenhuma receita encontrada com este nome, por favor tente novamente</p>
+	</div>
 </div>

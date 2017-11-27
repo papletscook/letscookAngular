@@ -13,6 +13,13 @@
                 <span class="title">Let's Cook</span>
             </a>
         </div>
+        <div class="search">
+            <label for="search_input" for="search_input" aria-haspopup="true" role="tooltip" class="tooltip tooltip-lg tooltip-bottom-right">
+                <input id="search_input" name="searchNomeReceita" type="text" placeholder="Nome da Receita..." [(ngModel)]="searchNomeReceita"
+                    (keyup.enter)="buscarReceitas()">
+                <span class="tooltip-content">Após inserir o nome da receita pressione "Enter"</span>
+            </label>
+        </div>
         <div class="header-nav">
             <clr-tooltip>
                 <a class="nav-link nav-icon" href="./" clrTooltipTrigger>
@@ -85,9 +92,6 @@
             <a clrVerticalNavLink href="#" [routerLink]="['/topavaliacao']" routerLinkActive="active">
                 <clr-icon clrVerticalNavIcon shape="star"></clr-icon>
                 Bem Avaliadas</a>
-            <a clrVerticalNavLink href="#" [routerLink]="['/busca']" routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="search"></clr-icon>
-                Buscar</a>
             <clr-vertical-nav-group routerLinkActive="active">
                 <clr-icon shape="view-cards" clrVerticalNavIcon></clr-icon>
                 Categorias

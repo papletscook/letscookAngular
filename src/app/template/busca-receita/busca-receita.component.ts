@@ -1,35 +1,44 @@
 import { Receita } from './../../viewmodel/template/receita/receita';
 import { ReceitaService } from 'app/template/menu-receita/receita.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { HolderService } from 'app/service/holder.service';
 
 @Component({
-  selector: 'app-busca-receita',
-  templateUrl: './busca-receita.component.html',
-  styleUrls: ['./busca-receita.component.css'],
-  providers: [ReceitaService]
+	selector: 'app-busca-receita',
+	templateUrl: './busca-receita.component.html',
+	styleUrls: ['./busca-receita.component.css'],
+	providers: [ReceitaService]
 })
-export class BuscaReceitaComponent implements OnInit {
+export class BuscaReceitaComponent implements OnInit, OnChanges {
 
-  private nome: string;
+	private nome: string;
 
-  private receitas: Receita[];
+	private receitas: Receita[];
 
-  private loading: boolean = false;
+	private loading: boolean = false;
+
+	constructor(private receitaService: ReceitaService,
+		public holderService: HolderService) { }
+
+	public ngOnInit() {
+		this.receitas = this.holderService.receitas;
+	}
+
+	public ngOnChanges(changes: SimpleChanges) {
+
+		console.log(changes);
 
 
-  constructor(private serv: ReceitaService) { }
+	}
 
-  ngOnInit() {
-  }
+	// public carregar() {
+	// 	this.receitaService.buscarPorNome(this.nome).then(data => {
+	// 		this.receitas = data;
+	// 	}, error => {
 
-  public carregar() {
-    this.serv.buscarPorNome(this.nome).then(data => {
-      this.receitas = data;
-    }, error => {
-
-    });
-    this.loading = false;
-  }
+	// 	});
+	// 	this.loading = false;
+	// }
 
 
 }

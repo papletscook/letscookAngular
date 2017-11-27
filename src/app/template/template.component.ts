@@ -16,12 +16,14 @@ import { IndexPageComponent } from 'app/template/index-page/index-page.component
 import { AlertService } from 'app/service/alert.service';
 import { CategoriaService } from 'app/template/categoria/categoria.service';
 import * as _ from "lodash";
+import { ReceitaService } from 'app/template/menu-receita/receita.service';
+import { BuscaReceitaComponent } from 'app/template/busca-receita/busca-receita.component';
 
 @Component({
     templateUrl: 'template.component.html',
     styleUrls: ['template.component.css'],
     selector: 'template-component',
-    providers: [TemplateService, AlertService, SessionService, HolderService, CategoriaService]
+    providers: [TemplateService, AlertService, SessionService, HolderService, CategoriaService, ReceitaService]
 })
 
 export class TemplateComponent implements OnInit {
@@ -39,8 +41,9 @@ export class TemplateComponent implements OnInit {
     @ViewChild('publicar')
     private publicar: PublicarReceitaComponent;
 
-    private receita: Receita = new Receita()
+    private receita: Receita = new Receita();
 
+    public searchNomeReceita: string;
 
     constructor(private router: Router,
         public holderService: HolderService,
@@ -48,7 +51,7 @@ export class TemplateComponent implements OnInit {
         private session: SessionService,
         public alert: AlertService,
         private catServ: CategoriaService,
-    ) { }
+        private receitaService: ReceitaService) { }
 
     public ngOnInit(): void {
         if (!this.categorias) {
@@ -124,6 +127,20 @@ export class TemplateComponent implements OnInit {
 
     private reloadIndexPage() {
         window.location.reload();
+    }
+
+    private buscarReceitas() {
+        this.holderService.loadingSearchReceitas = true;
+        this.receitaService
+            .buscarPorNome(this.searchNomeReceita)
+            .then(data => {
+                this.holderService.receitas = data;
+                this.changeCase(BuscaReceitaComponent);
+                this.holderService.loadingSearchReceitas = false;
+            }, error => {
+                console.log("Erro ao realizar busca...");
+                this.holderService.loadingSearchReceitas = false;
+            });
     }
 
 }
