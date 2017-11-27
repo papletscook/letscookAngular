@@ -106,12 +106,20 @@ export class TemplateComponent implements OnInit {
     public abrirComponentesGenericoDaIndex(component: string) {
         switch (component) {
             case "DespensaComponent":
-                this.adminNav(true);
+                // if (true) { // mudar par variavel de administrado...
+                //     this.adminNav(true);
+                // } else {
+                //     this.adminNav(false);
+                // }
                 this.changeCase(DespensaComponent);
                 break;
             case "PainelDeControleComponent":
-                this.holderService.sideNav = false
-                this.adminNav(true);
+                // if (true) { // mudar par variavel de administrado...
+                //     this.adminNav(true);
+                // } else {
+                //     this.adminNav(false);
+                // }
+                this.holderService.sideNav = false;
                 this.changeCase(PainelDeControleComponent);
                 break;
             case "IndexPageComponent":
@@ -126,7 +134,8 @@ export class TemplateComponent implements OnInit {
     }
 
     private reloadIndexPage() {
-        window.location.reload();
+        //window.location.reload();
+        this.router.navigate(['./']);
     }
 
     private buscarReceitas() {
