@@ -58,7 +58,7 @@
                 <a class="btn btn-sm btn-link" (click)="excluir = true">Excluir</a>
             </div>
             <div class="card-footer" *ngIf="!isDonoReceita()">
-                <a class="btn btn-sm btn-link">Ver Perfil</a>
+                <button class="btn btn-sm btn-link" [disabled]="blocked || receitaInativa" (click)="verPerfil()">Ver Perfil</button>
             </div>
         </div>
 
@@ -114,9 +114,6 @@
         </div>
         <app-comentario-receita [blocked]="blocked" [receita]="receita"></app-comentario-receita>
     </div>
-
-
-
 </div>
 <preparar-receita-component [receita]="receita" [medidas]="medidas"></preparar-receita-component>
 <publicar-receita-component [receita]="editedReceita"></publicar-receita-component>
@@ -128,5 +125,15 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="excluir = false">Cancelar</button>
         <button type="button" class="btn btn-danger" (click)="excluirReceita()">Excluir</button>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="perfilModal">
+    <h3 class="modal-title">Perfil do Cozinheiro</h3>
+    <div class="modal-body">
+        <perfil-component [userFull]="userPerfil"></perfil-component>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="perfilModal = false">Fechar</button>
     </div>
 </clr-modal>

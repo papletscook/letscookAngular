@@ -30,10 +30,10 @@ export class LoginService {
             .catch(this.handleError);
     }
 
-    public consultar(usuario: Usuario): Promise<Usuario> {
+    public consultar(usuario: string): Promise<Usuario> {
         this.infoRequest = {
             rqst: 'post', command: this.urlServiceService.pathLetsCook + 'usuario/findByEmail', timeout: 6000,
-            _data: { email: usuario.email }
+            _data: { email: usuario }
         };
         return this.urlServiceService.request(this.infoRequest)
             .then(data => {

@@ -3,6 +3,7 @@ import { AlertService } from './../../service/alert.service';
 import { PainelDeControleService } from './painel-de-controle.service';
 import { UserFull } from './../../viewmodel/template/login/userFull';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 import { Md5 } from 'ts-md5/dist/md5';
 
@@ -55,6 +56,7 @@ export class PainelDeControleComponent implements OnInit {
         if (this.passwordChangeOld || this.passwordChangeOne || this.passwordChangeTwo) {
             this.veSePasswordConfere();
         }
+
         this.painelDeControleService
             .modificaUsuario(this.userFull)
             .then(data => {
@@ -101,6 +103,10 @@ export class PainelDeControleComponent implements OnInit {
             this.passwordChangeOld = "";
             this.passwordChangeNPreenchido = true;
         }
+    }
+
+    private formatDataNasc() {
+        this.userFull.dataNasc = new Date(this.dataNascimento).getTime() / 1000;
     }
 
 }

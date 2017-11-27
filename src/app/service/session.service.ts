@@ -32,6 +32,11 @@ export class SessionService {
         }
     }
 
+    public userIsAdm(): boolean {
+        let sessionObj = JSON.parse(sessionStorage.getItem("user"));
+        return sessionObj.admin;
+    }
+
     public deslogar() {
         sessionStorage.clear();
     }
