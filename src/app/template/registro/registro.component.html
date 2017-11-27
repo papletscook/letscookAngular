@@ -63,13 +63,6 @@
                     <label for="aForm_4">Sobre você:</label>
                     <textarea [(ngModel)]="userFull.descricao" name="descricao"></textarea>
                 </div>
-                <clr-alert [clrAlertType]="typealert" *ngIf="alertOn">
-                    <div class="alert-item">
-                        <span class="alert-text">
-                            {{messagealert}}
-                        </span>
-                    </div>
-                </clr-alert>
                 <button type="button" class="btn btn-primary btn-block" (click)="criarusuario()" [disabled]="userRegForm.form.invalid || registrando">Cadastrar</button>
             </section>
         </form>

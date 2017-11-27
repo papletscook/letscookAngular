@@ -76,7 +76,7 @@ export class RegistroComponent implements OnInit {
             } else {
                 this.alertOn = true;
                 this.typealert = "alert-danger";
-                this.messagealert = "Senhas não coincide"
+                this.alert.error("Senhas não coincidem!");
             }
         }
     }

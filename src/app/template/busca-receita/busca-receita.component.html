@@ -4,13 +4,14 @@
 	<span>Aguarde...</span>
 </div>
 <div *ngIf="!holderService.loadingSearchReceitas && receitas">
-	<h3>Resultado das buscas por <b>"{{ holderService.searchNomeReceita }}"</b>:</h3>
+	<h3>Resultado das buscas por
+		<b>"{{ holderService.searchNomeReceita }}"</b>:</h3>
 	<div *ngIf="receitas" class="row">
 		<div *ngFor="let receita of receitas" class="col-xs-12 col-md-6">
 			<app-card-receita [receita]="receita"></app-card-receita>
 		</div>
 	</div>
-	<div *ngIf="!receitas">
-		<p>Nenhuma receita encontrada com este nome, por favor tente novamente</p>
-	</div>
+</div>
+<div *ngIf="!holderService.loadingSearchReceitas && receitas.length == 0">
+	<p>Nenhuma receita encontrada, por favor tente novamente.</p>
 </div>
