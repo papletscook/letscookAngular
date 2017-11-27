@@ -47,6 +47,7 @@ import { CardReceitaComponent } from './template/card-receita/card-receita.compo
 import { BuscaReceitaComponent } from './template/busca-receita/busca-receita.component';
 import { PageNotFoundComponent } from './template/page-not-found/page-not-found.component';
 import { CommonModule } from "@angular/common";
+import { PerfilComponent } from 'app/template/perfil/perfil.component';
 
 @NgModule({
     declarations: [
@@ -79,7 +80,8 @@ import { CommonModule } from "@angular/common";
         CardReceitaComponent,
         BuscaReceitaComponent,
         PageNotFoundComponent,
-        RegistroComponent
+        RegistroComponent,
+        PerfilComponent
     ],
     imports: [
         BrowserModule,

@@ -42,7 +42,7 @@
                     <label>Data de Nascimento:</label>
                     <div class="form-group">
                         <!-- <input type="date" id="date" required name="date" [(ngModel)]="dataNascimento" (blur)="formatDataNasc()"> -->
-                        <label>{{dataNascimento}}</label>
+                        <label>{{((dataNascimento / 1000) | amFromUnix) | amDateFormat:'DD/MM/YYYY'}}</label>
                     </div>
                 </section>
             </div>

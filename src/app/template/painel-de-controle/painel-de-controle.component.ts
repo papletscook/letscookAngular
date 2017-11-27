@@ -44,10 +44,7 @@ export class PainelDeControleComponent implements OnInit {
     public getUserInfos() {
         let sessionObj = JSON.parse(sessionStorage.getItem("user"));
         this.userFull = sessionObj;
-        //this.dataNascimento = this.userFull.dataNasc.toString();
-        this.dataNascimento = moment.unix(this.userFull.dataNasc).format("DD/MM/YYYY");
-
-        //dataNascimento | amFromUnix) | amDateFormat: 'DD/MM/YYYY'
+        this.dataNascimento = this.userFull.dataNasc.toString();
     }
 
 

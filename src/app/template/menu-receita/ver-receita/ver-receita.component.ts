@@ -21,6 +21,7 @@ import { MockReceita } from 'app/template/menu-receita/mock/mockReceita';
 import { ToastsManager } from 'ng2-toastr';
 import { Medida } from 'app/viewmodel/template/receita/medida';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from 'app/template/login/login.service';
 
 
 
@@ -32,7 +33,8 @@ import { ActivatedRoute } from '@angular/router';
         ReceitaService,
         MedidaService,
         ListaComprasService,
-        DespensaService
+        DespensaService,
+        LoginService
     ]
 })
 
@@ -66,6 +68,9 @@ export class VerReceitaComponent implements OnInit {
 
     private ds: Despensa;
 
+    private userPerfil: any;
+
+    private perfilModal: boolean = false;
 
     constructor(private receitaService: ReceitaService,
         private session: SessionService,
@@ -74,7 +79,8 @@ export class VerReceitaComponent implements OnInit {
         private holder: HolderService,
         private route: ActivatedRoute,
         private listaComprasService: ListaComprasService,
-        private despensaService: DespensaService) {
+        private despensaService: DespensaService,
+        private loginService: LoginService) {
     }
 
 
@@ -97,13 +103,14 @@ export class VerReceitaComponent implements OnInit {
         }, error => {
             this.alertService.error('Ocorreu um erro ao obter receita!');
         });
-
-        this.buscarReceitaIngredientesReceita();
+        if (this.holder.userLogado) {
+            this.buscarReceitaIngredientesReceita();
+        }
     }
 
     private buscarReceitaIngredientesReceita() {
         this.despensaService.buscarPorUsuario()
-            .then(data => {                
+            .then(data => {
                 this.ds = data;
             });
     }
@@ -178,7 +185,7 @@ export class VerReceitaComponent implements OnInit {
             nome: "Ingredientes para: " + this.receita.nome,
             itens: []
         }
-        let ingSDespensa: any[] = [];        
+        let ingSDespensa: any[] = [];
 
         this.ds.ings.forEach(element => {
             ingSDespensa.push(element.ingrediente.nome);
@@ -201,6 +208,15 @@ export class VerReceitaComponent implements OnInit {
         } else {
             this.alertService.error("Os itens da lista já estão cadastrados em sua lista de compras");
         }
+    }
+
+    public verPerfil() {
+        this.loginService
+            .consultar(this.receita.criador.email)
+            .then(data => {
+                this.userPerfil = data;
+                this.perfilModal = true;
+            });
     }
 
 }

@@ -41,10 +41,10 @@ export class LoginComponent implements OnInit {
                 if (data) {
                     this.holderService.userLogado = true;
                     this.loginService
-                        .consultar(this.usuario)
+                        .consultar(this.usuario.email)
                         .then(data => {                            
                             this.session.definirUsuario(data);
-                            //location.reload();
+                            location.reload();
                         })
                     this.holderService.modalOpen = false;
                 } else {

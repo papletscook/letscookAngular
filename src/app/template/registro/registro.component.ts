@@ -45,7 +45,7 @@ export class RegistroComponent implements OnInit {
                 let usr = new Usuario();
                 usr.email = data.email;
                 usr.senha = data.senha;
-                this.loginService.consultar(usr).then(data => {
+                this.loginService.consultar(usr.email).then(data => {
                     this.session.definirUsuario(data)
                 });
                 this.registrando = false;
