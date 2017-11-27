@@ -42,13 +42,14 @@ export class RegistroComponent implements OnInit {
         this.registrando = true;
         this.loginService.criarusuario(this.userFull)
             .then(data => {
-                this.holderService.userLogado = true;
-                this.usuario.email = data.email;
-                this.usuario.senha = data.senha;
-                this.loginService.consultar(this.usuario).then(data => {
+                let usr = new Usuario();
+                usr.email = data.email;
+                usr.senha = data.senha;
+                this.loginService.consultar(usr).then(data => {
                     this.session.definirUsuario(data)
                 });
                 this.registrando = false;
+                this.holderService.userLogado = true;
                 window.location.reload();
             }, error => {
                 this.userFull = new UserFull();
