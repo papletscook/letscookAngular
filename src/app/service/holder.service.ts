@@ -21,10 +21,14 @@ export class HolderService {
     // Comportamento do Alert App Level
     public alert: Alert;
 
-    public sideNav : boolean = true;
+    public sideNav: boolean = true;
 
     public receitas: Receita[];
+
     public loadingSearchReceitas: boolean = true;
+
+    public searchNomeReceita: string;
+
 
     constructor() {
         this.alert = new Alert("")

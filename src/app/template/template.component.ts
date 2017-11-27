@@ -27,6 +27,7 @@ import { BuscaReceitaComponent } from 'app/template/busca-receita/busca-receita.
 })
 
 export class TemplateComponent implements OnInit {
+    searchNomeReceita: string;
 
     categorias: any;
 
@@ -43,7 +44,6 @@ export class TemplateComponent implements OnInit {
 
     private receita: Receita = new Receita();
 
-    public searchNomeReceita: string;
 
     constructor(private router: Router,
         public holderService: HolderService,
@@ -130,9 +130,10 @@ export class TemplateComponent implements OnInit {
     }
 
     private buscarReceitas() {
+        this.holderService.searchNomeReceita = this.searchNomeReceita;
         this.holderService.loadingSearchReceitas = true;
         this.receitaService
-            .buscarPorNome(this.searchNomeReceita)
+            .buscarPorNome(this.holderService.searchNomeReceita)
             .then(data => {
                 this.holderService.receitas = data;
                 this.changeCase(BuscaReceitaComponent);
