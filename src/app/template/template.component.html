@@ -32,7 +32,7 @@
                 </clr-tooltip-content>
             </clr-tooltip>
             <clr-tooltip>
-                <a class="nav-link nav-icon" href="./despensa" *ngIf="holderService.userLogado" clrTooltipTrigger>
+                <a class="nav-link nav-icon" [routerLink]="['/despensa']" routerLinkActive="active" *ngIf="holderService.userLogado" clrTooltipTrigger>
                     <clr-icon shape="bundle"></clr-icon>
                 </a>
                 <clr-tooltip-content clrPosition="bottom-right" clrSize="md" *clrIfOpen>
@@ -40,7 +40,8 @@
                 </clr-tooltip-content>
             </clr-tooltip>
             <clr-tooltip>
-                <a class="nav-link nav-icon" href="./listaCompras" *ngIf="holderService.userLogado" clrTooltipTrigger>
+                <a class="nav-link nav-icon" [routerLink]="['/listaCompras']" routerLinkActive="active" *ngIf="holderService.userLogado"
+                    clrTooltipTrigger>
                     <clr-icon shape="list"></clr-icon>
                 </a>
                 <clr-tooltip-content clrPosition="bottom-right" clrSize="md" *clrIfOpen>

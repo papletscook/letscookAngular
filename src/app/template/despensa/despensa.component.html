@@ -25,7 +25,6 @@
                         <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
                             placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
                     </div>
-                    <button type="button" class="btn btn-outline" (click)="ingrediente = null">Cancel</button>
                     <button type="button" class="btn btn-primary" (click)="adicionarIngrediente()">Adicionar</button>
                 </section>
             </form>
