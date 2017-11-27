@@ -1,3 +1,4 @@
+import { CategoriaComponent } from './index-page/categoria/categoria.component';
 import { RegistroComponent } from './registro/registro.component';
 import { Receita } from 'app/viewmodel/template/receita/receita';
 import { PublicarReceitaComponent } from 'app/template/menu-receita/publicar-receita/publicar-receita.component';
@@ -42,6 +43,9 @@ export class TemplateComponent implements OnInit {
     @ViewChild('publicar')
     private publicar: PublicarReceitaComponent;
 
+    @ViewChild('categoria')
+    private categoria: CategoriaComponent;
+
     private receita: Receita = new Receita();
 
 
@@ -58,6 +62,11 @@ export class TemplateComponent implements OnInit {
             this.listarCategorias()
         }
     }
+
+    private loadCategoria(){
+        this.categoria.ngOnDestroy();
+        
+    } 
 
     private publicarReceita() {
         this.publicar.open()

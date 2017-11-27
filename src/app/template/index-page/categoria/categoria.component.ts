@@ -3,8 +3,9 @@ import { Categoria } from './../../../viewmodel/template/receita/categoria';
 import { AlertService } from 'app/service/alert.service';
 import { Receita } from 'app/viewmodel/template/receita/receita';
 import { CategoriaService } from 'app/template/categoria/categoria.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-categoria',
@@ -12,44 +13,52 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./categoria.component.css'],
   providers: [CategoriaService, ReceitaService]
 })
-export class CategoriaComponent implements OnInit {
 
+export class CategoriaComponent implements OnInit, OnDestroy {
+  private sub: Subscription;
   private receitas: Receita[];
   private categoria: Categoria;
   private loading: boolean = true;
-
 
   constructor(
     private serv: CategoriaService,
     private alert: AlertService,
     private route: ActivatedRoute,
+    private router: Router,
     private receitaServ: ReceitaService) { }
 
   ngOnInit() {
-    if (!this.receitas) {
-      this.carregarCategoria()
-    }
+    this.loading = true
+    this.carregarCategoria()
   }
 
   public carregarCategoria() {
-    this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe(params => {
       this.categoria = new Categoria()
-      this.categoria.id = +params['id']; // (+) converts string 'id' to a number
+      this.categoria.id = +params['id'];
+      this.load()
     });
+  }
 
-    this.serv.getById(this.categoria)
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy')
+    this.sub.unsubscribe();
+
+  }
+
+  private load() {
+    this.receitaServ.listarPorCategoria(this.categoria)
       .then(data => {
-        this.categoria = data;
-        this.receitaServ.listarPorCategoria(this.categoria)
-          .then(data => {
-            this.receitas = data;
-            this.loading = false;
-          }, error => {
-            this.alert.error("Ocorreu um erro ao buscar!");
-          });
+        this.receitas = data;
+        this.loading = false;
       }, error => {
         this.alert.error("Ocorreu um erro ao buscar!");
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
   }
 
   private listarReceitas() {

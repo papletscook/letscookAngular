@@ -97,7 +97,7 @@
                 Categorias
                 <clr-vertical-nav-group-children *clrIfExpanded="true">
                     <div *ngFor="let cat of categorias">
-                        <a clrVerticalNavLink [routerLink]="['/categoria', cat.id]" (click)="categoriarComp.carregarCategoria()" routerLinkActive="active">
+                        <a clrVerticalNavLink [routerLink]="['/categoria', cat.id]" routerLinkActive="active">
                             {{cat.nome}}
                         </a>
                     </div>
