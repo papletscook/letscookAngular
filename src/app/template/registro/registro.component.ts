@@ -1,3 +1,4 @@
+import { AlertService } from './../../service/alert.service';
 import { Usuario } from 'app/viewmodel/template/login/usuario';
 import { SessionService } from './../../service/session.service';
 import { HolderService } from './../../service/holder.service';
@@ -9,7 +10,8 @@ import { Md5 } from 'ts-md5/dist/md5';
 @Component({
     selector: 'registro-component',
     templateUrl: 'registro.component.html',
-    styleUrls: ['registro.component.css']
+    styleUrls: ['registro.component.css'],
+    providers: [AlertService]
 })
 
 export class RegistroComponent implements OnInit {
@@ -30,6 +32,7 @@ export class RegistroComponent implements OnInit {
 
     constructor(
         private loginService: LoginService,
+        private alert : AlertService,
         private session: SessionService,
         public holderService: HolderService) { }
 
@@ -52,6 +55,7 @@ export class RegistroComponent implements OnInit {
                 this.holderService.userLogado = true;
                 window.location.reload();
             }, error => {
+                this.alert.error(error.message)
                 this.userFull = new UserFull();
                 this.senha = null;
                 this.senhatwo = null;
