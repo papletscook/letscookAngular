@@ -7,4 +7,5 @@ export class UserFull {
     senha: string;
     descricao: string;
     genero: string;
+    admin: boolean;
 }

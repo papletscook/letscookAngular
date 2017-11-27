@@ -63,7 +63,6 @@ export class TemplateComponent implements OnInit {
         this.publicar.open()
     }
 
-
     private listarCategorias() {
         this.catServ.list().then(data => {
             this.categorias = _.orderBy(data, ['nome'], ['asc']);
@@ -106,19 +105,19 @@ export class TemplateComponent implements OnInit {
     public abrirComponentesGenericoDaIndex(component: string) {
         switch (component) {
             case "DespensaComponent":
-                // if (true) { // mudar par variavel de administrado...
-                //     this.adminNav(true);
-                // } else {
-                //     this.adminNav(false);
-                // }
+                if (this.session.userIsAdm()) {
+                    this.adminNav(true);
+                } else {
+                    this.adminNav(false);
+                }
                 this.changeCase(DespensaComponent);
                 break;
             case "PainelDeControleComponent":
-                // if (true) { // mudar par variavel de administrado...
-                //     this.adminNav(true);
-                // } else {
-                //     this.adminNav(false);
-                // }
+                if (this.session.userIsAdm()) {
+                    this.adminNav(true);
+                } else {
+                    this.adminNav(false);
+                }
                 this.holderService.sideNav = false;
                 this.changeCase(PainelDeControleComponent);
                 break;
@@ -139,7 +138,9 @@ export class TemplateComponent implements OnInit {
     }
 
     private buscarReceitas() {
+        this.holderService.sideNav = true;
         this.holderService.loadingSearchReceitas = true;
+        this.adminNav(false);
         this.receitaService
             .buscarPorNome(this.searchNomeReceita)
             .then(data => {

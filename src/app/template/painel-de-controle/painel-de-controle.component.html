@@ -36,11 +36,13 @@
                     </div>
                     <label>Email: </label>
                     <div class="form-group">
-                        <input type="text" placeholder="Email" [(ngModel)]="userFull.email">
+                        <label>{{userFull.email}}</label>
+                        <!-- <input type="text" placeholder="Email" [(ngModel)]="userFull.email"> -->
                     </div>
                     <label>Data de Nascimento:</label>
                     <div class="form-group">
-                        <label>{{((dataNascimento / 1000) | amFromUnix) | amDateFormat: 'DD/MM/YYYY'}}</label>
+                        <!-- <input type="date" id="date" required name="date" [(ngModel)]="dataNascimento" (blur)="formatDataNasc()"> -->
+                        <label>{{dataNascimento}}</label>
                     </div>
                 </section>
             </div>

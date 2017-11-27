@@ -37,13 +37,15 @@ export class LoginComponent implements OnInit {
 
     public entrar() {
         this.loginService.loga(this.usuario)
-            .then(data => {
+            .then(data => {                
                 if (data) {
                     this.holderService.userLogado = true;
-                    this.loginService.consultar(this.usuario).then(data => {
-                        this.session.definirUsuario(data)
-                        location.reload()
-                    })
+                    this.loginService
+                        .consultar(this.usuario)
+                        .then(data => {                            
+                            this.session.definirUsuario(data);
+                            //location.reload();
+                        })
                     this.holderService.modalOpen = false;
                 } else {
                     this.erroLogar = true;
