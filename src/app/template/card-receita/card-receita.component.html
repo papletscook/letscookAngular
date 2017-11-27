@@ -29,6 +29,6 @@
 		</div>
 	</div>
 	<div class="card-footer">
-		<a class="btn btn-sm btn-link" href="./receita/{{receita.id}}">Ver Receita</a>
+		<a class="btn btn-sm btn-link" [routerLink]="['/receita', receita.id]" routerLinkActive="active">Ver Receita</a>
 	</div>
 </div>

@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <a class="btn btn-sm btn-link" href="./receita/{{score.receita.id}}">Ver Receita</a>
+                                        <a class="btn btn-sm btn-link" [routerLink]="['/receita', score.receita.id]" routerLinkActive="active">Ver Receita</a>
                                     </div>
                                 </div>
                             </div>
