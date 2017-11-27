@@ -103,7 +103,7 @@ export class VerReceitaComponent implements OnInit {
 
     private buscarReceitaIngredientesReceita() {
         this.despensaService.buscarPorUsuario()
-            .then(data => {
+            .then(data => {                
                 this.ds = data;
             });
     }
@@ -178,14 +178,11 @@ export class VerReceitaComponent implements OnInit {
             nome: "Ingredientes para: " + this.receita.nome,
             itens: []
         }
-        let ingSDespensa: any[] = [];
+        let ingSDespensa: any[] = [];        
 
         this.ds.ings.forEach(element => {
-            ingSDespensa.push(element.ingrediente.nome)
+            ingSDespensa.push(element.ingrediente.nome);
         });
-
-        console.log(ingSDespensa);
-        console.log(ingSDespensa.indexOf("Margarina"));
 
         this.receita.ingts.forEach(element => {
             if (ingSDespensa.indexOf(element.ingrediente.nome) < 0) {
@@ -204,8 +201,6 @@ export class VerReceitaComponent implements OnInit {
         } else {
             this.alertService.error("Os itens da lista já estão cadastrados em sua lista de compras");
         }
-
-
     }
 
 }
