@@ -48,6 +48,7 @@ import { BuscaReceitaComponent } from './template/busca-receita/busca-receita.co
 import { PageNotFoundComponent } from './template/page-not-found/page-not-found.component';
 import { CommonModule } from "@angular/common";
 import { PerfilComponent } from 'app/template/perfil/perfil.component';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 @NgModule({
     declarations: [
@@ -97,7 +98,8 @@ import { PerfilComponent } from 'app/template/perfil/perfil.component';
         Ng2CompleterModule,
         MomentModule,
         CommonModule,
-        BrowserModule
+        BrowserModule,
+        NguiAutoCompleteModule
     ],
     providers: [
         HolderService,

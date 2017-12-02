@@ -25,7 +25,7 @@ export class DespensaComponent implements OnInit {
     private despensa: Despensa;
     private loading: boolean = true;
     private loadingBusca: boolean = false;
-    private myFilterValue : string = "";
+    private myFilterValue: string = "";
 
 
     protected searchStr: string;
@@ -52,15 +52,20 @@ export class DespensaComponent implements OnInit {
         this.buscarIngredientes();
     }
 
+
     public buscarIngredientes() {
         this.ingredienteService.list().then(data => {
-            this.ingredientes = data;
+            this.ingredientes = _.orderBy(data, ['nome'], ['asc']);;
             this.dataService = this.completerService.local(data, 'nome', 'nome');
         }, error => {
             this.loading = false;
         });
     }
-    
+
+    autocompleListFormatter = (data: any) => {
+        return data.nome;
+    }
+
     public adicionarIngrediente() {
         console.log('adicionarIngrediente')
         this.modalAdd = false;

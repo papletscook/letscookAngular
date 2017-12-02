@@ -14,24 +14,25 @@
     </div>
     <!-- <button class="btn btn-primary btn-block">Adicionar Item na Despensa</button> -->
     <div class="row" *ngIf="despensa">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <h4>Cadastrar Ingredientes</h4>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <form>
                 <section class="form-block">
+                    <label>Cadastrar Ingredientes</label>
                     <div class="form-group">
-                        <label for="aForm_1">Ingrediente:</label>
-                    </div>
-                    <div class="form-group">
-                        <ng2-completer [minSearchLength]="1" id="ingrediente" name="ingrediente" autofocus="true" textNoResults="Ingrediente não encontrado!"
-                            placeholder="Nome do Ingrediente..." [(ngModel)]="searchStr" [datasource]="dataService"></ng2-completer>
+                        <label for="aForm_1">Nome do Ingrediente</label>
+                        <input type="text" placeholder="Nome..." class="form-control" auto-complete="true" id="ingrediente" autofocus="true" name="ingrediente"
+                            [(ngModel)]="searchStr" [source]="ingredientes" [list-formatter]="autocompleListFormatter" autocomplete="off"
+                            display-property-name="nome" min-chars="2" max-num-list="10" open-on-focus="false" />
                     </div>
                     <button type="button" class="btn btn-primary" (click)="adicionarIngrediente()">Adicionar</button>
                 </section>
+
             </form>
+
         </div>
 
 
-        <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <h4>Ingredientes Cadastrados</h4>
 
             <clr-datagrid>
@@ -43,7 +44,7 @@
                             <clr-icon shape="close"></clr-icon> Limpar</button>
                     </div>
                 </clr-dg-action-bar>
-                <clr-dg-column >Nome</clr-dg-column>
+                <clr-dg-column>Nome</clr-dg-column>
 
                 <clr-dg-row *ngFor="let ings of despensa.ings">
                     <clr-dg-cell>{{ings.ingrediente.nome}}</clr-dg-cell>
