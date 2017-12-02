@@ -31,38 +31,38 @@
                 <clr-stack-header>{{editedLista.nome}}</clr-stack-header>
 
                 <clr-stack-block [clrSbExpanded]="true" [clrSbExpandable]="false">
-                    <clr-stack-label>Ingrediente</clr-stack-label>
+                    <clr-stack-label>Conclusão</clr-stack-label>
                     <clr-stack-content>
                         <div class="row">
-                            <div class="col-lg-10">
+                            <div class="col-lg-10 col-md-10">
+                                Item
                             </div>
-                            <div class="col-lg-2">
-                                <clr-icon shape="plus" (click)="adicionarIngrediente()"></clr-icon>
+                            <div class="col-lg-2 col-md-2">
+                                <clr-icon shape="plus" (click)="adicionarIngrediente()" style="text-align: right"></clr-icon>
                             </div>
                         </div>
                     </clr-stack-content>
                     <clr-stack-block *ngFor="let list of editedLista.itens">
-                        <clr-stack-label (dblclick)="editaPassoH(list)">
+                        <clr-stack-label>
+                            <clr-checkbox [(clrChecked)]="list.checked"> </clr-checkbox>
+                        </clr-stack-label>
+                        <clr-stack-content (dblclick)="editaPassoH(list)">
                             <div class="row">
-                                <div class="col-md-10">
-                                    <div *ngIf="list != itemListaH">
-                                        {{list.nome}}
-                                    </div>
-                                    <div *ngIf="list === itemListaH">
-                                        <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
-                                    </div>
+                                <div class="col-lg-10 col-md-10" *ngIf="list != itemListaH">
+                                    {{list.nome}}
                                 </div>
-                                <div class="col-md-2">
-                                    <clr-checkbox [(clrChecked)]="list.checked"> </clr-checkbox>
+                                <div class="col-lg-10 col-md-10" *ngIf="list === itemListaH">
+                                    <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                    <clr-icon shape="trash" (click)="excluirIngredienteDaLista(list)" style="text-align: right"></clr-icon>
                                 </div>
                             </div>
-                        </clr-stack-label>
-                        <clr-stack-content style="float: right;">
-                            <clr-icon shape="trash" (click)="excluirIngredienteDaLista(list)" style="text-align: right"></clr-icon>
+
                         </clr-stack-content>
                     </clr-stack-block>
-
                 </clr-stack-block>
+
 
             </clr-stack-view>
         </div>
@@ -79,7 +79,7 @@
         <div>
             <label>Nome da Lista</label>
             <input type="text" placeholder="Insira o nome da lista" [(ngModel)]="createdLista.nome">
-            <clr-stack-view style="margin-top: 25px;">
+            <clr-stack-view style="margin-top: 25px; height: auto;">
                 <clr-stack-block [clrSbExpanded]="true" [clrSbExpandable]="false">
                     <clr-stack-label>Ingrediente</clr-stack-label>
                     <clr-stack-content>
@@ -98,7 +98,7 @@
                             </div>
                             <div *ngIf="list === itemListaH">
                                 <input type="text" [(ngModel)]="list.nome" (focusout)="outPassoH()" (keyup.enter)="outPassoH()">
-                            </div>                            
+                            </div>
                         </clr-stack-label>
                         <clr-stack-content style="float: right;">
                             <clr-icon shape="trash" (click)="excluirIngredienteDaListaCreate(list)"></clr-icon>

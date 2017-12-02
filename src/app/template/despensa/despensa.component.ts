@@ -25,6 +25,8 @@ export class DespensaComponent implements OnInit {
     private despensa: Despensa;
     private loading: boolean = true;
     private loadingBusca: boolean = false;
+    private myFilterValue : string = "";
+
 
     protected searchStr: string;
     protected dataService: any;

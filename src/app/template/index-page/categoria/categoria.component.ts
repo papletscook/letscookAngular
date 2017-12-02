@@ -36,6 +36,9 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.categoria = new Categoria()
       this.categoria.id = +params['id'];
+      this.serv.getById(this.categoria).then(data => {
+        this.categoria = data;
+      });
       this.load()
     });
   }
@@ -44,7 +47,6 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     console.log('ngOnDestroy')
     this.sub.unsubscribe();
-
   }
 
   private load() {
