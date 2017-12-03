@@ -89,15 +89,20 @@ export class PrepararReceitaComponent implements OnInit {
             .then(data => {
                 let despensa = data;
 
-                this.receita.ingts.forEach(ingr => {
-                    _.remove(despensa.ings, { ingrediente: element });
-                    this.selecionarTodos()
-                });
+                try {
+                    for (let ingr of this.receita.ingts) {
+                        _.remove(despensa.ings, { ingrediente: ingr });
+                    }
+                } catch (error) {
+
+                }
                 this.despensaService.atualizarDespensa(despensa);
             }, error => {
                 this.alert.error("Falha ao Sacar Ingredientes da Despensa!")
             });
+
     }
+
 
     isDonoReceita(): boolean {
         return this.receita.criador.email == this.session.consultarUsuario().email
