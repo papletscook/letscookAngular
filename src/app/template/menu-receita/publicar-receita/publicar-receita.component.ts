@@ -200,6 +200,9 @@ export class PublicarReceitaComponent implements OnInit {
         }
     }
 
+    autocompleListFormatter = (data: any) => {
+        return data.nome;
+    }
 
     public open() {
         this.wizard.open()

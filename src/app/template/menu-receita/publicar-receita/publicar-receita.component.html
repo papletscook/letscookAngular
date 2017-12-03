@@ -74,14 +74,10 @@
 
                         </div>
                         <div class="col-md-2">
-
-                            <div class="select">
-                                <select name="ingredienteCad.ingrediente" class="form-control" [(ngModel)]="ingredienteCad.ingrediente">
-                                    <option [ngValue]="null" disabled>Selecione</option>
-                                    <option [ngValue]="ing" *ngFor="let ing of allIngredientes">{{ing.nome}}</option>
-                                </select>
-                            </div>
-
+                            <input type="text" placeholder="Nome..." class="form-control" auto-complete="true" id="ingredienteCad.ingrediente" autofocus="true"
+                                name="ingredienteCad.ingrediente" [(ngModel)]="ingredienteCad.ingrediente" [source]="allIngredientes"
+                                [list-formatter]="autocompleListFormatter" autocomplete="off" display-property-name="nome" min-chars="2"
+                                max-num-list="10" open-on-focus="false" />
                         </div>
 
                         <div class="col-md-2">

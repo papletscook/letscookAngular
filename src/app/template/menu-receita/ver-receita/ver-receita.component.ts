@@ -22,6 +22,7 @@ import { ToastsManager } from 'ng2-toastr';
 import { Medida } from 'app/viewmodel/template/receita/medida';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from 'app/template/login/login.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -40,6 +41,8 @@ import { LoginService } from 'app/template/login/login.service';
 
 
 export class VerReceitaComponent implements OnInit {
+
+    private sub: Subscription;
 
     receitaInativa: boolean = false;
 
@@ -86,14 +89,23 @@ export class VerReceitaComponent implements OnInit {
 
     ngOnInit() {
         this.receita = new Receita()
-        this.receita.id = Number(this.route.snapshot.paramMap.get('id'));
 
+        this.sub = this.route.params.subscribe(params => {
+            this.receita = new Receita()
+            this.receita.id = +params['id'];
+            this.load()
+        });
+
+
+
+    }
+
+    private load() {
         this.medidaService.list()
             .then(data => {
                 this.medidas = data;
             }, error => {
             });
-
         this.receitaService.getById(this.receita).then(data => {
             this.receita = data;
             this.loading = false;
@@ -107,6 +119,11 @@ export class VerReceitaComponent implements OnInit {
             this.buscarReceitaIngredientesReceita();
         }
     }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
 
     private buscarReceitaIngredientesReceita() {
         this.despensaService.buscarPorUsuario()
@@ -193,7 +210,7 @@ export class VerReceitaComponent implements OnInit {
 
         this.receita.ingts.forEach(element => {
             if (ingSDespensa.indexOf(element.ingrediente.nome) < 0) {
-                let item : ItemLista = new ItemLista();
+                let item: ItemLista = new ItemLista();
                 item.nome = element.ingrediente.nome;
                 item.ingrediente = element.ingrediente;
                 listaCompra.itens.push(item);

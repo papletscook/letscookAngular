@@ -89,7 +89,7 @@ export class PrepararReceitaComponent implements OnInit {
             .then(data => {
                 let despensa = data;
                 for (let ingr of this.receita.ingts) {
-                    _.remove(despensa.ings, { ingrediente: ingr });
+                    _.remove(despensa.ings, { ingrediente: ingr.ingrediente });
                 }
                 this.selecionarTodos()
                 this.despensaService.atualizarDespensa(despensa);
