@@ -1,7 +1,10 @@
+import { Categoria } from './../../viewmodel/template/receita/categoria';
 import { Receita } from './../../viewmodel/template/receita/receita';
 import { ReceitaService } from 'app/template/menu-receita/receita.service';
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { HolderService } from 'app/service/holder.service';
+import * as _ from "lodash";
+
 
 @Component({
 	selector: 'app-busca-receita',
@@ -17,9 +20,9 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 
 	private loading: boolean = false;
 
-	private categoriaExist: string[] = [];
+	private categoriaExist: Categoria[] = [];
 
-	private categoriaSelect: string;
+	private categoriaSelect: Categoria;
 
 
 
@@ -35,40 +38,37 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 	}
 
 	public ngOnChanges(changes: SimpleChanges) {
-
 		//console.log(changes);
-
 	}
 
 	private qualcategoriaexiste() {
-		let cat: string[] = [];
+		let cat: Categoria[] = [];
 		this.receitas.forEach(element => {
-			cat.push(element.categoria.nome);
+			cat.push(element.categoria);
 		});
-		this.categoriaExist = Array.from(new Set(cat.map((itemInArray) => itemInArray)));
+		this.categoriaExist = _.uniq(cat)
+		this.categoriaExist.sort(function (a, b) {
+			return a.nome.localeCompare(b.nome);
+		});
 	}
 
-	// public carregar() {
-	// 	this.receitaService.buscarPorNome(this.nome).then(data => {
-	// 		this.receitas = data;
-	// 	}, error => {
-
-	// 	});
-	// 	this.loading = false;
-	// }
-
-	private mostrasomentecategoriaclicada(categoria: string) {
+	private limparFiltro() {
 		this.receitas = this.holderService.receitas;
-		if (categoria !== this.categoriaSelect) {
-			this.categoriaSelect = categoria;
-			let receitasSelect: Receita[] = [];
-			this.receitas.forEach(element => {
-				if (element.categoria.nome === categoria) {
-					receitasSelect.push(element);
-				}
-			});
-			this.receitas = receitasSelect;
-		}
+	}
+
+	private filtraPorCategoria(categoria: Categoria) {
+		this.receitas = this.holderService.receitas;
+		this.categoriaSelect = categoria;
+		let receitasSelect: Receita[] = [];
+		this.receitas.forEach(element => {
+			if (element.categoria == categoria) {
+				receitasSelect.push(element);
+			}
+		});
+		receitasSelect.sort(function (a, b) {
+			return a.categoria.nome.localeCompare(b.categoria.nome);
+		});
+		this.receitas = receitasSelect;
 	}
 
 

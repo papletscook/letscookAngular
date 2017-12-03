@@ -10,9 +10,9 @@
 	<br/>
 
 	<div>
-		<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="mostrasomentecategoriaclicada(cat);">
-			{{cat}}
-			<!-- <span class="badge">1</span> -->
+		<button class="label label-orange clickable" *ngIf="receitas.length > 0" (click)="limparFiltro()">Todas</button>
+		<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="filtraPorCategoria(cat);">
+			{{cat.nome}}
 		</button>
 	</div>
 
