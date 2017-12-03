@@ -88,14 +88,10 @@ export class PrepararReceitaComponent implements OnInit {
         this.despensaService.buscarPorUsuario()
             .then(data => {
                 let despensa = data;
-
-                try {
-                    for (let ingr of this.receita.ingts) {
-                        _.remove(despensa.ings, { ingrediente: ingr });
-                    }
-                } catch (error) {
-
+                for (let ingr of this.receita.ingts) {
+                    _.remove(despensa.ings, { ingrediente: ingr });
                 }
+                this.selecionarTodos()
                 this.despensaService.atualizarDespensa(despensa);
             }, error => {
                 this.alert.error("Falha ao Sacar Ingredientes da Despensa!")
