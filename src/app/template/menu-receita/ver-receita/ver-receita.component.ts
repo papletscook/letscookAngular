@@ -193,7 +193,10 @@ export class VerReceitaComponent implements OnInit {
 
         this.receita.ingts.forEach(element => {
             if (ingSDespensa.indexOf(element.ingrediente.nome) < 0) {
-                listaCompra.itens.push({ id: null, nome: element.quant + " " + this.detailMedida(element.uMedida).desc + " de " + element.ingrediente.nome });
+                let item : ItemLista = new ItemLista();
+                item.nome = element.ingrediente.nome;
+                item.ingrediente = element.ingrediente;
+                listaCompra.itens.push(item);
             }
         });
 

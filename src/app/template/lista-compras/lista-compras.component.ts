@@ -105,7 +105,8 @@ export class ListaComprasComponent implements OnInit {
         itemLista = {
             id: null,
             nome: "Nome do item",
-            checked: false
+            checked: false,
+            ingrediente: null
         };
         this.editedLista.itens.push(itemLista);
     }
@@ -144,7 +145,8 @@ export class ListaComprasComponent implements OnInit {
         itemLista = {
             id: null,
             nome: "Nome do item",
-            checked: false
+            checked: false,
+            ingrediente: null
         };
         if (typeof this.createdLista.itens != "undefined") {
             this.createdLista.itens.push(itemLista);

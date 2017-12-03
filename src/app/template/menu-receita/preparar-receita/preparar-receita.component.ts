@@ -1,3 +1,4 @@
+import { DespensaService } from './../../despensa/despensa.service';
 import { MedidaService } from './../medida.service';
 import { ReceitaService } from './../receita.service';
 import { AvaliacaoService } from './avaliacao.service';
@@ -20,6 +21,7 @@ import { SessionService } from 'app/service/session.service';
 import { AlertService } from 'app/service/alert.service';
 import * as _ from "lodash";
 import { Observable } from 'rxjs/Observable';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'preparar-receita-component',
@@ -68,7 +70,9 @@ export class PrepararReceitaComponent implements OnInit {
     constructor(
         private alert: AlertService,
         private session: SessionService,
-        private avaliacaoService: AvaliacaoService) { }
+        private avaliacaoService: AvaliacaoService,
+        private despensaService: DespensaService
+    ) { }
 
     ngOnInit(): void {
         //Notification.requestPermission();
@@ -77,6 +81,22 @@ export class PrepararReceitaComponent implements OnInit {
     doCancel(): void {
         console.log('doCancel')
         this.wizard.close();
+    }
+
+    public sacarDaDespensa() {
+
+        this.despensaService.buscarPorUsuario()
+            .then(data => {
+                let despensa = data;
+
+                this.receita.ingts.forEach(ingr => {
+                    _.remove(despensa.ings, { ingrediente: element });
+                    this.selecionarTodos()
+                });
+                this.despensaService.atualizarDespensa(despensa);
+            }, error => {
+                this.alert.error("Falha ao Sacar Ingredientes da Despensa!")
+            });
     }
 
     isDonoReceita(): boolean {
@@ -110,7 +130,7 @@ export class PrepararReceitaComponent implements OnInit {
         this.timer = null;
     }
 
-    validationThree(): boolean{
+    validationThree(): boolean {
         return this.avaliacao.valor > 0;
     }
 
