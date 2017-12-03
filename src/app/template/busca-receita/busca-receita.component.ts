@@ -17,6 +17,12 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 
 	private loading: boolean = false;
 
+	private categoriaExist: string[] = [];
+
+	private categoriaSelect: string;
+
+
+
 	@Input()
 	private search: string;
 
@@ -25,13 +31,21 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 
 	public ngOnInit() {
 		this.receitas = this.holderService.receitas;
+		this.qualcategoriaexiste();
 	}
 
 	public ngOnChanges(changes: SimpleChanges) {
 
-		console.log(changes);
+		//console.log(changes);
 
+	}
 
+	private qualcategoriaexiste() {
+		let cat: string[] = [];
+		this.receitas.forEach(element => {
+			cat.push(element.categoria.nome);
+		});
+		this.categoriaExist = Array.from(new Set(cat.map((itemInArray) => itemInArray)));
 	}
 
 	// public carregar() {
@@ -42,6 +56,20 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 	// 	});
 	// 	this.loading = false;
 	// }
+
+	private mostrasomentecategoriaclicada(categoria: string) {
+		this.receitas = this.holderService.receitas;
+		if (categoria !== this.categoriaSelect) {
+			this.categoriaSelect = categoria;
+			let receitasSelect: Receita[] = [];
+			this.receitas.forEach(element => {
+				if (element.categoria.nome === categoria) {
+					receitasSelect.push(element);
+				}
+			});
+			this.receitas = receitasSelect;
+		}
+	}
 
 
 }

@@ -6,6 +6,16 @@
 <div *ngIf="!holderService.loadingSearchReceitas && receitas">
 	<h3>Resultado das buscas por
 		<b>"{{ holderService.searchNomeReceita }}"</b>:</h3>
+
+	<br/>
+
+	<div>
+		<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="mostrasomentecategoriaclicada(cat);">
+			{{cat}}
+			<!-- <span class="badge">1</span> -->
+		</button>
+	</div>
+
 	<div *ngIf="receitas" class="row">
 		<div *ngFor="let receita of receitas" class="col-xs-12 col-md-6">
 			<app-card-receita [receita]="receita"></app-card-receita>
