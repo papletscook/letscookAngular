@@ -181,7 +181,6 @@ export class PublicarReceitaComponent implements OnInit {
 
     publicarReceita(): void {
         if (this.validationStepFour()) {
-            this.loading = true;
             if (this.img.image) {
                 this.receita.imagem = this.img.image;
             }
@@ -189,11 +188,10 @@ export class PublicarReceitaComponent implements OnInit {
                 .then(data => {
                     console.log(data)
                     this.receita = data;
-                    this.alert.info("Receita cadastrada!")
-                    this.router.navigate(['/receita', data.id]);
+                    this.router.navigate(['/receita', this.receita.id]);
                 }, error => {
                     this.alert.error("Falha ao publicar Receita!")
-                })
+                });
 
         }
     }
