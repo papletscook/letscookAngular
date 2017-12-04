@@ -3,7 +3,7 @@ import { Receita } from './../../viewmodel/template/receita/receita';
 import { ReceitaService } from 'app/template/menu-receita/receita.service';
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { HolderService } from 'app/service/holder.service';
-import * as _ from "lodash";
+import _ from "lodash";
 
 
 @Component({
@@ -22,9 +22,10 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 
 	private categoriaExist: Categoria[] = [];
 
+	private _categoriaExist: string[] = [];
+	private _categoriaSelect: string;
+
 	private categoriaSelect: Categoria;
-
-
 
 	@Input()
 	private search: string;
@@ -46,9 +47,9 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 		this.receitas.forEach(element => {
 			cat.push(element.categoria);
 		});
-		this.categoriaExist = _.uniq(cat)
-		this.categoriaExist.sort(function (a, b) {
-			return a.nome.localeCompare(b.nome);
+		this._categoriaExist = _.uniq(_.map(cat, 'nome'));
+		this._categoriaExist.sort(function (a, b) {
+			return a.localeCompare(b);
 		});
 	}
 
@@ -56,12 +57,12 @@ export class BuscaReceitaComponent implements OnInit, OnChanges {
 		this.receitas = this.holderService.receitas;
 	}
 
-	private filtraPorCategoria(categoria: Categoria) {
+	private filtraPorCategoria(categoria: string) {
 		this.receitas = this.holderService.receitas;
-		this.categoriaSelect = categoria;
+		this._categoriaSelect = categoria;
 		let receitasSelect: Receita[] = [];
 		this.receitas.forEach(element => {
-			if (element.categoria == categoria) {
+			if (element.categoria.nome === categoria) {
 				receitasSelect.push(element);
 			}
 		});
