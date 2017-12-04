@@ -186,9 +186,8 @@ export class PublicarReceitaComponent implements OnInit {
             }
             this.receitaService.cadastrar(this.receita)
                 .then(data => {
-                    console.log(data)
-                    this.receita = data;
-                    this.router.navigate(['/receita', this.receita.id]);
+                    this.router.navigate(['/receita', data.id]);
+                this.alert.info("Receita cadastrada!")
                 }, error => {
                     this.alert.error("Falha ao publicar Receita!")
                 });
