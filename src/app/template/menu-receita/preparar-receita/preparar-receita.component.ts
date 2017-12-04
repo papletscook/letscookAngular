@@ -84,7 +84,6 @@ export class PrepararReceitaComponent implements OnInit {
     }
 
     public sacarDaDespensa() {
-
         this.despensaService.buscarPorUsuario()
             .then(data => {
                 let despensa = data;
@@ -96,7 +95,6 @@ export class PrepararReceitaComponent implements OnInit {
             }, error => {
                 this.alert.error("Falha ao Sacar Ingredientes da Despensa!")
             });
-
     }
 
 

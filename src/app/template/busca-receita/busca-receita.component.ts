@@ -1,6 +1,6 @@
+import { Categoria } from 'app/viewmodel/template/receita/categoria';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Categoria } from './../../viewmodel/template/receita/categoria';
 import { Receita } from './../../viewmodel/template/receita/receita';
 import { ReceitaService } from 'app/template/menu-receita/receita.service';
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
@@ -20,6 +20,8 @@ export class BuscaReceitaComponent implements OnInit, OnChanges, OnDestroy {
 	private avaliacaoFilter: string;
 
 	private minsPreparoFilter: number;
+
+	private categoriaFilter: Categoria;
 
 	private sub: Subscription;
 
@@ -46,7 +48,6 @@ export class BuscaReceitaComponent implements OnInit, OnChanges, OnDestroy {
 		this.sub = this.route.params.subscribe(params => {
 			this.search = params['search'];
 			this.load()
-			this.qualcategoriaexiste();
 		});
 	}
 
@@ -56,6 +57,7 @@ export class BuscaReceitaComponent implements OnInit, OnChanges, OnDestroy {
 			.then(data => {
 				this.receitas = data;
 				this.loading = false;
+				this.qualcategoriaexiste();
 			}, error => {
 				console.log("Erro ao realizar busca...");
 				this.loading = false;
@@ -74,11 +76,15 @@ export class BuscaReceitaComponent implements OnInit, OnChanges, OnDestroy {
 
 	private qualcategoriaexiste() {
 		try {
+			this.categoriaExist = [];
 			let cat: Categoria[] = [];
-			this.receitas.forEach(element => {
-				cat.push(element.categoria);
-			});
-			this.categoriaExist = _.uniq(cat)
+			for (let element of this.receitas) {
+				if (!this.contains(element.categoria, cat)) {
+					cat.push(element.categoria);
+				}
+			}
+
+			this.categoriaExist = cat;
 			this.categoriaExist.sort(function (a, b) {
 				return a.nome.localeCompare(b.nome);
 			});
@@ -87,23 +93,22 @@ export class BuscaReceitaComponent implements OnInit, OnChanges, OnDestroy {
 		}
 	}
 
+	public contains(cat: Categoria, lst: Categoria[]): boolean {
+		for (let element of lst) {
+			if (cat.nome === element.nome) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private limparFiltro() {
+		this.categoriaFilter = null
 		this.load()
 	}
 
 	private filtraPorCategoria(categoria: Categoria) {
-		this.receitas = this.holderService.receitas;
-		this.categoriaSelect = categoria;
-		let receitasSelect: Receita[] = [];
-		this.receitas.forEach(element => {
-			if (element.categoria == categoria) {
-				receitasSelect.push(element);
-			}
-		});
-		receitasSelect.sort(function (a, b) {
-			return a.categoria.nome.localeCompare(b.categoria.nome);
-		});
-		this.receitas = receitasSelect;
+		this.categoriaFilter = categoria;
 	}
 
 

@@ -199,14 +199,14 @@ export class VerReceitaComponent implements OnInit {
             nome: "Ingredientes para: " + this.receita.nome,
             itens: []
         }
-        let ingSDespensa: any[] = [];
+        let ingLista: any[] = [];
 
         this.ds.ings.forEach(element => {
-            ingSDespensa.push(element.ingrediente.nome);
+            ingLista.push(element.ingrediente.nome);
         });
 
         this.receita.ingts.forEach(element => {
-            if (ingSDespensa.indexOf(element.ingrediente.nome) < 0) {
+            if (ingLista.indexOf(element.ingrediente.nome) < 0) {
                 let item: ItemLista = new ItemLista();
                 item.nome = element.ingrediente.nome;
                 item.ingrediente = element.ingrediente;

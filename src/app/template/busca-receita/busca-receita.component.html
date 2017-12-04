@@ -34,8 +34,20 @@
 	</div>
 
 	<div *ngIf="receitas" class="row">
-		<div *ngFor="let receita of receitas" class="col-xs-12 col-md-6">
-			<app-card-receita [receita]="receita" *ngIf="(!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))"></app-card-receita>
+		<div *ngFor="let receita of receitas" [ngClass]="{'col-lg-6 col-md-6 col-xs-12' : (!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))
+				&&
+				(!minsPreparoFilter ||(minsPreparoFilter >= receita.minsPreparo))
+				&&
+				(!categoriaFilter ||(categoriaFilter.nome == receita.categoria.nome))
+				}">
+			<div *ngIf="(!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))
+					&&
+					(!minsPreparoFilter ||(minsPreparoFilter >= receita.minsPreparo))
+					&&
+					(!categoriaFilter ||(categoriaFilter.nome == receita.categoria.nome))
+					">
+				<app-card-receita [receita]="receita"></app-card-receita>
+			</div>
 		</div>
 	</div>
 </div>

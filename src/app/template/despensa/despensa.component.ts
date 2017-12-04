@@ -1,3 +1,4 @@
+import { Categoria } from './../../viewmodel/template/receita/categoria';
 import { Router } from '@angular/router';
 import { HolderService } from './../../service/holder.service';
 import { IngredienteService } from './../ingrediente/ingrediente.service';
@@ -20,6 +21,16 @@ import * as _ from "lodash";
 })
 
 export class DespensaComponent implements OnInit {
+
+    private avaliacaoFilter: string;
+
+    private minsPreparoFilter: number;
+
+    private categoriaFilter: Categoria;
+
+    private categoriaExist: Categoria[] = [];
+
+
     private scores: ScoreReceita[];
     private ingredientes: Ingrediente[];
     private despensa: Despensa;
@@ -48,6 +59,10 @@ export class DespensaComponent implements OnInit {
         if (!this.holderService.userLogado) {
             this.router.navigate(['/']);
         }
+        this.load();
+    }
+
+    public load() {
         this.buscarPorUsuario();
         this.buscarIngredientes();
     }
@@ -107,6 +122,7 @@ export class DespensaComponent implements OnInit {
         }
         this.despensaService.buscarPorIngredientes(ingredientes).then(data => {
             this.scores = _.orderBy(data, ['compt'], ['desc']);
+            this.qualcategoriaexiste();            
             this.loading = false;
         }, error => {
             this.alert.error("Falha ao buscar Despensa!")
@@ -140,6 +156,44 @@ export class DespensaComponent implements OnInit {
             }, error => {
                 this.alert.error("Falha ao atualizar Despensa!")
             });
+    }
+
+
+    private qualcategoriaexiste() {
+        try {
+            this.categoriaExist = [];
+            let cat: Categoria[] = [];
+            for (let element of this.scores) {
+                if (!this.contains(element.receita.categoria, cat)) {
+                    cat.push(element.receita.categoria);
+                }
+            }
+
+            this.categoriaExist = cat;
+            this.categoriaExist.sort(function (a, b) {
+                return a.nome.localeCompare(b.nome);
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    public contains(cat: Categoria, lst: Categoria[]): boolean {
+        for (let element of lst) {
+            if (cat.nome === element.nome) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private limparFiltro() {
+        this.categoriaFilter = null
+        this.load()
+    }
+
+    private filtraPorCategoria(categoria: Categoria) {
+        this.categoriaFilter = categoria;
     }
 
 }

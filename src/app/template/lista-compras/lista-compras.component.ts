@@ -1,7 +1,9 @@
+import { IngredienteDespensa } from 'app/viewmodel/template/despensa/ingrediente-despensa';
+import { Ingrediente } from 'app/viewmodel/template/receita/ingrediente';
+import { DespensaService } from './../despensa/despensa.service';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { CompleterService } from 'ng2-completer';
-import { Ingrediente } from './../../viewmodel/template/receita/ingrediente';
 import { IngredienteService } from './../ingrediente/ingrediente.service';
 import { ItemLista } from './../../viewmodel/template/lista/item-lista';
 import { AlertService } from './../../service/alert.service';
@@ -9,12 +11,13 @@ import { ListaCompra } from 'app/viewmodel/template/lista/lista-compra';
 import { HolderService } from './../../service/holder.service';
 import { Component, OnInit } from '@angular/core';
 import { ListaComprasService } from 'app/template/lista-compras/lista-compras.service';
+import { Despensa } from 'app/viewmodel/template/despensa/despensa';
 
 @Component({
     selector: 'app-lista-compras',
     templateUrl: './lista-compras.component.html',
     styleUrls: ['./lista-compras.component.css'],
-    providers: [ListaComprasService, IngredienteService]
+    providers: [ListaComprasService, IngredienteService, DespensaService, AlertService]
 
 })
 export class ListaComprasComponent implements OnInit {
@@ -42,7 +45,9 @@ export class ListaComprasComponent implements OnInit {
         private listaComprasService: ListaComprasService,
         public alertService: AlertService,
         public ingredienteService: IngredienteService,
+        private despensaService: DespensaService,
         private completerService: CompleterService,
+        private alert: AlertService,
         private router: Router) { }
 
     public ngOnInit() {
@@ -92,6 +97,40 @@ export class ListaComprasComponent implements OnInit {
         this.modalCreate = true;
     }
 
+    public integrarNaDespensa() {
+        this.despensaService.buscarPorUsuario()
+            .then(data => {
+                let despensa: Despensa = data;
+                let ingreDespensa: Ingrediente[] = []
+
+                for (let ingDes of despensa.ings) {
+                    ingreDespensa.push(ingDes.ingrediente)
+
+                }
+                for (let item of this.editedLista.itens) {
+                    if (item.checked) {
+                        if (!this.contains(item.ingrediente, ingreDespensa)) {
+                            despensa.ings.push({ ingrediente: item.ingrediente });
+                        }
+                    }
+                }
+
+                this.despensaService.atualizarDespensa(despensa);
+                this.alert.info("Ingredientes integrados a Despensa!")
+            }, error => {
+                this.alert.error("Falha ao Sacar Ingredientes da Despensa!")
+            });
+    }
+
+    public contains(cat: Ingrediente, lst: Ingrediente[]): boolean {
+        for (let element of lst) {
+            if (cat.nome === element.nome) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public excluirLista(r: ListaCompra) {
         this.listaComprasService.deletarListaDeCompras(r);
         let index = this.listas.indexOf(r);
@@ -126,7 +165,7 @@ export class ListaComprasComponent implements OnInit {
         this.listaComprasService
             .atualizarListaDeCompra(this.editedLista)
             .then(data => {
-                // console.log(ingrediente adicionado com sucesso.);
+                this.integrarNaDespensa()
             }, error => {
                 this.alertService.error(error.message);
             })
