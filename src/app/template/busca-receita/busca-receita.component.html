@@ -1,61 +1,44 @@
-<div id="loading-spinner" *ngIf="holderService.loadingSearchReceitas">
+<div id="loading-spinner" *ngIf="loading">
 	<span class="spinner">Loading...</span>
 	<br/>
 	<span>Aguarde...</span>
 </div>
-<div *ngIf="!holderService.loadingSearchReceitas && receitas">
+<div *ngIf="!loading">
 	<h3>Resultado das buscas por
-		<b>"{{ holderService.searchNomeReceita }}"</b>:</h3>
-
+		<b>"{{ search }}"</b>:</h3>
 	<br/>
 
-	<div>
-		<button class="label label-orange clickable" *ngIf="receitas.length > 0" (click)="limparFiltro()">Todas</button>
-		<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="filtraPorCategoria(cat);">
-			{{cat.nome}}
-		</button>
+	<div *ngIf="receitas.length > 0">
+		<div class="row">
+			<form (keydown.enter)="$event.preventDefault()" class="compact">
+				<section class="form-block">
+					<label>Filtro</label>
+					<div class="form-group">
+						<label>Tempo de Preparo (minutos): </label>
+						<input type="number" name="minsPreparo" min="0" step="5" [(ngModel)]="minsPreparoFilter" size="30" placeholder="Tempo de Preparo">
+					</div>
+					<div class="form-group">
+						<label>Avaliação: </label>
+						<rating name="avaliacao" [(ngModel)]="avaliacaoFilter"></rating>
+					</div>
+					<div class="form-group">
+						<label>Categorias: </label>
+						<button class="label label-orange clickable" *ngIf="receitas.length > 0" (click)="limparFiltro()">Todas</button>
+						<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="filtraPorCategoria(cat);">
+							{{cat.nome}}
+						</button>
+					</div>
+				</section>
+			</form>
+		</div>
 	</div>
 
 	<div *ngIf="receitas" class="row">
 		<div *ngFor="let receita of receitas" class="col-xs-12 col-md-6">
-			<!-- <app-card-receita [receita]="receita"></app-card-receita> -->
-			<div class="card">
-				<div class="card-header">
-					<div class="row flex-items-xs-between">
-						<div class="col-xs">
-							<label>{{ receita.nome | uppercase}}</label>
-						</div>
-						<div class="col-xs text-right">
-							<rating name="avaliacao" [float]="true" [readonly]="true" [(ngModel)]="receita.rating"></rating>
-						</div>
-					</div>
-				</div>
-				<div class="card-block">
-					<div class="card-media-block">
-						<img [src]="receita.imagem" class="card-media-image">
-						<div class="card-media-description">
-							<span class="card-media-title">
-								Autor: {{ receita.criador.nome}}.
-							</span>
-							<span class="card-media-title">
-								Tempo de Preparo: {{ receita.minsPreparo}} minutos.
-							</span>
-							<span class="card-media-title">
-								Categoria: {{ receita.categoria.nome}}.
-							</span>
-						</div>
-					</div>
-					<div class="card-text">
-						{{ receita.descricao}}.
-					</div>
-				</div>
-				<div class="card-footer">
-					<a class="btn btn-sm btn-link" [routerLink]="['/receita', receita.id]" (click)="logaqueclick();" routerLinkActive="active">Ver Receita</a>
-				</div>
-			</div>
+			<app-card-receita [receita]="receita" *ngIf="(!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))"></app-card-receita>
 		</div>
 	</div>
 </div>
-<div *ngIf="!holderService.loadingSearchReceitas && receitas.length == 0">
+<div *ngIf="!loading && receitas.length == 0">
 	<p>Nenhuma receita encontrada, por favor tente novamente.</p>
 </div>

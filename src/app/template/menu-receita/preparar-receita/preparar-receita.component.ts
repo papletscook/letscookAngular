@@ -267,7 +267,9 @@ export class PrepararReceitaComponent implements OnInit {
 
     cancelar() {
         this.open = false;
+        this.reiniciarReceita()
         this.wizard.reset();
+        location.reload()
     }
 
     processarPasso(passo: Passo) {

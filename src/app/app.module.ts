@@ -125,7 +125,8 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
         CadastrarIngredienteComponent,
         CadastrarCategoriaComponent,
         TopavaliacaoComponent,
-        RegistroComponent
+        RegistroComponent,
+        BuscaReceitaComponent
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -75,7 +75,8 @@ export class VerReceitaComponent implements OnInit {
 
     private perfilModal: boolean = false;
 
-    constructor(private receitaService: ReceitaService,
+    constructor(
+        private receitaService: ReceitaService,
         private session: SessionService,
         private medidaService: MedidaService,
         private alertService: AlertService,
@@ -89,15 +90,11 @@ export class VerReceitaComponent implements OnInit {
 
     ngOnInit() {
         this.receita = new Receita()
-
         this.sub = this.route.params.subscribe(params => {
             this.receita = new Receita()
             this.receita.id = +params['id'];
             this.load()
         });
-
-
-
     }
 
     private load() {

@@ -69,15 +69,12 @@
                 <section class="form-block">
                     <label>Adicionar Ingrediente</label>
                     <div class="form-group row">
-                        <div class="col-md-2">
-                            <label class="required">Ingrediente:</label>
 
-                        </div>
                         <div class="col-md-2">
-                            <input type="text" placeholder="Nome..." class="form-control" auto-complete="true" id="ingredienteCad.ingrediente" autofocus="true"
-                                name="ingredienteCad.ingrediente" [(ngModel)]="ingredienteCad.ingrediente" [source]="allIngredientes"
-                                [list-formatter]="autocompleListFormatter" autocomplete="off" display-property-name="nome" min-chars="2"
-                                max-num-list="10" open-on-focus="false" />
+                            <label class="required">Quantidade:</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input class="form-control" min="0" name="ingredienteCad.quant" [(ngModel)]="ingredienteCad.quant" type="number" placeholder="Qtde">
                         </div>
 
                         <div class="col-md-2">
@@ -93,10 +90,13 @@
                         </div>
 
                         <div class="col-md-2">
-                            <label class="required">Quantidade:</label>
+                            <label class="required">Ingrediente:</label>
                         </div>
-                        <div class="col-md-1">
-                            <input class="form-control" min="0" name="ingredienteCad.quant" [(ngModel)]="ingredienteCad.quant" type="number" placeholder="Qtde">
+                        <div class="col-md-2">
+                            <input type="text" placeholder="Nome..." class="form-control" auto-complete="true" id="ingredienteCad.ingrediente" autofocus="true"
+                                name="ingredienteCad.ingrediente" [(ngModel)]="ingredienteCad.ingrediente" [source]="allIngredientes"
+                                [list-formatter]="autocompleListFormatter" autocomplete="off" display-property-name="nome" min-chars="2"
+                                max-num-list="10" open-on-focus="false" />
                         </div>
 
                     </div>
@@ -118,14 +118,19 @@
                     <table class="table table-compact">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Unidade de Medida</th>
                                 <th>Quantidade</th>
-                                <th>Ação</th>
+                                <th>Unidade de Medida</th>
+                                <th>Nome</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ingt of receita.ingts">
+                                <td *ngIf="ingt != ingrEdited">{{ingt.quant}}</td>
+                                <td *ngIf="ingt == ingrEdited">
+                                    <input class="form-control" min="0" name="ingt.quant" [(ngModel)]="ingt.quant" type="number" placeholder="Qtde">
+                                </td>
+
                                 <td>
                                     {{ingt.ingrediente.nome}}
                                 </td>
@@ -138,11 +143,6 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td *ngIf="ingt != ingrEdited">{{ingt.quant}}</td>
-                                <td *ngIf="ingt == ingrEdited">
-                                    <input class="form-control" min="0" name="ingt.quant" [(ngModel)]="ingt.quant" type="number" placeholder="Qtde">
-                                </td>
-
                                 <td>
                                     <clr-icon *ngIf="ingt == ingrEdited" shape="floppy" (click)="salvarIngrediente()"></clr-icon>
                                     <clr-icon *ngIf="ingt != ingrEdited" shape="pencil" (click)="editarIngrediente(ingt)"></clr-icon>
@@ -173,7 +173,8 @@
                         <button class="stack-action btn btn-sm btn-link" type="button" (click)="addNewEtapa()">Adicionar Etapa</button>
                     </span>
                 </h4>
-                <dl class="stack-view" style="height: auto;">
+                <!-- <dl class="stack-view" style="height: auto;"> -->
+                <dl class="stack-view">
                     <div class="stack-block stack-block-expanded" *ngFor="let etapa of receita.etapas">
                         <dd class="stack-block-content" (dblclick)="editarEtapa(etapa)">
                             <div class="row">
@@ -225,7 +226,7 @@
                                                         <h4>Cronômetro</h4>
                                                         <div class="form-group">
                                                             <label>Duração (minutos): </label>
-                                                            <input [(ngModel)]="passo.minPasso" name="minPasso" type="number" step="5">
+                                                            <input [(ngModel)]="passo.minPasso" name="minPasso" type="number" step="5" min="0">
                                                         </div>
                                                     </clr-signpost-content>
                                                 </clr-signpost>

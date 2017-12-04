@@ -63,10 +63,10 @@ export class TemplateComponent implements OnInit {
         }
     }
 
-    private loadCategoria(){
+    private loadCategoria() {
         this.categoria.ngOnDestroy();
-        
-    } 
+
+    }
 
     private publicarReceita() {
         this.publicar.open()
@@ -142,25 +142,11 @@ export class TemplateComponent implements OnInit {
     }
 
     private reloadIndexPage() {
-        //window.location.reload();
         this.router.navigate(['./']);
     }
 
     private buscarReceitas() {
-        this.holderService.searchNomeReceita = this.searchNomeReceita;
-        this.holderService.sideNav = true;
-        this.holderService.loadingSearchReceitas = true;
-        this.adminNav(false);
-        this.receitaService
-            .buscarPorNome(this.holderService.searchNomeReceita)
-            .then(data => {
-                this.holderService.receitas = data;
-                this.changeCase(BuscaReceitaComponent);
-                this.holderService.loadingSearchReceitas = false;
-            }, error => {
-                console.log("Erro ao realizar busca...");
-                this.holderService.loadingSearchReceitas = false;
-            });
+        this.router.navigate(['/buscar/', this.searchNomeReceita]);
     }
 
 }

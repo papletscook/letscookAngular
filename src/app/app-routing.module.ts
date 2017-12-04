@@ -13,12 +13,12 @@ import { PageNotFoundComponent } from 'app/template/page-not-found/page-not-foun
 
 const routes: Routes = [
     { path: '',   redirectTo: '/topavaliacao', pathMatch: 'full' },
+    { path: 'buscar/:search', component: BuscaReceitaComponent },
     { path: 'receita/:id', component: VerReceitaComponent },
     { path: 'categoria/:id', component: CategoriaComponent },
     { path: 'topavaliacao', component: TopavaliacaoComponent },
     { path: 'despensa', component: DespensaComponent },
     { path: 'listaCompras', component: ListaComprasComponent },
-    { path: 'busca', component: BuscaReceitaComponent },
     { path: '**', component: PageNotFoundComponent }
 
 ]
