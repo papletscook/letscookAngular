@@ -192,11 +192,12 @@ export class PublicarReceitaComponent implements OnInit {
                     this.receita = data;
                     this.alert.info("Receita cadastrada!")
                     this.router.navigate(['/receita', data.id]);
+                    this.loading = false;
+                    this.wizard.reset()
                 }, error => {
                     this.alert.error("Falha ao publicar Receita!")
                 })
-            this.loading = false;
-            this.wizard.reset()
+
         }
     }
 
