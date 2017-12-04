@@ -23,11 +23,12 @@
 					</div>
 					<div class="form-group">
 						<label>Categorias: </label>
-						<button class="label label-orange clickable" *ngIf="receitas.length > 0" (click)="limparFiltro()">Todas</button>
+						<button class="label label-orange clickable" *ngIf="receitas.length > 0" (click)="categoriaFilter = null">Todas</button>
 						<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="filtraPorCategoria(cat);">
 							{{cat.nome}}
 						</button>
 					</div>
+					<button type="button" class="btn btn-primary" (click)="limparFiltro()">Limpar</button>
 				</section>
 			</form>
 		</div>

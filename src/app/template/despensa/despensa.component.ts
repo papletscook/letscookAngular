@@ -178,6 +178,8 @@ export class DespensaComponent implements OnInit {
         }
     }
 
+
+
     public contains(cat: Categoria, lst: Categoria[]): boolean {
         for (let element of lst) {
             if (cat.nome === element.nome) {
@@ -189,6 +191,8 @@ export class DespensaComponent implements OnInit {
 
     private limparFiltro() {
         this.categoriaFilter = null
+        this.avaliacaoFilter = null;
+        this.minsPreparoFilter = null;
         this.load()
     }
 

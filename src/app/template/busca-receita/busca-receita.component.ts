@@ -93,6 +93,13 @@ export class BuscaReceitaComponent implements OnInit, OnChanges, OnDestroy {
 		}
 	}
 
+	private limparFiltro() {
+		this.categoriaFilter = null
+		this.avaliacaoFilter = null;
+		this.minsPreparoFilter = null;
+		this.load()
+	}
+
 	public contains(cat: Categoria, lst: Categoria[]): boolean {
 		for (let element of lst) {
 			if (cat.nome === element.nome) {
@@ -102,10 +109,6 @@ export class BuscaReceitaComponent implements OnInit, OnChanges, OnDestroy {
 		return false;
 	}
 
-	private limparFiltro() {
-		this.categoriaFilter = null
-		this.load()
-	}
 
 	private filtraPorCategoria(categoria: Categoria) {
 		this.categoriaFilter = categoria;
