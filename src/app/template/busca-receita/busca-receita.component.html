@@ -1,53 +1,53 @@
 <div id="loading-spinner" *ngIf="loading">
-	<span class="spinner">Loading...</span>
-	<br/>
-	<span>Aguarde...</span>
-</div>
-<div *ngIf="!loading">
-	<div *ngIf="receitas.length > 0">
-		<form (keydown.enter)="$event.preventDefault()" class="compact">
-			<section class="form-block">
-				<label>Filtro</label>
-				<div class="form-group">
-					<label>Tempo de Preparo (minutos): </label>
-					<input type="number" name="minsPreparo" min="0" step="5" [(ngModel)]="minsPreparoFilter" size="30" placeholder="Tempo de Preparo">
-				</div>
-				<div class="form-group">
-					<label>Avaliação: </label>
-					<rating name="avaliacao" [(ngModel)]="avaliacaoFilter"></rating>
-				</div>
-				<div class="form-group">
-					<label>Categorias: </label>
-					<button class="label label-orange clickable" *ngIf="receitas.length > 0" (click)="categoriaFilter = null">Todas</button>
-					<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="filtraPorCategoria(cat);">
-						{{cat.nome}}
-					</button>
-				</div>
-				<button type="button" class="btn btn-primary" (click)="limparFiltro()">Limpar</button>
-			</section>
-		</form>
+		<span class="spinner">Loading...</span>
+		<br/>
+		<span>Aguarde...</span>
 	</div>
-	<h3 *ngIf="receitas">Resultado das buscas por
-		<b>"{{ search }}"</b>:</h3>
-	<div *ngIf="receitas" class="row">
-
-		<div *ngFor="let receita of receitas" [ngClass]="{'col-lg-6 col-md-6 col-xs-12' : (!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))
-				&&
-				(!minsPreparoFilter ||(minsPreparoFilter >= receita.minsPreparo))
-				&&
-				(!categoriaFilter ||(categoriaFilter.nome == receita.categoria.nome))
-				}">
-			<div *ngIf="(!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))
+	<div *ngIf="!loading">
+		<div *ngIf="receitas.length > 0">
+			<form (keydown.enter)="$event.preventDefault()" class="compact">
+				<section class="form-block">
+					<label>Filtro</label>
+					<div class="form-group">
+						<label>Tempo de Preparo (minutos): </label>
+						<input type="number" name="minsPreparo" min="0" step="5" [(ngModel)]="minsPreparoFilter" size="30" placeholder="Tempo de Preparo">
+					</div>
+					<div class="form-group">
+						<label>Avaliação: </label>
+						<rating name="avaliacao" [(ngModel)]="avaliacaoFilter"></rating>
+					</div>
+					<div class="form-group">
+						<label>Categorias: </label>
+						<button class="label label-orange clickable" *ngIf="receitas.length > 0" (click)="categoriaFilter = null">Todas</button>
+						<button class="label label-orange clickable" *ngFor="let cat of categoriaExist" (click)="filtraPorCategoria(cat);">
+							{{cat.nome}}
+						</button>
+					</div>
+					<button type="button" class="btn btn-primary" (click)="limparFiltro()">Limpar</button>
+				</section>
+			</form>
+		</div>
+		<h3 *ngIf="receitas">Resultado das buscas por
+			<b>"{{ search }}"</b>:</h3>
+		<div *ngIf="receitas" class="row">
+	
+			<div *ngFor="let receita of receitas" [ngClass]="{'col-lg-6 col-md-6 col-xs-12' : (!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))
 					&&
 					(!minsPreparoFilter ||(minsPreparoFilter >= receita.minsPreparo))
 					&&
 					(!categoriaFilter ||(categoriaFilter.nome == receita.categoria.nome))
-					">
-				<app-card-receita [receita]="receita"></app-card-receita>
+					}">
+				<div *ngIf="(!avaliacaoFilter ||(avaliacaoFilter >= receita.rating))
+						&&
+						(!minsPreparoFilter ||(minsPreparoFilter >= receita.minsPreparo))
+						&&
+						(!categoriaFilter ||(categoriaFilter.nome == receita.categoria.nome))
+						">
+					<app-card-receita [receita]="receita"></app-card-receita>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div *ngIf="!loading && receitas.length == 0">
-	<p>Nenhuma receita encontrada, por favor tente novamente.</p>
-</div>
+	<div *ngIf="!loading && receitas.length == 0">
+		<p>Nenhuma receita encontrada, por favor tente novamente.</p>
+	</div>

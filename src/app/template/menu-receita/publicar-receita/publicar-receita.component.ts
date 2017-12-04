@@ -185,15 +185,12 @@ export class PublicarReceitaComponent implements OnInit {
             if (this.img.image) {
                 this.receita.imagem = this.img.image;
             }
-
             this.receitaService.cadastrar(this.receita)
                 .then(data => {
                     console.log(data)
                     this.receita = data;
                     this.alert.info("Receita cadastrada!")
                     this.router.navigate(['/receita', data.id]);
-                    this.loading = false;
-                    this.wizard.reset()
                 }, error => {
                     this.alert.error("Falha ao publicar Receita!")
                 })
