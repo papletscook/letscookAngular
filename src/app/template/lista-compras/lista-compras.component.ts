@@ -174,4 +174,8 @@ export class ListaComprasComponent implements OnInit {
         this.itemListaH = null;
     }
 
+    private validaSeJaPossuiItensDaLista() {
+
+    }
+
 }
